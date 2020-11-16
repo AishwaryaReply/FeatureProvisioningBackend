@@ -1,0 +1,4165 @@
+{
+  "swagger": "2.0",
+  "host": "",
+  "basePath": "/",
+  "info": {
+    "version": "v2.0",
+    "title": "${SWAGGER_TITLE}",
+    "description": "${SWAGGER_DESCRIPTION}"
+  },
+  "schemes": [
+    "https"
+  ],
+  "definitions": {
+    "TransportationOption": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "deliveryInfo": {
+          "type": "object"
+        }
+      }
+    },
+    "Phones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Emails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GenericAppointment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "opCode": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "analyticsMsrp": {
+          "type": "number"
+        },
+        "laborHours": {
+          "type": "number"
+        },
+        "selected": {
+          "type": "boolean"
+        },
+        "maintenanceKind": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        }
+      }
+    },
+    "Mileage": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unitsKind": {
+          "type": "string"
+        }
+      }
+    },
+    "Customer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phones": {
+          "$ref": "#/definitions/Phones"
+        },
+        "emails": {
+          "$ref": "#/definitions/Emails"
+        },
+        "scheduledTime": {
+          "type": "string"
+        },
+        "mileage": {
+          "$ref": "#/definitions/Mileage"
+        },
+        "status": {
+          "type": "string"
+        },
+        "customerConcernsInfo": {
+          "type": "string"
+        },
+        "confirmationCode": {
+          "type": "string"
+        },
+        "advisor": {
+          "$ref": "#/definitions/Advisor"
+        },
+        "transportationOption": {
+          "$ref": "#/definitions/TransportationOption"
+        },
+        "services": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "$ref": "#/definitions/AppointmentSummaryResponse"
+            },
+            "drs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GenericAppointment"
+              }
+            },
+            "frs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GenericAppointment"
+              }
+            },
+            "repair": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GenericAppointment"
+              }
+            },
+            "recalls": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GenericAppointment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetAppointmentDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "customer": {
+          "$ref": "#/definitions/Customer"
+        }
+      }
+    },
+    "Appointment": {
+      "type": "object",
+      "properties": {
+        "appointmentId": {
+          "type": "string"
+        },
+        "departmentId": {
+          "type": "string"
+        },
+        "scheduledTime": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "GetServiceAppointmentResponse": {
+      "type": "object",
+      "properties": {
+        "appointments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Appointment"
+          }
+        }
+      }
+    },
+    "PutUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "confirmationCode": {
+          "type": "string"
+        }
+      }
+    },
+    "PostAppointmentResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "confirmationCode": {
+          "type": "string"
+        }
+      }
+    },
+    "Slot": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "count": {
+          "type": "string"
+        }
+      }
+    },
+    "TimeSegmentsResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string"
+        },
+        "endTime": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Slot"
+          }
+        },
+        "available": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Option": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "TransportationOptionResponse": {
+      "type": "object",
+      "properties": {
+        "transportation-options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Option"
+          }
+        }
+      }
+    },
+    "Advisor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "memberId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "GetAdvisorsResponse": {
+      "type": "object",
+      "properties": {
+        "serviceAdvisors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Advisor"
+          }
+        }
+      }
+    },
+    "AppointmentSummaryResponse": {
+      "type": "object",
+      "properties": {
+        "taxes": {
+          "type": "number"
+        },
+        "taxesGt": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        },
+        "totalLabourHours": {
+          "type": "number"
+        }
+      }
+    },
+    "DealerDepartmentResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "SearchVehicles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "vin": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SearchEmail": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "foundType": {
+          "type": "string"
+        }
+      }
+    },
+    "SearchVin": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "foundType": {
+          "type": "string"
+        },
+        "vehicles": {
+          "$ref": "#/definitions/SearchVehicles"
+        }
+      }
+    },
+    "Link": {
+      "type": "object",
+      "properties": {
+        "rel": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        }
+      }
+    },
+    "Vehicle": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "ServicePostAppointmentParams": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "comment": {
+          "type": "string"
+        }
+      }
+    },
+    "ServicesPostAppointment": {
+      "type": "object",
+      "properties": {
+        "drs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServicePostAppointmentParams"
+          }
+        },
+        "frs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServicePostAppointmentParams"
+          }
+        },
+        "repair": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServicePostAppointmentParams"
+          }
+        }
+      }
+    },
+    "PostAppointmentRequest": {
+      "type": "object",
+      "properties": {
+        "departmentId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "customerConcernsInfo": {
+          "type": "string"
+        },
+        "advisorId": {
+          "type": "number"
+        },
+        "transportationOptionCode": {
+          "type": "string"
+        },
+        "scheduledTime": {
+          "type": "string"
+        },
+        "mileage": {
+          "$ref": "#/definitions/Mileage"
+        },
+        "services": {
+          "$ref": "#/definitions/ServicesPostAppointment"
+        },
+        "vehicle": {
+          "$ref": "#/definitions/Vehicle"
+        }
+      }
+    },
+    "PutAppointmentRequest": {
+      "type": "object",
+      "properties": {
+        "departmentId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "customerConcernsInfo": {
+          "type": "string"
+        },
+        "advisorId": {
+          "type": "number"
+        },
+        "transportationOptionCode": {
+          "type": "string"
+        },
+        "scheduledTime": {
+          "type": "string"
+        },
+        "appointmentId": {
+          "type": "string"
+        },
+        "mileage": {
+          "$ref": "#/definitions/Mileage"
+        },
+        "services": {
+          "$ref": "#/definitions/ServicesPostAppointment"
+        },
+        "vehicle": {
+          "$ref": "#/definitions/Vehicle"
+        }
+      }
+    },
+    "ServiceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "Service": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        }
+      }
+    },
+    "ServicesResponse": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Service"
+          }
+        }
+      }
+    },
+    "DfxVehicleResponse": {
+      "type": "object",
+      "properties": {
+        "vin": {
+          "type": "string"
+        },
+        "make": {
+          "type": "string"
+        },
+        "year": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "transmission": {
+          "type": "string"
+        },
+        "engine": {
+          "type": "string"
+        },
+        "train": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenResponse": {
+      "type": "object",
+      "required": [
+        "accessToken",
+        "tokenType",
+        "expiresIn"
+      ],
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "tokenType": {
+          "type": "string"
+        },
+        "expiresIn": {
+          "type": "number"
+        }
+      }
+    },
+    "Router400ErrorResponse": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Bad Request"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "Missing/Invalid Parameter in Request"
+        }
+      }
+    },
+    "Router401ErrorResponse": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Unauthorized"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message the possible values can be - User not authorized"
+        }
+      }
+    },
+    "Router403ErrorResponse": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Not Found"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "description of the error response"
+        }
+      }
+    },
+    "Router404ErrorResponse": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "System Exception"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "description of the error response, values can be - Resource Not Found"
+        }
+      }
+    },
+    "Router500ErrorResponse": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Bad Gateway"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "description of the error response, values can be - Internal Server Error"
+        }
+      }
+    },
+    "Router502ErrorResponse": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Bad Gateway"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error message - possible values can be Proxy Integration Failed"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header"
+    },
+    "sigv4": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "x-amazon-apigateway-authtype": "awsSigv4"
+    }
+  },
+  "x-amazon-apigateway-request-validators": {
+    "Validate body, query string parameters, and headers": {
+      "validateRequestParameters": true,
+      "validateRequestBody": true
+    }
+  },
+  "paths": {
+    "/v1/digitalglovebox/servicescheduling/token": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Get the authentication token for DealerFX OSS API.",
+        "description": "This API returns the authentication token for DealerFX OSS API.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hintDealer",
+            "description": "dfx token got by the dealer",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/TokenResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/dfxvehicle": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Get the vehicle info stored in DFX.",
+        "description": "This API returns the vehicle info stored in DFX.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userid",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vin",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/DfxVehicleResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/facrtoryservices/mileage/{mileage}": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Get the list of factory services for a specific vehicle.",
+        "description": "This API returns the list of factory services for a specific vehicle.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "mileage",
+            "description": "distance in mileage",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userid",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vin",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ServicesResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/digitalglovebox/servicescheduling/facrtoryservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Get the list of factory services for a specific vehicle.",
+        "description": "This API returns the list of factory services for a specific vehicle.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "mileage",
+            "description": "distance in mileage",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "make",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "year",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "model",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transmission",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "engine",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "train",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ServicesResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/dealerservices/mileage/{mileage}": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Get the list of dealer services for a specific vehicle.",
+        "description": "This API returns the list of dealer services for a specific vehicle.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "mileage",
+            "description": "distance in mileage",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userid",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vin",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ServicesResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/digitalglovebox/servicescheduling/dealerservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Get the list of dealer services for a specific vehicle.",
+        "description": "This API returns the list of dealer services for a specific vehicle.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "mileage",
+            "description": "distance in mileage",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "make",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "year",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "model",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transmission",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "engine",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "train",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ServicesResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/repairservices/mileage/{mileage}": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Get the list of repair services for a specific vehicle.",
+        "description": "This API returns the list of repair services for a specific vehicle.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "mileage",
+            "description": "distance in mileage",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userid",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vin",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ServicesResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/digitalglovebox/servicescheduling/repairservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Get the list of repair services for a specific vehicle.",
+        "description": "This API returns the list of repair services for a specific vehicle.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "mileage",
+            "description": "distance in mileage",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "make",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "year",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "model",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transmission",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "engine",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "train",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ServicesResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/digitalglovebox/servicescheduling/search": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Performs a search of a customer in the DFX system by email.",
+        "description": "This API performs a search of a customer in the DFX system by email.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "email for searching the customer",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/SearchEmail"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/search": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Performs a search of a customer in the DFX system by vin.",
+        "description": "This API performs a search of a customer in the DFX system by vin.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userid",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vin",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/SearchVin"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/digitalglovebox/servicescheduling/dealerdepartment": {
+      "post": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Returns the department for services.",
+        "description": "This API returns the department for services.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "list of services.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "servicesList": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ServiceId"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/DealerDepartmentResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/digitalglovebox/servicescheduling/appointmentsummary": {
+      "post": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Returns the summary costs for the appointment.",
+        "description": "This API returns the summary costs for the appointment.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "list of services.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "servicesList": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ServiceId"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/AppointmentSummaryResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/digitalglovebox/servicescheduling/department/{departmentId}/advisors": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Returns the list of advisors for a specific dealer department.",
+        "description": "This API returns the list of advisors for a specific dealer department.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "departmentId",
+            "description": "unique identifier of the department",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/GetAdvisorsResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/digitalglovebox/servicescheduling/department/{departmentId}/trasportationoption": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Returns the list of transportation options for a specific dealer department.",
+        "description": "This API returns the list of transportation options for a specific dealer department.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "departmentId",
+            "description": "unique identifier of the department",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/TransportationOptionResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/digitalglovebox/servicescheduling/department/{departmentId}/timesegments": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Returns the list of time segments for a specific dealer department.",
+        "description": "This API returns the list of time segments for a specific dealer department.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "departmentId",
+            "description": "unique identifier of the department",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "description": "starting date for the research ( YYYY-MM-DD )",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "description": "ending date for the research ( YYYY-MM-DD )",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/TimeSegmentsResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointment": {
+      "post": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Returns the list of services scheduled for a specific vehicle to a specific dealer.",
+        "description": "This API returns the list of services scheduled for a specific vehicle to a specific dealer.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create a new appointment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostAppointmentRequest"
+            }
+          },
+          {
+            "name": "userid",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vin",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/PostAppointmentResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "put": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Update an appointment for a service.",
+        "description": "This API updates an appointment for a service.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "update an appointment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutAppointmentRequest"
+            }
+          },
+          {
+            "name": "userid",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vin",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/PutUpdateResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointments": {
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Returns the list of services scheduled for a specific vehicle to a specific dealer.",
+        "description": "This API returns the list of services scheduled for a specific vehicle to a specific dealer.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userid",
+            "description": "unique identifier of user - Gigya id for user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vin",
+            "description": "Vehicle Identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/GetServiceAppointmentResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    },
+    "/v1/digitalglovebox/servicescheduling/appointment/{appointmentId}/department/{departmentId}": {
+      "delete": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Delete a specific service.",
+        "description": "This API delete a specific service.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "appointmentId",
+            "description": "unique identifier of the appointment",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "departmentId",
+            "description": "unique identifier of the department",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "departmentId",
+            "description": "unique identifier of the department",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "get": {
+        "tags": [
+          "Service Scheduling"
+        ],
+        "summary": "Returns the details for a specific appointment.",
+        "description": "This API returns the details for a specific appointment.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "appointmentId",
+            "description": "unique identifier of the appointment",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "departmentId",
+            "description": "unique identifier of the department",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-name",
+            "description": "Name of the Client application",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-clientapp-version",
+            "description": "Version of the client applications software",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content-type",
+            "description": "application/json ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "description": "API key for the Service ",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientrequestid",
+            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Locale",
+            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-device-id",
+            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-originator-type",
+            "description": "The originating clients type: app, web ,server",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dealer-authorization",
+            "description": "dfx token got by the dealer",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/GetAppointmentDetailsResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Router400ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "schema": {
+              "$ref": "#/definitions/Router401ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "403 response",
+            "schema": {
+              "$ref": "#/definitions/Router403ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Router500ErrorResponse"
+            }
+          },
+          "502": {
+            "description": "502 response",
+            "schema": {
+              "$ref": "#/definitions/Router502ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "sigv4": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      },
+      "options": {
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy"
+        }
+      }
+    }
+  }
+}

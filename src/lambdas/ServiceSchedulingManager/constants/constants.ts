@@ -17,9 +17,13 @@ export const POST_APPOINTMENT_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{use
 export const PUT_APPOINTMENT_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduling\/appointment$';
 export const GET_APPOINTMENTS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduling\/appointments$';
 export const DELETE_APPOINTMENT_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduling\/appointment\/\{appointmentId\}\/department\/\{departmentId\}$';
+<<<<<<< HEAD
 export const GET_DETAILS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduling\/appointment\/\{appointmentId\}\/department\/\{departmentId\}$';
 
 export const REL_CUSTOMER_ID = "http://api.dealer-fx.com/docs/rels/customer-vehicles";
 export const HREF_CUSTOMER_ID = "https://scheduler.dealer-fx.com/catalog/customers/";
 export const REL_VEHICLE_VIN = "http://api.dealer-fx.com/docs/rels/vehicle";
 export const HREF_VEHICLE_VIN = "https://scheduler.dealer-fx.com/catalog/vehicles/";
+=======
+export const GET_DETAILS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduling\/appointment\/\{appointmentId\}\/department\/\{departmentId\}$';
+>>>>>>> first commit handler and services

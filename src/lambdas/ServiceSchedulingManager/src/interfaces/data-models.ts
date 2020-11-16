@@ -36,9 +36,15 @@ export interface DfxSearchEmailRequestData extends ServiceRequestData {
 }
 
 export type SearchEmailResponse = {
+<<<<<<< HEAD
     customerId?: string,
     email?: string,
     foundType?: string
+=======
+    customerId: string,
+    email: string,
+    foundType: string
+>>>>>>> first commit handler and services
 }
 
 export interface VinRequestData extends ServiceRequestData {

@@ -1,9 +1,13 @@
 import { DataModels } from "../interfaces";
 import { SchedulingServiceDataModels, SchedulingConectorService } from 'gcv-meld';
 import logger from "gcv-logger";
-import { Constants } from "../../constants";
+import { ServiceCatalog } from "aws-sdk";
 
 const LOG_PREFIX_CLASS = 'ServiceScheduling | ';
+const REL_CUSTOMER_ID = "http://api.dealer-fx.com/docs/rels/customer-vehicles";
+const HREF_CUSTOMER_ID = "https://scheduler.dealer-fx.com/catalog/customers/";
+const REL_VEHICLE_VIN = "http://api.dealer-fx.com/docs/rels/vehicle";
+const HREF_VEHICLE_VIN = "https://scheduler.dealer-fx.com/catalog/vehicles/";
 
 export class ServiceScheduling {
     public async searchByEmail(request: DataModels.DfxSearchEmailRequestData): Promise<DataModels.SearchEmailResponse> {
@@ -24,9 +28,9 @@ export class ServiceScheduling {
             let dim:number = response.customerPreviews[0].links.length;
             for(let i = 0; i < dim; i++){
                 if(response.customerPreviews[0].links[i].rel && 
-                    response.customerPreviews[0].links[i].rel == Constants.REL_CUSTOMER_ID){
+                    response.customerPreviews[0].links[i].rel == REL_CUSTOMER_ID){
                         let str = response.customerPreviews[0].links[i].href;
-                        customerId = str.substring(Constants.HREF_CUSTOMER_ID.length , str.length).replace("/vehicles", "");    
+                        customerId = str.substring(HREF_CUSTOMER_ID.length , str.length).replace("/vehicles", "");    
                 }
             }
             
@@ -59,14 +63,14 @@ export class ServiceScheduling {
             let dim:number = response.customerPreviews[0].links.length;
             for(let i = 0; i < dim; i++){                
                 if(response.customerPreviews[0].links[i].rel && 
-                    response.customerPreviews[0].links[i].rel == Constants.REL_CUSTOMER_ID){
+                    response.customerPreviews[0].links[i].rel == REL_CUSTOMER_ID){
                         let str = response.customerPreviews[0].links[i].href;
-                        customerId = str.substring(Constants.HREF_CUSTOMER_ID.length , str.length).replace("/vehicles", "");    
+                        customerId = str.substring(HREF_CUSTOMER_ID.length , str.length).replace("/vehicles", "");    
                 }
                 if(response.customerPreviews[0].links[i].rel && 
-                    response.customerPreviews[0].links[i].rel == Constants.REL_VEHICLE_VIN){
+                    response.customerPreviews[0].links[i].rel == REL_VEHICLE_VIN){
                         let str = response.customerPreviews[0].links[i].href;
-                        vin = str.substring(Constants.HREF_VEHICLE_VIN.length , str.length);    
+                        vin = str.substring(HREF_VEHICLE_VIN.length , str.length);    
                 }
             }
             

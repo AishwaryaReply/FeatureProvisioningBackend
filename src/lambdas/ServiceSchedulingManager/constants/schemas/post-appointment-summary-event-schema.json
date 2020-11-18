@@ -1,6 +1,19 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "description": "schema to validate the post appointment summary event",
+    "definitions":{
+            "Service": {
+				"type": "object",
+				"properties": {
+					"id" : {
+						"type":"string"
+					}
+				},
+				"required": [
+					"id"
+				]
+			}
+        },
     "type": "object",
     "properties": {
         "headers": {
@@ -40,19 +53,7 @@
 				"content-type"
             ]
         },
-		"definitions":{
-            "Service": {
-				"type": "object",
-				"properties": {
-					"id" : {
-						"type":"string"
-					}
-				},
-				"required": [
-					"id"
-				]
-			}
-        },
+		
         "requestBody": {
             "type": "object",
             "properties": {

@@ -1,7 +1,7 @@
 export const GET_TOKEN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduling\/token$';
 export const GET_DFX_VEHICLE_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduling\/dfxvehicle$';
-export const GET_FACTORY_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduling\/facrtoryservices\/mileage\/\{mileage\}$';
-export const GET_FACTORY_NO_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduling\/facrtoryservices\/\{make\}\/\{year\}\/\{model\}\/\{transmission\}\/\{engine\}\/\{train\}\/mileage\/\{mileage\}$';
+export const GET_FACTORY_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduling\/factoryservices\/mileage\/\{mileage\}$';
+export const GET_FACTORY_NO_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduling\/factoryservices\/\{make\}\/\{year\}\/\{model\}\/\{transmission\}\/\{engine\}\/\{train\}\/mileage\/\{mileage\}$';
 export const GET_DEALER_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduling\/dealerservices\/mileage\/\{mileage\}$';
 export const GET_DEALER_NO_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduling\/dealerservices\/\{make\}\/\{year\}\/\{model\}\/\{transmission\}\/\{engine\}\/\{train\}\/mileage\/\{mileage\}$';
 export const GET_REPAIR_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduling\/repairservices\/mileage\/\{mileage\}$';

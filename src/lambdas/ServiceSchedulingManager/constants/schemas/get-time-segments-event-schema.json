@@ -51,7 +51,7 @@
                 "departmentId"
             ]
         },
-        "queryParams": {
+        "queryString": {
             "type": "object",
             "properties": {
                 "startDate": {
@@ -70,6 +70,6 @@
     "required": [
         "headers",
         "pathParams",
-		"queryParams"
+		"queryString"
     ]
 }

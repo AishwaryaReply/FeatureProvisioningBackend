@@ -150,20 +150,20 @@ async function invokeService(requestData: DataModels.ServiceRequestData): Promis
             return await service.getDfxToken(requestData as DataModels.GetTokenRequestData);
         case 'GET_DEALER_SERVICES_VIN': 
             return await service.getDealerServicesVin(requestData as DataModels.GetServicesVinRequestData);
-        // case 'GET_FACTORY_SERVICES_WITHOUT_VIN': 
-        //     return await service.getManual(requestData as DataModels.GetManualRequestData);
-        // case 'GET_FACTORY_SERVICES_VIN': 
-        //     return await service.getCoverages(requestData as DataModels.GetCoveragesRequestData);
-        // case 'GET_DEALER_SERVICES_WITHOUT_VIN': 
-        //     return await service.getMileage(requestData as DataModels.GetMileageRequestData);
+        case 'GET_DEALER_SERVICES_WITHOUT_VIN': 
+            return await service.getDealerServicesWithoutVin(requestData as DataModels.GetServicesNoVinRequestData);
+        case 'GET_FACTORY_SERVICES_VIN': 
+            return await service.getFactoryServicesVin(requestData as DataModels.GetServicesVinRequestData);
+        case 'GET_FACTORY_SERVICES_WITHOUT_VIN': 
+            return await service.getFactoryServicesWithoutVin(requestData as DataModels.GetServicesNoVinRequestData);
+        case 'GET_REPAIR_SERVICES_VIN': 
+            return await service.getRepairServicesVin(requestData as DataModels.GetServicesVinRequestData);
+        case 'GET_REPAIR_SERVICES_WITHOUT_VIN': 
+            return await service.getRepairServicesWithoutVin(requestData as DataModels.GetServicesNoVinRequestData);
         // case 'GET_DEALER_DEPARTMENT': 
         //     return await service.getManual(requestData as DataModels.GetManualRequestData);
         // case 'GET_APPOINTMENT_SUMMARY': 
-        //     return await service.getCoverages(requestData as DataModels.GetCoveragesRequestData);
-        // case 'GET_REPAIR_SERVICES_VIN': 
-        //     return await service.getMileage(requestData as DataModels.GetMileageRequestData);
-        // case 'GET_REPAIR_SERVICES_WITHOUT_VIN': 
-        //     return await service.getManual(requestData as DataModels.GetManualRequestData);
+        //     return await service.getCoverages(requestData as DataModels.GetCoveragesRequestData);        
         // case 'GET_ADVISORS': 
         //     return await service.getManual(requestData as DataModels.GetManualRequestData);
         // case 'GET_TRANSPORTATION_OPTIONS': 

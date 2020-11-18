@@ -179,6 +179,6 @@ export type Service = {
     name: string, 
     price: number,
 }
-export type GetDealerServicesResponse = {    
+export type GetServicesResponse = {    
     services?: Service[]
 }

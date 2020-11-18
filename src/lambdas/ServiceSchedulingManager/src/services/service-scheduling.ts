@@ -131,7 +131,7 @@ export class ServiceScheduling {
     }
 
 
-    public async getDealerServicesVin(request: DataModels.GetServicesVinRequestData): Promise<DataModels.GetDealerServicesResponse> {
+    public async getDealerServicesVin(request: DataModels.GetServicesVinRequestData): Promise<DataModels.GetServicesResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getDealerServicesVin |`;
         const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsVin = {
             vin: request.vin,
@@ -142,7 +142,216 @@ export class ServiceScheduling {
         const response: SchedulingServiceDataModels.GetDealerServicesResponse = await SchedulingConectorService.getDealerServicesVin(mappedRequest);
         logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
 
-        let filteredResponse: DataModels.GetDealerServicesResponse = {};
+        let filteredResponse: DataModels.GetServicesResponse = {};
+
+        let services: DataModels.Service[] = [];
+
+        if(response.services && response.services.length != 0){
+            let dim:number = response.services.length;
+            for(let i = 0; i < dim; i++){
+                const elem = response.services[i];
+                if(elem.id &&  elem.name && elem.price){
+                    let service:DataModels.Service = {
+                        id: elem.id, 
+                        name: elem.name, 
+                        price: elem.price
+                    }
+                    services.push(service);
+                }
+                
+            }
+
+            filteredResponse = {
+                services: services
+            }
+        }
+        
+        return filteredResponse;
+    }
+
+    public async getDealerServicesWithoutVin(request: DataModels.GetServicesNoVinRequestData): Promise<DataModels.GetServicesResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getDealerServicesWithoutVin |`;
+        const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsWithoutVin = {
+            mileage: request.mileage,
+            make: request.make,
+            year: request.year,
+            model: request.model,
+            transmission: request.transmission,
+            train: request.train,
+            engine: request.engine,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetDealerServicesResponse = await SchedulingConectorService.getDealerServicesWithoutVin(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.GetServicesResponse = {};
+
+        let services: DataModels.Service[] = [];
+
+        if(response.services && response.services.length != 0){
+            let dim:number = response.services.length;
+            for(let i = 0; i < dim; i++){
+                const elem = response.services[i];
+                if(elem.id &&  elem.name && elem.price){
+                    let service:DataModels.Service = {
+                        id: elem.id, 
+                        name: elem.name, 
+                        price: elem.price
+                    }
+                    services.push(service);
+                }
+                
+            }
+
+            filteredResponse = {
+                services: services
+            }
+        }
+        
+        return filteredResponse;
+    }
+	
+	public async getFactoryServicesVin(request: DataModels.GetServicesVinRequestData): Promise<DataModels.GetServicesResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getFactoryServicesVin |`;
+        const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsVin = {
+            vin: request.vin,
+            mileage: request.mileage,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetFactoryServicesResponse = await SchedulingConectorService.getFactoryServicesVin(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.GetServicesResponse = {};
+
+        let services: DataModels.Service[] = [];
+
+        if(response.services && response.services.length != 0){
+            let dim:number = response.services.length;
+            for(let i = 0; i < dim; i++){
+                const elem = response.services[i];
+                if(elem.id &&  elem.name && elem.price){
+                    let service:DataModels.Service = {
+                        id: elem.id, 
+                        name: elem.name, 
+                        price: elem.price
+                    }
+                    services.push(service);
+                }
+                
+            }
+
+            filteredResponse = {
+                services: services
+            }
+        }
+        
+        return filteredResponse;
+    }
+	
+	
+	
+	public async getFactoryServicesWithoutVin(request: DataModels.GetServicesNoVinRequestData): Promise<DataModels.GetServicesResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getFactoryServicesWithoutVin |`;
+        const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsWithoutVin = {
+            mileage: request.mileage,
+            make: request.make,
+            year: request.year,
+            model: request.model,
+            transmission: request.transmission,
+            train: request.train,
+            engine: request.engine,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetFactoryServicesResponse = await SchedulingConectorService.getFactoryServicesWithoutVin(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.GetServicesResponse = {};
+
+        let services: DataModels.Service[] = [];
+
+        if(response.services && response.services.length != 0){
+            let dim:number = response.services.length;
+            for(let i = 0; i < dim; i++){
+                const elem = response.services[i];
+                if(elem.id &&  elem.name && elem.price){
+                    let service:DataModels.Service = {
+                        id: elem.id, 
+                        name: elem.name, 
+                        price: elem.price
+                    }
+                    services.push(service);
+                }
+                
+            }
+
+            filteredResponse = {
+                services: services
+            }
+        }
+        
+        return filteredResponse;
+    }
+	
+	public async getRepairServicesVin(request: DataModels.GetServicesVinRequestData): Promise<DataModels.GetServicesResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getRepairServicesVin |`;
+        const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsVin = {
+            vin: request.vin,
+            mileage: request.mileage,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetRepairServicesResponse = await SchedulingConectorService.getRepairServicesVin(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.GetServicesResponse = {};
+
+        let services: DataModels.Service[] = [];
+
+        if(response.services && response.services.length != 0){
+            let dim:number = response.services.length;
+            for(let i = 0; i < dim; i++){
+                const elem = response.services[i];
+                if(elem.id &&  elem.name && elem.price){
+                    let service:DataModels.Service = {
+                        id: elem.id, 
+                        name: elem.name, 
+                        price: elem.price
+                    }
+                    services.push(service);
+                }
+                
+            }
+
+            filteredResponse = {
+                services: services
+            }
+        }
+        
+        return filteredResponse;
+    }
+	
+	
+	
+	public async getRepairServicesWithoutVin(request: DataModels.GetServicesNoVinRequestData): Promise<DataModels.GetServicesResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getRepairServicesWithoutVin |`;
+        const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsWithoutVin = {
+            mileage: request.mileage,
+            make: request.make,
+            year: request.year,
+            model: request.model,
+            transmission: request.transmission,
+            train: request.train,
+            engine: request.engine,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetRepairServicesResponse = await SchedulingConectorService.getRepairServicesWithoutVin(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.GetServicesResponse = {};
 
         let services: DataModels.Service[] = [];
 

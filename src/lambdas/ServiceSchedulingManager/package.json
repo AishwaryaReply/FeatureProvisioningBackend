@@ -1,0 +1,72 @@
+{
+    "name": "ServiceSchedulingManager",
+    "version": "1.0.0",
+    "description": "This API manages the service scheduling process",
+    "config": {
+        "mocha-sonar-reporter": {
+            "outputfile": "test/TEST-all.xml"
+        }
+    },
+    "dependencies": {
+        "@mapbox/polyline": "1.1.1",
+        "@types/mapbox__polyline": "^1.0.0",
+        "gcv-cache": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPSdpRouter/gcv-cache.git#v1.8",
+        "gcv-ciam-gigya": "git+ssh://git@gsdp.github.intra.fcagroup.com:GSDPSdpRouter/gcv-ciam-gigya.git#v2.7",
+        "gcv-common-services": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPSdpRouter/gcv-common-services.git#v1.3.0",
+        "gcv-db-factory": "git+ssh://git@gsdp.github.intra.fcagroup.com:GSDPCustomLayer/gcv-db-factory.git#v1.4",
+        "gcv-db-interface": "git+ssh://git@gsdp.github.intra.fcagroup.com:GSDPCustomLayer/gcv-db-interface.git#v1.0",
+        "gcv-dynamodb-dao": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPCustomLayer/gcv-dynamodb-dao#v1.8.0",
+        "gcv-event-dao": "git+ssh://git@gsdp.github.intra.fcagroup.com:GSDPSdpRouter/gcv-event-dao.git#v1.2",
+        "gcv-http-utils": "git+ssh://git@gsdp.github.intra.fcagroup.com:GSDPSdpRouter/gcv-http-utils.git#v1.5",
+        "gcv-logger": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPSdpRouter/gcv-logger.git#v1.3",
+        "gcv-utilities": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPSdpRouter/gcv-utilities.git#v1.0.9",
+        "gcv-utils": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPSdpRouter/gcv-utils.git#v2.9",
+        "gcv-vehicle-dao": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPCustomLayer/gcv-vehicle-dao.git#v2.48",
+        "gcv-meld": "git+ssh://git@gsdp.github.intra.fcagroup.com:GSDPSdpRouter/gcv-meld.git#master"
+    },
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.57",
+        "@types/chai-as-promised": "^7.1.2",
+        "@types/mocha": "^5.2.7",
+        "@types/node": "^12.11.7",
+        "@types/sinon": "^7.0.13",
+        "@types/uuid": "^8.3.0",
+        "@typescript-eslint/eslint-plugin": "^2.3.1",
+        "@typescript-eslint/parser": "^2.3.1",
+        "aws-sdk": "^2.527.0",
+        "chai": "^4.2.0",
+        "chai-as-promised": "^7.1.1",
+        "eslint": "^6.4.0",
+        "eslint-plugin-json": "^2.0.1",
+        "mocha": "^6.2.0",
+        "nyc": "^14.1.1",
+        "sinon": "^7.4.2",
+        "source-map-support": "^0.5.13",
+        "ts-node": "^8.3.0",
+        "typescript": "3.9.2"
+    },
+    "scripts": {
+        "test": "nyc mocha -r ts-node/register -r source-map-support/register --require 'test/test.bootstrap' 'test/**/*test.ts'",
+        "prebuild": "rm -r dist && echo 'Dist folder removed' || echo 'Dist folder does not exist'",
+        "build": "tsc",
+        "lint": "eslint \"src/**\""
+    },
+    "nyc": {
+        "extension": [
+            ".ts",
+            ".tsx"
+        ],
+        "include": [
+            "src"
+        ],
+        "exclude": [
+            "**/*.d.ts"
+        ],
+        "reporter": [
+            "lcov"
+        ],
+        "all": true
+    },
+    "author": "iHSF",
+    "license": "UNLICENSED"
+}

@@ -1,0 +1,63 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "description": "schema to validate the delete service appointment event",
+    "type": "object",
+    "properties": {
+        "headers": {
+            "type": "object",
+            "properties": {
+                "x-device-id": {
+                    "type": "string"
+                },
+                "x-originator-type": {
+                    "type": "string"
+                },
+                "clientrequestid": {
+                    "type": "string"
+                },
+                "x-clientapp-name": {
+                    "type": "string"
+                },
+                "x-clientapp-version": {
+                    "type": "string"
+                },
+                "locale": {
+                    "type": "string"
+                },
+				"dealer-authorization": {
+                    "type": "string"
+				},
+                "content-type": {
+                    "type": "string",
+                    "pattern": "^(application\/json)(.*)?$"
+                }
+            },
+            "required": [
+                "clientrequestid",
+                "x-originator-type",
+				"dealer-authorization",
+				"x-clientapp-version",
+				"content-type"
+            ]
+        },
+        "pathParams": {
+            "type": "object",
+            "properties": {
+                "appointmentId": {
+                    "type": "string"
+                },
+                "departmentId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "appointmentId",
+                "departmentId"
+            ]
+        }
+    },
+    "required": [
+        "headers",
+        "pathParams"
+    ]
+}

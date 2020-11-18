@@ -36,9 +36,9 @@ export interface DfxSearchEmailRequestData extends ServiceRequestData {
 }
 
 export type SearchEmailResponse = {
-    customerId: string,
-    email: string,
-    foundType: string
+    customerId?: string,
+    email?: string,
+    foundType?: string
 }
 
 export interface VinRequestData extends ServiceRequestData {
@@ -49,7 +49,7 @@ export interface VinRequestData extends ServiceRequestData {
 
 export type GetDfxVehicleRequestData = VinRequestData;
 export type DfxSearchVinRequestData = VinRequestData;
-export type GetAppointmentsRequestData = VinRequestData;
+export type GetAppointmentRequestData = VinRequestData;
 
 export interface GetServicesNoVinRequestData extends ServiceRequestData {
     mileage: string;
@@ -67,7 +67,7 @@ export interface GetServicesVinRequestData extends VinRequestData {
 }
 
 export interface ServiceId {
-    id: number;
+    id: string;
 }
 
 export interface ServicesListRequestData extends ServiceRequestData {

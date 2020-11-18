@@ -113,6 +113,7 @@ export namespace Stubs {
             ]
         }
     }
+    const TEST_APPOINTMENT_ID = "test appointment";
 
     export const clone = <T>(obj: T): T => {
         return JSON.parse(JSON.stringify(obj))
@@ -309,7 +310,8 @@ export namespace Stubs {
         },
         requestBody: TEST_POST_BODY,
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointment'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointment',
+            httpMethod: 'POST'
         }
     }
 
@@ -321,7 +323,79 @@ export namespace Stubs {
         },
         requestBody: TEST_PUT_BODY,
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointment'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointment',
+            httpMethod: 'PUT'
+        }
+    }
+
+    export const WrongMethodAppointmentEvent = {
+        headers: headers,
+        pathParams: {
+            vin: TEST_VIN,
+            userid: TEST_USERID
+        },
+        requestBody: TEST_PUT_BODY,
+        runTimeInfo: {
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointment',
+            httpMethod: 'GET'
+        }
+    }
+
+    export const GetDealerDepartmentEvent = {
+        headers: headers,
+
+        requestBody: {
+            servicesList: SERVICE_LIST
+        },
+        runTimeInfo: {
+            resourcePath: '/v1/digitalglovebox/servicescheduling/dealerdepartment'
+        }
+    }
+
+    export const DeleteAppointmentEvent = {
+        headers: headers,
+        pathParams: {
+            appointmentId: TEST_APPOINTMENT_ID,
+            departmentId: TEST_DEPARTMENT
+        },
+        runTimeInfo: {
+            resourcePath: '/v1/digitalglovebox/servicescheduling/appointment/{appointmentId}/department/{departmentId}',
+            httpMethod: 'DELETE'
+        }
+    }
+
+    export const GetAppointmentDetailsEvent = {
+        headers: headers,
+        pathParams: {
+            appointmentId: TEST_APPOINTMENT_ID,
+            departmentId: TEST_DEPARTMENT
+        },
+        runTimeInfo: {
+            resourcePath: '/v1/digitalglovebox/servicescheduling/appointment/{appointmentId}/department/{departmentId}',
+            httpMethod: 'GET'
+        }
+    }
+
+    export const WrongMethodAppointmentDetailsEvent = {
+        headers: headers,
+        pathParams: {
+            appointmentId: TEST_APPOINTMENT_ID,
+            departmentId: TEST_DEPARTMENT
+        },
+        runTimeInfo: {
+            resourcePath: '/v1/digitalglovebox/servicescheduling/appointment/{appointmentId}/department/{departmentId}',
+            httpMethod: 'POST'
+        }
+    }
+
+    export const ResourcePathNotSupportedEvent = {
+        headers: headers,
+        pathParams: {
+            appointmentId: TEST_APPOINTMENT_ID,
+            departmentId: TEST_DEPARTMENT
+        },
+        runTimeInfo: {
+            resourcePath: '/v1/not/supported/path'
         }
     }
 

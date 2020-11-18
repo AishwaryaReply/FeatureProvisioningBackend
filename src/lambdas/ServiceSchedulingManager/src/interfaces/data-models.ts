@@ -49,7 +49,7 @@ export interface VinRequestData extends ServiceRequestData {
 
 export type GetDfxVehicleRequestData = VinRequestData;
 export type DfxSearchVinRequestData = VinRequestData;
-export type GetAppointmentRequestData = VinRequestData;
+export type GetAppointmentsRequestData = VinRequestData;
 
 export interface GetServicesNoVinRequestData extends ServiceRequestData {
     mileage: string;
@@ -67,7 +67,7 @@ export interface GetServicesVinRequestData extends VinRequestData {
 }
 
 export interface ServiceId {
-    id: string;
+    id: number;
 }
 
 export interface ServicesListRequestData extends ServiceRequestData {

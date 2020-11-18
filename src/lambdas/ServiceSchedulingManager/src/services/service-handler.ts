@@ -231,7 +231,8 @@ export class ServiceHandler {
 
     private prepareAppointmentOperation(event: UtilityObjects.TransformedInputEvent, api: ServiceRequested): DataModels.AppointmentRequestData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareAppointmentOperation |`;
-        logger.debug(logPrefix, `api: ${api}, appointmentId: ${event.pathParams.appointmentId}, departmentId: ${event.queryString.departmentId}, dealerToken: ${event.headers['dealer-authorization']}`);
+        
+        logger.debug(logPrefix, `api: ${api}, appointmentId: ${event.pathParams.appointmentId}, departmentId: ${event.pathParams.departmentId}, dealerToken: ${event.headers['dealer-authorization']}`);
         return {
             requestedService: api,
             dealerToken: event.headers['dealer-authorization'],
@@ -252,6 +253,7 @@ export class ServiceHandler {
     public getServiceRequested(runTimeInfo: any): DataModels.ServiceRequested {
         const logPrefix = `${LOG_PREFIX_CLASS} getServiceRequested |`;
         const resourcePath: string = runTimeInfo.resourcePath;
+        const resourceMethod: string = runTimeInfo.httpMethod;
         logger.debug(`${logPrefix} path: ${resourcePath}`);
         if (resourcePath.search(new RegExp(Constants.DFX_SEARCH_EMAIL_API_PATH_REGEX)) > -1) {
             return 'DFX_SEARCH_EMAIL';
@@ -265,7 +267,7 @@ export class ServiceHandler {
         if (resourcePath.search(new RegExp(Constants.GET_TOKEN_API_PATH_REGEX)) > -1) {
             return 'GET_DFX_TOKEN';
         }
-        if (resourcePath.search(new RegExp(Constants.GET_DEALER_VIN_API_PATH_REGEX )) > -1) {
+        if (resourcePath.search(new RegExp(Constants.GET_DEALER_VIN_API_PATH_REGEX)) > -1) {
             return 'GET_DEALER_SERVICES_VIN';
         }
         if (resourcePath.search(new RegExp(Constants.GET_DEALER_NO_VIN_API_PATH_REGEX)) > -1) {
@@ -301,19 +303,26 @@ export class ServiceHandler {
         if (resourcePath.search(new RegExp(Constants.GET_APPOINTMENTS_API_PATH_REGEX)) > -1) {
             return 'GET_SERVICE_APPOINTMENTS';
         }
-        if (resourcePath.search(new RegExp(Constants.POST_APPOINTMENT_API_PATH_REGEX)) > -1) {
-            return 'POST_APPOINTMENT';
+        if (resourcePath.search(new RegExp(Constants.POST_PUT_APPOINTMENT_API_PATH_REGEX)) > -1) {
+            switch (resourceMethod) {
+                case 'POST':
+                    return 'POST_APPOINTMENT';
+                case 'PUT':
+                    return 'UPDATE_SERVICE_APPOINTMENT';
+                default:
+                    throw new GCVErrors.HttpMethodNotAllowed('HttpMethod is not valid');
+            }
         }
-        if (resourcePath.search(new RegExp(Constants.DELETE_APPOINTMENT_API_PATH_REGEX)) > -1) {
-            return 'DELETE_SERVICE_APPOINTMENT';
+        if (resourcePath.search(new RegExp(Constants.APPOINTMENT_DETAILS_API_PATH_REGEX)) > -1) {
+            switch (resourceMethod) {
+                case 'GET':
+                    return 'GET_SERVICE_APPOINTMENT_DETAILS';
+                case 'DELETE':
+                    return 'DELETE_SERVICE_APPOINTMENT';
+                default:
+                    throw new GCVErrors.HttpMethodNotAllowed('HttpMethod is not valid');
+            }
         }
-        if (resourcePath.search(new RegExp(Constants.PUT_APPOINTMENT_API_PATH_REGEX)) > -1) {
-            return 'UPDATE_SERVICE_APPOINTMENT';
-        }
-        if (resourcePath.search(new RegExp(Constants.GET_DETAILS_API_PATH_REGEX)) > -1) {
-            return 'GET_SERVICE_APPOINTMENT_DETAILS';
-        }
-        
         throw new GCVErrors.ServiceNotSupported(`service ${resourcePath} is not supported`);
     }
 }

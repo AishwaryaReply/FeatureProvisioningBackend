@@ -1,6 +1,57 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "description": "schema to validate the post appointments event",
+    "definitions": {
+        "Service": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type":"number"
+                },
+                "comment": {
+                    "type":"string"
+                }
+            },
+            "required":[
+                "id",
+                "comment"
+            ]
+        },
+        "Services": {
+            "type": "object",
+            "properties": {
+                "drs": {
+                    "type":"array",
+                    "items": {
+                        "$ref": "#/definitions/Service"
+                    }
+                },
+                "frs": {
+                    "type":"array",
+                    "items": {
+                        "$ref": "#/definitions/Service"
+                    }
+                },
+                "repair": {
+                    "type":"array",
+                    "items": {
+                        "$ref": "#/definitions/Service"
+                    }
+                }
+            }
+        },
+        "Link": {
+            "type": "object",
+            "properties": {
+                "rel" : {
+                    "type":"string"
+                },
+                "href": {
+                    "type":"string"
+                }
+            }
+        }
+    },
     "type": "object",
     "properties": {
         "headers": {
@@ -40,57 +91,6 @@
 				"content-type"
             ]
         },
-		"definitions": {
-			"Service": {
-				"type": "object",
-				"properties": {
-					"id": {
-						"type":"number"
-					},
-					"comment": {
-						"type":"string"
-					}
-				},
-				"required":[
-					"id",
-					"comment"
-				]
-			},
-			"Services": {
-				"type": "object",
-				"properties": {
-					"drs": {
-						"type":"array",
-						"items": {
-							"$ref": "#/definitions/Service"
-						}
-					},
-					"frs": {
-						"type":"array",
-						"items": {
-							"$ref": "#/definitions/Service"
-						}
-					},
-					"repair": {
-						"type":"array",
-						"items": {
-							"$ref": "#/definitions/Service"
-						}
-					}
-				}
-			},
-			"Link": {
-				"type": "object",
-				"properties": {
-					"rel" : {
-						"type":"string"
-					},
-					"href": {
-						"type":"string"
-					}
-				}
-			}
-		},
         "pathParams": {
             "type": "object",
             "properties": {

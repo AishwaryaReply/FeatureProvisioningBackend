@@ -377,4 +377,49 @@ export class ServiceScheduling {
         
         return filteredResponse;
     }
+	
+	
+	
+	public async getDealerDepartment(request: DataModels.GetDealerDepartmentRequestData): Promise<DataModels.GetDealerDepartmentResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getDealerDepartment |`;
+        const mappedRequest: SchedulingServiceDataModels.GetDealerDepartmentRequestParams = {
+            services: request.servicesList,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetDealerDepartmentResponse = await SchedulingConectorService.getDealerDepartment(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.GetDealerDepartmentResponse = {};
+
+        if(response?.id){
+            filteredResponse = {
+                id: response.id
+            }
+        }        
+        return filteredResponse;
+    }
+	
+	
+	
+	public async getAppointmentSummary(request: DataModels.GetAppointmentSummaryRequestData): Promise<DataModels.GetAppointmentSummaryResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getAppointmentSummary |`;        
+        const mappedRequest: SchedulingServiceDataModels.GetAppointmentSummaryRequestParams = {
+            services: request.servicesList,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetAppointmentSummaryResponse = await SchedulingConectorService.getAppointmentSummary(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+    
+        let filteredResponse: DataModels.GetAppointmentSummaryResponse = {};
+    
+        if(response.taxes && 
+            response.taxesGt && 
+            response.total){                
+                filteredResponse = response;
+        }
+        
+        return filteredResponse;
+    }
 }   

@@ -67,7 +67,7 @@ export interface GetServicesVinRequestData extends VinRequestData {
 }
 
 export interface ServiceId {
-    id: string;
+    id: number;
 }
 
 export interface ServicesListRequestData extends ServiceRequestData {
@@ -181,4 +181,17 @@ export type Service = {
 }
 export type GetServicesResponse = {    
     services?: Service[]
+}
+
+export type GetDealerDepartmentResponse = {    
+    id?: number,
+    name?: string,
+    code?: string,
+}
+
+export type GetAppointmentSummaryResponse = {    
+    taxes?: number,
+    taxesGt?: number,
+    total?: number,
+    totalLabourHours?: number
 }

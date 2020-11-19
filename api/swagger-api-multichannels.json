@@ -3926,13 +3926,6 @@
             "in": "header",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "departmentId",
-            "description": "unique identifier of the department",
-            "in": "query",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {

@@ -164,10 +164,10 @@ async function invokeService(requestData: DataModels.ServiceRequestData): Promis
             return await service.getDealerDepartment(requestData as DataModels.GetDealerDepartmentRequestData);
         case 'GET_APPOINTMENT_SUMMARY': 
             return await service.getAppointmentSummary(requestData as DataModels.GetAppointmentSummaryRequestData);        
-        // case 'GET_ADVISORS': 
-        //     return await service.getManual(requestData as DataModels.GetManualRequestData);
-        // case 'GET_TRANSPORTATION_OPTIONS': 
-        //     return await service.getMileage(requestData as DataModels.GetMileageRequestData);
+        case 'GET_ADVISORS': 
+            return await service.getAdvisors(requestData as DataModels.GetAdvisorsRequestData);
+        case 'GET_TRANSPORTATION_OPTIONS': 
+            return await service.getTransportationOptions(requestData as DataModels.GetTransportationOptionsRequestData);
         // case 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS': 
         //     return await service.getManual(requestData as DataModels.GetManualRequestData);
         // case 'GET_SERVICE_APPOINTMENTS': 

@@ -184,9 +184,7 @@ export type GetServicesResponse = {
 }
 
 export type GetDealerDepartmentResponse = {    
-    id?: number,
-    name?: string,
-    code?: string,
+    id?: number
 }
 
 export type GetAppointmentSummaryResponse = {    
@@ -194,4 +192,21 @@ export type GetAppointmentSummaryResponse = {
     taxesGt?: number,
     total?: number,
     totalLabourHours?: number
+}
+
+export type serviceAdvisor = {    
+    id: number,
+    memberId: number,
+    name: string
+}
+export type GetAdvisorsResponse = {    
+    serviceAdvisors?: serviceAdvisor[],
+}
+
+export type transportationOption = {    
+    code: string,
+    description: string
+}
+export type GetTransportationOptionsResponse = {    
+    transportationOptions?: transportationOption[],
 }

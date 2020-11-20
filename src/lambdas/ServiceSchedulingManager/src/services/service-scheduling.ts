@@ -422,4 +422,75 @@ export class ServiceScheduling {
         
         return filteredResponse;
     }
+
+
+
+    public async getAdvisors(request: DataModels.GetAdvisorsRequestData): Promise<DataModels.GetAdvisorsResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getAdvisors |`;        
+        const mappedRequest: SchedulingServiceDataModels.GetAdvisorsRequestParams = {
+            departmentId: request.departmentId,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetAdvisorsResponse = await SchedulingConectorService.getAdvisors(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+    
+        let filteredResponse: DataModels.GetAdvisorsResponse = {};
+    
+        let serviceAdvisors: DataModels.serviceAdvisor[] = [];
+    
+        if(response.serviceAdvisors && response.serviceAdvisors.length != 0){    
+            let dim:number = response.serviceAdvisors.length;
+            for(let i = 0; i < dim; i++){
+                const elem = response.serviceAdvisors[i];
+                if(elem.id &&  elem.name && elem.memberId){
+                    let service:DataModels.serviceAdvisor = {
+                        id: elem.id, 
+                        name: elem.name, 
+                        memberId: elem.memberId
+                    }
+                    serviceAdvisors.push(service);
+                }                
+            }            
+            filteredResponse = {
+                serviceAdvisors: serviceAdvisors
+            }
+        }        
+        return filteredResponse;
+    }
+
+    
+
+    public async getTransportationOptions(request: DataModels.GetTransportationOptionsRequestData): Promise<DataModels.GetTransportationOptionsResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getTransportationOptions |`;        
+        const mappedRequest: SchedulingServiceDataModels.GetTransportationOptionsParams = {
+            departmentId: request.departmentId,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetTransportationOptionsResponse = await SchedulingConectorService.getTransportationOptions(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+    
+        let filteredResponse: DataModels.GetTransportationOptionsResponse = {};
+    
+        let transportationOptions: DataModels.transportationOption[] = [];
+    
+        if(response.options && response.options.length != 0){    
+            let dim:number = response.options.length;
+            for(let i = 0; i < dim; i++){
+                const elem = response.options[i];
+                if(elem.code &&  elem.description){
+                    let service:DataModels.transportationOption = {
+                        code: elem.code, 
+                        description: elem.description
+                    }
+                    transportationOptions.push(service);
+                }                
+            }            
+            filteredResponse = {
+                transportationOptions: transportationOptions
+            }
+        }        
+        return filteredResponse;
+    }
 }   

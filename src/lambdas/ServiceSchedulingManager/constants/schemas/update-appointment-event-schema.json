@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "description": "schema to validate the update appointments event",
+    "description": "schema to validate the update appointment event",
     "definitions": {
         "Service": {
             "type": "object",

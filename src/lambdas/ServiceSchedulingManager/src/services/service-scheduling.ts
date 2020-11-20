@@ -60,12 +60,12 @@ export class ServiceScheduling {
             for(let i = 0; i < dim; i++){                
                 if(response.customerPreviews[0].links[i].rel && 
                     response.customerPreviews[0].links[i].rel == Constants.REL_CUSTOMER_ID){
-                        let str = response.customerPreviews[0].links[i].href;
+                        const str = response.customerPreviews[0].links[i].href;
                         customerId = str.substring(Constants.HREF_CUSTOMER_ID.length , str.length).replace("/vehicles", "");    
                 }
                 if(response.customerPreviews[0].links[i].rel && 
                     response.customerPreviews[0].links[i].rel == Constants.REL_VEHICLE_VIN){
-                        let str = response.customerPreviews[0].links[i].href;
+                        const str = response.customerPreviews[0].links[i].href;
                         vin = str.substring(Constants.HREF_VEHICLE_VIN.length , str.length);    
                 }
             }
@@ -147,11 +147,11 @@ export class ServiceScheduling {
         let services: DataModels.Service[] = [];
 
         if(response.services && response.services.length != 0){
-            let dim:number = response.services.length;
+            const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
                 if(elem.id &&  elem.name && elem.price){
-                    let service:DataModels.Service = {
+                    const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
                         price: elem.price
@@ -190,11 +190,11 @@ export class ServiceScheduling {
         let services: DataModels.Service[] = [];
 
         if(response.services && response.services.length != 0){
-            let dim:number = response.services.length;
+            const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
                 if(elem.id &&  elem.name && elem.price){
-                    let service:DataModels.Service = {
+                    const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
                         price: elem.price
@@ -228,11 +228,11 @@ export class ServiceScheduling {
         let services: DataModels.Service[] = [];
 
         if(response.services && response.services.length != 0){
-            let dim:number = response.services.length;
+            const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
                 if(elem.id &&  elem.name && elem.price){
-                    let service:DataModels.Service = {
+                    const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
                         price: elem.price
@@ -273,11 +273,11 @@ export class ServiceScheduling {
         let services: DataModels.Service[] = [];
 
         if(response.services && response.services.length != 0){
-            let dim:number = response.services.length;
+            const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
                 if(elem.id &&  elem.name && elem.price){
-                    let service:DataModels.Service = {
+                    const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
                         price: elem.price
@@ -311,11 +311,11 @@ export class ServiceScheduling {
         let services: DataModels.Service[] = [];
 
         if(response.services && response.services.length != 0){
-            let dim:number = response.services.length;
+            const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
                 if(elem.id &&  elem.name && elem.price){
-                    let service:DataModels.Service = {
+                    const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
                         price: elem.price
@@ -356,11 +356,11 @@ export class ServiceScheduling {
         let services: DataModels.Service[] = [];
 
         if(response.services && response.services.length != 0){
-            let dim:number = response.services.length;
+            const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
                 if(elem.id &&  elem.name && elem.price){
-                    let service:DataModels.Service = {
+                    const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
                         price: elem.price
@@ -440,11 +440,11 @@ export class ServiceScheduling {
         let serviceAdvisors: DataModels.serviceAdvisor[] = [];
     
         if(response.serviceAdvisors && response.serviceAdvisors.length != 0){    
-            let dim:number = response.serviceAdvisors.length;
+            const dim:number = response.serviceAdvisors.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.serviceAdvisors[i];
                 if(elem.id &&  elem.name && elem.memberId){
-                    let service:DataModels.serviceAdvisor = {
+                    const service:DataModels.serviceAdvisor = {
                         id: elem.id, 
                         name: elem.name, 
                         memberId: elem.memberId
@@ -476,11 +476,11 @@ export class ServiceScheduling {
         let transportationOptions: DataModels.transportationOption[] = [];
     
         if(response.options && response.options.length != 0){    
-            let dim:number = response.options.length;
+            const dim:number = response.options.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.options[i];
                 if(elem.code &&  elem.description){
-                    let service:DataModels.transportationOption = {
+                    const service:DataModels.transportationOption = {
                         code: elem.code, 
                         description: elem.description
                     }
@@ -489,6 +489,151 @@ export class ServiceScheduling {
             }            
             filteredResponse = {
                 transportationOptions: transportationOptions
+            }
+        }        
+        return filteredResponse;
+    }
+
+
+
+    public async getDealerDepartmentTimeSegments(request: DataModels.GetTimeSegmetsRequestData): Promise<DataModels.GetDealerDepartmentTimeSegmentsResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getDealerDepartmentTimeSegments |`;        
+        const mappedRequest: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsParams = {
+            departmentId: request.departmentId,
+            StartDate: request.startDate,
+            EndDate: request.endDate,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsResponse = await SchedulingConectorService.getDealerDepartmentTimeSegments(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+    
+        let filteredResponse: DataModels.GetDealerDepartmentTimeSegmentsResponse = {};
+    
+        let segments: DataModels.Segment[] = [];
+    
+        if(response.segments && response.segments.length != 0){    
+            const dim:number = response.segments.length;
+            for(let i = 0; i < dim; i++){
+                const elem = response.segments[i];                
+                let slots: DataModels.Slot[] = [];
+                if(elem.time && 
+                    elem.endTime && 
+                    elem.state && 
+                    elem.available && 
+                    elem.slots && 
+                    elem.slots.length != 0){
+    
+                    const dimSlots:number = elem.slots.length;
+                    for(let i = 0; i < dimSlots; i++){
+                        const slotElem = elem.slots[i];   
+                        if(slotElem.name && slotElem.count){
+                            const slot:DataModels.Slot = {
+                                name: slotElem.name, 
+                                count: slotElem.count
+                            }
+                            slots.push(slot);
+                        }
+                    }
+                    const segment:DataModels.Segment = {
+                        time: elem.time,
+                        endTime: elem.endTime,
+                        state: elem.time,
+                        slots: slots,
+                        available: elem.available
+                    }
+                    segments.push(segment);
+                }                
+            }            
+            filteredResponse = {
+                segments: segments
+            }
+        }        
+        return filteredResponse;
+    }
+
+
+
+    public async getServiceAppointments(request: DataModels.GetAppointmentsRequestData): Promise<DataModels.GetServiceAppointmentsResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getServiceAppointments |`;        
+        const mappedRequest: SchedulingServiceDataModels.GetServiceAppointmentsParams = {
+            vin: request.vin,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetServiceAppointmentsResponse = await SchedulingConectorService.getServiceAppointments(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.GetServiceAppointmentsResponse = {};
+
+        let appointments: DataModels.Appointment[] = [];
+
+        if(response.appointments && response.appointments.length != 0){    
+            const dim:number = response.appointments.length;
+            for(let i = 0; i < dim; i++){
+                const elem = response.appointments[i];   
+                if(elem.scheduledTime && 
+                    elem.status && 
+                    elem.links && 
+                    elem.links.length != 0){
+
+                    let appointmentId:string = "";
+                    let departmentId:string = "";
+
+                    const dimLinks:number = elem.links.length;
+                    for(let i = 0; i < dimLinks; i++){
+                        const slotElem = elem.links[i];   
+                        if(slotElem.rel && slotElem.href){
+                            if(slotElem.rel == Constants.REL_APPOINTMENT_ID){
+                                const str = slotElem.href;
+                                appointmentId = str.substring(Constants.HREF_APPOINTMENT_ID.length , str.length); 
+                            }else if(slotElem.rel == Constants.REL_DEPARTMENT_ID){
+                                const str = slotElem.href;
+                                departmentId = str.substring(Constants.HREF_DEPARTMENT_ID.length , str.length); 
+                            }
+                        }
+                    }
+                    const appointment:DataModels.Appointment = {
+                        scheduledTime: elem.scheduledTime,
+                        status: elem.status,
+                        appointmentId: appointmentId,
+                        departmentId: departmentId
+                    }
+                    appointments.push(appointment);
+                }                
+            }            
+            filteredResponse = {
+                appointments: appointments
+            }
+        }        
+        return filteredResponse;
+    }
+
+
+
+    public async postAppointment(request: DataModels.PostAppointmentRequestData): Promise<DataModels.PostAppointmentResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} postAppointment |`;        
+        const mappedRequest: SchedulingServiceDataModels.PostAppointmentParams = {
+            departmentId: request.body.departmentId,
+            services: request.body.services,
+            customerId: request.body.customerId,
+            customerConcernsInfo: request.body.customerConcernsInfo,
+            advisorId: request.body.advisorId,
+            transportationOptionCode: request.body.transportationOptionCode,
+            scheduledTime: request.body.scheduledTime,
+            mileage: request.body.mileage,
+            dealerToken: request.dealerToken,
+            vin: request.vin
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.PostAppointmentResponse = await SchedulingConectorService.postAppointment(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.PostAppointmentResponse = {};
+
+        if(response.status && response.confirmationCode){    
+            filteredResponse = {
+                status: response.status
             }
         }        
         return filteredResponse;

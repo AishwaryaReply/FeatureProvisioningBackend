@@ -49,7 +49,7 @@ export interface VinRequestData extends ServiceRequestData {
 
 export type GetDfxVehicleRequestData = VinRequestData;
 export type DfxSearchVinRequestData = VinRequestData;
-export type GetAppointmentRequestData = VinRequestData;
+export type GetAppointmentsRequestData = VinRequestData;
 
 export interface GetServicesNoVinRequestData extends ServiceRequestData {
     mileage: string;
@@ -209,4 +209,33 @@ export type transportationOption = {
 }
 export type GetTransportationOptionsResponse = {    
     transportationOptions?: transportationOption[],
+}
+
+export declare type Slot = {
+    name: string;
+    count: string;
+};
+export declare type Segment = {
+    time: string;
+    endTime: string;
+    state: string;
+    slots: Slot[];
+    available: boolean;
+};
+export declare type GetDealerDepartmentTimeSegmentsResponse = {
+    segments?: Segment[];
+};
+
+export declare type Appointment = {
+    appointmentId: string;
+    departmentId: string;
+    scheduledTime: string;
+    status: string;
+};
+export declare type GetServiceAppointmentsResponse = {
+    appointments?: Appointment[];
+};
+
+export type PostAppointmentResponse = {    
+    status?: string
 }

@@ -18,11 +18,7 @@ export const GET_APPOINTMENTS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{use
 export const APPOINTMENT_DETAILS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduling\/appointment\/\{appointmentId\}\/department\/\{departmentId\}$';
 
 export const REL_CUSTOMER_ID = "http://api.dealer-fx.com/docs/rels/customer-vehicles";
-export const HREF_CUSTOMER_ID = "https://scheduler.dealer-fx.com/catalog/customers/";
 export const REL_VEHICLE_VIN = "http://api.dealer-fx.com/docs/rels/vehicle";
-export const HREF_VEHICLE_VIN = "https://scheduler.dealer-fx.com/catalog/vehicles/";
 
 export const REL_APPOINTMENT_ID = "http://api.dealer-fx.com/docs/rels/appointment";
-export const HREF_APPOINTMENT_ID = "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/";
 export const REL_DEPARTMENT_ID = "http://api.dealer-fx.com/docs/rels/service-department";
-export const HREF_DEPARTMENT_ID = "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/";

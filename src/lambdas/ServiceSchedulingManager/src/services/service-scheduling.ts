@@ -26,8 +26,8 @@ export class ServiceScheduling {
             for(let i = 0; i < dim; i++){
                 if(response.customerPreviews[0].links[i].rel && 
                     response.customerPreviews[0].links[i].rel == Constants.REL_CUSTOMER_ID){
-                        let str = response.customerPreviews[0].links[i].href;
-                        customerId = str.substring(Constants.HREF_CUSTOMER_ID.length , str.length).replace("/vehicles", "");    
+                        const hrefArray = response.customerPreviews[0].links[i].href.split("/");
+                        customerId = hrefArray[hrefArray.length - 2];       
                 }
             }
             
@@ -61,13 +61,13 @@ export class ServiceScheduling {
             for(let i = 0; i < dim; i++){                
                 if(response.customerPreviews[0].links[i].rel && 
                     response.customerPreviews[0].links[i].rel == Constants.REL_CUSTOMER_ID){
-                        const str = response.customerPreviews[0].links[i].href;
-                        customerId = str.substring(Constants.HREF_CUSTOMER_ID.length , str.length).replace("/vehicles", "");    
+                        const hrefArray = response.customerPreviews[0].links[i].href.split("/");
+                        customerId = hrefArray[hrefArray.length - 2];    
                 }
                 if(response.customerPreviews[0].links[i].rel && 
-                    response.customerPreviews[0].links[i].rel == Constants.REL_VEHICLE_VIN){
-                        const str = response.customerPreviews[0].links[i].href;
-                        vin = str.substring(Constants.HREF_VEHICLE_VIN.length , str.length);    
+                    response.customerPreviews[0].links[i].rel == Constants.REL_VEHICLE_VIN){                        
+                        const hrefArray = response.customerPreviews[0].links[i].href.split("/");
+                        vin = hrefArray[hrefArray.length - 1]; 
                 }
             }
             
@@ -495,7 +495,7 @@ export class ServiceScheduling {
     }
 
 
-    //TODO: To be modified
+
     public async getDealerDepartmentTimeSegments(request: DataModels.GetTimeSegmetsRequestData): Promise<DataModels.GetDealerDepartmentTimeSegmentsResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getDealerDepartmentTimeSegments |`;        
         const mappedRequest: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsParams = {
@@ -568,8 +568,8 @@ export class ServiceScheduling {
         return filteredResponse;
     }
 
+    
 
-    //TODO: Use split
     public async getServiceAppointments(request: DataModels.GetAppointmentsRequestData): Promise<DataModels.GetServiceAppointmentsResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getServiceAppointments |`;        
         const mappedRequest: SchedulingServiceDataModels.GetServiceAppointmentsParams = {
@@ -601,11 +601,11 @@ export class ServiceScheduling {
                         const slotElem = elem.links[i];   
                         if(slotElem.rel && slotElem.href){
                             if(slotElem.rel == Constants.REL_APPOINTMENT_ID){
-                                const str = slotElem.href;
-                                appointmentId = str.substring(Constants.HREF_APPOINTMENT_ID.length , str.length); 
+                                const hrefArray = slotElem.href.split("/");
+                                appointmentId = hrefArray[hrefArray.length - 1]; 
                             }else if(slotElem.rel == Constants.REL_DEPARTMENT_ID){
-                                const str = slotElem.href;
-                                departmentId = str.substring(Constants.HREF_DEPARTMENT_ID.length , str.length); 
+                                const hrefArray = slotElem.href.split("/");
+                                departmentId = hrefArray[hrefArray.length - 1]; 
                             }
                         }
                     }
@@ -722,6 +722,7 @@ export class ServiceScheduling {
 
         let filteredResponse: DataModels.GetServiceAppointmentDetailsResponse = {};
 
+        /*
         if(response?.status){  
             filteredResponse.status = response.status;
         }
@@ -734,10 +735,14 @@ export class ServiceScheduling {
         if(response?.confirmationCode){
             filteredResponse.confirmationCode = response.confirmationCode;
         }  
+        */
+        this.copyElement(response, ["status", "scheduledTime", "customerConcernsInfo", "confirmationCode"], filteredResponse);
+
         if(response?.customer?.id){
             const elem:SchedulingServiceDataModels.Customer = response.customer;
             let cust:DataModels.Customer = {};
             cust.id = elem.id;
+            /*
             if(elem.firstName){
                 cust.firstName = elem.firstName;
             }
@@ -756,35 +761,44 @@ export class ServiceScheduling {
             if(elem.emails && elem.emails.length != 0){
                 cust.emails = elem.emails;
             }
+            */
+            this.copyElement(elem, ["firstName", "lastName", "phone", "email", "emails", "emails"], cust);
             filteredResponse.customer = cust;
         } 
         if(response?.mileage){
             const elem:SchedulingServiceDataModels.Mileage = response.mileage;
             let mil:DataModels.Mileage = {value: 0, unitsKind: ""};
+            /*
             if(elem.value){
                 mil.value = elem.value;
             }
             if(elem.unitsKind){
                 mil.unitsKind = elem.unitsKind;
             }
+            */
+            this.copyElement(elem, ["value", "unitsKind"], mil);
             filteredResponse.mileage = mil;
         }   
         if(response?.advisor?.id){
             const elem:SchedulingServiceDataModels.Advisor = response.advisor;
             let adv:DataModels.Advisor = {};
             adv.id = elem.id;
+            /*
             if(elem.name){
                 adv.name = elem.name;
             }
             if(elem.departmentId){
                 adv.departmentId = elem.departmentId;
             }
+            */
+            this.copyElement(elem, ["name", "departmentId"], adv);
             filteredResponse.advisor = adv;
         }  
         if(response?.transportationOption?.code){
             const elem:SchedulingServiceDataModels.TransportationOptionPostAppointment = response.transportationOption;
             let tO:DataModels.TransportationOption = {};
             tO.code = elem.code;
+            /*
             if(elem.enabled){
                 tO.enabled = elem.enabled;
             }
@@ -794,6 +808,8 @@ export class ServiceScheduling {
             if(elem.deliveryInfo){
                 tO.deliveryInfo = elem.deliveryInfo;
             }
+            */
+            this.copyElement(elem, ["enabled", "description", "deliveryInfo"], tO);
             filteredResponse.transportationOption = tO;
         } 
         if(response?.services){
@@ -803,51 +819,42 @@ export class ServiceScheduling {
                 servs.summary = elem.summary;
             }
             if(elem.drs){
-                const dim: number = elem.drs.length;
-                for(let i = 0; i<dim; i++){
-                    if(elem.drs[i].links){
-                        delete elem.drs[i].links;
-                        servs.drs?.push(elem.drs[i]);
-                    }else{                        
-                        servs.drs?.push(elem.drs[i]);
-                    }
-                }
+                servs.drs = this.copyService(elem.drs, "drs");
             }
             if(elem.frs){
-                const dim: number = elem.frs.length;
-                for(let i = 0; i<dim; i++){
-                    if(elem.frs[i].links){
-                        delete elem.frs[i].links;
-                        servs.frs?.push(elem.frs[i]);
-                    }else{                        
-                        servs.frs?.push(elem.frs[i]);
-                    }
-                }
+                servs.frs = this.copyService(elem.frs, "frs");
             }
             if(elem.repair){
-                const dim: number = elem.repair.length;
-                for(let i = 0; i<dim; i++){
-                    if(elem.repair[i].links){
-                        delete elem.repair[i].links;
-                        servs.repair?.push(elem.repair[i]);
-                    }else{                        
-                        servs.repair?.push(elem.repair[i]);
-                    }
-                }
+                servs.repair = this.copyService(elem.repair, "frs");
             }
             if(elem.recalls){
-                const dim: number = elem.recalls.length;
-                for(let i = 0; i<dim; i++){
-                    if(elem.recalls[i].links){
-                        delete elem.recalls[i].links;
-                        servs.recalls?.push(elem.recalls[i]);
-                    }else{                        
-                        servs.recalls?.push(elem.recalls[i]);
-                    }
-                }
+                servs.recalls = this.copyService(elem.recalls, "recalls");
             }
             filteredResponse.services = servs;
         } 
         return filteredResponse;
     }
+
+    private copyService(elem:any, key:string) {
+        let se:DataModels.ServiceAppointment[] = [];
+        const dim: number = elem[key].length;
+        for(let i = 0; i<dim; i++){
+            if(elem[key][i].links){
+                delete elem[key][i].links;
+            }
+            se.push(elem[key][i]);
+        }
+        return se;       
+    }
+
+    private copyElement(fromElem:any, keys:string[], toObj:any){
+        keys.forEach(key => {
+            if(fromElem[key] && fromElem[key].length != 0){
+                toObj.key = fromElem[key];
+            }
+        });
+    }
+
 }   
+
+

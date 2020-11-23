@@ -174,11 +174,11 @@ async function invokeService(requestData: DataModels.ServiceRequestData): Promis
             return await service.getServiceAppointments(requestData as DataModels.GetAppointmentsRequestData);
         case 'POST_APPOINTMENT': 
             return await service.postAppointment(requestData as DataModels.PostAppointmentRequestData);
-        // case 'DELETE_SERVICE_APPOINTMENT': 
-        //     return await service.getManual(requestData as DataModels.GetManualRequestData);
-        // case 'UPDATE_SERVICE_APPOINTMENT': 
-        //     return await service.getManual(requestData as DataModels.GetManualRequestData);
-        // case 'GET_SERVICE_APPOINTMENT_DETAILS':
-        //     return await service.getCoverages(requestData as DataModels.GetCoveragesRequestData);
+        case 'DELETE_SERVICE_APPOINTMENT': 
+            return await service.deleteServiceAppointment(requestData as DataModels.AppointmentRequestData);
+        case 'UPDATE_SERVICE_APPOINTMENT': 
+            return await service.updateServiceAppointment(requestData as DataModels.PutAppointmentRequestData);
+        case 'GET_SERVICE_APPOINTMENT_DETAILS':
+            return await service.getServiceAppointmentDetails(requestData as DataModels.AppointmentRequestData);
     }
 }

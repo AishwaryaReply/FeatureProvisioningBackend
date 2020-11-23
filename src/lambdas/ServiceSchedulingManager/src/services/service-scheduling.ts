@@ -2,6 +2,7 @@ import { DataModels } from "../interfaces";
 import { SchedulingServiceDataModels, SchedulingConectorService } from 'gcv-meld';
 import logger from "gcv-logger";
 import { Constants } from "../../constants";
+import { GCVErrors } from "gcv-utils";
 
 const LOG_PREFIX_CLASS = 'ServiceScheduling | ';
 
@@ -443,11 +444,10 @@ export class ServiceScheduling {
             const dim:number = response.serviceAdvisors.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.serviceAdvisors[i];
-                if(elem.id &&  elem.name && elem.memberId){
+                if(elem.id && elem.name){
                     const service:DataModels.serviceAdvisor = {
                         id: elem.id, 
-                        name: elem.name, 
-                        memberId: elem.memberId
+                        name: elem.name
                     }
                     serviceAdvisors.push(service);
                 }                
@@ -479,7 +479,7 @@ export class ServiceScheduling {
             const dim:number = response.options.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.options[i];
-                if(elem.code &&  elem.description){
+                if(elem.code &&  elem.description && elem.enabled){
                     const service:DataModels.transportationOption = {
                         code: elem.code, 
                         description: elem.description
@@ -495,7 +495,7 @@ export class ServiceScheduling {
     }
 
 
-
+    //TODO: To be modified
     public async getDealerDepartmentTimeSegments(request: DataModels.GetTimeSegmetsRequestData): Promise<DataModels.GetDealerDepartmentTimeSegmentsResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getDealerDepartmentTimeSegments |`;        
         const mappedRequest: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsParams = {
@@ -516,14 +516,13 @@ export class ServiceScheduling {
             const dim:number = response.segments.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.segments[i];                
-                let slots: DataModels.Slot[] = [];
+                let slots: DataModels.Slots = {};
                 if(elem.time && 
-                    elem.endTime && 
-                    elem.state && 
+                    elem.endTime &&
                     elem.available && 
                     elem.slots && 
                     elem.slots.length != 0){
-    
+
                     const dimSlots:number = elem.slots.length;
                     for(let i = 0; i < dimSlots; i++){
                         const slotElem = elem.slots[i];   
@@ -532,9 +531,26 @@ export class ServiceScheduling {
                                 name: slotElem.name, 
                                 count: slotElem.count
                             }
-                            slots.push(slot);
+                            if(slot.name.includes("service-advisor")){    
+                                const se = slot.name.split(":");
+                                slot.name = se[se.length - 1];    
+                                if(slot.name){                     
+                                    slots.serviceAdvisors?.slots.push(slot);
+                                }else{
+                                    if(slots.serviceAdvisors) slots.serviceAdvisors.totalAvailable = slot.count;
+                                }
+                            }else if(slot.name.includes("transportation-options")){   
+                                const se = slot.name.split(":");
+                                slot.name = se[se.length - 1]; 
+                                if(slot.name){                                                     
+                                    slots.transportationOptions?.slots.push(slot);
+                                }else{
+                                    if(slots.transportationOptions) slots.transportationOptions.totalAvailable = slot.count;
+                                }
+                            }
                         }
                     }
+
                     const segment:DataModels.Segment = {
                         time: elem.time,
                         endTime: elem.endTime,
@@ -553,7 +569,7 @@ export class ServiceScheduling {
     }
 
 
-
+    //TODO: Use split
     public async getServiceAppointments(request: DataModels.GetAppointmentsRequestData): Promise<DataModels.GetServiceAppointmentsResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getServiceAppointments |`;        
         const mappedRequest: SchedulingServiceDataModels.GetServiceAppointmentsParams = {
@@ -633,9 +649,205 @@ export class ServiceScheduling {
 
         if(response.status && response.confirmationCode){    
             filteredResponse = {
-                status: response.status
+                status: response.status,
+                confirmationCode: response.confirmationCode
             }
         }        
+        return filteredResponse;
+    }
+
+    
+
+    public async deleteServiceAppointment(request: DataModels.AppointmentRequestData): Promise<DataModels.DeleteServiceAppointmentResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} deleteServiceAppointment |`;        
+        const mappedRequest: SchedulingServiceDataModels.DeleteServiceAppointmentParams = {
+            departmentId: request.departmentId,
+            appointmentId: request.appointmentId,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.DeleteServiceAppointmentResponse = await SchedulingConectorService.deleteServiceAppointment(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.DeleteServiceAppointmentResponse = {};
+
+        if(!response?.status || !response?.confirmationCode){    
+            throw new GCVErrors.NotFound("Appointment does not exist");
+        }        
+        return filteredResponse;
+    }
+
+    public async updateServiceAppointment(request: DataModels.PutAppointmentRequestData): Promise<DataModels.PutAppointmentRequestResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} updateServiceAppointment |`;        
+        const mappedRequest: SchedulingServiceDataModels.UpdateServiceAppointmentParams = {
+            departmentId: request.body.departmentId,
+            services: request.body.services,
+            customerId: request.body.customerId,
+            customerConcernsInfo: request.body.customerConcernsInfo,
+            advisorId: request.body.advisorId,
+            transportationOptionCode: request.body.transportationOptionCode,
+            scheduledTime: request.body.scheduledTime,
+            mileage: request.body.mileage,
+            dealerToken: request.dealerToken,
+            vin: request.vin,
+            appointmentId: request.body.appointmentId
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.UpdateServiceAppointmentResponse = await SchedulingConectorService.updateServiceAppointment(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.PutAppointmentRequestResponse = {};
+
+        if(!response?.confirmationCode){    
+            filteredResponse = {                
+                status: response.status,
+                confirmationCode: response.confirmationCode
+            }
+        }        
+        return filteredResponse;
+    }
+
+
+
+    public async getServiceAppointmentDetails(request: DataModels.AppointmentRequestData): Promise<DataModels.GetServiceAppointmentDetailsResponse> {
+        const logPrefix = `${LOG_PREFIX_CLASS} getServiceAppointmentDetails |`;        
+        const mappedRequest: SchedulingServiceDataModels.GetServiceAppointmentDetailsParams = {
+            departmentId: request.departmentId,
+            appointmentId: request.appointmentId,
+            dealerToken: request.dealerToken
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: SchedulingServiceDataModels.GetServiceAppointmentDetailsResponse = await SchedulingConectorService.getServiceAppointmentDetails(mappedRequest);
+        logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
+
+        let filteredResponse: DataModels.GetServiceAppointmentDetailsResponse = {};
+
+        if(response?.status){  
+            filteredResponse.status = response.status;
+        }
+        if(response?.scheduledTime){
+            filteredResponse.scheduledTime = response.scheduledTime;
+        }  
+        if(response?.customerConcernsInfo){
+            filteredResponse.customerConcernsInfo = response.customerConcernsInfo;
+        }  
+        if(response?.confirmationCode){
+            filteredResponse.confirmationCode = response.confirmationCode;
+        }  
+        if(response?.customer?.id){
+            const elem:SchedulingServiceDataModels.Customer = response.customer;
+            let cust:DataModels.Customer = {};
+            cust.id = elem.id;
+            if(elem.firstName){
+                cust.firstName = elem.firstName;
+            }
+            if(elem.lastName){
+                cust.lastName = elem.lastName;
+            }
+            if(elem.phone){
+                cust.phone = elem.phone;
+            }
+            if(elem.email){
+                cust.email = elem.email;
+            }
+            if(elem.phones && elem.phones.length != 0){
+                cust.phones = elem.phones;
+            }
+            if(elem.emails && elem.emails.length != 0){
+                cust.emails = elem.emails;
+            }
+            filteredResponse.customer = cust;
+        } 
+        if(response?.mileage){
+            const elem:SchedulingServiceDataModels.Mileage = response.mileage;
+            let mil:DataModels.Mileage = {value: 0, unitsKind: ""};
+            if(elem.value){
+                mil.value = elem.value;
+            }
+            if(elem.unitsKind){
+                mil.unitsKind = elem.unitsKind;
+            }
+            filteredResponse.mileage = mil;
+        }   
+        if(response?.advisor?.id){
+            const elem:SchedulingServiceDataModels.Advisor = response.advisor;
+            let adv:DataModels.Advisor = {};
+            adv.id = elem.id;
+            if(elem.name){
+                adv.name = elem.name;
+            }
+            if(elem.departmentId){
+                adv.departmentId = elem.departmentId;
+            }
+            filteredResponse.advisor = adv;
+        }  
+        if(response?.transportationOption?.code){
+            const elem:SchedulingServiceDataModels.TransportationOptionPostAppointment = response.transportationOption;
+            let tO:DataModels.TransportationOption = {};
+            tO.code = elem.code;
+            if(elem.enabled){
+                tO.enabled = elem.enabled;
+            }
+            if(elem.description){
+                tO.description = elem.description;
+            }
+            if(elem.deliveryInfo){
+                tO.deliveryInfo = elem.deliveryInfo;
+            }
+            filteredResponse.transportationOption = tO;
+        } 
+        if(response?.services){
+            const elem:SchedulingServiceDataModels.Services = response.services;
+            let servs:DataModels.Services = {};
+            if(elem.summary){
+                servs.summary = elem.summary;
+            }
+            if(elem.drs){
+                const dim: number = elem.drs.length;
+                for(let i = 0; i<dim; i++){
+                    if(elem.drs[i].links){
+                        delete elem.drs[i].links;
+                        servs.drs?.push(elem.drs[i]);
+                    }else{                        
+                        servs.drs?.push(elem.drs[i]);
+                    }
+                }
+            }
+            if(elem.frs){
+                const dim: number = elem.frs.length;
+                for(let i = 0; i<dim; i++){
+                    if(elem.frs[i].links){
+                        delete elem.frs[i].links;
+                        servs.frs?.push(elem.frs[i]);
+                    }else{                        
+                        servs.frs?.push(elem.frs[i]);
+                    }
+                }
+            }
+            if(elem.repair){
+                const dim: number = elem.repair.length;
+                for(let i = 0; i<dim; i++){
+                    if(elem.repair[i].links){
+                        delete elem.repair[i].links;
+                        servs.repair?.push(elem.repair[i]);
+                    }else{                        
+                        servs.repair?.push(elem.repair[i]);
+                    }
+                }
+            }
+            if(elem.recalls){
+                const dim: number = elem.recalls.length;
+                for(let i = 0; i<dim; i++){
+                    if(elem.recalls[i].links){
+                        delete elem.recalls[i].links;
+                        servs.recalls?.push(elem.recalls[i]);
+                    }else{                        
+                        servs.recalls?.push(elem.recalls[i]);
+                    }
+                }
+            }
+            filteredResponse.services = servs;
+        } 
         return filteredResponse;
     }
 }   

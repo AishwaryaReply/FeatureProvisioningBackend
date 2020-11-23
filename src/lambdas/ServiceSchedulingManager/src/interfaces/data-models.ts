@@ -196,7 +196,6 @@ export type GetAppointmentSummaryResponse = {
 
 export type serviceAdvisor = {    
     id: number,
-    memberId: number,
     name: string
 }
 export type GetAdvisorsResponse = {    
@@ -213,13 +212,21 @@ export type GetTransportationOptionsResponse = {
 
 export declare type Slot = {
     name: string;
-    count: string;
+    count: number;
+};
+export declare type S = {
+    slots: Slot[],
+    totalAvailable: number
+}
+export declare type Slots = {
+    serviceAdvisors?: S;
+    transportationOptions?: S;
 };
 export declare type Segment = {
     time: string;
     endTime: string;
     state: string;
-    slots: Slot[];
+    slots: Slots;
     available: boolean;
 };
 export declare type GetDealerDepartmentTimeSegmentsResponse = {
@@ -237,5 +244,79 @@ export declare type GetServiceAppointmentsResponse = {
 };
 
 export type PostAppointmentResponse = {    
-    status?: string
+    status?: string,   
+    confirmationCode?: string
+}
+
+export type DeleteServiceAppointmentResponse = {}
+
+export type PutAppointmentRequestResponse = {    
+    status?: string,   
+    confirmationCode?: string
+}
+
+export declare type Phone = {
+    type?: string,
+    number?: string
+};
+export declare type Email = {
+    type?: string;
+    email?: string;
+};
+export declare type Customer = {
+    id?: string;
+    firstName?: string;
+    lastName?: string;
+    phone?: string;
+    email?: string;
+    phones?: Phone[];
+    emails?: Email[];
+};
+export declare type Advisor = {
+    id?: number;
+    name?: string;
+    departmentId?: number;
+};
+export declare type TransportationOption = {
+    code?: string;
+    enabled?: boolean;
+    description?: string;
+    deliveryInfo?: any;
+};
+export declare type Summary = {
+    taxes?: number;
+    taxesGt?: number;
+    total?: number;
+    totalLabourHours?: number;
+};
+export declare type ServiceAppointment = {
+    id?: number;
+    name?: string;
+    price?: number;
+    opCode?: string;
+    analyticsMsrp?: number;
+    laborHours?: number;
+    selected?: boolean;
+    benefitsDescription?: string;
+    benefitsImage?: string;
+    maintenanceKind?: string;
+    comment?: string;
+};
+export declare type Services = {
+    summary?: Summary;
+    drs?: ServiceAppointment[];
+    frs?: ServiceAppointment[];
+    repair?: ServiceAppointment[];
+    recalls?: ServiceAppointment[];
+};
+export type GetServiceAppointmentDetailsResponse = {    
+    customer?: Customer;
+    scheduledTime?: string;
+    mileage?: Mileage;
+    status?: string;
+    customerConcernsInfo?: string;
+    confirmationCode?: string;
+    advisor?: Advisor;
+    transportationOption?: TransportationOption;
+    services?: Services;
 }

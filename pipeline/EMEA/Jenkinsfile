@@ -1,0 +1,395 @@
+@Library('toolchain-utilities-backend')_
+import com.fca.gcv.pipeline.EmeaConfigs
+
+def JenkinsConfig
+def JenkinsConfigRegional
+def ParametersStoreUtils
+def ParametersStore
+def CloudformationOutput
+
+pipeline{
+    agent {
+    node {
+      label 'master'
+    }
+  }
+  options {
+    timeout(time: 2, unit: 'HOURS')
+  }
+  stages{
+      stage('CONFIGURE') {
+      options {
+        timeout(time: 5, unit: 'MINUTES')
+      }
+      input {
+        message "Configure pipeline execution"
+        ok "Continue"
+        parameters {
+          booleanParam(
+            name: 'EXECUTE_UNIT_TESTING',
+            defaultValue: true,
+            description: 'Enable or disable unit testing, this option is ignored if unit testing is mandatory (i.e. release on pre-prod or beyond)'
+          )
+          booleanParam(
+            name: 'EXECUTE_STATIC_ANALYSIS',
+            defaultValue: true,
+            description: 'Enable or disable static analysis, this option is ignored if static analysis is mandatory (i.e. release on pre-prod or beyond)'
+          )
+          booleanParam(
+            name: 'DEPLOY_INT',
+            defaultValue: true,
+            description: 'Enable or disable deploy in integration environment'
+          )
+          booleanParam(
+            name: 'DEPLOY_PREP',
+            defaultValue: true,
+            description: 'Enable or disable deploy in pre-production environment, this option is ignored if pre-production is not reachable (i.e. build starting from pull request branch)'
+          )
+          booleanParam(
+            name: 'DEPLOY_PROD',
+            defaultValue: true,
+            description: 'Enable or disable deploy in production environment, this option is ignored if production is not reachable (i.e. build starting from pull request branch)'
+          )
+        }
+      }
+      steps {
+        sh "echo 'Loading Configuration'"
+        script {
+          JenkinsConfig = load './pipeline/JenkinsConfig.groovy'
+          JenkinsConfigRegional = new EmeaConfigs(env)
+          ParametersStoreUtils = load './pipeline/ParametersStoreUtils.groovy'
+          ParametersStore = load './pipeline/ParametersStore.groovy'
+          ParametersStoreUtils.storePipelineParameters(ParametersStore.store)
+          JenkinsConfig.loadEnvVariablesGlobal()
+        }
+        sh "echo 'Configuration successfully loaded'"
+      }
+      post {
+        failure {
+          sh "echo 'Configuration not loaded'"
+        }
+      }
+    }
+    stage('TEST') {
+      stages {
+        stage('unit-testing') {
+          when {
+            anyOf {
+              expression { return ParametersStore.store.EXECUTE_UNIT_TESTING == 'true' }
+              //release branches must be always unit tested
+              branch 'release/v*'
+            }
+          }
+          steps {
+            script {
+              JenkinsConfig.loadEnvVariablesGlobal()
+              JenkinsConfig.loadUnitTestingEnvVariables()
+            }
+            sh "sh ./scripts/test/unit_testing/script.sh"
+          }
+        }
+        stage('static-analysis') {
+          when {
+            anyOf {
+              expression { return ParametersStore.store.EXECUTE_STATIC_ANALYSIS == 'true' }
+              //release branches must be always statically analyzed
+              branch 'release/v*'
+            }
+          }
+          steps {
+            script {
+              JenkinsConfig.loadEnvVariablesGlobal()
+              JenkinsConfig.loadStaticAnalysisEnvVariables()
+            }
+            withSonarQubeEnv ('sonarqube-nafta') {
+              sh "sh ./scripts/test/static_analysis/set_up_script.sh"
+              sh "${env.SCANNER_HOME}/bin/sonar-scanner -X -Dsonar.login=${env.SONAR_AUTH_TOKEN} -Dsonar.projectName=${env.SCANNER_PROJECT} -Dsonar.projectVersion=${env.SCANNER_PROJECT_VERSION} -Dsonar.projectKey=${env.SCANNER_PROJECT_KEY} -Dsonar.sources=${env.SCANNER_PROJECT_SOURCES} -Dsonar.projectBaseDir=${env.WORKSPACE} -Dsonar.tests=${env.SCANNER_PROJECT_UNIT_TEST} -Dsonar.typescript.lcov.reportPaths=${env.SCANNER_UNIT_TEST_COVERAGE}"
+            }
+          }
+          post {
+            always {
+              script {
+                JenkinsConfig.loadEnvVariablesGlobal()
+                JenkinsConfig.loadStaticAnalysisEnvVariables()
+              }
+              sh "sh ./scripts/test/static_analysis/clean_up_script.sh"
+            }
+          }
+        }
+      }
+    }
+    stage('BUILD') {
+      steps {
+        script {
+          JenkinsConfig.loadEnvVariablesGlobal()
+          JenkinsConfig.loadBuildEnvVariables()
+        }
+        withCredentials([string(credentialsId: 'npmToken', variable: 'TOKEN')]) {
+          sh """
+            virtualenv -p python3 ${PYTHON_VIRTUALENV_NAME}
+            source ./${PYTHON_VIRTUALENV_NAME}/bin/activate
+            pip install -r ./scripts/build/requirements.txt
+            sh ./scripts/build/script.sh
+            deactivate
+          """
+        }
+      }
+      post {
+        always {
+          script {
+            JenkinsConfig.loadEnvVariablesGlobal()
+            JenkinsConfig.loadBuildEnvVariables()
+          }
+          sh "rm -rf ${PYTHON_VIRTUALENV_NAME}"
+        }
+      }
+    }
+    stage('PACKAGE') {
+      stages {
+        stage('package-eu-west-1') {
+          steps {
+            script {
+              JenkinsConfig.loadEnvVariablesGlobal()
+              JenkinsConfigRegional.loadPackageEnvVariablesEuWest1()
+            }
+            sh 'sh ./scripts/package/script.sh'
+          }
+        }
+      }
+    }
+    stage('DEPLOY DEV') {
+      when {
+        //only release and PR merge branches can be deployed in dev
+        expression { return "${BRANCH_NAME}" =~ "(release\\/v.*|PR.*)" }
+      }
+      stages {
+        stage('deploy-sdpr-eu-west-1') {
+          steps {
+            // Create/Update cloudformation stack
+            script {
+              JenkinsConfig.loadEnvVariablesGlobal()
+              JenkinsConfigRegional.loadDeployEnvVariablesDevEuWest1()
+              JenkinsConfigRegional.loadDeploySdprEnvVariablesDevEuWest1()
+              sh 'printenv'
+            }
+            withAWS(region: "${CF_DEPLOY_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+              ) {
+              cfnCreateChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}", create: true,
+                url: "${CF_TEMPLATE_URL}", roleArn: "${SDPR_JENKINS_SLAVE_ROLE_ARN}", params: [
+                  '0001ParamEnvironment': "${ENVIRONMENT}",
+                  '0002ParamProjectName': "${PROJECT_NAME}",
+                  '0003ParamProjectComponent': "${PROJECT_COMPONENT}",
+                  '0004ParamFeatureName': "${FEATURE_NAME}",
+                  '0005ParamFeatureCode': "${FEATURE_CODE}",
+                  '0006ParamAppDynamicsLayer': "${PARAM_GCV_APPDYNAMICS_LAYER}",
+                  '0201ParamMultichannelsApiID': "${MULTICHANNELS_API_ID}",
+                  '0202ParamMultichannelsAPIAccountID': "${SDPR_ACCOUNT_ID}",
+                  '0301ParamLambdaSubnetIdList': "${PARAM_SUBNET_ID_LIST_LAMBDA}",
+                  '0302ParamLambdaSecuritygroupIdList': "${PARAM_SECURITYGROUP_ID_LIST_LAMBDA}"
+                ]
+              )
+              cfnExecuteChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}")
+            }
+            // Create/Update APIs
+            // API: Multichannels
+            script {
+              JenkinsConfigRegional.loadDeployMultichannelsEnvVariablesDevEuWest1()
+              sh 'printenv'
+            }
+            withAWS(region: "${MULTICHANNELS_API_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+            ) {
+              sh 'sh ./scripts/deploy/api-deploy.sh'
+            }
+          }
+        }
+      }
+    }
+    stage('DEPLOY INT') {
+      when {
+        allOf {
+          expression { return ParametersStore.store.DEPLOY_INT == 'true' }
+          //only release and PR merge branches can be deployed in int
+          expression { return "${BRANCH_NAME}" =~ "(release\\/v.*|PR.*)" }
+        }
+      }
+      stages {
+        stage('deploy-sdpr-eu-west-1') {
+          steps {
+            // Create/Update cloudformation stack
+            script {
+              JenkinsConfig.loadEnvVariablesGlobal()
+              JenkinsConfigRegional.loadDeployEnvVariablesIntEuWest1()
+              JenkinsConfigRegional.loadDeploySdprEnvVariablesIntEuWest1()
+              sh 'printenv'
+            }
+            withAWS(region: "${CF_DEPLOY_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+              ) {
+              cfnCreateChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}", create: true,
+                url: "${CF_TEMPLATE_URL}", roleArn: "${SDPR_JENKINS_SLAVE_ROLE_ARN}", params: [
+                  '0001ParamEnvironment': "${ENVIRONMENT}",
+                  '0002ParamProjectName': "${PROJECT_NAME}",
+                  '0003ParamProjectComponent': "${PROJECT_COMPONENT}",
+                  '0004ParamFeatureName': "${FEATURE_NAME}",
+                  '0005ParamFeatureCode': "${FEATURE_CODE}",
+                  '0006ParamAppDynamicsLayer': "${PARAM_GCV_APPDYNAMICS_LAYER}",
+                  '0201ParamMultichannelsApiID': "${MULTICHANNELS_API_ID}",
+                  '0202ParamMultichannelsAPIAccountID': "${SDPR_ACCOUNT_ID}",
+                  '0301ParamLambdaSubnetIdList': "${PARAM_SUBNET_ID_LIST_LAMBDA}",
+                  '0302ParamLambdaSecuritygroupIdList': "${PARAM_SECURITYGROUP_ID_LIST_LAMBDA}"
+                ]
+              )
+            }
+            input "Execute change set ${CF_CHANGE_SET_NAME} for stack ${CF_STACK_NAME} in account ${SDPR_ACCOUNT_ID}?"
+            withAWS(region: "${CF_DEPLOY_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+            ) {
+              cfnExecuteChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}")
+            }
+            // Create/Update APIs
+            // API: Multichannels
+            script {
+              JenkinsConfigRegional.loadDeployMultichannelsEnvVariablesIntEuWest1()
+              sh 'printenv'
+            }
+            input "Deploy stage ${API_GW_STAGE_NAME} for api ${API_ID}?"
+            withAWS(region: "${MULTICHANNELS_API_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+            ) {
+              sh 'sh ./scripts/deploy/api-deploy.sh'
+            }
+          }
+        }
+      }
+    }
+    stage('DEPLOY PREP') {
+      when {
+        allOf {
+          expression { return ParametersStore.store.DEPLOY_PREP == 'true' }
+          //only release branches can be deployed in prep
+          branch 'release/v*'
+        }
+      }
+      stages {
+        stage('deploy-sdpr-eu-west-1') {
+          steps {
+            // Create/Update cloudformation stack
+            script {
+              JenkinsConfig.loadEnvVariablesGlobal()
+              JenkinsConfigRegional.loadDeployEnvVariablesPrepEuWest1()
+              JenkinsConfigRegional.loadDeploySdprEnvVariablesPrepEuWest1()
+              sh 'printenv'
+            }
+            withAWS(region: "${CF_DEPLOY_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+              ) {
+              cfnCreateChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}", create: true,
+                url: "${CF_TEMPLATE_URL}", roleArn: "${SDPR_JENKINS_SLAVE_ROLE_ARN}", params: [
+                  '0001ParamEnvironment': "${ENVIRONMENT}",
+                  '0002ParamProjectName': "${PROJECT_NAME}",
+                  '0003ParamProjectComponent': "${PROJECT_COMPONENT}",
+                  '0004ParamFeatureName': "${FEATURE_NAME}",
+                  '0005ParamFeatureCode': "${FEATURE_CODE}",
+                  '0006ParamAppDynamicsLayer': "${PARAM_GCV_APPDYNAMICS_LAYER}",
+                  '0201ParamMultichannelsApiID': "${MULTICHANNELS_API_ID}",
+                  '0202ParamMultichannelsAPIAccountID': "${SDPR_ACCOUNT_ID}",
+                  '0301ParamLambdaSubnetIdList': "${PARAM_SUBNET_ID_LIST_LAMBDA}",
+                  '0302ParamLambdaSecuritygroupIdList': "${PARAM_SECURITYGROUP_ID_LIST_LAMBDA}"
+                ]
+              )
+            }
+            input "Execute change set ${CF_CHANGE_SET_NAME} for stack ${CF_STACK_NAME} in account ${SDPR_ACCOUNT_ID}?"
+            withAWS(region: "${CF_DEPLOY_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+            ) {
+              cfnExecuteChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}")
+            }
+            // Create/Update APIs
+            // API: Multichannels
+            script {
+              JenkinsConfigRegional.loadDeployMultichannelsEnvVariablesPrepEuWest1()
+              sh 'printenv'
+            }
+            input "Deploy stage ${API_GW_STAGE_NAME} for api ${API_ID}?"
+            withAWS(region: "${MULTICHANNELS_API_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+            ) {
+              sh 'sh ./scripts/deploy/api-deploy.sh'
+            }
+          }
+        }
+      }
+    }
+    stage('DEPLOY PROD') {
+      when {
+        allOf {
+          expression { return ParametersStore.store.DEPLOY_PROD == 'true' }
+          //only release branches can be deployed in prod
+          branch 'release/v*'
+        }
+      }
+      stages {
+        stage('deploy-sdpr-eu-west-1') {
+          steps {
+            // Create/Update cloudformation stack
+            script {
+              JenkinsConfig.loadEnvVariablesGlobal()
+              JenkinsConfigRegional.loadDeployEnvVariablesProdEuWest1()
+              JenkinsConfigRegional.loadDeploySdprEnvVariablesProdEuWest1()
+              sh 'printenv'
+            }
+            withAWS(region: "${CF_DEPLOY_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+              ) {
+              cfnCreateChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}", create: true,
+                url: "${CF_TEMPLATE_URL}", roleArn: "${SDPR_JENKINS_SLAVE_ROLE_ARN}", params: [
+                  '0001ParamEnvironment': "${ENVIRONMENT}",
+                  '0002ParamProjectName': "${PROJECT_NAME}",
+                  '0003ParamProjectComponent': "${PROJECT_COMPONENT}",
+                  '0004ParamFeatureName': "${FEATURE_NAME}",
+                  '0005ParamFeatureCode': "${FEATURE_CODE}",
+                  '0006ParamAppDynamicsLayer': "${PARAM_GCV_APPDYNAMICS_LAYER}",
+                  '0201ParamMultichannelsApiID': "${MULTICHANNELS_API_ID}",
+                  '0202ParamMultichannelsAPIAccountID': "${SDPR_ACCOUNT_ID}",
+                  '0301ParamLambdaSubnetIdList': "${PARAM_SUBNET_ID_LIST_LAMBDA}",
+                  '0302ParamLambdaSecuritygroupIdList': "${PARAM_SECURITYGROUP_ID_LIST_LAMBDA}"
+                ]
+              )
+            }
+            input "Execute change set ${CF_CHANGE_SET_NAME} for stack ${CF_STACK_NAME} in account ${SDPR_ACCOUNT_ID}?"
+            withAWS(region: "${CF_DEPLOY_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+            ) {
+              cfnExecuteChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}")
+            }
+            // Create/Update APIs
+            // API: Multichannels
+            script {
+              JenkinsConfigRegional.loadDeployMultichannelsEnvVariablesProdEuWest1()
+              sh 'printenv'
+            }
+            input "Deploy stage ${API_GW_STAGE_NAME} for api ${API_ID}?"
+            withAWS(region: "${MULTICHANNELS_API_REGION}",
+                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+                    roleAccount: "${SDPR_ACCOUNT_ID}"
+            ) {
+              sh 'sh ./scripts/deploy/api-deploy.sh'
+            }
+          }
+        }
+      }
+    }
+  }
+}

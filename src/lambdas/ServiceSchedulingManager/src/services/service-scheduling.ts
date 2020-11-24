@@ -64,11 +64,18 @@ export class ServiceScheduling {
                         const hrefArray = response.customerPreviews[0].links[i].href.split("/");
                         customerId = hrefArray[hrefArray.length - 2];    
                 }
-                if(response.customerPreviews[0].links[i].rel && 
-                    response.customerPreviews[0].links[i].rel == Constants.REL_VEHICLE_VIN){                        
-                        const hrefArray = response.customerPreviews[0].links[i].href.split("/");
-                        vin = hrefArray[hrefArray.length - 1]; 
+            }
+
+            if(response.customerPreviews[0].vehicle){
+                let dim:number = response.customerPreviews[0].vehicle.links.length;
+                for(let i = 0; i < dim; i++){   
+                    if(response.customerPreviews[0].vehicle.links[i].rel && 
+                        response.customerPreviews[0].vehicle.links[i].rel == Constants.REL_VEHICLE_VIN){                        
+                            const hrefArray = response.customerPreviews[0].vehicle.links[i].href.split("/");
+                            vin = hrefArray[hrefArray.length - 1]; 
+                    }
                 }
+
             }
             
             filteredResponse = {
@@ -151,7 +158,7 @@ export class ServiceScheduling {
             const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
-                if(elem.id &&  elem.name && elem.price){
+                if(elem.id &&  elem.name && (elem.price != undefined)){
                     const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
@@ -194,7 +201,7 @@ export class ServiceScheduling {
             const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
-                if(elem.id &&  elem.name && elem.price){
+                if(elem.id &&  elem.name && (elem.price != undefined)){
                     const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
@@ -232,7 +239,7 @@ export class ServiceScheduling {
             const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
-                if(elem.id &&  elem.name && elem.price){
+                if(elem.id &&  elem.name && (elem.price != undefined)){
                     const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
@@ -277,7 +284,7 @@ export class ServiceScheduling {
             const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
-                if(elem.id &&  elem.name && elem.price){
+                if(elem.id &&  elem.name && (elem.price != undefined)){
                     const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
@@ -315,7 +322,7 @@ export class ServiceScheduling {
             const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
-                if(elem.id &&  elem.name && elem.price){
+                if(elem.id &&  elem.name && (elem.price != undefined)){
                     const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 
@@ -360,7 +367,7 @@ export class ServiceScheduling {
             const dim:number = response.services.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.services[i];
-                if(elem.id &&  elem.name && elem.price){
+                if(elem.id &&  elem.name && (elem.price != undefined)){
                     const service:DataModels.Service = {
                         id: elem.id, 
                         name: elem.name, 

@@ -1,5 +1,9 @@
+import { SchedulingServiceDataModels } from "gcv-meld";
+import { DataModels } from "../../../src/interfaces";
+
 export namespace Stubs {
 
+    const TEST_DEALER_TOKEN = "dealerTokenTest"
     const TEST_USERID = "userid";
     const TEST_VIN = "vin";
     const TEST_EMAIL = "test@test.it";
@@ -398,5 +402,1740 @@ export namespace Stubs {
             resourcePath: '/v1/not/supported/path'
         }
     }
+
+    export const mockSearchByEmail: SchedulingServiceDataModels.GetSearchResponse = {
+        "customerPreviews": [
+            {
+                "name": "T**T F*A",
+                "phone": "2********2",
+                "email": "testkh19@gmail.com",
+                "foundType": "byEmail",
+                "links": [
+                    {
+                        "rel": "self",
+                        "href": "https://scheduler.dealer-fx.com/catalog/search"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/customer-vehicles",
+                        "href": "https://scheduler.dealer-fx.com/catalog/customers/urn:dfx:customer:103129767/vehicles"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/customer-verify",
+                        "href": "https://scheduler.dealer-fx.com/catalog/customers/urn:dfx:customer:103129767/verify"
+                    }
+                ]
+            }
+        ]
+    }
+
+    export const mockSearchByEmailFiltered: DataModels.SearchEmailResponse = {
+        customerId: "urn:dfx:customer:103129767",
+        email: "testkh19@gmail.com",
+        foundType: "byEmail"
+    }
+
+    export const mockSearchByEmailRequest:DataModels.DfxSearchEmailRequestData = {
+        email: TEST_EMAIL,
+        dealerToken: TEST_VIN,
+        requestedService: 'DFX_SEARCH_EMAIL'
+    }
+
+    export const mockSearchByVinFiltered: DataModels.SearchVinResponse = {
+        customerId: "urn:dfx:customer:103129767",
+        foundType: "byVin",
+        vehicles: [{"vin": "2C3CCAGG7LH2003XM"}]
+    }
+
+    export const mockSearchByVin: SchedulingServiceDataModels.GetSearchResponse = {
+        "customerPreviews": [
+            {
+                "vehicle": {
+                    "specification": "Automatic 6CYL 4WD",
+                    "model": "2020 CHRYSLER 300 (3.6L)",
+                    "image": "https://omm1.dealer-fx.com/images/vehiclecolors/109/2020/300_2020.jpg",
+                    "links": [
+                        {
+                            "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                            "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+                        }
+                    ]
+                },
+                "name": "T**T F*A",
+                "phone": "2********2",
+                "email": "t*******@gmail.com",
+                "foundType": "byVin",
+                "links": [
+                    {
+                        "rel": "self",
+                        "href": "https://scheduler.dealer-fx.com/catalog/search"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/customer-vehicles",
+                        "href": "https://scheduler.dealer-fx.com/catalog/customers/urn:dfx:customer:103129767/vehicles"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/customer-verify",
+                        "href": "https://scheduler.dealer-fx.com/catalog/customers/urn:dfx:customer:103129767/verify"
+                    }
+                ]
+            }
+        ]
+    }
+
+    export const mockSearchByVinRequest:DataModels.DfxSearchVinRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        dealerToken: TEST_VIN,
+        requestedService: 'DFX_SEARCH_VIN'
+    }
+
+    // GetDfxVehicle
+    export const mockGetDfxVehicleRequest:DataModels.GetDfxVehicleRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        dealerToken: TEST_VIN,
+        requestedService: 'DFX_SEARCH_VIN'
+    }
+
+    export const mockGetDfxVehicle: SchedulingServiceDataModels.GetVehicleResponse = {
+        "vin": "2C3CCAGG7LH2003XM",
+        "make": {
+            "name": "CHRYSLER",
+            "links": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/manufacturer",
+                    "href": "https://scheduler.dealer-fx.com/catalog/manufacturers/109"
+                }
+            ]
+        },
+        "year": {
+            "name": "2020",
+            "links": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/manufacture-year",
+                    "href": "https://scheduler.dealer-fx.com/catalog/manufacturers/109/years/2020"
+                }
+            ]
+        },
+        "model": {
+            "name": "300 (3.6L)",
+            "links": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/car-model",
+                    "href": "https://scheduler.dealer-fx.com/catalog/manufacturers/109/years/2020/models/300%20(3.6l)"
+                }
+            ]
+        },
+        "transmission": {
+            "name": "Automatic",
+            "links": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/transmission",
+                    "href": "https://scheduler.dealer-fx.com/catalog/manufacturers/109/years/2020/models/300%20(3.6l)/transmissions/automatic"
+                }
+            ]
+        },
+        "engine": {
+            "name": "6CYL",
+            "links": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/cylinder",
+                    "href": "https://scheduler.dealer-fx.com/catalog/manufacturers/109/years/2020/models/300%20(3.6l)/transmissions/automatic/cylinders/6cyl"
+                }
+            ]
+        },
+        "train": {
+            "name": "4WD",
+            "links": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/drive",
+                    "href": "https://scheduler.dealer-fx.com/catalog/manufacturers/109/years/2020/models/300%20(3.6l)/transmissions/automatic/cylinders/6cyl/drives/4wd"
+                }
+            ],
+            "linkTemplates": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/required-service-collection",
+                    "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/maintenance-services/frs/%7Bmileage%7Cmonths%7D/%7Bmileage.value%7D"
+                },
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/recommended-service-collection",
+                    "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/maintenance-services/drs/%7Bmileage%7Cmonths%7D/%7Bmileage.value%7D"
+                }
+            ]
+        },
+        "image": "https://omm1.dealer-fx.com/images/vehiclecolors/109/2020/300_2020.jpg",
+        "specification": "Automatic 6CYL 4WD",
+        "vehicleName": "2020 CHRYSLER 300 (3.6L)",
+        "maintenance": {
+            "period": 10000,
+            "enrollmentDate": "2020-01-01",
+            "enrollmentMileage": 0
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/appointment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/appointments"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/maintenance-interval-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/intervals?culture=en-US"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/recall-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/recalls"
+            }
+        ]
+    }
+
+    export const mockGetDfxVehicleFiltered: DataModels.GetDfxVehicleResponse = {
+        vin: "2C3CCAGG7LH2003XM",
+        make: "CHRYSLER",
+        year: "2020",
+        model: "300 (3.6L)",
+        transmission: "Automatic",
+        engine: "6CYL",
+        train: "4WD"
+    }
+
+    // GetDfxToken
+    export const mockGetDfxTokenRequest:DataModels.GetTokenRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        hintDealer: "TEST_HINT",
+        requestedService: 'GET_DFX_TOKEN'
+    }
+
+    export const mockGetDfxToken: SchedulingServiceDataModels.TokenResponse = {
+        "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHA6Ly9sb2NhbC9kZWFsZXItaWQiOjUxNTEsInVybjpkZng6YXBwOnRoZW1lIjoiZmNhIiwidXJuOmRmeDphcHA6Y3VsdHVyZSI6ImVuLXVzIiwiYXBwOi8vbG9jYWwvY2xpZW50LWFkZHJlc3MiOiIxMC4wLjEzMC4xOCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvYXV0aGVudGljYXRpb25pbnN0YW50IjoiMjAyMC0xMS0yM1QwODoyMDozNy41MzIwMzI3WiIsInVybjphcHA6YXV0aDplbmRwb2ludCI6Imh0dHBzOi8vc2NoZWR1bGVyLmRlYWxlci1meC5jb20vIiwiYXBwOi8vbG9jYWwvZW5hYmxlLXBhY2thZ2VzIjoiRmFsc2UiLCJhcHA6Ly9sb2NhbC9kZWFsZXItdHoiOiJFYXN0ZXJuIFN0YW5kYXJkIFRpbWUiLCJhcHA6Ly9hdXRob3JpemF0aW9uL2FwcG9pbnRtZW50L3NlcnZpY2UtYWR2aXNvci9zZWxlY3Rpb24iOiJvbmxpbmUtb25seSIsImFwcDovL2F1dGhvcml6YXRpb24vc2VydmljZS1kZXBhcnRtZW50L3RpbWUtc2VnbWVudC9zZXJ2aWNlLW1lbWJlciI6Im9ubGluZS1vbmx5IiwibmJmIjoxNjA2MTE5NjM3LCJleHAiOjE2MDYyMDYwMzcsImlhdCI6MTYwNjExOTYzNywiaXNzIjoiT1NTIElkZW50aXR5IFByb3ZpZGVyIiwiYXVkIjoidXJuOm9zcyJ9.UpdIaUwSx-08vBYA7nYJtBWAvaYoTNRbwhHf3PBv4MgFSTtOwZVyFP3WvMVYCRhMIfTIzUNAE_k1qFrkmXOMcso2Yl9yPCqIRtvH9GFqluIr_Q8AEy7HxwWKwAPWzkXE3Nen5aUbkVuRRgFtQqE9qtyQrL2cZguuUb9S-uyOMNpJ4tqfUTxr4DrKI_r6Tb8m2rOaTHOJ4x41VZTqP_dHxnoPwAGICT2yJWJuRBAjAVV8q76yRRmshd1R5ZZRsYL9d5fzs2Yk8usM7XK1AVzhzLeKbztAE-zkwrCFNwysGE1Mso8IPQ1B8LWpENESyY1ruOAvtDKJmMidyHX-1nBS4g",
+        "token_type": "bearer",
+        "expires_in": 86399
+    }
+
+    export const mockGetDfxTokenFiltered: DataModels.GetDfxTokenResponse = {
+        access_token: mockGetDfxToken.access_token,
+        token_type: mockGetDfxToken.token_type,
+        expires_in: mockGetDfxToken.expires_in
+    }
+
+    // GetDealerServicesVin
+    export const mockGetDealerServicesVinRequest:DataModels.GetServicesVinRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        mileage: TEST_MILEAGE,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_DEALER_SERVICES_VIN'
+    }
+
+    export const mockGetDealerServicesVin:SchedulingServiceDataModels.GetDealerServicesResponse = {
+        "services": [
+            {
+                "id": 80163,
+                "name": "Four Wheel Alignment",
+                "opCode": "ALGN",
+                "price": 110.9500,
+                "analyticsMsrp": 110.9500,
+                "laborHours": 0.00,
+                "selected": false,
+                "intervalRecommended": true,
+                "benefitsDescription": "Four Wheel Alignment",
+                "benefitsImage": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/80163"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/20"
+                    }
+                ]
+            },
+            {
+                "id": 80209,
+                "name": "State Inspection",
+                "opCode": "40",
+                "price": 37.0000,
+                "analyticsMsrp": 37.0000,
+                "laborHours": 0.40,
+                "selected": false,
+                "intervalRecommended": true,
+                "benefitsDescription": "State Inspection",
+                "benefitsImage": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/80209"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    }
+                ]
+            },
+            {
+                "id": 80220,
+                "name": "Synthetic Oil Upgrade (6 Cyl.)",
+                "opCode": "EXLOF",
+                "price": 55.0000,
+                "analyticsMsrp": 55.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "intervalRecommended": false,
+                "benefitsDescription": "Synthetic Oil Upgrade (6 Cyl.)",
+                "benefitsImage": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/80220"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/29"
+                    }
+                ]
+            },
+            {
+                "id": 2982763,
+                "name": "Service Contract Lube, Oil and Filter",
+                "opCode": "EXLOF",
+                "price": 29.0000,
+                "analyticsMsrp": 29.0000,
+                "laborHours": 0.30,
+                "selected": false,
+                "intervalRecommended": true,
+                "benefitsDescription": "SVC CONTRACT LOF",
+                "benefitsImage": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/2982763"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/41"
+                    }
+                ]
+            }
+        ],
+        "affectiveMileage": {
+            "value": 20000,
+            "unitsKind": "mileage"
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/maintenance-services/drs/mileage/15000"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            }
+        ]
+    }
+
+    export const mockGetDealerServicesVinFiltered: DataModels.GetServicesResponse = {
+        services: [
+            {
+                id: 80163,
+                name: "Four Wheel Alignment",
+                price: 110.9500
+            },
+            {
+                id: 80209,
+                name: "State Inspection",
+                price: 37.0000
+            },
+            {
+                id: 80220,
+                name: "Synthetic Oil Upgrade (6 Cyl.)",
+                price: 55.0000
+            },
+            {
+                id: 2982763,
+                name: "Service Contract Lube, Oil and Filter",
+                price: 29.0000
+            }
+        ]
+    }
+
+    // GetDealerServicesWithoutVin
+    export const mockGetDealerServicesWithoutVinRequest:DataModels.GetServicesNoVinRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        mileage: TEST_MILEAGE,
+        make: TEST_MAKE, 
+        year: TEST_YEAR, 
+        model: TEST_MODEL, 
+        transmission: TEST_MAKE,
+        train: TEST_TRAIN, 
+        engine: TEST_ENGINE,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_DEALER_SERVICES_VIN'
+    }
+
+    export const mockGetDealerServicesWithoutVin:SchedulingServiceDataModels.GetDealerServicesResponse = {
+        "services": [
+            {
+                "id": 80163,
+                "name": "Four Wheel Alignment",
+                "opCode": "ALGN",
+                "price": 110.9500,
+                "analyticsMsrp": 110.9500,
+                "laborHours": 0.00,
+                "selected": false,
+                "intervalRecommended": true,
+                "benefitsDescription": "Four Wheel Alignment",
+                "benefitsImage": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/80163"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/20"
+                    }
+                ]
+            },
+            {
+                "id": 80209,
+                "name": "State Inspection",
+                "opCode": "40",
+                "price": 37.0000,
+                "analyticsMsrp": 37.0000,
+                "laborHours": 0.40,
+                "selected": false,
+                "intervalRecommended": true,
+                "benefitsDescription": "State Inspection",
+                "benefitsImage": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/80209"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    }
+                ]
+            },
+            {
+                "id": 80220,
+                "name": "Synthetic Oil Upgrade (6 Cyl.)",
+                "opCode": "EXLOF",
+                "price": 55.0000,
+                "analyticsMsrp": 55.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "intervalRecommended": false,
+                "benefitsDescription": "Synthetic Oil Upgrade (6 Cyl.)",
+                "benefitsImage": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/80220"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/29"
+                    }
+                ]
+            },
+            {
+                "id": 2982763,
+                "name": "Service Contract Lube, Oil and Filter",
+                "opCode": "EXLOF",
+                "price": 29.0000,
+                "analyticsMsrp": 29.0000,
+                "laborHours": 0.30,
+                "selected": false,
+                "intervalRecommended": true,
+                "benefitsDescription": "SVC CONTRACT LOF",
+                "benefitsImage": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/2982763"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/41"
+                    }
+                ]
+            }
+        ],
+        "affectiveMileage": {
+            "value": 20000,
+            "unitsKind": "mileage"
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/maintenance-services/drs/mileage/15000"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            }
+        ]
+    }
+
+    export const mockGetDealerServicesWithoutVinFiltered: DataModels.GetServicesResponse = {
+        services: [
+            {
+                id: 80163,
+                name: "Four Wheel Alignment",
+                price: 110.9500
+            },
+            {
+                id: 80209,
+                name: "State Inspection",
+                price: 37.0000
+            },
+            {
+                id: 80220,
+                name: "Synthetic Oil Upgrade (6 Cyl.)",
+                price: 55.0000
+            },
+            {
+                id: 2982763,
+                name: "Service Contract Lube, Oil and Filter",
+                price: 29.0000
+            }
+        ]
+    }
+
+    // GetFactoryServicesVin
+    export const mockGetFactoryServicesVinRequest:DataModels.GetServicesVinRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        mileage: TEST_MILEAGE,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_FACTORY_SERVICES_VIN'
+    }
+
+    export const mockGetFactoryServicesVin:SchedulingServiceDataModels.GetFactoryServicesResponse = {
+        "services": [
+            {
+                "id": 82893,
+                "name": "Replace engine oil and filter",
+                "opCode": "30",
+                "price": 69.9500,
+                "analyticsMsrp": 69.9500,
+                "laborHours": 0.30,
+                "selected": false,
+                "benefitsDescription": "Replace engine oil and filter",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/82893"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/29"
+                    }
+                ]
+            },
+            {
+                "id": 79277,
+                "name": "Multi-point inspection (according to maintenance interval)",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Multi-point inspection (according to maintenance interval)",
+                "benefitsImage": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/6-Multi-Point-Inspection.gif",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/79277"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/53"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-services/benefit-image",
+                        "href": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/6-Multi-Point-Inspection.gif"
+                    }
+                ]
+            },
+            {
+                "id": 79144,
+                "name": "Rotate tires",
+                "opCode": "22",
+                "price": 29.9500,
+                "analyticsMsrp": 29.9500,
+                "laborHours": 0.40,
+                "selected": false,
+                "benefitsDescription": "Rotate tires",
+                "benefitsImage": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/11-Tire-Rotation.gif",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/79144"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/20"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-services/benefit-image",
+                        "href": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/11-Tire-Rotation.gif"
+                    }
+                ]
+            },
+            {
+                "id": 79145,
+                "name": "Inspect front suspention, tie rod ends, boot seals, and replace if necessary",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Inspect front suspention, tie rod ends, boot seals, and replace if necessary",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/79145"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    }
+                ]
+            },
+            {
+                "id": 79146,
+                "name": "Inspect brake linings, parking brake function",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Inspect brake linings, parking brake function",
+                "benefitsImage": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/19-Brake-Maintenance-Service.gif",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/79146"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-services/benefit-image",
+                        "href": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/19-Brake-Maintenance-Service.gif"
+                    }
+                ]
+            },
+            {
+                "id": 44754881,
+                "name": "Inspect rear axle fluid",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Inspect rear axle fluid",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/44754881"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    }
+                ]
+            },
+            {
+                "id": 44754880,
+                "name": "Inspect front axle fluid",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Inspect front axle fluid",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/44754880"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    }
+                ]
+            },
+            {
+                "id": 79198,
+                "name": "Replace air conditioning filter",
+                "opCode": "24",
+                "price": 99.5800,
+                "analyticsMsrp": 99.5800,
+                "laborHours": 0.40,
+                "selected": false,
+                "benefitsDescription": "Replace air conditioning filter",
+                "benefitsImage": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/15-Cabin-Air-Filter-Replacement.gif",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/79198"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/33"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-services/benefit-image",
+                        "href": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/15-Cabin-Air-Filter-Replacement.gif"
+                    }
+                ]
+            },
+            {
+                "id": 6359896,
+                "name": "Adjust parking brake",
+                "opCode": "01",
+                "price": 59.9800,
+                "analyticsMsrp": 59.9800,
+                "laborHours": 0.40,
+                "selected": false,
+                "benefitsDescription": "Adjust parking brake",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/6359896"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/1"
+                    }
+                ]
+            },
+            {
+                "id": 62265794,
+                "name": "Inspect CV joints",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Inspect CV joints",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/62265794"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    }
+                ]
+            }
+        ],
+        "affectiveMileage": {
+            "value": 20000,
+            "unitsKind": "mileage"
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/maintenance-services/frs/mileage/15000"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            }
+        ]
+    }
+
+    export const mockGetFactoryServicesVinFiltered: DataModels.GetServicesResponse = {
+        services: [
+            {
+                id: 82893,
+                name: "Replace engine oil and filter",
+                price: 69.9500
+            },
+            {
+                id: 79277,
+                name: "Multi-point inspection (according to maintenance interval)",
+                price: 0.0000
+            },
+            {
+                id: 79144,
+                name: "Rotate tires",
+                price: 29.9500
+            },
+            {
+                id: 79145,
+                name: "Inspect front suspention, tie rod ends, boot seals, and replace if necessary",
+                price: 0.0000
+            },
+            {
+                id: 79146,
+                name: "Inspect brake linings, parking brake function",
+                price: 0.0000
+            },
+            {
+                id: 44754881,
+                name: "Inspect rear axle fluid",
+                price: 0.0000
+            },
+            {
+                id: 44754880,
+                name: "Inspect front axle fluid",
+                price: 0.0000
+            },
+            {
+                id: 79198,
+                name: "Replace air conditioning filter",
+                price: 99.5800
+            },
+            {
+                id: 6359896,
+                name: "Adjust parking brake",
+                price: 59.9800
+            },
+            {
+                id: 62265794,
+                name: "Inspect CV joints",
+                price: 0.0000
+            }
+        ]
+    }
+
+    // GetFactoryServicesWithoutVin
+    export const mockGetFactoryServicesWithoutVinRequest:DataModels.GetServicesNoVinRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        mileage: TEST_MILEAGE,
+        make: TEST_MAKE, 
+        year: TEST_YEAR, 
+        model: TEST_MODEL, 
+        transmission: TEST_MAKE,
+        train: TEST_TRAIN, 
+        engine: TEST_ENGINE,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_FACTORY_SERVICES_WITHOUT_VIN'
+    }
+
+    export const mockGetFactoryServicesWithoutVin:SchedulingServiceDataModels.GetFactoryServicesResponse = {
+        "services": [
+            {
+                "id": 82893,
+                "name": "Replace engine oil and filter",
+                "opCode": "30",
+                "price": 69.9500,
+                "analyticsMsrp": 69.9500,
+                "laborHours": 0.30,
+                "selected": false,
+                "benefitsDescription": "Replace engine oil and filter",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/82893"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/29"
+                    }
+                ]
+            },
+            {
+                "id": 79277,
+                "name": "Multi-point inspection (according to maintenance interval)",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Multi-point inspection (according to maintenance interval)",
+                "benefitsImage": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/6-Multi-Point-Inspection.gif",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/79277"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/53"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-services/benefit-image",
+                        "href": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/6-Multi-Point-Inspection.gif"
+                    }
+                ]
+            },
+            {
+                "id": 79144,
+                "name": "Rotate tires",
+                "opCode": "22",
+                "price": 29.9500,
+                "analyticsMsrp": 29.9500,
+                "laborHours": 0.40,
+                "selected": false,
+                "benefitsDescription": "Rotate tires",
+                "benefitsImage": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/11-Tire-Rotation.gif",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/79144"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/20"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-services/benefit-image",
+                        "href": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/11-Tire-Rotation.gif"
+                    }
+                ]
+            },
+            {
+                "id": 79145,
+                "name": "Inspect front suspention, tie rod ends, boot seals, and replace if necessary",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Inspect front suspention, tie rod ends, boot seals, and replace if necessary",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/79145"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    }
+                ]
+            },
+            {
+                "id": 79146,
+                "name": "Inspect brake linings, parking brake function",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Inspect brake linings, parking brake function",
+                "benefitsImage": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/19-Brake-Maintenance-Service.gif",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/79146"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-services/benefit-image",
+                        "href": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/19-Brake-Maintenance-Service.gif"
+                    }
+                ]
+            },
+            {
+                "id": 44754881,
+                "name": "Inspect rear axle fluid",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Inspect rear axle fluid",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/44754881"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    }
+                ]
+            },
+            {
+                "id": 44754880,
+                "name": "Inspect front axle fluid",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Inspect front axle fluid",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/44754880"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    }
+                ]
+            },
+            {
+                "id": 79198,
+                "name": "Replace air conditioning filter",
+                "opCode": "24",
+                "price": 99.5800,
+                "analyticsMsrp": 99.5800,
+                "laborHours": 0.40,
+                "selected": false,
+                "benefitsDescription": "Replace air conditioning filter",
+                "benefitsImage": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/15-Cabin-Air-Filter-Replacement.gif",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/79198"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/33"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-services/benefit-image",
+                        "href": "https://graphics.dealer-fx.com/ServiceBenefits/en-us/15-Cabin-Air-Filter-Replacement.gif"
+                    }
+                ]
+            },
+            {
+                "id": 6359896,
+                "name": "Adjust parking brake",
+                "opCode": "01",
+                "price": 59.9800,
+                "analyticsMsrp": 59.9800,
+                "laborHours": 0.40,
+                "selected": false,
+                "benefitsDescription": "Adjust parking brake",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/6359896"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/1"
+                    }
+                ]
+            },
+            {
+                "id": 62265794,
+                "name": "Inspect CV joints",
+                "opCode": "01",
+                "price": 0.0000,
+                "analyticsMsrp": 0.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "Inspect CV joints",
+                "benefitsImage": "",
+                "maintenanceKind": "Required",
+                "comment": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/62265794"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/31"
+                    }
+                ]
+            }
+        ],
+        "affectiveMileage": {
+            "value": 20000,
+            "unitsKind": "mileage"
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/maintenance-services/frs/mileage/15000"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            }
+        ]
+    }
+
+    export const mockGetFactoryServicesWithoutVinFiltered: DataModels.GetServicesResponse = {
+        services: [
+            {
+                id: 82893,
+                name: "Replace engine oil and filter",
+                price: 69.9500
+            },
+            {
+                id: 79277,
+                name: "Multi-point inspection (according to maintenance interval)",
+                price: 0.0000
+            },
+            {
+                id: 79144,
+                name: "Rotate tires",
+                price: 29.9500
+            },
+            {
+                id: 79145,
+                name: "Inspect front suspention, tie rod ends, boot seals, and replace if necessary",
+                price: 0.0000
+            },
+            {
+                id: 79146,
+                name: "Inspect brake linings, parking brake function",
+                price: 0.0000
+            },
+            {
+                id: 44754881,
+                name: "Inspect rear axle fluid",
+                price: 0.0000
+            },
+            {
+                id: 44754880,
+                name: "Inspect front axle fluid",
+                price: 0.0000
+            },
+            {
+                id: 79198,
+                name: "Replace air conditioning filter",
+                price: 99.5800
+            },
+            {
+                id: 6359896,
+                name: "Adjust parking brake",
+                price: 59.9800
+            },
+            {
+                id: 62265794,
+                name: "Inspect CV joints",
+                price: 0.0000
+            }
+        ]
+    }
+
+    // GetRepairServicesVin
+    export const mockGetRepairServicesVinRequest:DataModels.GetServicesVinRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        mileage: TEST_MILEAGE,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_REPAIR_SERVICES_VIN'
+    }
+
+    export const mockGetRepairServicesVin:SchedulingServiceDataModels.GetFactoryServicesResponse = {
+        "services": [
+            {
+                "id": 47007611,
+                "name": "AC/Heating Concern",
+                "opCode": "14",
+                "price": 165.0000,
+                "analyticsMsrp": 165.0000,
+                "laborHours": 1.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007611"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/3"
+                    }
+                ]
+            },
+            {
+                "id": 47007612,
+                "name": "Automatic Transmission Concern",
+                "opCode": "11",
+                "price": 165.0000,
+                "analyticsMsrp": 165.0000,
+                "laborHours": 1.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007612"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/2"
+                    }
+                ]
+            },
+            {
+                "id": 47007613,
+                "name": "Axle/Driveshaft/Differential Concern",
+                "opCode": "03",
+                "price": 165.0000,
+                "analyticsMsrp": 165.0000,
+                "laborHours": 1.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007613"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/4"
+                    }
+                ]
+            },
+            {
+                "id": 47007614,
+                "name": "Body Systems/Trim Concern (Non-Electrical)",
+                "opCode": "96",
+                "price": 55.0000,
+                "analyticsMsrp": 55.0000,
+                "laborHours": 0.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007614"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/6"
+                    }
+                ]
+            },
+            {
+                "id": 47007615,
+                "name": "Radio/Nav/Telematics Concern",
+                "opCode": "76",
+                "price": 110.0000,
+                "analyticsMsrp": 110.0000,
+                "laborHours": 1.00,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007615"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/16"
+                    }
+                ]
+            },
+            {
+                "id": 47007616,
+                "name": "Brake Systems Concern",
+                "opCode": "05",
+                "price": 110.0000,
+                "analyticsMsrp": 110.0000,
+                "laborHours": 1.00,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007616"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/7"
+                    }
+                ]
+            },
+            {
+                "id": 47007617,
+                "name": "Electrical/Non PCM Flashes Concern",
+                "opCode": "08",
+                "price": 165.0000,
+                "analyticsMsrp": 165.0000,
+                "laborHours": 1.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007617"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/8"
+                    }
+                ]
+            },
+            {
+                "id": 47007618,
+                "name": "Engine Mechanical Concern",
+                "opCode": "09",
+                "price": 165.0000,
+                "analyticsMsrp": 165.0000,
+                "laborHours": 1.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007618"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/9"
+                    }
+                ]
+            },
+            {
+                "id": 47007619,
+                "name": "Engine Performance Concern (Diesel)",
+                "opCode": "09",
+                "price": 220.0000,
+                "analyticsMsrp": 220.0000,
+                "laborHours": 2.00,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007619"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/11"
+                    }
+                ]
+            },
+            {
+                "id": 47007620,
+                "name": "Manual Transmission Concern",
+                "opCode": "M11",
+                "price": 110.0000,
+                "analyticsMsrp": 110.0000,
+                "laborHours": 1.00,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007620"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/15"
+                    }
+                ]
+            },
+            {
+                "id": 70417532,
+                "name": "DIAGNOSE ESP LIGHT",
+                "opCode": "08",
+                "price": 160.0000,
+                "analyticsMsrp": 160.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/70417532"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/37"
+                    }
+                ]
+            }
+        ],
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/maintenance-services/repairs"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            }
+        ]
+    }
+
+    export const mockGetRepairServicesVinFiltered: DataModels.GetServicesResponse = {
+        services: [
+            {
+                id: 47007611,
+                name: "AC/Heating Concern",
+                price: 165.0000
+            },
+            {
+                id: 47007612,
+                name: "Automatic Transmission Concern",
+                price: 165.0000
+            },
+            {
+                id: 47007613,
+                name: "Axle/Driveshaft/Differential Concern",
+                price: 165.0000
+            },
+            {
+                id: 47007614,
+                name: "Body Systems/Trim Concern (Non-Electrical)",
+                price: 55.0000
+            },
+            {
+                id: 47007615,
+                name: "Radio/Nav/Telematics Concern",
+                price: 110.0000
+            },
+            {
+                id: 47007616,
+                name: "Brake Systems Concern",
+                price: 110.0000
+            },
+            {
+                id: 47007617,
+                name: "Electrical/Non PCM Flashes Concern",
+                price: 165.0000
+            },
+            {
+                id: 47007618,
+                name: "Engine Mechanical Concern",
+                price: 165.0000
+            },
+            {
+                id: 47007619,
+                name: "Engine Performance Concern (Diesel)",
+                price: 220.0000
+            },
+            {
+                id: 47007620,
+                name: "Manual Transmission Concern",
+                price: 110.0000
+            },
+            {
+                id: 70417532,
+                name: "DIAGNOSE ESP LIGHT",
+                price: 160.0000
+            }
+        ]
+    }
+
+    // GetRepairServicesWithoutVin
+    export const mockGetRepairServicesWithoutVinRequest:DataModels.GetServicesNoVinRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        mileage: TEST_MILEAGE,
+        make: TEST_MAKE, 
+        year: TEST_YEAR, 
+        model: TEST_MODEL, 
+        transmission: TEST_MAKE,
+        train: TEST_TRAIN, 
+        engine: TEST_ENGINE,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_REPAIR_SERVICES_WITHOUT_VIN'
+    }
+
+    export const mockGetRepairServicesWithoutVin:SchedulingServiceDataModels.GetFactoryServicesResponse = {
+        "services": [
+            {
+                "id": 47007611,
+                "name": "AC/Heating Concern",
+                "opCode": "14",
+                "price": 165.0000,
+                "analyticsMsrp": 165.0000,
+                "laborHours": 1.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007611"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/3"
+                    }
+                ]
+            },
+            {
+                "id": 47007612,
+                "name": "Automatic Transmission Concern",
+                "opCode": "11",
+                "price": 165.0000,
+                "analyticsMsrp": 165.0000,
+                "laborHours": 1.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007612"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/2"
+                    }
+                ]
+            },
+            {
+                "id": 47007613,
+                "name": "Axle/Driveshaft/Differential Concern",
+                "opCode": "03",
+                "price": 165.0000,
+                "analyticsMsrp": 165.0000,
+                "laborHours": 1.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007613"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/4"
+                    }
+                ]
+            },
+            {
+                "id": 47007614,
+                "name": "Body Systems/Trim Concern (Non-Electrical)",
+                "opCode": "96",
+                "price": 55.0000,
+                "analyticsMsrp": 55.0000,
+                "laborHours": 0.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007614"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/6"
+                    }
+                ]
+            },
+            {
+                "id": 47007615,
+                "name": "Radio/Nav/Telematics Concern",
+                "opCode": "76",
+                "price": 110.0000,
+                "analyticsMsrp": 110.0000,
+                "laborHours": 1.00,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007615"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/16"
+                    }
+                ]
+            },
+            {
+                "id": 47007616,
+                "name": "Brake Systems Concern",
+                "opCode": "05",
+                "price": 110.0000,
+                "analyticsMsrp": 110.0000,
+                "laborHours": 1.00,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007616"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/7"
+                    }
+                ]
+            },
+            {
+                "id": 47007617,
+                "name": "Electrical/Non PCM Flashes Concern",
+                "opCode": "08",
+                "price": 165.0000,
+                "analyticsMsrp": 165.0000,
+                "laborHours": 1.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007617"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/8"
+                    }
+                ]
+            },
+            {
+                "id": 47007618,
+                "name": "Engine Mechanical Concern",
+                "opCode": "09",
+                "price": 165.0000,
+                "analyticsMsrp": 165.0000,
+                "laborHours": 1.50,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007618"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/9"
+                    }
+                ]
+            },
+            {
+                "id": 47007619,
+                "name": "Engine Performance Concern (Diesel)",
+                "opCode": "09",
+                "price": 220.0000,
+                "analyticsMsrp": 220.0000,
+                "laborHours": 2.00,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007619"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/11"
+                    }
+                ]
+            },
+            {
+                "id": 47007620,
+                "name": "Manual Transmission Concern",
+                "opCode": "M11",
+                "price": 110.0000,
+                "analyticsMsrp": 110.0000,
+                "laborHours": 1.00,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/47007620"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/15"
+                    }
+                ]
+            },
+            {
+                "id": 70417532,
+                "name": "DIAGNOSE ESP LIGHT",
+                "opCode": "08",
+                "price": 160.0000,
+                "analyticsMsrp": 160.0000,
+                "laborHours": 0.00,
+                "selected": false,
+                "benefitsDescription": "",
+                "links": [
+                    {
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/70417532"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/maintenance-service-category",
+                        "href": "https://scheduler.dealer-fx.com/catalog/maintenance-service-categories/37"
+                    }
+                ]
+            }
+        ],
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM/maintenance-services/repairs"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            }
+        ]
+    }
+
+    export const mockGetRepairServicesWithoutVinFiltered: DataModels.GetServicesResponse = {
+        services: [
+            {
+                id: 47007611,
+                name: "AC/Heating Concern",
+                price: 165.0000
+            },
+            {
+                id: 47007612,
+                name: "Automatic Transmission Concern",
+                price: 165.0000
+            },
+            {
+                id: 47007613,
+                name: "Axle/Driveshaft/Differential Concern",
+                price: 165.0000
+            },
+            {
+                id: 47007614,
+                name: "Body Systems/Trim Concern (Non-Electrical)",
+                price: 55.0000
+            },
+            {
+                id: 47007615,
+                name: "Radio/Nav/Telematics Concern",
+                price: 110.0000
+            },
+            {
+                id: 47007616,
+                name: "Brake Systems Concern",
+                price: 110.0000
+            },
+            {
+                id: 47007617,
+                name: "Electrical/Non PCM Flashes Concern",
+                price: 165.0000
+            },
+            {
+                id: 47007618,
+                name: "Engine Mechanical Concern",
+                price: 165.0000
+            },
+            {
+                id: 47007619,
+                name: "Engine Performance Concern (Diesel)",
+                price: 220.0000
+            },
+            {
+                id: 47007620,
+                name: "Manual Transmission Concern",
+                price: 110.0000
+            },
+            {
+                id: 70417532,
+                name: "DIAGNOSE ESP LIGHT",
+                price: 160.0000
+            }
+        ]
+    }
+    
 
 }

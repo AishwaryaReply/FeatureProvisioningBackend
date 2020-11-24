@@ -17,7 +17,7 @@ import * as GetTimeSegmentsSchema from './schemas/get-time-segments-event-schema
 import * as GetTransportationOptionSchema from './schemas/get-transportation-options-event-schema.json';
 import * as GetSummaryAppointmentSchema from './schemas/post-appointment-summary-event-schema.json';
 import * as PostAppointmentSchema from './schemas/post-appointments-event-schema.json';
-import * as PutAppointmentSchema from './schemas/update-appointments-event-schema.json';
+import * as PutAppointmentSchema from './schemas/update-appointment-event-schema.json';
 
 export {    DeleteAppointmentSchema,
             SearchEmailSchema,

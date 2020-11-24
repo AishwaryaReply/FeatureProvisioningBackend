@@ -215,18 +215,17 @@ export declare type Slot = {
     count: number;
 };
 export declare type S = {
-    slots: Slot[],
+    slots: Slot[]
+}
+export interface Sext extends S {
     totalAvailable: number
 }
-export declare type Slots = {
-    serviceAdvisors?: S;
-    transportationOptions?: S;
-};
 export declare type Segment = {
-    time: string;
-    endTime: string;
-    state: string;
-    slots: Slots;
+    time: string,
+    endTime: string,
+    state: string,
+    serviceAdvisors: Sext,
+    transportationOptions: S,
     available: boolean;
 };
 export declare type GetDealerDepartmentTimeSegmentsResponse = {

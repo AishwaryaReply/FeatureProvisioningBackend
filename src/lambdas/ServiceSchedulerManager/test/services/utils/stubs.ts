@@ -15,6 +15,7 @@ export namespace Stubs {
     const TEST_MODEL = "model";
     const TEST_YEAR = "2020";
     const TEST_MAKE = "make";
+    const TEST_SERVICE_LIST = [{id:0},{id:1},{id:2}];
     const headers = {
         "clientrequestid": "mock",
         "x-originator-type": "mock",
@@ -2134,6 +2135,1692 @@ export namespace Stubs {
                 name: "DIAGNOSE ESP LIGHT",
                 price: 160.0000
             }
+        ]
+    }
+
+    // GetAppointmentSummary
+    export const mockGetAppointmentSummaryRequest:DataModels.GetAppointmentSummaryRequestData = {
+        servicesList: TEST_SERVICE_LIST,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_APPOINTMENT_SUMMARY'
+    }
+
+    export const mockGetAppointmentSummary:SchedulingServiceDataModels.GetAppointmentSummaryResponse = {
+        "taxes": 17.37,
+        "taxesGt": 2.50,
+        "total": 283.82,
+        "totalLabourHours": 2.10
+    }
+
+    export const mockGetAppointmentSummaryFiltered: DataModels.GetAppointmentSummaryResponse = mockGetAppointmentSummary;
+
+    // GetAdvisors
+    export const mockGetAdvisorsRequest:DataModels.GetAdvisorsRequestData = {
+        departmentId: TEST_DEPARTMENT,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_APPOINTMENT_SUMMARY'
+    }
+
+    export const mockGetAdvisors:SchedulingServiceDataModels.GetAdvisorsResponse = {
+        "serviceAdvisors": [
+            {
+                "id": 332708,
+                "name": "Albert Pico",
+                "photoUrl": "https://ommadmin1.dealer-fx.com/UserPictures/5151/5151_332708.jpg",
+                "memberId": 101336,
+                "departmentId": 4836,
+                "teamId": 5098,
+                "links": [
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-department",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-advisor",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/advisors/101336"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/advisors/101336/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+                    }
+                ]
+            },
+            {
+                "id": 959285,
+                "name": "Crystal Rentas",
+                "memberId": 127487,
+                "departmentId": 4836,
+                "teamId": 5098,
+                "links": [
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-department",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-advisor",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/advisors/127487"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/advisors/127487/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+                    }
+                ]
+            },
+            {
+                "id": 274509,
+                "name": "Jose Gomez",
+                "photoUrl": "https://ommadmin1.dealer-fx.com/UserPictures/5151/5151_274509.jpg",
+                "memberId": 43032,
+                "departmentId": 4836,
+                "teamId": 5098,
+                "links": [
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-department",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-advisor",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/advisors/43032"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/advisors/43032/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+                    }
+                ]
+            }
+        ],
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/advisors"
+            }
+        ]
+    }
+
+    export const mockGetAdvisorsFiltered: DataModels.GetAdvisorsResponse = {
+        serviceAdvisors: [
+            {
+                id: 332708,
+                name: "Albert Pico"
+            },
+            {
+                id: 959285,
+                name: "Crystal Rentas"
+            },
+            {
+                id: 274509,
+                name: "Jose Gomez"
+            }
+        ]
+    }
+
+    // GetTransportationOptions
+    export const mockGetTransportationOptionsRequest:DataModels.GetTransportationOptionsRequestData = {
+        departmentId: TEST_DEPARTMENT,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_TRANSPORTATION_OPTIONS'
+    }
+
+    export const mockGetTransportationOptions:SchedulingServiceDataModels.GetTransportationOptionsResponse = {
+        "options": [
+            {
+                "code": "waiter",
+                "description": "Waiter",
+                "enabled": true,
+                "links": [
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/transportation-option",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/transportation-options/waiter"
+                    }
+                ]
+            },
+            {
+                "code": "own-ride",
+                "description": "Own ride",
+                "enabled": true,
+                "links": [
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/transportation-option",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/transportation-options/own-ride"
+                    }
+                ]
+            },
+            {
+                "code": "need-rental",
+                "description": "Rental car",
+                "enabled": true,
+                "links": [
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/transportation-option",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/transportation-options/need-rental"
+                    }
+                ]
+            },
+            {
+                "code": "need-pickup",
+                "description": "Pick up & Delivery",
+                "enabled": true,
+                "links": [
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/transportation-option",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/transportation-options/need-pickup"
+                    }
+                ]
+            }
+        ],
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options"
+            }
+        ],
+        "linkTemplates": [
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options?date=%7Byyyy-MM-dd%7D"
+            }
+        ]
+    }
+
+    export const mockGetTransportationOptionsFiltered: DataModels.GetTransportationOptionsResponse = {
+        transportationOptions: [
+            {
+                code: "waiter",
+                description: "Waiter"
+            },
+            {
+                code: "own-ride",
+                description: "Own ride"
+            },
+            {
+                code: "need-rental",
+                description: "Rental car"
+            },
+            {
+                code: "need-pickup",
+                description: "Pick up & Delivery"
+            }
+        ]
+    }
+
+    // GetDealerDepartmentTimeSegments
+    export const mockGetDealerDepartmentTimeSegmentsRequest:DataModels.GetTimeSegmetsRequestData = {
+        startDate: TEST_START_DATE,
+        endDate: TEST_END_DATE,
+        departmentId: TEST_DEPARTMENT,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS'
+    }
+
+    export const mockGetDealerDepartmentTimeSegments:SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsResponse = {
+        "segments": [
+            {
+                "time": "2020-11-25T07:30:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 0,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 2,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T07:45:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 3,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T08:00:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 3,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T08:15:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 3,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T08:30:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 0,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 2,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T08:45:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 3,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T09:00:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 0,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 2,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T09:15:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 3,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T09:30:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 3,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T09:45:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 3,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T10:00:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 3,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T10:15:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 3,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            },
+            {
+                "time": "2020-11-25T10:30:00.00-05:00",
+                "endTime": "2020-11-25T17:00:00.00-05:00",
+                "state": "opened",
+                "slots": [
+                    {
+                        "name": "urn:dfx:service-advisor:101336",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:127487",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor:43032",
+                        "count": 1,
+                        "links": []
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:waiter",
+                        "count": 997,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/waiter"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:own-ride",
+                        "count": 1,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/own-ride"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-rental",
+                        "count": 0,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-rental"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:transportation-options:need-pickup",
+                        "count": 4,
+                        "links": [
+                            {
+                                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option",
+                                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options/need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "urn:dfx:service-advisor",
+                        "count": 3,
+                        "links": []
+                    }
+                ],
+                "available": true,
+                "links": []
+            }
+        ],
+        "links": [
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836"
+            }
+        ]
+    }
+
+    export const mockGetDealerDepartmentTimeSegmentsFiltered: DataModels.GetDealerDepartmentTimeSegmentsResponse = {
+        segments: [
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 0,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 2
+            },
+            state: "opened",
+            time: "2020-11-25T07:30:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 0,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 3
+            },
+            state: "opened",
+            time: "2020-11-25T07:45:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 0,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 3
+            },
+            state: "opened",
+            time: "2020-11-25T08:00:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 3
+            },
+            state: "opened",
+            time: "2020-11-25T08:15:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 0,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 2
+            },
+            state: "opened",
+            time: "2020-11-25T08:30:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 3
+            },
+            state: "opened",
+            time: "2020-11-25T08:45:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 0,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 2
+            },
+            state: "opened",
+            time: "2020-11-25T09:00:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 3
+            },
+            state: "opened",
+            time: "2020-11-25T09:15:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 3
+            },
+            state: "opened",
+            time: "2020-11-25T09:30:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 3
+            },
+            state: "opened",
+            time: "2020-11-25T09:45:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 3
+            },
+            state: "opened",
+            time: "2020-11-25T10:00:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 3
+            },
+            state: "opened",
+            time: "2020-11-25T10:15:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          },
+          {
+            available: true,
+            endTime: "2020-11-25T17:00:00.00-05:00",
+            serviceAdvisors: {
+              slots: [
+                {
+                  count: 1,
+                  name: "101336"
+                },
+                {
+                  count: 1,
+                  name: "127487"
+                },
+                {
+                  count: 1,
+                  name: "43032"
+                }
+              ],
+              totalAvailable: 3
+            },
+            state: "opened",
+            time: "2020-11-25T10:30:00.00-05:00",
+            transportationOptions: {
+              slots: [
+                {
+                  count: 997,
+                  name: "waiter"
+                },
+                {
+                  count: 1,
+                  name: "own-ride"
+                },
+                {
+                  count: 0,
+                  name: "need-rental"
+                },
+                {
+                  count: 4,
+                  name: "need-pickup"
+                }
+              ]
+            }
+          }
         ]
     }
     

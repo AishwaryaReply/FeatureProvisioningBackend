@@ -523,7 +523,13 @@ export class ServiceScheduler {
             const dim:number = response.segments.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.segments[i];                
-                let slots: DataModels.Slots = {};
+                let serviceAdvisors: DataModels.Sext = {
+                    slots: [],
+                    totalAvailable: 0
+                };    
+                let transportationOptions: DataModels.S = {
+                    slots: []
+                };
                 if(elem.time && 
                     elem.endTime &&
                     elem.available && 
@@ -533,26 +539,24 @@ export class ServiceScheduler {
                     const dimSlots:number = elem.slots.length;
                     for(let i = 0; i < dimSlots; i++){
                         const slotElem = elem.slots[i];   
-                        if(slotElem.name && slotElem.count){
+                        if(slotElem.name && (slotElem.count != undefined)){
                             const slot:DataModels.Slot = {
                                 name: slotElem.name, 
                                 count: slotElem.count
                             }
-                            if(slot.name.includes("service-advisor")){    
+                            if(slot.name.includes("service-advisor")){  
                                 const se = slot.name.split(":");
                                 slot.name = se[se.length - 1];    
-                                if(slot.name){                     
-                                    slots.serviceAdvisors?.slots.push(slot);
+                                if(slot.name != "service-advisor"){  
+                                    serviceAdvisors?.slots.push(slot);
                                 }else{
-                                    if(slots.serviceAdvisors) slots.serviceAdvisors.totalAvailable = slot.count;
+                                    serviceAdvisors.totalAvailable = slot.count;
                                 }
-                            }else if(slot.name.includes("transportation-options")){   
+                            }else if(slot.name.includes("transportation-options")){
                                 const se = slot.name.split(":");
-                                slot.name = se[se.length - 1]; 
-                                if(slot.name){                                                     
-                                    slots.transportationOptions?.slots.push(slot);
-                                }else{
-                                    if(slots.transportationOptions) slots.transportationOptions.totalAvailable = slot.count;
+                                slot.name = se[se.length - 1];     
+                                if(slot.name != "transportation-options"){                                                     
+                                    transportationOptions.slots.push(slot);
                                 }
                             }
                         }
@@ -561,8 +565,9 @@ export class ServiceScheduler {
                     const segment:DataModels.Segment = {
                         time: elem.time,
                         endTime: elem.endTime,
-                        state: elem.time,
-                        slots: slots,
+                        state: elem.state,
+                        serviceAdvisors: serviceAdvisors,
+                        transportationOptions: transportationOptions,
                         available: elem.available
                     }
                     segments.push(segment);

@@ -130,7 +130,7 @@ export namespace Stubs {
             email: TEST_EMAIL
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/search'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/search'
         }
     }
 
@@ -140,7 +140,7 @@ export namespace Stubs {
             hintDealer: TEST_DEALER
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/token'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/token'
         }
     }
 
@@ -151,7 +151,7 @@ export namespace Stubs {
             userid: TEST_USERID
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/search'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/search'
         }
     }
 
@@ -162,7 +162,7 @@ export namespace Stubs {
             userid: TEST_USERID
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/dfxvehicle'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/dfxvehicle'
         }
     }
 
@@ -174,7 +174,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/dealerservices/mileage/{mileage}'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/dealerservices/mileage/{mileage}'
         }
     }
 
@@ -190,7 +190,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/dealerservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/dealerservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
         }
     }
 
@@ -202,7 +202,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/factoryservices/mileage/{mileage}'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/factoryservices/mileage/{mileage}'
         }
     }
 
@@ -218,7 +218,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/factoryservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/factoryservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
         }
     }
 
@@ -230,7 +230,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/repairservices/mileage/{mileage}'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/repairservices/mileage/{mileage}'
         }
     }
 
@@ -246,7 +246,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/repairservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/repairservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
         }
     }
 
@@ -257,7 +257,7 @@ export namespace Stubs {
             servicesList: SERVICE_LIST
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/appointmentsummary'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/appointmentsummary'
         }
     }
 
@@ -267,7 +267,7 @@ export namespace Stubs {
             departmentId: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/department/{departmentId}/advisors'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentId}/advisors'
         }
     }
 
@@ -277,7 +277,7 @@ export namespace Stubs {
             departmentId: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/department/{departmentId}/trasportationoption'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentId}/trasportationoption'
         }
     }
 
@@ -291,7 +291,7 @@ export namespace Stubs {
             endDate: TEST_END_DATE
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/department/{departmentId}/timesegments'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentId}/timesegments'
         }
     }
 
@@ -302,7 +302,7 @@ export namespace Stubs {
             userid: TEST_USERID
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointments'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/appointments'
         }
     }
 
@@ -314,7 +314,7 @@ export namespace Stubs {
         },
         requestBody: TEST_POST_BODY,
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointment',
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/appointment',
             httpMethod: 'POST'
         }
     }
@@ -327,7 +327,7 @@ export namespace Stubs {
         },
         requestBody: TEST_PUT_BODY,
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointment',
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/appointment',
             httpMethod: 'PUT'
         }
     }
@@ -340,7 +340,7 @@ export namespace Stubs {
         },
         requestBody: TEST_PUT_BODY,
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointment',
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/appointment',
             httpMethod: 'GET'
         }
     }
@@ -352,7 +352,7 @@ export namespace Stubs {
             servicesList: SERVICE_LIST
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/dealerdepartment'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/dealerdepartment'
         }
     }
 
@@ -363,7 +363,7 @@ export namespace Stubs {
             departmentId: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/appointment/{appointmentId}/department/{departmentId}',
+            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentId}/department/{departmentId}',
             httpMethod: 'DELETE'
         }
     }
@@ -375,7 +375,7 @@ export namespace Stubs {
             departmentId: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/appointment/{appointmentId}/department/{departmentId}',
+            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentId}/department/{departmentId}',
             httpMethod: 'GET'
         }
     }
@@ -387,7 +387,7 @@ export namespace Stubs {
             departmentId: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduling/appointment/{appointmentId}/department/{departmentId}',
+            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentId}/department/{departmentId}',
             httpMethod: 'POST'
         }
     }

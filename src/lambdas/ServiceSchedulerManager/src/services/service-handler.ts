@@ -5,7 +5,7 @@ import { DataModels } from '../interfaces';
 import { Constants, GetFactoryNoVinSchema, GetRepairNoVinSchema, GetAppointmentDetailsSchema, GetAppointmentSchema, GetTimeSegmentsSchema, GetTransportationOptionSchema, PostAppointmentSchema, PutAppointmentSchema, GetFactoryVinSchema, GetDealerNoVinSchema, GetDealerVinSchema, GetDealerDepartmentSchema, GetAdvisorsSchema, GetVehicleSchema, GetTokenSchema, SearchVinSchema, SearchEmailSchema, DeleteAppointmentSchema, GetRepairVinSchema, GetSummaryAppointmentSchema } from '../../constants';
 import { ServiceRequestData, ServiceRequested, } from '../interfaces/data-models';
 
-const LOG_PREFIX_CLASS = 'ServiceSchedulingHandler | ';
+const LOG_PREFIX_CLASS = 'ServiceSchedulerHandler | ';
 
 export class ServiceHandler {
     public getServiceParams(inputEvent: UtilityObjects.TransformedInputEvent): ServiceRequestData {

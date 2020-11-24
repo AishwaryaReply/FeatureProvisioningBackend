@@ -4,9 +4,9 @@ import logger from "gcv-logger";
 import { Constants } from "../../constants";
 import { GCVErrors } from "gcv-utils";
 
-const LOG_PREFIX_CLASS = 'ServiceScheduling | ';
+const LOG_PREFIX_CLASS = 'ServiceScheduler | ';
 
-export class ServiceScheduling {
+export class ServiceScheduler {
     public async searchByEmail(request: DataModels.DfxSearchEmailRequestData): Promise<DataModels.SearchEmailResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} searchByEmail |`;
         const mappedRequest: SchedulingServiceDataModels.GetSearchRequestParams = {

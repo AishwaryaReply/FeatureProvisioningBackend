@@ -708,10 +708,10 @@
     }
   },
   "paths": {
-    "/v1/digitalglovebox/servicescheduling/token": {
+    "/v1/digitalglovebox/servicescheduler/token": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Get the authentication token for DealerFX OSS API.",
         "description": "This API returns the authentication token for DealerFX OSS API.",
@@ -833,7 +833,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -862,10 +862,10 @@
         }
       }
     },
-    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/dfxvehicle": {
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/dfxvehicle": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Get the vehicle info stored in DFX.",
         "description": "This API returns the vehicle info stored in DFX.",
@@ -1001,7 +1001,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -1030,10 +1030,10 @@
         }
       }
     },
-    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/facrtoryservices/mileage/{mileage}": {
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/facrtoryservices/mileage/{mileage}": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Get the list of factory services for a specific vehicle.",
         "description": "This API returns the list of factory services for a specific vehicle.",
@@ -1176,7 +1176,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -1205,10 +1205,10 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduling/facrtoryservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}": {
+    "/v1/digitalglovebox/servicescheduler/facrtoryservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Get the list of factory services for a specific vehicle.",
         "description": "This API returns the list of factory services for a specific vehicle.",
@@ -1379,7 +1379,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -1408,10 +1408,10 @@
         }
       }
     },
-    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/dealerservices/mileage/{mileage}": {
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/dealerservices/mileage/{mileage}": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Get the list of dealer services for a specific vehicle.",
         "description": "This API returns the list of dealer services for a specific vehicle.",
@@ -1554,7 +1554,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -1583,10 +1583,10 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduling/dealerservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}": {
+    "/v1/digitalglovebox/servicescheduler/dealerservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Get the list of dealer services for a specific vehicle.",
         "description": "This API returns the list of dealer services for a specific vehicle.",
@@ -1757,7 +1757,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -1786,10 +1786,10 @@
         }
       }
     },
-    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/repairservices/mileage/{mileage}": {
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/repairservices/mileage/{mileage}": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Get the list of repair services for a specific vehicle.",
         "description": "This API returns the list of repair services for a specific vehicle.",
@@ -1932,7 +1932,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -1961,10 +1961,10 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduling/repairservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}": {
+    "/v1/digitalglovebox/servicescheduler/repairservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Get the list of repair services for a specific vehicle.",
         "description": "This API returns the list of repair services for a specific vehicle.",
@@ -2135,7 +2135,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -2164,10 +2164,10 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduling/search": {
+    "/v1/digitalglovebox/servicescheduler/search": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Performs a search of a customer in the DFX system by email.",
         "description": "This API performs a search of a customer in the DFX system by email.",
@@ -2296,7 +2296,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -2325,10 +2325,10 @@
         }
       }
     },
-    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/search": {
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/search": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Performs a search of a customer in the DFX system by vin.",
         "description": "This API performs a search of a customer in the DFX system by vin.",
@@ -2464,7 +2464,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -2493,10 +2493,10 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduling/dealerdepartment": {
+    "/v1/digitalglovebox/servicescheduler/dealerdepartment": {
       "post": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Returns the department for services.",
         "description": "This API returns the department for services.",
@@ -2635,7 +2635,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -2664,10 +2664,10 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduling/appointmentsummary": {
+    "/v1/digitalglovebox/servicescheduler/appointmentsummary": {
       "post": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Returns the summary costs for the appointment.",
         "description": "This API returns the summary costs for the appointment.",
@@ -2806,7 +2806,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -2835,10 +2835,10 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduling/department/{departmentId}/advisors": {
+    "/v1/digitalglovebox/servicescheduler/department/{departmentId}/advisors": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Returns the list of advisors for a specific dealer department.",
         "description": "This API returns the list of advisors for a specific dealer department.",
@@ -2967,7 +2967,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -2996,10 +2996,10 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduling/department/{departmentId}/trasportationoption": {
+    "/v1/digitalglovebox/servicescheduler/department/{departmentId}/trasportationoption": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Returns the list of transportation options for a specific dealer department.",
         "description": "This API returns the list of transportation options for a specific dealer department.",
@@ -3128,7 +3128,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -3157,10 +3157,10 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduling/department/{departmentId}/timesegments": {
+    "/v1/digitalglovebox/servicescheduler/department/{departmentId}/timesegments": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Returns the list of time segments for a specific dealer department.",
         "description": "This API returns the list of time segments for a specific dealer department.",
@@ -3303,7 +3303,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -3332,10 +3332,10 @@
         }
       }
     },
-    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointment": {
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/appointment": {
       "post": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Returns the list of services scheduled for a specific vehicle to a specific dealer.",
         "description": "This API returns the list of services scheduled for a specific vehicle to a specific dealer.",
@@ -3480,7 +3480,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -3494,7 +3494,7 @@
       },
       "put": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Update an appointment for a service.",
         "description": "This API updates an appointment for a service.",
@@ -3639,7 +3639,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -3668,10 +3668,10 @@
         }
       }
     },
-    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduling/appointments": {
+    "/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/appointments": {
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Returns the list of services scheduled for a specific vehicle to a specific dealer.",
         "description": "This API returns the list of services scheduled for a specific vehicle to a specific dealer.",
@@ -3807,7 +3807,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -3836,10 +3836,10 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduling/appointment/{appointmentId}/department/{departmentId}": {
+    "/v1/digitalglovebox/servicescheduler/appointment/{appointmentId}/department/{departmentId}": {
       "delete": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Delete a specific service.",
         "description": "This API delete a specific service.",
@@ -3975,7 +3975,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -3989,7 +3989,7 @@
       },
       "get": {
         "tags": [
-          "Service Scheduling"
+          "Service Scheduler"
         ],
         "summary": "Returns the details for a specific appointment.",
         "description": "This API returns the details for a specific appointment.",
@@ -4125,7 +4125,7 @@
           }
         ],
         "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduling-manager:gsdp/invocations",
+          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
           "responses": {
             "default": {
               "statusCode": "200"

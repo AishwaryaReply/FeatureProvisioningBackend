@@ -17,10 +17,10 @@ from troposphere.iam import Role, ManagedPolicy
 from troposphere.dynamodb import Table, AttributeDefinition, KeySchema, ProvisionedThroughput
 from component_info import (
     base_info,
-    service_scheduling_manager_lambda_function_info,
+    service_scheduler_manager_lambda_function_info,
     global_policy_for_lambda_function_execution_iam_policy_info,
     lambda_function_execution_role_iam_role_info,
-    service_scheduling_manager_lambda_permission_info,
+    service_scheduler_manager_lambda_permission_info,
     specific_policy_for_lambda_function_execution_iam_policy_info,
     available_aws_regions,
     available_environments
@@ -104,43 +104,43 @@ mappings['EnvRegionIndexMap'] = {
 # in particular the format of the expexted variable is '<model_1>#<model_2>#<model_n>
 mappings['EnvRegionMap'] = {
     'dev-eu-west-1': {
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Memory': '128',
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Timeout': '15',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Memory': '128',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Timeout': '15',
         'logLevel': 'debug',
     },
     'int-eu-west-1': {
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Memory': '128',
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Timeout': '15',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Memory': '128',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Timeout': '15',
         'logLevel': 'debug',
     },
     'prep-eu-west-1': {
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Memory': '512',
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Timeout': '15',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Memory': '512',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Timeout': '15',
         'logLevel': 'debug',
     },
     'prod-eu-west-1': {
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Memory': '512',
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Timeout': '15',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Memory': '512',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Timeout': '15',
         'logLevel': 'debug',
     },
     'dev-us-east-1': {
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Memory': '128',
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Timeout': '15',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Memory': '128',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Timeout': '15',
         'logLevel': 'debug',
     },
     'int-us-east-1': {
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Memory': '128',
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Timeout': '15',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Memory': '128',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Timeout': '15',
         'logLevel': 'debug',
     },
     'prep-us-east-1': {
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Memory': '512',
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Timeout': '15',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Memory': '512',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Timeout': '15',
         'logLevel': 'debug',
     },
     'prod-us-east-1': {
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Memory': '512',
-        f'{service_scheduling_manager_lambda_function_info.template_logical_id}Timeout': '15',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Memory': '512',
+        f'{service_scheduler_manager_lambda_function_info.template_logical_id}Timeout': '15',
         'logLevel': 'debug',
     }
 }
@@ -200,19 +200,19 @@ global_lambda_vpc_config = VPCConfig(
     SubnetIds=Ref(parameters['subnet_id_list_lambda'])
 )
 
-# 1.5.2 ServiceSchedulingManager lambda
-resources[service_scheduling_manager_lambda_function_info.template_logical_id] = Function(
-    service_scheduling_manager_lambda_function_info.template_logical_id,
-    FunctionName=service_scheduling_manager_lambda_function_info.generate_function_name(base_name, 'service-scheduling-manager'),
-    CodeUri="../../src/lambdas/ServiceSchedulingManager/dist",
+# 1.5.2 ServiceSchedulerManager lambda
+resources[service_scheduler_manager_lambda_function_info.template_logical_id] = Function(
+    service_scheduler_manager_lambda_function_info.template_logical_id,
+    FunctionName=service_scheduler_manager_lambda_function_info.generate_function_name(base_name, 'service-scheduler-manager'),
+    CodeUri="../../src/lambdas/ServiceSchedulerManager/dist",
     Handler='src/handler.handler',
     Runtime="nodejs10.x",
     Layers=[Ref(parameters['lambda_layer_arn'])],
     AutoPublishAlias="gsdp",
-    Description="Service Scheduling Manager"
+    Description="Service Scheduler Manager"
                 "- version:{}".format(short_description),
-    MemorySize=get_value_from_env_region_map_by_key(f'{service_scheduling_manager_lambda_function_info.template_logical_id}Memory'),
-    Timeout=get_value_from_env_region_map_by_key(f'{service_scheduling_manager_lambda_function_info.template_logical_id}Timeout'),
+    MemorySize=get_value_from_env_region_map_by_key(f'{service_scheduler_manager_lambda_function_info.template_logical_id}Memory'),
+    Timeout=get_value_from_env_region_map_by_key(f'{service_scheduler_manager_lambda_function_info.template_logical_id}Timeout'),
     Environment=LambdaEnvironment(
         Variables={
             'stage': Ref(parameters['env']),
@@ -224,11 +224,11 @@ resources[service_scheduling_manager_lambda_function_info.template_logical_id] =
     VpcConfig=global_lambda_vpc_config,
 )
 
-resources[service_scheduling_manager_lambda_permission_info.template_logical_id] = LambdaPermission(
-    service_scheduling_manager_lambda_permission_info.template_logical_id,
+resources[service_scheduler_manager_lambda_permission_info.template_logical_id] = LambdaPermission(
+    service_scheduler_manager_lambda_permission_info.template_logical_id,
     Action='lambda:InvokeFunction',
     FunctionName=Join(':', [GetAtt(
-        resources[service_scheduling_manager_lambda_function_info.template_logical_id], "Arn"), 'gsdp']),
+        resources[service_scheduler_manager_lambda_function_info.template_logical_id], "Arn"), 'gsdp']),
     Principal="apigateway.amazonaws.com",
     SourceArn=Join(
         '',
@@ -245,7 +245,7 @@ resources[service_scheduling_manager_lambda_permission_info.template_logical_id]
         # the alias resource is created automatically by SAM since
         # in lambda definition we use attribute "AutoPublishAlias"
         "{lambda_function}Alias{alias_name}".format(
-            lambda_function=service_scheduling_manager_lambda_function_info.template_logical_id,
+            lambda_function=service_scheduler_manager_lambda_function_info.template_logical_id,
             alias_name="gsdp")
     ]
 )

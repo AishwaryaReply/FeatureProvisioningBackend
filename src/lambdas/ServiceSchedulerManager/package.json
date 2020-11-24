@@ -1,7 +1,7 @@
 {
-    "name": "ServiceSchedulingManager",
+    "name": "ServiceSchedulerManager",
     "version": "1.0.0",
-    "description": "This API manages the service scheduling process",
+    "description": "This API manages the service scheduler process",
     "config": {
         "mocha-sonar-reporter": {
             "outputfile": "test/TEST-all.xml"

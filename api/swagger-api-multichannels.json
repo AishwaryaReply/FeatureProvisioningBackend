@@ -505,7 +505,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "number"
         }
       }
     },

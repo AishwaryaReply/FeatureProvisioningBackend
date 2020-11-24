@@ -2,7 +2,7 @@ from troposphere_helpers import ResourceInfo, LambdaFunctionInfo
 
 # BASE INFO: base_info contains information related to entire stack
 base_info = {
-    'Feature Name': 'ServiceScheduling',
+    'Feature Name': 'ServiceScheduler',
     'Feature Code': 'SSC',
     'Project Name': 'GSDP',
     'Project Component': 'SDPR',
@@ -16,11 +16,11 @@ base_info = {
 
 # RESOURCES INFO: here are reported in standard format information related to single resources
 # LAMBDA FUNCTIONS
-service_scheduling_manager_lambda_function_info = LambdaFunctionInfo(
+service_scheduler_manager_lambda_function_info = LambdaFunctionInfo(
     code='SC001',
-    name='ServiceSchedulingManager',
+    name='ServiceSchedulerManager',
 )
-service_scheduling_manager_lambda_permission_info = service_scheduling_manager_lambda_function_info.generate_api_gateway_permission_info()
+service_scheduler_manager_lambda_permission_info = service_scheduler_manager_lambda_function_info.generate_api_gateway_permission_info()
 
 # POLICIES
 global_policy_for_lambda_function_execution_iam_policy_info = ResourceInfo(

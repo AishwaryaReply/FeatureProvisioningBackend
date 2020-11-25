@@ -19,7 +19,7 @@ export class ServiceScheduler {
 
         let filteredResponse: DataModels.SearchEmailResponse = {};
 
-        if(response.customerPreviews.length != 0){
+        if(response.customerPreviews.length != 0 && response.customerPreviews[0].email && response.customerPreviews[0].foundType){
             let customerId:string = "";
             
             let dim:number = response.customerPreviews[0].links.length;
@@ -34,8 +34,7 @@ export class ServiceScheduler {
             filteredResponse = {
                 customerId: customerId,
                 email: response.customerPreviews[0].email,
-                // foundType: "response.customerPreviews[0].foundType",
-                foundType: "byEmail"
+                foundType: response.customerPreviews[0].foundType
             }
 
         }

@@ -34,7 +34,8 @@ export class ServiceScheduler {
             filteredResponse = {
                 customerId: customerId,
                 email: response.customerPreviews[0].email,
-                foundType: "response.customerPreviews[0].foundType"
+                // foundType: "response.customerPreviews[0].foundType",
+                foundType: "byEmail"
             }
 
         }

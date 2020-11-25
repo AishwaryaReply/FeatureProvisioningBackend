@@ -26,7 +26,6 @@ module.exports.handler = async (event: APIGatewayProxyEvent, context: Context): 
         // INIT
         const requestObj = await initializeFunction(event, context)
         headers = requestObj.headers;
-
         // CORE
         // filtering event for required parameters
         const serviceHandler = ServiceFactory.getServiceHandler();

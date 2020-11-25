@@ -30,12 +30,13 @@ export class ServiceScheduler {
                         customerId = hrefArray[hrefArray.length - 2];       
                 }
             }
-            
+            console.log("response :"+ JSON.stringify(response));
             filteredResponse = {
                 customerId: customerId,
                 email: response.customerPreviews[0].email,
-                foundType: response.customerPreviews[0].foundType
+                foundType: "response.customerPreviews[0].foundType"
             }
+
         }
         return filteredResponse;
     }

@@ -15,6 +15,7 @@ export namespace Stubs {
     const TEST_MODEL = "model";
     const TEST_YEAR = "2020";
     const TEST_MAKE = "make";
+    const TEST_CUST_ID = "cust_id";
     const TEST_SERVICE_LIST = [{id:0},{id:1},{id:2}];
     const headers = {
         "clientrequestid": "mock",
@@ -2136,7 +2137,57 @@ export namespace Stubs {
                 price: 160.0000
             }
         ]
+    }    
+
+    // GetDealerDepartment
+    export const mockGetDealerDepartmentRequest:DataModels.GetDealerDepartmentRequestData = {
+        servicesList: TEST_SERVICE_LIST,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_DEALER_DEPARTMENT'
     }
+
+    export const mockGetDealerDepartment:SchedulingServiceDataModels.GetDealerDepartmentResponse = {
+        "id": 4836,
+        "name": "Riverdale Chrysler Jeep - Service",
+        "code": "3QC",
+        "email": "service@riverdalechryslerjeep.com",
+        "segmentIncrement": 15,
+        "maxAppsPerSegment": 3,
+        "permittedRescheduleTime": 9999,
+        "default": true,
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/appointment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/appointments"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/department-transportation-option-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/transportation-options"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-advisor-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/advisors"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            }
+        ],
+        "linkTemplates": [
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            }
+        ]
+    }
+
+    export const mockGetDealerDepartmentFiltered: DataModels.GetDealerDepartmentResponse = {
+        id: 4836
+    };
 
     // GetAppointmentSummary
     export const mockGetAppointmentSummaryRequest:DataModels.GetAppointmentSummaryRequestData = {
@@ -3262,566 +3313,1528 @@ export namespace Stubs {
 
     export const mockGetDealerDepartmentTimeSegmentsFiltered: DataModels.GetDealerDepartmentTimeSegmentsResponse = {
         segments: [
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 0,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 2
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T07:30:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 0,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 3
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T07:45:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 0,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 3
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T08:00:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 3
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T08:15:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 0,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 2
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T08:30:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 3
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T08:45:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 0,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 2
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T09:00:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 3
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T09:15:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 3
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T09:30:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 3
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T09:45:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 3
-            },
-            state: "opened",
+            },            
             time: "2020-11-25T10:00:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
-          {
-            available: true,
+          {            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 3
-            },
-            state: "opened",
+            },        
             time: "2020-11-25T10:15:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           },
           {
-            available: true,
+            
             endTime: "2020-11-25T17:00:00.00-05:00",
             serviceAdvisors: {
               slots: [
                 {
                   count: 1,
-                  name: "101336"
+                  id: "101336"
                 },
                 {
                   count: 1,
-                  name: "127487"
+                  id: "127487"
                 },
                 {
                   count: 1,
-                  name: "43032"
+                  id: "43032"
                 }
               ],
               totalAvailable: 3
             },
-            state: "opened",
+            
             time: "2020-11-25T10:30:00.00-05:00",
             transportationOptions: {
               slots: [
                 {
                   count: 997,
-                  name: "waiter"
+                  code: "waiter"
                 },
                 {
                   count: 1,
-                  name: "own-ride"
+                  code: "own-ride"
                 },
                 {
                   count: 0,
-                  name: "need-rental"
+                  code: "need-rental"
                 },
                 {
                   count: 4,
-                  name: "need-pickup"
+                  code: "need-pickup"
                 }
               ]
             }
           }
         ]
+    }
+
+    // GetServiceAppointments
+    export const mockGetServiceAppointmentsRequest:DataModels.GetAppointmentsRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_SERVICE_APPOINTMENTS'
+    }
+
+    export const mockGetServiceAppointments:SchedulingServiceDataModels.GetServiceAppointmentsResponse = {
+        "appointments": [
+            {
+                "scheduledTime": "2020-11-20T15:15:00.00-05:00",
+                "status": "missed",
+                "serviceAdvisor": {
+                    "name": "Albert Pico"
+                },
+                "departmentCode": "3QC",
+                "transportationOption": {
+                    "code": "waiter",
+                    "description": "Waiter",
+                    "enabled": true
+                },
+                "links": [
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/appointment",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-department",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836"
+                    },
+                    {
+                        "rel": "http://api.dealer-fx.com/docs/rels/service-advisor",
+                        "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/service-advisors/332708"
+                    }
+                ]
+            }
+        ],
+        "links": [
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            }
+        ]
+    }
+
+    export const mockGetServiceAppointmentsFiltered: DataModels.GetServiceAppointmentsResponse = {
+        appointments: [
+            {
+                scheduledTime: "2020-11-20T15:15:00.00-05:00",
+                status: "missed",
+                appointmentId: "55292010",
+                departmentId: "4836"
+            }
+        ]
+    };
+
+    // PostAppointment
+    export const mockPostAppointmentRequest:DataModels.PostAppointmentRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        dealerToken: TEST_DEALER_TOKEN,
+        body:{
+            departmentId: TEST_DEPARTMENT,
+            customerId: TEST_CUST_ID,
+            customerConcernsInfo: "customerConcernsInfo",
+            advisorId: 0,
+            transportationOptionCode: "transportationOptionCode",
+            scheduledTime: "scheduledTime",
+            mileage: {
+                value: 0,
+                unitsKind: "unitsKind"
+            },
+            services: {
+                drs: [
+                    { 
+                        id: 0,
+                        comment: "string"
+                    }
+                ],
+                frs: [
+                    { 
+                        id: 0,
+                        comment: "string"
+                    }
+                ],
+                repair: [
+                    { 
+                        id: 0,
+                        comment: "string"
+                    }
+                ]
+            },
+            vehicle: [
+                {
+                    rel: "string",
+                    href: "string"
+                }
+            ]
+        },
+        requestedService: 'POST_APPOINTMENT'
+    }
+
+    export const mockPostAppointment:SchedulingServiceDataModels.PostAppointmentResponse = {
+        "customer": {
+            "id": "urn:dfx:customer:103129767",
+            "firstName": "TEST",
+            "lastName": "FCA",
+            "phone": "2484206482",
+            "email": "testkh19@gmail.com",
+            "phones": [
+                {
+                    "type": "default",
+                    "number": "2484206482"
+                },
+                {
+                    "type": "home",
+                    "number": "2484206482"
+                }
+            ],
+            "emails": [
+                {
+                    "type": "business",
+                    "email": "testkh19@gmail.com"
+                },
+                {
+                    "type": "personal",
+                    "email": "testkh19@gmail.com"
+                },
+                {
+                    "type": "default",
+                    "email": "testkh19@gmail.com"
+                }
+            ]
+        },
+        "scheduledTime": "2020-11-20T15:15:00.00-05:00",
+        "mileage": {
+            "value": 150,
+            "unitsKind": "unspecified"
+        },
+        "status": "missed",
+        "customerConcernsInfo": "MY FIRST APP",
+        "confirmationCode": "DFX-WX3L6",
+        "advisor": {
+            "id": 101336,
+            "name": "Albert Pico",
+            "photoUrl": "https://ommadmin1.dealer-fx.com/UserPictures/5151/5151_332708.jpg",
+            "departmentId": 4836
+        },
+        "transportationOption": {
+            "code": "waiter",
+            "enabled": false,
+            "links": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/transportation-option",
+                    "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/transportation-options/waiter"
+                }
+            ]
+        },
+        "services": {
+            "summary": {
+                "taxes": 2.78,
+                "taxesGt": 2.50,
+                "total": 264.23,
+                "totalLabourHours": 0.60
+            },
+            "drs": [
+                {
+                    "id": 2982763,
+                    "name": "Service Contract Lube, Oil and Filter",
+                    "opCode": "EXLOF",
+                    "price": 29.0000,
+                    "analyticsMsrp": 29.0000,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "comment": "Service Contract Lube, Oil and Filter",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/2982763"
+                        }
+                    ]
+                }
+            ],
+            "frs": [
+                {
+                    "id": 82893,
+                    "name": "Replace engine oil and filter",
+                    "opCode": "30",
+                    "price": 69.9500,
+                    "analyticsMsrp": 69.9500,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "comment": "Replace engine oil and filter",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/82893"
+                        }
+                    ]
+                }
+            ],
+            "repair": [
+                {
+                    "id": 70417486,
+                    "name": "ABS Light Diagnosis",
+                    "opCode": "05",
+                    "price": 160.0000,
+                    "analyticsMsrp": 160.0000,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "comment": "ABS Light Diagnosis",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/70417486"
+                        }
+                    ]
+                }
+            ],
+            "recalls": []
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=opcode1%252copcode2&code=code"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-advisor-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/advisors"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-advisor",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/advisors/101336"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/advisors/101336/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=opcode1%252copcode2&code=code"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/repair-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/services/repairs"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/appointment-calendar+ics",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/appointments/55292010/calendar/855aa652af1c40ccb3df8e587fc9db83?extension=ics&culture=en-US"
+            }
+        ],
+        "linkTemplates": [
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/required-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/services/frs/%7Bmileage%7Cmonths%7D/%7Bmileage.value%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/recommended-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/services/drs/%7Bmileage%7Cmonths%7D/%7Bmileage.value%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/advisors/101336/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            }
+        ]
+    }
+
+    export const mockPostAppointmentFiltered: DataModels.PostAppointmentResponse = {
+        status: "missed",
+        confirmationCode: "DFX-WX3L6"
+    };
+
+    // DeleteServiceAppointment
+    export const mockDeleteServiceAppointmentRequest:DataModels.AppointmentRequestData = {
+        appointmentId: TEST_APPOINTMENT_ID,
+        departmentId: TEST_DEPARTMENT,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'DELETE_SERVICE_APPOINTMENT'
+    }
+
+    export const mockDeleteServiceAppointment:SchedulingServiceDataModels.DeleteServiceAppointmentResponse = {
+        "customer": {
+            "id": "urn:dfx:customer:103129767",
+            "firstName": "TEST",
+            "lastName": "FCA",
+            "phone": "2484206482",
+            "email": "testkh19@gmail.com",
+            "phones": [
+                {
+                    "type": "default",
+                    "number": "2484206482"
+                },
+                {
+                    "type": "home",
+                    "number": "2484206482"
+                }
+            ],
+            "emails": [
+                {
+                    "type": "business",
+                    "email": "testkh19@gmail.com"
+                },
+                {
+                    "type": "personal",
+                    "email": "testkh19@gmail.com"
+                },
+                {
+                    "type": "default",
+                    "email": "testkh19@gmail.com"
+                }
+            ]
+        },
+        "scheduledTime": "2020-11-20T15:15:00.00-05:00",
+        "mileage": {
+            "value": 150,
+            "unitsKind": "unspecified"
+        },
+        "status": "missed",
+        "customerConcernsInfo": "MY FIRST APP",
+        "confirmationCode": "DFX-WX3L6",
+        "advisor": {
+            "id": 101336,
+            "name": "Albert Pico",
+            "photoUrl": "https://ommadmin1.dealer-fx.com/UserPictures/5151/5151_332708.jpg",
+            "departmentId": 4836
+        },
+        "transportationOption": {
+            "code": "waiter",
+            "enabled": false,
+            "links": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/transportation-option",
+                    "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/transportation-options/waiter"
+                }
+            ]
+        },
+        "services": {
+            "summary": {
+                "taxes": 2.78,
+                "taxesGt": 2.50,
+                "total": 264.23,
+                "totalLabourHours": 0.60
+            },
+            "drs": [
+                {
+                    "id": 2982763,
+                    "name": "Service Contract Lube, Oil and Filter",
+                    "opCode": "EXLOF",
+                    "price": 29.0000,
+                    "analyticsMsrp": 29.0000,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "comment": "Service Contract Lube, Oil and Filter",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/2982763"
+                        }
+                    ]
+                }
+            ],
+            "frs": [
+                {
+                    "id": 82893,
+                    "name": "Replace engine oil and filter",
+                    "opCode": "30",
+                    "price": 69.9500,
+                    "analyticsMsrp": 69.9500,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "comment": "Replace engine oil and filter",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/82893"
+                        }
+                    ]
+                }
+            ],
+            "repair": [
+                {
+                    "id": 70417486,
+                    "name": "ABS Light Diagnosis",
+                    "opCode": "05",
+                    "price": 160.0000,
+                    "analyticsMsrp": 160.0000,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "comment": "ABS Light Diagnosis",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/70417486"
+                        }
+                    ]
+                }
+            ],
+            "recalls": []
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=opcode1%252copcode2&code=code"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-advisor-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/advisors"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-advisor",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/advisors/101336"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/advisors/101336/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=opcode1%252copcode2&code=code"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/repair-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/services/repairs"
+            }
+        ],
+        "linkTemplates": [
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/required-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/services/frs/%7Bmileage%7Cmonths%7D/%7Bmileage.value%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/recommended-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/services/drs/%7Bmileage%7Cmonths%7D/%7Bmileage.value%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55292010/departments/4836/advisors/101336/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            }
+        ]
+    }
+
+    export const mockDeleteServiceAppointmentFiltered: DataModels.DeleteServiceAppointmentResponse = {};
+
+    // UpdateServiceAppointment
+    export const mockUpdateServiceAppointmentRequest:DataModels.PutAppointmentRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        dealerToken: TEST_DEALER_TOKEN,
+        body:{
+            departmentId: TEST_DEPARTMENT,
+            customerId: TEST_CUST_ID,
+            customerConcernsInfo: "customerConcernsInfo",
+            advisorId: 0,
+            transportationOptionCode: "transportationOptionCode",
+            scheduledTime: "scheduledTime",
+            appointmentId: TEST_APPOINTMENT_ID,
+            mileage: {
+                value: 0,
+                unitsKind: "unitsKind"
+            },
+            services: {
+                drs: [
+                    { 
+                        id: 0,
+                        comment: "string"
+                    }
+                ],
+                frs: [
+                    { 
+                        id: 0,
+                        comment: "string"
+                    }
+                ],
+                repair: [
+                    { 
+                        id: 0,
+                        comment: "string"
+                    }
+                ]
+            },
+            vehicle: [
+                {
+                    rel: "string",
+                    href: "string"
+                }
+            ]
+        },
+        requestedService: 'UPDATE_SERVICE_APPOINTMENT'
+    }
+
+    export const mockUpdateServiceAppointment:SchedulingServiceDataModels.UpdateServiceAppointmentResponse = {
+        "customer": {
+            "id": "urn:dfx:customer:103129767",
+            "firstName": "TEST",
+            "lastName": "FCA",
+            "phone": "2484206482",
+            "email": "testkh19@gmail.com",
+            "phones": [
+                {
+                    "type": "default",
+                    "number": "2484206482"
+                },
+                {
+                    "type": "home",
+                    "number": "2484206482"
+                }
+            ],
+            "emails": [
+                {
+                    "type": "business",
+                    "email": "testkh19@gmail.com"
+                },
+                {
+                    "type": "personal",
+                    "email": "testkh19@gmail.com"
+                },
+                {
+                    "type": "default",
+                    "email": "testkh19@gmail.com"
+                }
+            ]
+        },
+        "scheduledTime": "2020-11-20T15:15:00.00-05:00",
+        "mileage": {
+            "value": 150,
+            "unitsKind": "unspecified"
+        },
+        "customerConcernsInfo": "MY FIRST APP",
+        "confirmationCode": "DFX-WX5WN",
+        "advisor": {
+            "id": 101336,
+            "name": "Albert Pico",
+            "photoUrl": "https://ommadmin1.dealer-fx.com/UserPictures/5151/5151_332708.jpg",
+            "departmentId": 4836
+        },
+        "transportationOption": {
+            "code": "waiter",
+            "enabled": false,
+            "links": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/transportation-option",
+                    "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/transportation-options/waiter"
+                }
+            ]
+        },
+        "services": {
+            "summary": {
+                "taxes": 2.78,
+                "taxesGt": 2.50,
+                "total": 264.23,
+                "totalLabourHours": 0.60
+            },
+            "drs": [
+                {
+                    "id": 2982763,
+                    "name": "Service Contract Lube, Oil and Filter",
+                    "opCode": "EXLOF",
+                    "price": 29.0000,
+                    "analyticsMsrp": 29.0000,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "comment": "Service Contract Lube, Oil and Filter",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/2982763"
+                        }
+                    ]
+                }
+            ],
+            "frs": [
+                {
+                    "id": 82893,
+                    "name": "Replace engine oil and filter",
+                    "opCode": "30",
+                    "price": 69.9500,
+                    "analyticsMsrp": 69.9500,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "comment": "Replace engine oil and filter",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/82893"
+                        }
+                    ]
+                }
+            ],
+            "repair": [
+                {
+                    "id": 70417486,
+                    "name": "ABS Light Diagnosis",
+                    "opCode": "05",
+                    "price": 160.0000,
+                    "analyticsMsrp": 160.0000,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "comment": "ABS Light Diagnosis",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/70417486"
+                        }
+                    ]
+                }
+            ],
+            "recalls": []
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/departments"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/departments/4836"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/departments/4836/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=opcode1%252copcode2&code=code"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-advisor-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/departments/4836/advisors"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-advisor",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/departments/4836/advisors/101336"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/departments/4836/advisors/101336/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=opcode1%252copcode2&code=code"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/repair-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/services/repairs"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/appointment-calendar+ics",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/appointments/55295015/calendar/cde6a44e76fd4b54a1154fb6bbc477c1?extension=ics&culture=en-US"
+            }
+        ],
+        "linkTemplates": [
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/required-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/services/frs/%7Bmileage%7Cmonths%7D/%7Bmileage.value%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/recommended-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/services/drs/%7Bmileage%7Cmonths%7D/%7Bmileage.value%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/departments/4836/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55295015/departments/4836/advisors/101336/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            }
+        ]
+    }
+
+    export const mockUpdateServiceAppointmentFiltered: DataModels.PutAppointmentRequestResponse = {
+        confirmationCode: "DFX-WX5WN"
+    };
+
+    // GetServiceAppointmentDetails
+    export const mockGetServiceAppointmentDetailsRequest:DataModels.AppointmentRequestData = {
+        appointmentId: TEST_APPOINTMENT_ID,
+        departmentId: TEST_DEPARTMENT,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_SERVICE_APPOINTMENT_DETAILS'
+    }
+
+    export const mockGetServiceAppointmentDetails:SchedulingServiceDataModels.GetServiceAppointmentDetailsResponse = {
+        "customer": {
+            "id": "urn:dfx:customer:103129767",
+            "firstName": "TEST",
+            "lastName": "FCA",
+            "phones": [
+                {
+                    "type": "default",
+                    "number": "2484206482"
+                },
+                {
+                    "type": "home",
+                    "number": "2484206482"
+                }
+            ],
+            "emails": [
+                {
+                    "type": "business",
+                    "email": "testkh19@gmail.com"
+                },
+                {
+                    "type": "personal",
+                    "email": "testkh19@gmail.com"
+                },
+                {
+                    "type": "default",
+                    "email": "testkh19@gmail.com"
+                }
+            ]
+        },
+        "scheduledTime": "2020-11-20T15:15:00.00-05:00",
+        "mileage": {
+            "value": 150,
+            "unitsKind": "mileage"
+        },
+        "status": "missed",
+        "customerConcernsInfo": "MY FIRST APP",
+        "confirmationCode": "DFX-WX7HU",
+        "advisor": {
+            "id": 332708,
+            "name": "Albert Pico",
+            "photoUrl": "https://ommadmin1.dealer-fx.com/UserPictures/5151/5151_332708.jpg",
+            "departmentId": 4836
+        },
+        "transportationOption": {
+            "code": "waiter",
+            "description": "Waiter",
+            "enabled": false,
+            "deliveryInfo": {},
+            "links": [
+                {
+                    "rel": "http://api.dealer-fx.com/docs/rels/transportation-option",
+                    "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/transportation-options/waiter"
+                }
+            ]
+        },
+        "services": {
+            "summary": {
+                "taxes": 2.78,
+                "taxesGt": 2.50,
+                "total": 264.23,
+                "totalLabourHours": 0.60
+            },
+            "drs": [
+                {
+                    "id": 2982763,
+                    "name": "Service Contract Lube, Oil and Filter",
+                    "opCode": "EXLOF",
+                    "price": 29.0000,
+                    "analyticsMsrp": 29.0000,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "maintenanceKind": "Recommended",
+                    "comment": "Service Contract Lube, Oil and Filter",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/2982763"
+                        }
+                    ]
+                }
+            ],
+            "frs": [
+                {
+                    "id": 82893,
+                    "name": "Replace engine oil and filter",
+                    "opCode": "30",
+                    "price": 69.9500,
+                    "analyticsMsrp": 69.9500,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "maintenanceKind": "Required",
+                    "comment": "Replace engine oil and filter",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/82893"
+                        }
+                    ]
+                }
+            ],
+            "repair": [
+                {
+                    "id": 70417486,
+                    "name": "ABS Light Diagnosis",
+                    "opCode": "05",
+                    "price": 160.0000,
+                    "analyticsMsrp": 160.0000,
+                    "laborHours": 0.0,
+                    "selected": false,
+                    "maintenanceKind": "Repair",
+                    "comment": "ABS Light Diagnosis",
+                    "links": [
+                        {
+                            "href": "https://scheduler.dealer-fx.com/catalog/maintenance-services/70417486"
+                        }
+                    ]
+                }
+            ],
+            "recalls": []
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/departments"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/departments/4836"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/departments/4836/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-advisor-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/departments/4836/advisors"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-advisor",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/departments/4836/advisors/101336"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/departments/4836/advisors/101336/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/vehicle",
+                "href": "https://scheduler.dealer-fx.com/catalog/vehicles/2C3CCAGG7LH2003XM"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/repair-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/services/repairs"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/appointment-calendar+ics",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/departments/4836/appointments/55297074/calendar/64cc369fbe7040e595a28a54e75bd4b2?extension=ics&culture=en-US"
+            }
+        ],
+        "linkTemplates": [
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/required-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/services/frs/%7Bmileage%7Cmonths%7D/%7Bmileage.value%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/recommended-service-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/services/drs/%7Bmileage%7Cmonths%7D/%7Bmileage.value%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/departments/4836/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            },
+            {
+                "rel": "http://api.dealer-fx.com/docs/rels/service-department-member-time-segment-collection",
+                "href": "https://scheduler.dealer-fx.com/catalog/dealers/current/appointments/55297074/departments/4836/advisors/101336/time-segments?StartDate=%7Byyyy-MM-dd%7D&EndDate=%7Byyyy-MM-dd%7D&opcodes=%7Bopcodes%7D&code=%7Bcode%7D"
+            }
+        ]
+    }
+
+    export const mockGetServiceAppointmentDetailsFiltered: DataModels.GetServiceAppointmentDetailsResponse = {
+        customer: {
+            id: "urn:dfx:customer:103129767",
+            firstName: "TEST",
+            lastName: "FCA",
+            phones: [
+                {
+                    type: "default",
+                    number: "2484206482"
+                },
+                {
+                    type: "home",
+                    number: "2484206482"
+                }
+            ],
+            emails: [
+                {
+                    type: "business",
+                    email: "testkh19@gmail.com"
+                },
+                {
+                    type: "personal",
+                    email: "testkh19@gmail.com"
+                },
+                {
+                    type: "default",
+                    email: "testkh19@gmail.com"
+                }
+            ]
+        },
+        scheduledTime: "2020-11-20T15:15:00.00-05:00",
+        mileage: {
+            value: 150,
+            unitsKind: "mileage"
+        },
+        status: "missed",
+        customerConcernsInfo: "MY FIRST APP",
+        confirmationCode: "DFX-WX7HU",
+        advisor: {
+            id: 332708,
+            name: "Albert Pico",
+            departmentId: 4836
+        },
+        transportationOption: {
+            code: "waiter",
+            description: "Waiter",
+            enabled: false,
+            deliveryInfo: {}
+        },
+        services: {
+            summary: {
+                taxes: 2.78,
+                taxesGt: 2.50,
+                total: 264.23,
+                totalLabourHours: 0.60
+            },
+            drs: [
+                {
+                    id: 2982763,
+                    name: "Service Contract Lube, Oil and Filter",
+                    opCode: "EXLOF",
+                    price: 29.0000,
+                    analyticsMsrp: 29.0000,
+                    laborHours: 0.0,
+                    selected: false,
+                    maintenanceKind: "Recommended",
+                    comment: "Service Contract Lube, Oil and Filter"
+                }
+            ],
+            frs: [
+                {
+                    id: 82893,
+                    name: "Replace engine oil and filter",
+                    opCode: "30",
+                    price: 69.9500,
+                    analyticsMsrp: 69.9500,
+                    laborHours: 0.0,
+                    selected: false,
+                    maintenanceKind: "Required",
+                    comment: "Replace engine oil and filter"
+                }
+            ],
+            repair: [
+                {
+                    id: 70417486,
+                    name: "ABS Light Diagnosis",
+                    opCode: "05",
+                    price: 160.0000,
+                    analyticsMsrp: 160.0000,
+                    laborHours: 0.0,
+                    selected: false,
+                    maintenanceKind: "Repair",
+                    comment: "ABS Light Diagnosis"
+                }
+            ],
+            "recalls": []
+        }
     }
     
 

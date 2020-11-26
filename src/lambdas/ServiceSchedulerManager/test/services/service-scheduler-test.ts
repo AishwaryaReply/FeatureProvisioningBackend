@@ -8,6 +8,7 @@ import { ServiceScheduler } from '../../src/services';
 import { SchedulingConectorService, SchedulingServiceDataModels } from 'gcv-meld';
 import { Stubs } from './utils/stubs';
 import { DataModels } from '../../src/interfaces';
+import { GCVErrors } from 'gcv-utils';
 
 chai.use(chaiAsPromised)
 const expect = chai.expect;
@@ -27,7 +28,18 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {
+            let resp:SchedulingServiceDataModels.GetSearchResponse = Stubs.mockSearchByEmail;
+            delete resp.customerPreviews[0].foundType;
+            sinon.stub(SchedulingConectorService, 'getDfxSearch').resolves(resp);
+            
+            const expected: DataModels.SearchEmailResponse = {};
+            const response = await testServiceSchedulerService.searchByEmail(Stubs.mockSearchByEmailRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected empty response', async () => {            
             const noSearchByEmailResponse = {
                 customerPreviews: []
             };
@@ -51,7 +63,18 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {
+            let resp:SchedulingServiceDataModels.GetSearchResponse = Stubs.mockSearchByVin;
+            delete resp.customerPreviews[0].foundType;
+            sinon.stub(SchedulingConectorService, 'getDfxSearch').resolves(resp);
+            
+            const expected: DataModels.SearchVinResponse = {};
+            const response = await testServiceSchedulerService.searchByVin(Stubs.mockSearchByVinRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected empty response', async () => {            
             const noSearchByVinResponse = {
                 customerPreviews: []
             };
@@ -75,7 +98,18 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected response', async () => {
+            let resp:SchedulingServiceDataModels.GetVehicleResponse  = Stubs.mockGetDfxVehicle;
+            delete resp.engine;
+            sinon.stub(SchedulingConectorService, 'getDfxVehicle').resolves(resp);
+            
+            const expected: DataModels.GetDfxVehicleResponse = Stubs.mockGetDfxVehicleFiltered;
+            delete expected.engine;
+            const response = await testServiceSchedulerService.getDfxVehicle(Stubs.mockGetDfxVehicleRequest);
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected empty response', async () => {            
             const noGetDfxVehicleResponse = {};
 
             sinon.stub(SchedulingConectorService, 'getDfxVehicle').resolves(noGetDfxVehicleResponse);
@@ -97,7 +131,19 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected response', async () => {
+            let resp:SchedulingServiceDataModels.TokenResponse  = Stubs.mockGetDfxToken;
+            delete resp.token_type;
+            sinon.stub(SchedulingConectorService, 'getDfxToken').resolves(resp);
+            
+            const expected: DataModels.GetDfxTokenResponse = Stubs.mockGetDfxTokenFiltered;
+            delete expected.token_type;
+            const response = await testServiceSchedulerService.getDfxToken(Stubs.mockGetDfxTokenRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected empty response', async () => {            
             const noGetDfxToken:SchedulingServiceDataModels.TokenResponse = {
                 access_token: "",
                 token_type: "",
@@ -123,7 +169,7 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {            
             const noGetDealerServicesVin:SchedulingServiceDataModels.GetDealerServicesResponse = { };
 
             sinon.stub(SchedulingConectorService, 'getDealerServicesVin').resolves(noGetDealerServicesVin);
@@ -145,7 +191,7 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {            
             const noGetDealerServicesWithoutVin:SchedulingServiceDataModels.GetDealerServicesResponse = { };
 
             sinon.stub(SchedulingConectorService, 'getDealerServicesWithoutVin').resolves(noGetDealerServicesWithoutVin);
@@ -167,7 +213,7 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {            
             const noGetFactoryServicesVin:SchedulingServiceDataModels.GetFactoryServicesResponse = { };
 
             sinon.stub(SchedulingConectorService, 'getFactoryServicesVin').resolves(noGetFactoryServicesVin);
@@ -189,7 +235,7 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {            
             const noGetFactoryServicesWithoutVin:SchedulingServiceDataModels.GetFactoryServicesResponse = { };
 
             sinon.stub(SchedulingConectorService, 'getFactoryServicesWithoutVin').resolves(noGetFactoryServicesWithoutVin);
@@ -211,7 +257,7 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {            
             const noGetRepairServicesVin:SchedulingServiceDataModels.GetRepairServicesResponse = { };
 
             sinon.stub(SchedulingConectorService, 'getRepairServicesVin').resolves(noGetRepairServicesVin);
@@ -233,11 +279,33 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {            
             const noGetRepairServicesWithoutVin:SchedulingServiceDataModels.GetRepairServicesResponse = { };
 
             sinon.stub(SchedulingConectorService, 'getRepairServicesWithoutVin').resolves(noGetRepairServicesWithoutVin);
             const response = await testServiceSchedulerService.getRepairServicesWithoutVin(Stubs.mockGetRepairServicesWithoutVinRequest);
+            
+            expect(response).to.be.deep.equal({});
+        })       
+    });
+
+    describe('getDealerDepartment', () => {
+        afterEach(sinon.restore);
+
+        it('should return the expected response', async () => {
+            sinon.stub(SchedulingConectorService, 'getDealerDepartment').resolves(Stubs.mockGetDealerDepartment);
+            
+            const expected: DataModels.GetDealerDepartmentResponse = Stubs.mockGetDealerDepartmentFiltered;
+            const response = await testServiceSchedulerService.getDealerDepartment(Stubs.mockGetDealerDepartmentRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected empty response', async () => {            
+            const noGetDealerDepartment:SchedulingServiceDataModels.GetDealerDepartmentResponse = { };
+
+            sinon.stub(SchedulingConectorService, 'getDealerDepartment').resolves(noGetDealerDepartment);
+            const response = await testServiceSchedulerService.getDealerDepartment(Stubs.mockGetDealerDepartmentRequest);
             
             expect(response).to.be.deep.equal({});
         })       
@@ -255,7 +323,7 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {            
             const noGetAppointmentSummary:SchedulingServiceDataModels.GetAppointmentSummaryResponse = { };
 
             sinon.stub(SchedulingConectorService, 'getAppointmentSummary').resolves(noGetAppointmentSummary);
@@ -277,7 +345,7 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {            
             const noGetAdvisors:SchedulingServiceDataModels.GetAdvisorsResponse = {
                 serviceAdvisors: [],
                 links:[]
@@ -302,7 +370,7 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {            
             const noGetTransportationOptions:SchedulingServiceDataModels.GetTransportationOptionsResponse = {};
 
             sinon.stub(SchedulingConectorService, 'getTransportationOptions').resolves(noGetTransportationOptions);
@@ -324,11 +392,172 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected the expected empty response', async () => {            
+        it('should return the expected empty response', async () => {            
             const noGetDealerDepartmentTimeSegments:SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsResponse = {};
 
             sinon.stub(SchedulingConectorService, 'getDealerDepartmentTimeSegments').resolves(noGetDealerDepartmentTimeSegments);
             const response = await testServiceSchedulerService.getDealerDepartmentTimeSegments(Stubs.mockGetDealerDepartmentTimeSegmentsRequest);
+            
+            expect(response).to.be.deep.equal({});
+        })       
+    });
+
+    describe('getServiceAppointments', () => {
+        afterEach(sinon.restore);
+
+        it('should return the expected response', async () => {
+            sinon.stub(SchedulingConectorService, 'getServiceAppointments').resolves(Stubs.mockGetServiceAppointments);
+            
+            const expected: DataModels.GetServiceAppointmentsResponse = Stubs.mockGetServiceAppointmentsFiltered;
+            const response = await testServiceSchedulerService.getServiceAppointments(Stubs.mockGetServiceAppointmentsRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected empty response', async () => {            
+            const noGetServiceAppointments:SchedulingServiceDataModels.GetServiceAppointmentsResponse = {
+                appointments: []
+            };
+
+            sinon.stub(SchedulingConectorService, 'getServiceAppointments').resolves(noGetServiceAppointments);
+            const response = await testServiceSchedulerService.getServiceAppointments(Stubs.mockGetServiceAppointmentsRequest);
+            
+            expect(response).to.be.deep.equal({});
+        })       
+    });
+
+    describe('postAppointment', () => {
+        afterEach(sinon.restore);
+
+        it('should return the expected response', async () => {
+            sinon.stub(SchedulingConectorService, 'postAppointment').resolves(Stubs.mockPostAppointment);
+            
+            const expected: DataModels.PostAppointmentResponse = Stubs.mockPostAppointmentFiltered;
+            const response = await testServiceSchedulerService.postAppointment(Stubs.mockPostAppointmentRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected empty response', async () => {            
+            const noPostAppointment:SchedulingServiceDataModels.PostAppointmentResponse = {
+                status: "",
+                confirmationCode: ""
+            };
+
+            sinon.stub(SchedulingConectorService, 'postAppointment').resolves(noPostAppointment);
+            const response = await testServiceSchedulerService.postAppointment(Stubs.mockPostAppointmentRequest);
+            
+            expect(response).to.be.deep.equal({});
+        })       
+    });
+
+    describe('deleteServiceAppointment', () => {
+        afterEach(sinon.restore);
+
+        it('should return the expected response', async () => {
+            sinon.stub(SchedulingConectorService, 'deleteServiceAppointment').resolves(Stubs.mockDeleteServiceAppointment);
+            
+            const expected: DataModels.DeleteServiceAppointmentResponse = Stubs.mockDeleteServiceAppointmentFiltered;
+            const response = await testServiceSchedulerService.deleteServiceAppointment(Stubs.mockDeleteServiceAppointmentRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected exception', async () => {            
+            const noDeleteServiceAppointment:SchedulingServiceDataModels.DeleteServiceAppointmentResponse = {
+                status: "",
+                confirmationCode: ""
+            };
+
+            sinon.stub(SchedulingConectorService, 'deleteServiceAppointment').resolves(noDeleteServiceAppointment);
+            const response = testServiceSchedulerService.deleteServiceAppointment(Stubs.mockDeleteServiceAppointmentRequest);
+            
+            expect(response).to.be.eventually.rejectedWith(GCVErrors.NotFound);
+        })       
+    });
+
+    describe('postAppointment', () => {
+        afterEach(sinon.restore);
+
+        it('should return the expected response', async () => {
+            sinon.stub(SchedulingConectorService, 'postAppointment').resolves(Stubs.mockPostAppointment);
+            
+            const expected: DataModels.PostAppointmentResponse = Stubs.mockPostAppointmentFiltered;
+            const response = await testServiceSchedulerService.postAppointment(Stubs.mockPostAppointmentRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected empty response', async () => {            
+            const noPostAppointment:SchedulingServiceDataModels.PostAppointmentResponse = {
+                status: "",
+                confirmationCode: ""
+            };
+
+            sinon.stub(SchedulingConectorService, 'postAppointment').resolves(noPostAppointment);
+            const response = await testServiceSchedulerService.postAppointment(Stubs.mockPostAppointmentRequest);
+            
+            expect(response).to.be.deep.equal({});
+        })       
+    });
+
+    describe('updateServiceAppointment', () => {
+        afterEach(sinon.restore);
+
+        it('should return the expected response', async () => {
+            sinon.stub(SchedulingConectorService, 'updateServiceAppointment').resolves(Stubs.mockUpdateServiceAppointment);
+            
+            const expected: DataModels.PutAppointmentRequestResponse = Stubs.mockUpdateServiceAppointmentFiltered;
+            const response = await testServiceSchedulerService.updateServiceAppointment(Stubs.mockUpdateServiceAppointmentRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected response with status on', async () => {
+            let resp:SchedulingServiceDataModels.UpdateServiceAppointmentResponse = Stubs.mockUpdateServiceAppointment;
+            resp.status = "test";
+            sinon.stub(SchedulingConectorService, 'updateServiceAppointment').resolves(resp);
+            
+            const expected: DataModels.PutAppointmentRequestResponse = Stubs.mockUpdateServiceAppointmentFiltered;
+            const response = await testServiceSchedulerService.updateServiceAppointment(Stubs.mockUpdateServiceAppointmentRequest);           
+            expected.status = "test";
+           
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected empty response', async () => {            
+            const noUpdateServiceAppointment:SchedulingServiceDataModels.UpdateServiceAppointmentResponse = {
+                status: "",
+                confirmationCode: ""
+            };
+
+            sinon.stub(SchedulingConectorService, 'updateServiceAppointment').resolves(noUpdateServiceAppointment);
+            const response = await testServiceSchedulerService.updateServiceAppointment(Stubs.mockUpdateServiceAppointmentRequest);
+            
+            expect(response).to.be.deep.equal({});
+        })       
+    });
+
+    describe('getServiceAppointmentDetails', () => {
+        afterEach(sinon.restore);
+
+        it('should return the expected response', async () => {
+            sinon.stub(SchedulingConectorService, 'getServiceAppointmentDetails').resolves(Stubs.mockGetServiceAppointmentDetails);
+            
+            const expected: DataModels.GetServiceAppointmentDetailsResponse = Stubs.mockGetServiceAppointmentDetailsFiltered;
+            const response = await testServiceSchedulerService.getServiceAppointmentDetails(Stubs.mockGetServiceAppointmentDetailsRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected empty response', async () => {            
+            const noGetServiceAppointmentDetails:SchedulingServiceDataModels.GetServiceAppointmentDetailsResponse = {
+                status: "",
+                confirmationCode: ""
+            };
+
+            sinon.stub(SchedulingConectorService, 'getServiceAppointmentDetails').resolves(noGetServiceAppointmentDetails);
+            const response = await testServiceSchedulerService.getServiceAppointmentDetails(Stubs.mockGetServiceAppointmentDetailsRequest);
             
             expect(response).to.be.deep.equal({});
         })       

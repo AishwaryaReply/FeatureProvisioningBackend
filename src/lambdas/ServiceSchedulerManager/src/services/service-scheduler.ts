@@ -30,7 +30,7 @@ export class ServiceScheduler {
                         customerId = hrefArray[hrefArray.length - 2];       
                 }
             }
-            console.log("response :"+ JSON.stringify(response));
+            
             filteredResponse = {
                 customerId: customerId,
                 email: response.customerPreviews[0].email,
@@ -54,7 +54,7 @@ export class ServiceScheduler {
 
         let filteredResponse: DataModels.SearchVinResponse = {};
 
-        if(response.customerPreviews.length != 0){
+        if(response.customerPreviews.length != 0 && response.customerPreviews[0].email && response.customerPreviews[0].foundType){
             let customerId:string = "";
             let vin:string = "";
             
@@ -103,17 +103,21 @@ export class ServiceScheduler {
 
         if(response.vin){
             filteredResponse = {
-                vin: response.vin,
-                make: response.make?.name,
-                year: response.year?.name,
-                model: response.model?.name,
-                transmission: response.transmission?.name,
-                engine: response.engine?.name,
-                train: response.train?.name,
+                vin: response.vin
             }
+            const elems = ["make","year","model","transmission","engine","train"];
+            this.copyName(response, elems, filteredResponse);
         }
         
         return filteredResponse;
+    }
+
+    private copyName(fromElem:any, elems:string[], toObj:any){
+        elems.forEach(elem => {
+            if(fromElem[elem] != undefined){
+                toObj[elem] = fromElem[elem]["name"];
+            }            
+        });
     }
 
 
@@ -129,11 +133,8 @@ export class ServiceScheduler {
         let filteredResponse: DataModels.GetDfxTokenResponse = {};
 
         if(response.access_token){
-            filteredResponse = {
-                access_token: response.access_token,
-                token_type: response.token_type,
-                expires_in: response.expires_in
-            }
+            let elems = ["token_type","expires_in", "access_token"];
+            this.copyElement(response, elems, filteredResponse);
         }
         
         return filteredResponse;
@@ -166,8 +167,7 @@ export class ServiceScheduler {
                         price: elem.price
                     }
                     services.push(service);
-                }
-                
+                }                
             }
 
             filteredResponse = {
@@ -209,8 +209,7 @@ export class ServiceScheduler {
                         price: elem.price
                     }
                     services.push(service);
-                }
-                
+                }                
             }
 
             filteredResponse = {
@@ -247,8 +246,7 @@ export class ServiceScheduler {
                         price: elem.price
                     }
                     services.push(service);
-                }
-                
+                }                
             }
 
             filteredResponse = {
@@ -524,11 +522,11 @@ export class ServiceScheduler {
             const dim:number = response.segments.length;
             for(let i = 0; i < dim; i++){
                 const elem = response.segments[i];                
-                let serviceAdvisors: DataModels.Sext = {
+                let serviceAdvisors: DataModels.SA = {
                     slots: [],
                     totalAvailable: 0
                 };    
-                let transportationOptions: DataModels.S = {
+                let transportationOptions: DataModels.ST = {
                     slots: []
                 };
                 if(elem.time && 
@@ -541,23 +539,31 @@ export class ServiceScheduler {
                     for(let i = 0; i < dimSlots; i++){
                         const slotElem = elem.slots[i];   
                         if(slotElem.name && (slotElem.count != undefined)){
-                            const slot:DataModels.Slot = {
+                            const slot = {
                                 name: slotElem.name, 
                                 count: slotElem.count
                             }
                             if(slot.name.includes("service-advisor")){  
                                 const se = slot.name.split(":");
                                 slot.name = se[se.length - 1];    
-                                if(slot.name != "service-advisor"){  
-                                    serviceAdvisors?.slots.push(slot);
+                                if(slot.name != "service-advisor"){                                      
+                                    const SA:DataModels.SlotAdvisor = {
+                                        id: slot.name, 
+                                        count: slot.count
+                                    }                               
+                                    serviceAdvisors?.slots.push(SA);
                                 }else{
                                     serviceAdvisors.totalAvailable = slot.count;
                                 }
                             }else if(slot.name.includes("transportation-options")){
                                 const se = slot.name.split(":");
                                 slot.name = se[se.length - 1];     
-                                if(slot.name != "transportation-options"){                                                     
-                                    transportationOptions.slots.push(slot);
+                                if(slot.name != "transportation-options"){                                       
+                                    const ST:DataModels.SlotTransportation = {
+                                        code: slot.name, 
+                                        count: slot.count
+                                    }                                                                          
+                                    transportationOptions.slots.push(ST);
                                 }
                             }
                         }
@@ -566,10 +572,8 @@ export class ServiceScheduler {
                     const segment:DataModels.Segment = {
                         time: elem.time,
                         endTime: elem.endTime,
-                        state: elem.state,
                         serviceAdvisors: serviceAdvisors,
-                        transportationOptions: transportationOptions,
-                        available: elem.available
+                        transportationOptions: transportationOptions
                     }
                     segments.push(segment);
                 }                
@@ -711,11 +715,11 @@ export class ServiceScheduler {
 
         let filteredResponse: DataModels.PutAppointmentRequestResponse = {};
 
-        if(!response?.confirmationCode){    
-            filteredResponse = {                
-                status: response.status,
+        if(response.confirmationCode){    
+            filteredResponse = {         
                 confirmationCode: response.confirmationCode
             }
+            this.copyElement(response, ["status"], filteredResponse);
         }        
         return filteredResponse;
     }
@@ -735,135 +739,77 @@ export class ServiceScheduler {
 
         let filteredResponse: DataModels.GetServiceAppointmentDetailsResponse = {};
 
-        /*
-        if(response?.status){  
-            filteredResponse.status = response.status;
-        }
-        if(response?.scheduledTime){
-            filteredResponse.scheduledTime = response.scheduledTime;
-        }  
-        if(response?.customerConcernsInfo){
-            filteredResponse.customerConcernsInfo = response.customerConcernsInfo;
-        }  
-        if(response?.confirmationCode){
-            filteredResponse.confirmationCode = response.confirmationCode;
-        }  
-        */
-        this.copyElement(response, ["status", "scheduledTime", "customerConcernsInfo", "confirmationCode"], filteredResponse);
+        if(response?.confirmationCode){            
+            this.copyElement(response, ["status", "scheduledTime", "customerConcernsInfo", "confirmationCode"], filteredResponse);
 
-        if(response?.customer?.id){
-            const elem:SchedulingServiceDataModels.Customer = response.customer;
-            let cust:DataModels.Customer = {};
-            cust.id = elem.id;
-            /*
-            if(elem.firstName){
-                cust.firstName = elem.firstName;
-            }
-            if(elem.lastName){
-                cust.lastName = elem.lastName;
-            }
-            if(elem.phone){
-                cust.phone = elem.phone;
-            }
-            if(elem.email){
-                cust.email = elem.email;
-            }
-            if(elem.phones && elem.phones.length != 0){
-                cust.phones = elem.phones;
-            }
-            if(elem.emails && elem.emails.length != 0){
-                cust.emails = elem.emails;
-            }
-            */
-            this.copyElement(elem, ["firstName", "lastName", "phone", "email", "emails", "emails"], cust);
-            filteredResponse.customer = cust;
-        } 
-        if(response?.mileage){
-            const elem:SchedulingServiceDataModels.Mileage = response.mileage;
-            let mil:DataModels.Mileage = {value: 0, unitsKind: ""};
-            /*
-            if(elem.value){
-                mil.value = elem.value;
-            }
-            if(elem.unitsKind){
-                mil.unitsKind = elem.unitsKind;
-            }
-            */
-            this.copyElement(elem, ["value", "unitsKind"], mil);
-            filteredResponse.mileage = mil;
-        }   
-        if(response?.advisor?.id){
-            const elem:SchedulingServiceDataModels.Advisor = response.advisor;
-            let adv:DataModels.Advisor = {};
-            adv.id = elem.id;
-            /*
-            if(elem.name){
-                adv.name = elem.name;
-            }
-            if(elem.departmentId){
-                adv.departmentId = elem.departmentId;
-            }
-            */
-            this.copyElement(elem, ["name", "departmentId"], adv);
-            filteredResponse.advisor = adv;
-        }  
-        if(response?.transportationOption?.code){
-            const elem:SchedulingServiceDataModels.TransportationOptionPostAppointment = response.transportationOption;
-            let tO:DataModels.TransportationOption = {};
-            tO.code = elem.code;
-            /*
-            if(elem.enabled){
-                tO.enabled = elem.enabled;
-            }
-            if(elem.description){
-                tO.description = elem.description;
-            }
-            if(elem.deliveryInfo){
-                tO.deliveryInfo = elem.deliveryInfo;
-            }
-            */
-            this.copyElement(elem, ["enabled", "description", "deliveryInfo"], tO);
-            filteredResponse.transportationOption = tO;
-        } 
-        if(response?.services){
-            const elem:SchedulingServiceDataModels.Services = response.services;
-            let servs:DataModels.Services = {};
-            if(elem.summary){
-                servs.summary = elem.summary;
-            }
-            if(elem.drs){
-                servs.drs = this.copyService(elem.drs, "drs");
-            }
-            if(elem.frs){
-                servs.frs = this.copyService(elem.frs, "frs");
-            }
-            if(elem.repair){
-                servs.repair = this.copyService(elem.repair, "frs");
-            }
-            if(elem.recalls){
-                servs.recalls = this.copyService(elem.recalls, "recalls");
-            }
-            filteredResponse.services = servs;
-        } 
+            if(response?.customer?.id){
+                const elem:SchedulingServiceDataModels.Customer = response.customer;
+                let cust:DataModels.Customer = {};
+                cust.id = elem.id;
+                this.copyElement(elem, ["firstName", "lastName", "phone", "email", "emails", "phones"], cust);
+                filteredResponse.customer = cust;
+            } 
+            if(response?.mileage){
+                const elem:SchedulingServiceDataModels.Mileage = response.mileage;
+                let mil:DataModels.Mileage = {value: 0, unitsKind: ""};
+                this.copyElement(elem, ["value", "unitsKind"], mil);
+                filteredResponse.mileage = mil;
+            }   
+            if(response?.advisor?.id){
+                const elem:SchedulingServiceDataModels.Advisor = response.advisor;
+                let adv:DataModels.Advisor = {};
+                adv.id = elem.id;
+                this.copyElement(elem, ["name", "departmentId"], adv);
+                filteredResponse.advisor = adv;
+            }  
+            if(response?.transportationOption?.code){
+                const elem:SchedulingServiceDataModels.TransportationOptionPostAppointment = response.transportationOption;
+                let tO:DataModels.TransportationOption = {};
+                tO.code = elem.code;
+                this.copyElement(elem, ["enabled", "description", "deliveryInfo"], tO);
+                filteredResponse.transportationOption = tO;
+            } 
+            if(response?.services){
+                const elem:SchedulingServiceDataModels.Services = response.services;
+                let servs:DataModels.Services = {};
+                if(elem.summary){
+                    servs.summary = elem.summary;
+                }
+                if(elem.drs){
+                    servs.drs = this.copyService(elem.drs);
+                }
+                if(elem.frs){
+                    servs.frs = this.copyService(elem.frs);
+                }
+                if(elem.repair){
+                    servs.repair = this.copyService(elem.repair);
+                }
+                if(elem.recalls){
+                    servs.recalls = this.copyService(elem.recalls);
+                }
+                filteredResponse.services = servs;
+            } 
+        }
+        
         return filteredResponse;
     }
 
-    private copyService(elem:any, key:string) {
+    private copyService(elem:any) {
         let se:DataModels.ServiceAppointment[] = [];
-        const dim: number = elem[key].length;
+        const dim: number = elem.length;
         for(let i = 0; i<dim; i++){
-            if(elem[key][i].links){
-                delete elem[key][i].links;
+            if(elem[i].links){
+                delete elem[i].links;
             }
-            se.push(elem[key][i]);
+            se.push(elem[i]);
         }
         return se;       
     }
 
     private copyElement(fromElem:any, keys:string[], toObj:any){
         keys.forEach(key => {
-            if(fromElem[key] && fromElem[key].length != 0){
-                toObj.key = fromElem[key];
+            if(fromElem[key] != undefined){
+                toObj[key] = fromElem[key];
             }
         });
     }

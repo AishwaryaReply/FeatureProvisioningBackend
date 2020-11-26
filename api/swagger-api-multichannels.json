@@ -227,14 +227,50 @@
         }
       }
     },
-    "Slot": {
+    "SlotA": {
       "type": "object",
       "properties": {
-        "name": {
+        "id": {
           "type": "string"
         },
         "count": {
+          "type": "number"
+        }
+      }
+    },
+    "SlotT": {
+      "type": "object",
+      "properties": {
+        "code": {
           "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "SA": {
+      "type": "object",
+      "properties": {
+        "slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlotA"
+          }
+        },
+        "totalAvailable": {
+          "type": "number"
+        }
+      }
+    },
+    "ST": {
+      "type": "object",
+      "properties": {
+        "slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlotT"
+          }
         }
       }
     },
@@ -247,17 +283,17 @@
         "endTime": {
           "type": "string"
         },
-        "state": {
-          "type": "string"
-        },
-        "slots": {
+        "serviceAdvisors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Slot"
+            "$ref": "#/definitions/SA"
           }
         },
-        "available": {
-          "type": "boolean"
+        "transportationOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ST"
+          }
         }
       }
     },

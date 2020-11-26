@@ -210,23 +210,26 @@ export type GetTransportationOptionsResponse = {
     transportationOptions?: transportationOption[],
 }
 
-export declare type Slot = {
-    name: string;
+export declare type SlotAdvisor = {
+    id: string;
     count: number;
 };
-export declare type S = {
-    slots: Slot[]
-}
-export interface Sext extends S {
+export declare type SlotTransportation = {
+    code: string;
+    count: number;
+};
+export declare type SA = {
+    slots: SlotAdvisor[],
     totalAvailable: number
+}
+export declare type ST = {
+    slots: SlotTransportation[]
 }
 export declare type Segment = {
     time: string,
     endTime: string,
-    state: string,
-    serviceAdvisors: Sext,
-    transportationOptions: S,
-    available: boolean;
+    serviceAdvisors: SA,
+    transportationOptions: ST
 };
 export declare type GetDealerDepartmentTimeSegmentsResponse = {
     segments?: Segment[];

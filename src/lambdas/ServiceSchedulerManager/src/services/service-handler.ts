@@ -117,10 +117,10 @@ export class ServiceHandler {
 
     private prepareGetDfxToken(event: UtilityObjects.TransformedInputEvent): DataModels.GetTokenRequestData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareGetDfxSearch |`;
-        logger.debug(logPrefix, `dealer: ${event.queryString.hintDealer}`);
+        logger.debug(logPrefix, `dealer: ${event.queryString.hintdealer}`);
         return {
             requestedService: 'GET_DFX_TOKEN',
-            hintDealer: event.queryString.hintDealer
+            hintdealer: event.queryString.hintdealer
         }
     }
 
@@ -185,22 +185,22 @@ export class ServiceHandler {
 
     private prepareGetDepartmentData(event: UtilityObjects.TransformedInputEvent, api: ServiceRequested): DataModels.DepartmentRequestData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareGetDepartmentData |`;
-        logger.debug(logPrefix, `api: ${api}, departmentId: ${event.pathParams.departmentId}, dealerToken: ${event.headers['dealer-authorization']}`);
+        logger.debug(logPrefix, `api: ${api},departmentid: ${event.pathParams.departmentid}, dealerToken: ${event.headers['dealer-authorization']}`);
         return {
             requestedService: api,
-            departmentId: event.pathParams.departmentId,
+            departmentId: event.pathParams.departmentid,
             dealerToken: event.headers['dealer-authorization']
         }
     }
 
     private prepareGetTimeSegments(event: UtilityObjects.TransformedInputEvent): DataModels.GetTimeSegmetsRequestData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareGetTimeSegments |`;
-        logger.debug(logPrefix, `departmentId: ${event.pathParams.departmentId}, startDate: ${event.queryString.startDate}, endDate: ${event.queryString.endDate}, dealerToken: ${event.headers['dealer-authorization']}`);
+        logger.debug(logPrefix, `departmentid: ${event.pathParams.departmentid}, startdate: ${event.queryString.startdate}, enddate: ${event.queryString.enddate}, dealerToken: ${event.headers['dealer-authorization']}`);
         return {
             requestedService: 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS',
-            departmentId: event.pathParams.departmentId,
-            startDate: event.queryString.startDate,
-            endDate: event.queryString.endDate,
+            departmentId: event.pathParams.departmentid,
+            startdate: event.queryString.startdate,
+            enddate: event.queryString.enddate,
             dealerToken: event.headers['dealer-authorization']
         }
     }
@@ -232,12 +232,12 @@ export class ServiceHandler {
     private prepareAppointmentOperation(event: UtilityObjects.TransformedInputEvent, api: ServiceRequested): DataModels.AppointmentRequestData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareAppointmentOperation |`;
         
-        logger.debug(logPrefix, `api: ${api}, appointmentId: ${event.pathParams.appointmentId}, departmentId: ${event.pathParams.departmentId}, dealerToken: ${event.headers['dealer-authorization']}`);
+        logger.debug(logPrefix, `api: ${api}, appointmentid: ${event.pathParams.appointmentid}, departmentid: ${event.pathParams.departmentid}, dealerToken: ${event.headers['dealer-authorization']}`);
         return {
             requestedService: api,
             dealerToken: event.headers['dealer-authorization'],
-            departmentId: event.pathParams.departmentId,
-            appointmentId: event.pathParams.appointmentId
+            departmentId: event.pathParams.departmentid,
+            appointmentId: event.pathParams.appointmentid
         }
     }
 

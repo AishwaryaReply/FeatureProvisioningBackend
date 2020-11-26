@@ -27,7 +27,7 @@ export type ServiceRequestData = {
 }
 
 export interface GetTokenRequestData extends ServiceRequestData {
-    hintDealer: string;
+    hintdealer: string;
 }
 
 export interface DfxSearchEmailRequestData extends ServiceRequestData {
@@ -88,8 +88,8 @@ export type GetAdvisorsRequestData = DepartmentRequestData;
 
 export interface GetTimeSegmetsRequestData extends ServiceRequestData {
     departmentId: string;
-    startDate: string;
-    endDate: string;
+    startdate: string;
+    enddate: string;
     dealerToken: string;
 }
 

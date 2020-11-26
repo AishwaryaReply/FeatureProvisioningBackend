@@ -139,7 +139,7 @@ export namespace Stubs {
     export const GetTokenEvent = {
         headers: headers,
         queryString: {
-            hintDealer: TEST_DEALER
+            hintdealer: TEST_DEALER
         },
         runTimeInfo: {
             resourcePath: '/v1/digitalglovebox/servicescheduler/token'
@@ -266,34 +266,34 @@ export namespace Stubs {
     export const GetAdvisorsEvent = {
         headers: headers,
         pathParams: {
-            departmentId: TEST_DEPARTMENT
+            departmentid: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentId}/advisors'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentid}/advisors'
         }
     }
 
     export const GetTransmissionOptionsEvent = {
         headers: headers,
         pathParams: {
-            departmentId: TEST_DEPARTMENT
+            departmentid: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentId}/trasportationoption'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentid}/trasportationoption'
         }
     }
 
     export const GetTimeSegmentsEvent = {
         headers: headers,
         pathParams: {
-            departmentId: TEST_DEPARTMENT
+            departmentid: TEST_DEPARTMENT
         },
         queryString: {
-            startDate: TEST_START_DATE,
-            endDate: TEST_END_DATE
+            startdate: TEST_START_DATE,
+            enddate: TEST_END_DATE
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentId}/timesegments'
+            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentid}/timesegments'
         }
     }
 
@@ -361,11 +361,11 @@ export namespace Stubs {
     export const DeleteAppointmentEvent = {
         headers: headers,
         pathParams: {
-            appointmentId: TEST_APPOINTMENT_ID,
-            departmentId: TEST_DEPARTMENT
+            appointmentid: TEST_APPOINTMENT_ID,
+            departmentid: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentId}/department/{departmentId}',
+            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentid}/department/{departmentid}',
             httpMethod: 'DELETE'
         }
     }
@@ -373,11 +373,11 @@ export namespace Stubs {
     export const GetAppointmentDetailsEvent = {
         headers: headers,
         pathParams: {
-            appointmentId: TEST_APPOINTMENT_ID,
-            departmentId: TEST_DEPARTMENT
+            appointmentid: TEST_APPOINTMENT_ID,
+            departmentid: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentId}/department/{departmentId}',
+            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentid}/department/{departmentid}',
             httpMethod: 'GET'
         }
     }
@@ -385,11 +385,11 @@ export namespace Stubs {
     export const WrongMethodAppointmentDetailsEvent = {
         headers: headers,
         pathParams: {
-            appointmentId: TEST_APPOINTMENT_ID,
-            departmentId: TEST_DEPARTMENT
+            appointmentid: TEST_APPOINTMENT_ID,
+            departmentid: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentId}/department/{departmentId}',
+            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentid}/department/{departmentid}',
             httpMethod: 'POST'
         }
     }
@@ -397,8 +397,8 @@ export namespace Stubs {
     export const ResourcePathNotSupportedEvent = {
         headers: headers,
         pathParams: {
-            appointmentId: TEST_APPOINTMENT_ID,
-            departmentId: TEST_DEPARTMENT
+            appointmentid: TEST_APPOINTMENT_ID,
+            departmentid: TEST_DEPARTMENT
         },
         runTimeInfo: {
             resourcePath: '/v1/not/supported/path'
@@ -607,7 +607,7 @@ export namespace Stubs {
     export const mockGetDfxTokenRequest:DataModels.GetTokenRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
-        hintDealer: "TEST_HINT",
+        hintdealer: "TEST_HINT",
         requestedService: 'GET_DFX_TOKEN'
     }
 
@@ -2396,8 +2396,8 @@ export namespace Stubs {
 
     // GetDealerDepartmentTimeSegments
     export const mockGetDealerDepartmentTimeSegmentsRequest:DataModels.GetTimeSegmetsRequestData = {
-        startDate: TEST_START_DATE,
-        endDate: TEST_END_DATE,
+        startdate: TEST_START_DATE,
+        enddate: TEST_END_DATE,
         departmentId: TEST_DEPARTMENT,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS'

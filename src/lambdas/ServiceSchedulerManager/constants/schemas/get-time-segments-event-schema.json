@@ -43,27 +43,27 @@
         "pathParams": {
             "type": "object",
             "properties": {
-                "departmentId": {
+                "departmentid": {
                     "type": "string"
                 }
             },
             "required": [
-                "departmentId"
+                "departmentid"
             ]
         },
         "queryString": {
             "type": "object",
             "properties": {
-                "startDate": {
+                "startdate": {
                     "type": "string"
                 },
-                "endDate": {
+                "enddate": {
                     "type": "string"
                 }
             },
             "required": [
-                "startDate",
-				"endDate"
+                "startdate",
+				"enddate"
             ]
         }
     },

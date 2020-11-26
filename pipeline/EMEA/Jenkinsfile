@@ -157,57 +157,57 @@ pipeline{
         }
       }
     }
-    stage('DEPLOY DEV') {
-      when {
-        //only release and PR merge branches can be deployed in dev
-        expression { return "${BRANCH_NAME}" =~ "(release\\/v.*|PR.*)" }
-      }
-      stages {
-        stage('deploy-sdpr-eu-west-1') {
-          steps {
-            // Create/Update cloudformation stack
-            script {
-              JenkinsConfig.loadEnvVariablesGlobal()
-              JenkinsConfigRegional.loadDeployEnvVariablesDevEuWest1()
-              JenkinsConfigRegional.loadDeploySdprEnvVariablesDevEuWest1()
-              sh 'printenv'
-            }
-            withAWS(region: "${CF_DEPLOY_REGION}",
-                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
-                    roleAccount: "${SDPR_ACCOUNT_ID}"
-              ) {
-              cfnCreateChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}", create: true,
-                url: "${CF_TEMPLATE_URL}", roleArn: "${SDPR_JENKINS_SLAVE_ROLE_ARN}", params: [
-                  '0001ParamEnvironment': "${ENVIRONMENT}",
-                  '0002ParamProjectName': "${PROJECT_NAME}",
-                  '0003ParamProjectComponent': "${PROJECT_COMPONENT}",
-                  '0004ParamFeatureName': "${FEATURE_NAME}",
-                  '0005ParamFeatureCode': "${FEATURE_CODE}",
-                  '0006ParamAppDynamicsLayer': "${PARAM_GCV_APPDYNAMICS_LAYER}",
-                  '0201ParamMultichannelsApiID': "${MULTICHANNELS_API_ID}",
-                  '0202ParamMultichannelsAPIAccountID': "${SDPR_ACCOUNT_ID}",
-                  '0301ParamLambdaSubnetIdList': "${PARAM_SUBNET_ID_LIST_LAMBDA}",
-                  '0302ParamLambdaSecuritygroupIdList': "${PARAM_SECURITYGROUP_ID_LIST_LAMBDA}"
-                ]
-              )
-              cfnExecuteChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}")
-            }
-            // Create/Update APIs
-            // API: Multichannels
-            script {
-              JenkinsConfigRegional.loadDeployMultichannelsEnvVariablesDevEuWest1()
-              sh 'printenv'
-            }
-            withAWS(region: "${MULTICHANNELS_API_REGION}",
-                    role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
-                    roleAccount: "${SDPR_ACCOUNT_ID}"
-            ) {
-              sh 'sh ./scripts/deploy/api-deploy.sh'
-            }
-          }
-        }
-      }
-    }
+    // stage('DEPLOY DEV') {
+    //   when {
+    //     //only release and PR merge branches can be deployed in dev
+    //     expression { return "${BRANCH_NAME}" =~ "(release\\/v.*|PR.*)" }
+    //   }
+    //   stages {
+    //     stage('deploy-sdpr-eu-west-1') {
+    //       steps {
+    //         // Create/Update cloudformation stack
+    //         script {
+    //           JenkinsConfig.loadEnvVariablesGlobal()
+    //           JenkinsConfigRegional.loadDeployEnvVariablesDevEuWest1()
+    //           JenkinsConfigRegional.loadDeploySdprEnvVariablesDevEuWest1()
+    //           sh 'printenv'
+    //         }
+    //         withAWS(region: "${CF_DEPLOY_REGION}",
+    //                 role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+    //                 roleAccount: "${SDPR_ACCOUNT_ID}"
+    //           ) {
+    //           cfnCreateChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}", create: true,
+    //             url: "${CF_TEMPLATE_URL}", roleArn: "${SDPR_JENKINS_SLAVE_ROLE_ARN}", params: [
+    //               '0001ParamEnvironment': "${ENVIRONMENT}",
+    //               '0002ParamProjectName': "${PROJECT_NAME}",
+    //               '0003ParamProjectComponent': "${PROJECT_COMPONENT}",
+    //               '0004ParamFeatureName': "${FEATURE_NAME}",
+    //               '0005ParamFeatureCode': "${FEATURE_CODE}",
+    //               '0006ParamAppDynamicsLayer': "${PARAM_GCV_APPDYNAMICS_LAYER}",
+    //               '0201ParamMultichannelsApiID': "${MULTICHANNELS_API_ID}",
+    //               '0202ParamMultichannelsAPIAccountID': "${SDPR_ACCOUNT_ID}",
+    //               '0301ParamLambdaSubnetIdList': "${PARAM_SUBNET_ID_LIST_LAMBDA}",
+    //               '0302ParamLambdaSecuritygroupIdList': "${PARAM_SECURITYGROUP_ID_LIST_LAMBDA}"
+    //             ]
+    //           )
+    //           cfnExecuteChangeSet(changeSet: "${CF_CHANGE_SET_NAME}", stack: "${CF_STACK_NAME}")
+    //         }
+    //         // Create/Update APIs
+    //         // API: Multichannels
+    //         script {
+    //           JenkinsConfigRegional.loadDeployMultichannelsEnvVariablesDevEuWest1()
+    //           sh 'printenv'
+    //         }
+    //         withAWS(region: "${MULTICHANNELS_API_REGION}",
+    //                 role: "${SDPR_JENKINS_SLAVE_ROLE_NAME}",
+    //                 roleAccount: "${SDPR_ACCOUNT_ID}"
+    //         ) {
+    //           sh 'sh ./scripts/deploy/api-deploy.sh'
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
     stage('DEPLOY INT') {
       when {
         allOf {

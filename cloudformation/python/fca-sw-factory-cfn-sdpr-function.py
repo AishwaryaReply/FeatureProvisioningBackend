@@ -184,6 +184,27 @@ resources[global_policy_for_lambda_function_execution_iam_policy_info.template_l
                 '"gcv-lambda-RO-role"',
     PolicyDocument=global_policy_document
 )
+resources[specific_policy_for_lambda_function_execution_iam_policy_info.template_logical_id] = ManagedPolicy(
+    specific_policy_for_lambda_function_execution_iam_policy_info.template_logical_id,
+    ManagedPolicyName=Join('', [base_name, '_{code}-specific-policy'.format(
+        code=specific_policy_for_lambda_function_execution_iam_policy_info.code)]),
+    Description='This policy contains all specific permissions needed to lambda of Service Scheduler',
+    PolicyDocument={
+        'Version': '2012-10-17',
+        'Statement': [
+            {
+                'Sid': 'GetSecret',
+                'Effect': 'Allow',
+                'Action': [
+                    'secretsmanager:GetSecretValue'
+                ],
+                'Resource': [
+                    {'Fn::Sub': 'arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:GCV_MELD*'}
+                ]
+            }
+        ]
+    }
+)
 resources[lambda_function_execution_role_iam_role_info.template_logical_id] = Role(
     lambda_function_execution_role_iam_role_info.template_logical_id,
     RoleName=Join("", [base_name, "_{code}-role-for-lambda-functions".format(
@@ -191,7 +212,8 @@ resources[lambda_function_execution_role_iam_role_info.template_logical_id] = Ro
     AssumeRolePolicyDocument=assume_role_policy_document,
     Path='/',
     ManagedPolicyArns=[
-        Ref(resources[global_policy_for_lambda_function_execution_iam_policy_info.template_logical_id])
+        Ref(resources[global_policy_for_lambda_function_execution_iam_policy_info.template_logical_id]),
+        Ref(resources[specific_policy_for_lambda_function_execution_iam_policy_info.template_logical_id])
     ],
 )
 

@@ -43,16 +43,16 @@
         "pathParams": {
             "type": "object",
             "properties": {
-                "appointmentId": {
+                "appointmentid": {
                     "type": "string"
                 },
-                "departmentId": {
+                "departmentid": {
                     "type": "string"
                 }
             },
             "required": [
-                "appointmentId",
-                "departmentId"
+                "appointmentid",
+                "departmentid"
             ]
         }
     },

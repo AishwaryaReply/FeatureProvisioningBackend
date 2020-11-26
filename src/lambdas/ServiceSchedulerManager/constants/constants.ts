@@ -10,12 +10,12 @@ export const DFX_SEARCH_EMAIL_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox
 export const DFX_SEARCH_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/search$';
 export const GET_DEALER_DEPARTMENT_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/dealerdepartment$';
 export const GET_APPOINTMENT_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/appointmentsummary$';
-export const GET_ADVISORS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/department\/\{departmentId\}\/advisors$';
-export const GET_TRANSPORTATION_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/department\/\{departmentId\}\/trasportationoption$';
-export const GET_TIME_SEGMENTS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/department\/\{departmentId\}\/timesegments$';
+export const GET_ADVISORS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/department\/\{departmentid\}\/advisors$';
+export const GET_TRANSPORTATION_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/department\/\{departmentid\}\/trasportationoption$';
+export const GET_TIME_SEGMENTS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/department\/\{departmentid\}\/timesegments$';
 export const POST_PUT_APPOINTMENT_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/appointment$';
 export const GET_APPOINTMENTS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/appointments$';
-export const APPOINTMENT_DETAILS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/appointment\/\{appointmentId\}\/department\/\{departmentId\}$';
+export const APPOINTMENT_DETAILS_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/appointment\/\{appointmentid\}\/department\/\{departmentid\}$';
 
 export const REL_CUSTOMER_ID = "http://api.dealer-fx.com/docs/rels/customer-vehicles";
 export const REL_VEHICLE_VIN = "http://api.dealer-fx.com/docs/rels/vehicle";

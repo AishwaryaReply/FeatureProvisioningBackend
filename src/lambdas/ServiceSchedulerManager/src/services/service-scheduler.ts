@@ -124,7 +124,7 @@ export class ServiceScheduler {
     public async getDfxToken(request: DataModels.GetTokenRequestData): Promise<DataModels.GetDfxTokenResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getDfxToken |`;
         const mappedRequest: SchedulingServiceDataModels.GetTokenRequestParams = {
-            hint_dealer: request.hintDealer
+            hint_dealer: request.hintdealer
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.TokenResponse = await SchedulingConectorService.getDfxToken(mappedRequest);
@@ -506,8 +506,8 @@ export class ServiceScheduler {
         const logPrefix = `${LOG_PREFIX_CLASS} getDealerDepartmentTimeSegments |`;        
         const mappedRequest: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsParams = {
             departmentId: request.departmentId,
-            StartDate: request.startDate,
-            EndDate: request.endDate,
+            StartDate: request.startdate,
+            EndDate: request.enddate,
             dealerToken: request.dealerToken
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
@@ -610,8 +610,8 @@ export class ServiceScheduler {
                     elem.links && 
                     elem.links.length != 0){
 
-                    let appointmentId:string = "";
-                    let departmentId:string = "";
+                    let appointmentid:string = "";
+                    let departmentid:string = "";
 
                     const dimLinks:number = elem.links.length;
                     for(let i = 0; i < dimLinks; i++){
@@ -619,18 +619,18 @@ export class ServiceScheduler {
                         if(slotElem.rel && slotElem.href){
                             if(slotElem.rel == Constants.REL_APPOINTMENT_ID){
                                 const hrefArray = slotElem.href.split("/");
-                                appointmentId = hrefArray[hrefArray.length - 1]; 
+                                appointmentid = hrefArray[hrefArray.length - 1]; 
                             }else if(slotElem.rel == Constants.REL_DEPARTMENT_ID){
                                 const hrefArray = slotElem.href.split("/");
-                                departmentId = hrefArray[hrefArray.length - 1]; 
+                                departmentid = hrefArray[hrefArray.length - 1]; 
                             }
                         }
                     }
                     const appointment:DataModels.Appointment = {
                         scheduledTime: elem.scheduledTime,
                         status: elem.status,
-                        appointmentId: appointmentId,
-                        departmentId: departmentId
+                        appointmentId: appointmentid,
+                        departmentId: departmentid
                     }
                     appointments.push(appointment);
                 }                

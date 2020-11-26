@@ -183,10 +183,10 @@
     "Appointment": {
       "type": "object",
       "properties": {
-        "appointmentId": {
+        "appointmentid": {
           "type": "string"
         },
-        "departmentId": {
+        "departmentid": {
           "type": "string"
         },
         "scheduledTime": {
@@ -473,7 +473,7 @@
     "PostAppointmentRequest": {
       "type": "object",
       "properties": {
-        "departmentId": {
+        "departmentid": {
           "type": "string"
         },
         "customerId": {
@@ -505,7 +505,7 @@
     "PutAppointmentRequest": {
       "type": "object",
       "properties": {
-        "departmentId": {
+        "departmentid": {
           "type": "string"
         },
         "customerId": {
@@ -523,7 +523,7 @@
         "scheduledTime": {
           "type": "string"
         },
-        "appointmentId": {
+        "appointmentid": {
           "type": "string"
         },
         "mileage": {
@@ -815,7 +815,7 @@
             "type": "string"
           },
           {
-            "name": "hintDealer",
+            "name": "hintdealer",
             "description": "dfx token got by the dealer",
             "in": "query",
             "required": true,
@@ -2871,7 +2871,7 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduler/department/{departmentId}/advisors": {
+    "/v1/digitalglovebox/servicescheduler/department/{departmentid}/advisors": {
       "get": {
         "tags": [
           "Service Scheduler"
@@ -2886,7 +2886,7 @@
         ],
         "parameters": [
           {
-            "name": "departmentId",
+            "name": "departmentid",
             "description": "unique identifier of the department",
             "in": "path",
             "required": true,
@@ -3032,7 +3032,7 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduler/department/{departmentId}/trasportationoption": {
+    "/v1/digitalglovebox/servicescheduler/department/{departmentid}/trasportationoption": {
       "get": {
         "tags": [
           "Service Scheduler"
@@ -3047,7 +3047,7 @@
         ],
         "parameters": [
           {
-            "name": "departmentId",
+            "name": "departmentid",
             "description": "unique identifier of the department",
             "in": "path",
             "required": true,
@@ -3193,7 +3193,7 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduler/department/{departmentId}/timesegments": {
+    "/v1/digitalglovebox/servicescheduler/department/{departmentid}/timesegments": {
       "get": {
         "tags": [
           "Service Scheduler"
@@ -3208,7 +3208,7 @@
         ],
         "parameters": [
           {
-            "name": "departmentId",
+            "name": "departmentid",
             "description": "unique identifier of the department",
             "in": "path",
             "required": true,
@@ -3278,14 +3278,14 @@
             "type": "string"
           },
           {
-            "name": "startDate",
+            "name": "startdate",
             "description": "starting date for the research ( YYYY-MM-DD )",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
-            "name": "endDate",
+            "name": "enddate",
             "description": "ending date for the research ( YYYY-MM-DD )",
             "in": "query",
             "required": true,
@@ -3872,7 +3872,7 @@
         }
       }
     },
-    "/v1/digitalglovebox/servicescheduler/appointment/{appointmentId}/department/{departmentId}": {
+    "/v1/digitalglovebox/servicescheduler/appointment/{appointmentid}/department/{departmentid}": {
       "delete": {
         "tags": [
           "Service Scheduler"
@@ -3887,14 +3887,14 @@
         ],
         "parameters": [
           {
-            "name": "appointmentId",
+            "name": "appointmentid",
             "description": "unique identifier of the appointment",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "departmentId",
+            "name": "departmentid",
             "description": "unique identifier of the department",
             "in": "path",
             "required": true,
@@ -4037,14 +4037,14 @@
         ],
         "parameters": [
           {
-            "name": "appointmentId",
+            "name": "appointmentid",
             "description": "unique identifier of the appointment",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "departmentId",
+            "name": "departmentid",
             "description": "unique identifier of the department",
             "in": "path",
             "required": true,

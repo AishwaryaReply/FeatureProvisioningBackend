@@ -39,12 +39,12 @@
         "queryString": {
             "type": "object",
             "properties": {
-                "hintDealer": {
+                "hintdealer": {
                     "type": "string"
                 }
             },
             "required": [
-                "hintDealer"
+                "hintdealer"
             ]
         }
     },

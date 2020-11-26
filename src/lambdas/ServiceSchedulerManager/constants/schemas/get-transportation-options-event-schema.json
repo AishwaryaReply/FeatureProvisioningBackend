@@ -43,12 +43,12 @@
         "pathParams": {
             "type": "object",
             "properties": {
-                "departmentId": {
+                "departmentid": {
                     "type": "string"
                 }
             },
             "required": [
-                "departmentId"
+                "departmentid"
             ]
         }
     },

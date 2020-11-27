@@ -172,11 +172,13 @@ export namespace Stubs {
         headers: headers,
         pathParams: {
             vin: TEST_VIN,
-            userid: TEST_USERID,
+            userid: TEST_USERID
+        },
+        queryString: {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/dealerservices/mileage/{mileage}'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/dealerservices'
         }
     }
 
@@ -200,11 +202,13 @@ export namespace Stubs {
         headers: headers,
         pathParams: {
             vin: TEST_VIN,
-            userid: TEST_USERID,
+            userid: TEST_USERID
+        },
+        queryString: {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/factoryservices/mileage/{mileage}'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/factoryservices'
         }
     }
 
@@ -229,10 +233,12 @@ export namespace Stubs {
         pathParams: {
             vin: TEST_VIN,
             userid: TEST_USERID,
+        },
+        queryString: {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/repairservices/mileage/{mileage}'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/repairservices'
         }
     }
 
@@ -618,9 +624,9 @@ export namespace Stubs {
     }
 
     export const mockGetDfxTokenFiltered: DataModels.GetDfxTokenResponse = {
-        access_token: mockGetDfxToken.access_token,
-        token_type: mockGetDfxToken.token_type,
-        expires_in: mockGetDfxToken.expires_in
+        accessToken: mockGetDfxToken.access_token,
+        tokenType: mockGetDfxToken.token_type,
+        expiresIn: mockGetDfxToken.expires_in
     }
 
     // GetDealerServicesVin

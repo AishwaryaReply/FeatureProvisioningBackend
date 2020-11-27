@@ -1,10 +1,10 @@
 export const GET_TOKEN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/token$';
 export const GET_DFX_VEHICLE_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/dfxvehicle$';
-export const GET_FACTORY_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/factoryservices\/mileage\/\{mileage\}$';
+export const GET_FACTORY_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/factoryservices$';
 export const GET_FACTORY_NO_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/factoryservices\/\{make\}\/\{year\}\/\{model\}\/\{transmission\}\/\{engine\}\/\{train\}\/mileage\/\{mileage\}$';
-export const GET_DEALER_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/dealerservices\/mileage\/\{mileage\}$';
+export const GET_DEALER_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/dealerservices$';
 export const GET_DEALER_NO_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/dealerservices\/\{make\}\/\{year\}\/\{model\}\/\{transmission\}\/\{engine\}\/\{train\}\/mileage\/\{mileage\}$';
-export const GET_REPAIR_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/repairservices\/mileage\/\{mileage\}$';
+export const GET_REPAIR_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/repairservices$';
 export const GET_REPAIR_NO_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/repairservices\/\{make\}\/\{year\}\/\{model\}\/\{transmission\}\/\{engine\}\/\{train\}\/mileage\/\{mileage\}$';
 export const DFX_SEARCH_EMAIL_API_PATH_REGEX = '^\/v[1-9][0-9]*\/digitalglovebox\/servicescheduler\/search$';
 export const DFX_SEARCH_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/accounts\/\{userid\}\/vehicles\/\{vin\}\/digitalglovebox\/servicescheduler\/search$';

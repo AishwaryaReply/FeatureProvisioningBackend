@@ -147,13 +147,13 @@ export class ServiceHandler {
 
     private prepareGetServicesVin(event: UtilityObjects.TransformedInputEvent, api: ServiceRequested): DataModels.GetServicesVinRequestData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareGetServicesVin |`;
-        logger.debug(logPrefix, `api: ${api}, vin: ${event.pathParams.vin}, userId: ${event.pathParams.userid}, dealerToken: ${event.headers['dealer-authorization']}, mileage ${event.pathParams.mileage}`);
+        logger.debug(logPrefix, `api: ${api}, vin: ${event.pathParams.vin}, userId: ${event.pathParams.userid}, dealerToken: ${event.headers['dealer-authorization']}, mileage ${event.queryString.mileage}`);
         return {
             requestedService: api,
             vin: event.pathParams.vin,
             userid: event.pathParams.userid,
             dealerToken: event.headers['dealer-authorization'],
-            mileage: event.pathParams.mileage
+            mileage: event.queryString.mileage
         }
     }
 

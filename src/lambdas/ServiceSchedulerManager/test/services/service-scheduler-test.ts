@@ -137,7 +137,7 @@ describe('ServiceSchedulerService', () => {
             sinon.stub(SchedulingConectorService, 'getDfxToken').resolves(resp);
             
             const expected: DataModels.GetDfxTokenResponse = Stubs.mockGetDfxTokenFiltered;
-            delete expected.token_type;
+            delete expected.tokenType;
             const response = await testServiceSchedulerService.getDfxToken(Stubs.mockGetDfxTokenRequest);
             
             expect(response).to.be.deep.equal(expected);

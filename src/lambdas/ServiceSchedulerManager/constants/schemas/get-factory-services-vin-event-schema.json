@@ -48,20 +48,28 @@
                 },
                 "userid": {
                     "type": "string"
-                },
+                }
+            },
+            "required": [
+                "vin",
+                "userid"
+            ]
+        },
+        "queryString": {
+            "type": "object",
+            "properties": {
                 "mileage": {
                     "type": "string"
                 }
             },
             "required": [
-                "vin",
-                "userid",
                 "mileage"
             ]
         }
     },
     "required": [
         "headers",
-        "pathParams"
+        "pathParams",
+        "queryString"
     ]
 }

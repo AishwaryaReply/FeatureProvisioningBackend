@@ -133,8 +133,13 @@ export class ServiceScheduler {
         let filteredResponse: DataModels.GetDfxTokenResponse = {};
 
         if(response.access_token){
-            let elems = ["token_type","expires_in", "access_token"];
-            this.copyElement(response, elems, filteredResponse);
+            filteredResponse.accessToken = response.access_token;
+            if(response.expires_in){
+                filteredResponse.expiresIn = response.expires_in;
+            }
+            if(response.token_type){
+                filteredResponse.tokenType = response.token_type;
+            }
         }
         
         return filteredResponse;

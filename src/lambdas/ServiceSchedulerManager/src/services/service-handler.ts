@@ -212,18 +212,21 @@ export class ServiceHandler {
             requestedService: 'POST_APPOINTMENT',
             vin: event.pathParams.vin,
             userid: event.pathParams.userid,
+            departmentId: event.pathParams.departmentid,
             dealerToken: event.headers['dealer-authorization'],
             body: event.requestBody
         }
     }
 
     private preparePutAppointment(event: UtilityObjects.TransformedInputEvent): DataModels.PutAppointmentRequestData {
-        const logPrefix = `${LOG_PREFIX_CLASS} preparePutAppointment |`;
+        const logPrefix = `${LOG_PREFIX_CLASS} preparePostAppointment |`;
         logger.debug(logPrefix, `vin: ${event.pathParams.vin}, userId: ${event.pathParams.userid}, dealerToken: ${event.headers['dealer-authorization']}`);
         return {
             requestedService: 'UPDATE_SERVICE_APPOINTMENT',
             vin: event.pathParams.vin,
             userid: event.pathParams.userid,
+            departmentId: event.pathParams.departmentid,
+            appointmentId: event.pathParams.appointmentid,
             dealerToken: event.headers['dealer-authorization'],
             body: event.requestBody
         }
@@ -237,7 +240,9 @@ export class ServiceHandler {
             requestedService: api,
             dealerToken: event.headers['dealer-authorization'],
             departmentId: event.pathParams.departmentid,
-            appointmentId: event.pathParams.appointmentid
+            appointmentId: event.pathParams.appointmentid,
+            userid: event.pathParams.userid,
+            vin: event.pathParams.vin
         }
     }
 
@@ -303,15 +308,8 @@ export class ServiceHandler {
         if (resourcePath.search(new RegExp(Constants.GET_APPOINTMENTS_API_PATH_REGEX)) > -1) {
             return 'GET_SERVICE_APPOINTMENTS';
         }
-        if (resourcePath.search(new RegExp(Constants.POST_PUT_APPOINTMENT_API_PATH_REGEX)) > -1) {
-            switch (resourceMethod) {
-                case 'POST':
-                    return 'POST_APPOINTMENT';
-                case 'PUT':
-                    return 'UPDATE_SERVICE_APPOINTMENT';
-                default:
-                    throw new GCVErrors.HttpMethodNotAllowed('HttpMethod is not valid');
-            }
+        if (resourcePath.search(new RegExp(Constants.POST_APPOINTMENT_API_PATH_REGEX)) > -1) {
+            return 'POST_APPOINTMENT';
         }
         if (resourcePath.search(new RegExp(Constants.APPOINTMENT_DETAILS_API_PATH_REGEX)) > -1) {
             switch (resourceMethod) {
@@ -319,6 +317,8 @@ export class ServiceHandler {
                     return 'GET_SERVICE_APPOINTMENT_DETAILS';
                 case 'DELETE':
                     return 'DELETE_SERVICE_APPOINTMENT';
+                case 'PUT':
+                    return 'UPDATE_SERVICE_APPOINTMENT';
                 default:
                     throw new GCVErrors.HttpMethodNotAllowed('HttpMethod is not valid');
             }

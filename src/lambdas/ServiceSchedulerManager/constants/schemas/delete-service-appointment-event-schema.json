@@ -43,6 +43,12 @@
         "pathParams": {
             "type": "object",
             "properties": {
+                "userid": {
+                    "type": "string"
+                },
+                "vin": {
+                    "type": "string"
+                },
                 "appointmentid": {
                     "type": "string"
                 },
@@ -51,6 +57,8 @@
                 }
             },
             "required": [
+                "userid",
+                "vin",
                 "appointmentid",
                 "departmentid"
             ]

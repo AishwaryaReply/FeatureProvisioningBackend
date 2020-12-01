@@ -99,19 +99,20 @@
                 },
                 "vin": {
                     "type": "string"
+                },
+                "departmentid": {
+                    "type": "string"
                 }
             },
             "required": [
                 "userid",
-                "vin"
+                "vin",
+                "departmentid"
             ]
         },
         "requestBody": {
             "type": "object",
             "properties": {
-                "departmentId": {
-                    "type": "string"
-                },
                 "customerId": {
                     "type": "string"
                 },
@@ -154,7 +155,6 @@
                 }
             },
             "required": [
-                "departmentId",
 				"customerId",
 				"customerConcernsInfo",
 				"advisorId",

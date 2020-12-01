@@ -652,7 +652,7 @@ export class ServiceScheduler {
     public async postAppointment(request: DataModels.PostAppointmentRequestData): Promise<DataModels.PostAppointmentResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} postAppointment |`;        
         const mappedRequest: SchedulingServiceDataModels.PostAppointmentParams = {
-            departmentId: request.body.departmentId,
+            departmentId: request.departmentId,
             services: request.body.services,
             customerId: request.body.customerId,
             customerConcernsInfo: request.body.customerConcernsInfo,
@@ -702,7 +702,7 @@ export class ServiceScheduler {
     public async updateServiceAppointment(request: DataModels.PutAppointmentRequestData): Promise<DataModels.PutAppointmentRequestResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} updateServiceAppointment |`;        
         const mappedRequest: SchedulingServiceDataModels.UpdateServiceAppointmentParams = {
-            departmentId: request.body.departmentId,
+            departmentId: request.departmentId,
             services: request.body.services,
             customerId: request.body.customerId,
             customerConcernsInfo: request.body.customerConcernsInfo,
@@ -712,7 +712,7 @@ export class ServiceScheduler {
             mileage: request.body.mileage,
             dealerToken: request.dealerToken,
             vin: request.vin,
-            appointmentId: request.body.appointmentId
+            appointmentId: request.appointmentId
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.UpdateServiceAppointmentResponse = await SchedulingConectorService.updateServiceAppointment(mappedRequest);
@@ -818,7 +818,6 @@ export class ServiceScheduler {
             }
         });
     }
-
 }   
 
 

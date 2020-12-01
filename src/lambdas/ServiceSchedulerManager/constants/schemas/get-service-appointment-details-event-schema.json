@@ -48,11 +48,19 @@
                 },
                 "departmentid": {
                     "type": "string"
+                },
+                "userid": {
+                    "type": "string"
+                },
+                "vin": {
+                    "type": "string"
                 }
             },
             "required": [
                 "appointmentid",
-                "departmentid"
+                "departmentid",
+                "userid",
+                "vin"
             ]
         }
     },

@@ -39,7 +39,6 @@ export namespace Stubs {
     const TEST_END_DATE = "2020-12-21";
     const TEST_START_DATE = "2019-12-21";
     const TEST_POST_BODY = {
-        departmentId: "string",
         customerId: "string",
         customerConcernsInfo: "string",
         advisorId: 0,
@@ -79,13 +78,11 @@ export namespace Stubs {
         }
     }
     const TEST_PUT_BODY = {
-        departmentId: "string",
         customerId: "string",
         customerConcernsInfo: "string",
         advisorId: 0,
         transportationOptionCode: "string",
         scheduledTime: "string",
-        appointmentId: "string",
         mileage: {
             value: 0,
             unitsKind: "string"
@@ -132,7 +129,7 @@ export namespace Stubs {
             email: TEST_EMAIL
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/search'
+            resourcePath: '/v1/servicescheduler/search'
         }
     }
 
@@ -142,7 +139,7 @@ export namespace Stubs {
             hintdealer: TEST_DEALER
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/token'
+            resourcePath: '/v1/servicescheduler/token'
         }
     }
 
@@ -153,7 +150,7 @@ export namespace Stubs {
             userid: TEST_USERID
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/search'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/search'
         }
     }
 
@@ -164,7 +161,7 @@ export namespace Stubs {
             userid: TEST_USERID
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/dfxvehicle'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/ossvehicle'
         }
     }
 
@@ -178,7 +175,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/dealerservices'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/dealerservices'
         }
     }
 
@@ -194,7 +191,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/dealerservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
+            resourcePath: '/v1/servicescheduler/dealerservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
         }
     }
 
@@ -208,7 +205,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/factoryservices'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/factoryservices'
         }
     }
 
@@ -224,7 +221,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/factoryservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
+            resourcePath: '/v1/servicescheduler/factoryservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
         }
     }
 
@@ -238,7 +235,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/repairservices'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/repairservices'
         }
     }
 
@@ -254,7 +251,7 @@ export namespace Stubs {
             mileage: TEST_MILEAGE
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/repairservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
+            resourcePath: '/v1/servicescheduler/repairservices/{make}/{year}/{model}/{transmission}/{engine}/{train}/mileage/{mileage}'
         }
     }
 
@@ -265,7 +262,7 @@ export namespace Stubs {
             servicesList: SERVICE_LIST
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/appointmentsummary'
+            resourcePath: '/v1/servicescheduler/appointmentsummary'
         }
     }
 
@@ -275,7 +272,7 @@ export namespace Stubs {
             departmentid: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentid}/advisors'
+            resourcePath: '/v1/servicescheduler/department/{departmentid}/advisors'
         }
     }
 
@@ -285,7 +282,7 @@ export namespace Stubs {
             departmentid: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentid}/trasportationoption'
+            resourcePath: '/v1/servicescheduler/department/{departmentid}/trasportationoption'
         }
     }
 
@@ -299,7 +296,7 @@ export namespace Stubs {
             enddate: TEST_END_DATE
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/department/{departmentid}/timesegments'
+            resourcePath: '/v1/servicescheduler/department/{departmentid}/timesegments'
         }
     }
 
@@ -310,7 +307,7 @@ export namespace Stubs {
             userid: TEST_USERID
         },
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/appointments'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/appointments'
         }
     }
 
@@ -318,11 +315,12 @@ export namespace Stubs {
         headers: headers,
         pathParams: {
             vin: TEST_VIN,
-            userid: TEST_USERID
+            userid: TEST_USERID,
+            departmentid: TEST_DEPARTMENT
         },
         requestBody: TEST_POST_BODY,
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/appointment',
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/department/{departmentid}/appointment',
             httpMethod: 'POST'
         }
     }
@@ -331,11 +329,13 @@ export namespace Stubs {
         headers: headers,
         pathParams: {
             vin: TEST_VIN,
-            userid: TEST_USERID
+            userid: TEST_USERID,
+            departmentid: TEST_DEPARTMENT,
+            appointmentid: TEST_APPOINTMENT_ID
         },
         requestBody: TEST_PUT_BODY,
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/appointment',
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/department/{departmentid}/appointment/{appointmentid}',
             httpMethod: 'PUT'
         }
     }
@@ -344,12 +344,14 @@ export namespace Stubs {
         headers: headers,
         pathParams: {
             vin: TEST_VIN,
-            userid: TEST_USERID
+            userid: TEST_USERID,
+            departmentid: TEST_DEPARTMENT,
+            appointmentid: TEST_APPOINTMENT_ID
         },
         requestBody: TEST_PUT_BODY,
         runTimeInfo: {
-            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/digitalglovebox/servicescheduler/appointment',
-            httpMethod: 'GET'
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/department/{departmentid}/appointment/{appointmentid}',
+            httpMethod: 'POST'
         }
     }
 
@@ -360,7 +362,7 @@ export namespace Stubs {
             servicesList: SERVICE_LIST
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/dealerdepartment'
+            resourcePath: '/v1/servicescheduler/dealerdepartment'
         }
     }
 
@@ -368,10 +370,12 @@ export namespace Stubs {
         headers: headers,
         pathParams: {
             appointmentid: TEST_APPOINTMENT_ID,
-            departmentid: TEST_DEPARTMENT
+            departmentid: TEST_DEPARTMENT,
+            userid: TEST_USERID,
+            vin: TEST_VIN
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentid}/department/{departmentid}',
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/department/{departmentid}/appointment/{appointmentid}',
             httpMethod: 'DELETE'
         }
     }
@@ -380,10 +384,12 @@ export namespace Stubs {
         headers: headers,
         pathParams: {
             appointmentid: TEST_APPOINTMENT_ID,
-            departmentid: TEST_DEPARTMENT
+            departmentid: TEST_DEPARTMENT,
+            userid: TEST_USERID,
+            vin: TEST_VIN
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentid}/department/{departmentid}',
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/department/{departmentid}/appointment/{appointmentid}',
             httpMethod: 'GET'
         }
     }
@@ -395,7 +401,7 @@ export namespace Stubs {
             departmentid: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/digitalglovebox/servicescheduler/appointment/{appointmentid}/department/{departmentid}',
+            resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/department/{departmentid}/appointment/{appointmentid}',
             httpMethod: 'POST'
         }
     }
@@ -3919,8 +3925,8 @@ export namespace Stubs {
         vin: TEST_VIN,
         userid: TEST_USERID,
         dealerToken: TEST_DEALER_TOKEN,
+        departmentId: TEST_DEPARTMENT,
         body:{
-            departmentId: TEST_DEPARTMENT,
             customerId: TEST_CUST_ID,
             customerConcernsInfo: "customerConcernsInfo",
             advisorId: 0,
@@ -4332,14 +4338,14 @@ export namespace Stubs {
         vin: TEST_VIN,
         userid: TEST_USERID,
         dealerToken: TEST_DEALER_TOKEN,
+        appointmentId: TEST_APPOINTMENT_ID,
+        departmentId: TEST_DEPARTMENT,
         body:{
-            departmentId: TEST_DEPARTMENT,
             customerId: TEST_CUST_ID,
             customerConcernsInfo: "customerConcernsInfo",
             advisorId: 0,
             transportationOptionCode: "transportationOptionCode",
             scheduledTime: "scheduledTime",
-            appointmentId: TEST_APPOINTMENT_ID,
             mileage: {
                 value: 0,
                 unitsKind: "unitsKind"

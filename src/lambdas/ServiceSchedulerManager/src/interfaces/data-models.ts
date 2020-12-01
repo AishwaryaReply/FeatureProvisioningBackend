@@ -94,11 +94,14 @@ export interface GetTimeSegmetsRequestData extends ServiceRequestData {
 }
 
 export interface PostAppointmentRequestData extends VinRequestData {
-    body: PostAppointmentBody;
+    departmentId: string;
+    body: AppointmentBody;
 }
 
 export interface PutAppointmentRequestData extends VinRequestData {
-    body: PutAppointmentBody;
+    departmentId: string,
+    appointmentId: string,
+    body: AppointmentBody;
 }
 
 export type Mileage = {
@@ -126,8 +129,7 @@ export type Vehicle = {
       links: Link[];
 }
 
-export type PostAppointmentBody = {
-    departmentId: string;
+export type AppointmentBody = {
     customerId: string;
     customerConcernsInfo: string;
     advisorId: number;
@@ -136,10 +138,6 @@ export type PostAppointmentBody = {
     mileage: Mileage;
     services: ServicesPostAppointment;
     vehicle: Link[];
-}
-
-export interface PutAppointmentBody extends PostAppointmentBody {
-    appointmentId: string;
 }
 
 export interface AppointmentRequestData extends ServiceRequestData {

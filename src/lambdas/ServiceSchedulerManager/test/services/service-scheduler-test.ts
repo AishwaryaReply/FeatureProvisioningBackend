@@ -383,13 +383,27 @@ describe('ServiceSchedulerService', () => {
     describe('getDealerDepartmentTimeSegments', () => {
         afterEach(sinon.restore);
 
-        it('should return the expected response', async () => {
+        it('should return the expected response with date in format YYYY-MM-DD', async () => {
             sinon.stub(SchedulingConectorService, 'getDealerDepartmentTimeSegments').resolves(Stubs.mockGetDealerDepartmentTimeSegments);
             
             const expected: DataModels.GetDealerDepartmentTimeSegmentsResponse = Stubs.mockGetDealerDepartmentTimeSegmentsFiltered;
             const response = await testServiceSchedulerService.getDealerDepartmentTimeSegments(Stubs.mockGetDealerDepartmentTimeSegmentsRequest);
             
             expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected response with date in timestamp', async () => {
+            sinon.stub(SchedulingConectorService, 'getDealerDepartmentTimeSegments').resolves(Stubs.mockGetDealerDepartmentTimeSegments);
+            
+            const expected: DataModels.GetDealerDepartmentTimeSegmentsResponse = Stubs.mockGetDealerDepartmentTimeSegmentsFiltered;
+            const response = await testServiceSchedulerService.getDealerDepartmentTimeSegments(Stubs.mockGetDealerDepartmentTimeSegmentsRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should throw an error for wrong date', async () => {
+            const response = testServiceSchedulerService.getDealerDepartmentTimeSegments(Stubs.mockGetDealerDepartmentTimeSegmentsRequestInvalidData);
+            expect(response).to.be.eventually.rejectedWith(GCVErrors.BadRequest);
         }) 
 
         it('should return the expected empty response', async () => {            

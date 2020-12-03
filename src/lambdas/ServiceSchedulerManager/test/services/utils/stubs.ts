@@ -2415,6 +2415,25 @@ export namespace Stubs {
         requestedService: 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS'
     }
 
+    // InvalidDataRequest
+    export const mockGetDealerDepartmentTimeSegmentsRequestInvalidData:DataModels.GetTimeSegmetsRequestData = {
+        startdate: "data is a string",
+        enddate: TEST_END_DATE,
+        departmentId: TEST_DEPARTMENT,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS'
+    }
+
+    // TimestampData
+    export const mockGetDealerDepartmentTimeSegmentsRequestTimestampData:DataModels.GetTimeSegmetsRequestData = {
+        startdate: "1576886400",
+        enddate: TEST_END_DATE,
+        departmentId: TEST_DEPARTMENT,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS'
+    }
+
+
     export const mockGetDealerDepartmentTimeSegments:SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsResponse = {
         "segments": [
             {

@@ -19,40 +19,28 @@
         },
         "description": {
           "type": "string"
-        },
-        "enabled": {
-          "type": "boolean"
-        },
-        "deliveryInfo": {
-          "type": "object"
         }
       }
     },
-    "Phones": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
-          },
-          "number": {
-            "type": "string"
-          }
+    "Phone": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
         }
       }
     },
-    "Emails": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          }
+    "Email": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
         }
       }
     },
@@ -112,10 +100,16 @@
           "type": "string"
         },
         "phones": {
-          "$ref": "#/definitions/Phones"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Phone"
+          }
         },
         "emails": {
-          "$ref": "#/definitions/Emails"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Email"
+          }
         },
         "scheduledTime": {
           "type": "string"
@@ -274,7 +268,7 @@
         }
       }
     },
-    "TimeSegmentsResponse": {
+    "Segment": {
       "type": "object",
       "properties": {
         "time": {
@@ -293,6 +287,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ST"
+          }
+        }
+      }
+    },
+    "TimeSegmentsResponse": {
+      "type": "object",
+      "properties": {
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Segment"
           }
         }
       }
@@ -2414,7 +2419,7 @@
         }
       }
     },
-    "/v1/servicescheduler/department/{departmentid}/trasportationoption": {
+    "/v1/servicescheduler/department/{departmentid}/transportationoption": {
       "get": {
         "tags": [
           "Service Scheduler"
@@ -2661,14 +2666,14 @@
           },
           {
             "name": "startdate",
-            "description": "starting date for the research ( YYYY-MM-DD )",
+            "description": "starting date for the research ( timestamp )",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "enddate",
-            "description": "ending date for the research ( YYYY-MM-DD )",
+            "description": "ending date for the research ( timestamp )",
             "in": "query",
             "required": true,
             "type": "string"

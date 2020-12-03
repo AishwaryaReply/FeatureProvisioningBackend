@@ -4616,8 +4616,6 @@ export namespace Stubs {
         "transportationOption": {
             "code": "waiter",
             "description": "Waiter",
-            "enabled": false,
-            "deliveryInfo": {},
             "links": [
                 {
                     "rel": "http://api.dealer-fx.com/docs/rels/transportation-option",
@@ -4795,9 +4793,7 @@ export namespace Stubs {
         },
         transportationOption: {
             code: "waiter",
-            description: "Waiter",
-            enabled: false,
-            deliveryInfo: {}
+            description: "Waiter"
         },
         services: {
             summary: {

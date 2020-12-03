@@ -280,9 +280,7 @@ export declare type Advisor = {
 };
 export declare type TransportationOption = {
     code?: string;
-    enabled?: boolean;
     description?: string;
-    deliveryInfo?: any;
 };
 export declare type Summary = {
     taxes?: number;

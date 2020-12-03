@@ -751,7 +751,7 @@ export class ServiceScheduler {
                 const elem:SchedulingServiceDataModels.Customer = response.customer;
                 let cust:DataModels.Customer = {};
                 cust.id = elem.id;
-                this.copyElement(elem, ["firstName", "lastName", "phone", "email", "emails", "phones"], cust);
+                this.copyElement(elem, ["firstName", "lastName","emails", "phones"], cust);
                 filteredResponse.customer = cust;
             } 
             if(response?.mileage){
@@ -771,7 +771,7 @@ export class ServiceScheduler {
                 const elem:SchedulingServiceDataModels.TransportationOptionPostAppointment = response.transportationOption;
                 let tO:DataModels.TransportationOption = {};
                 tO.code = elem.code;
-                this.copyElement(elem, ["enabled", "description", "deliveryInfo"], tO);
+                this.copyElement(elem, ["description"], tO);
                 filteredResponse.transportationOption = tO;
             } 
             if(response?.services){

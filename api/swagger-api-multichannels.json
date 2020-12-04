@@ -172,6 +172,74 @@
         "customer": {
           "$ref": "#/definitions/Customer"
         }
+      },
+      "example": {
+        "customer": {
+          "id": "urn:dfx:customer:103129767",
+          "firstName": "TEST",
+          "lastName": "FCA",
+          "phones": [
+            {
+              "type": "default",
+              "number": 2484206482
+            },
+            {
+              "type": "home",
+              "number": 2484206482
+            }
+          ],
+          "emails": [
+            {
+              "type": "business",
+              "email": "testkh19@gmail.com"
+            },
+            {
+              "type": "personal",
+              "email": "testkh20@gmail.com"
+            }
+          ]
+        },
+        "scheduledTime": "2020-10-27T08:45:00.00-04:00",
+        "mileage": {
+          "value": 120,
+          "unitsKind": "mileage"
+        },
+        "status": "booked",
+        "customerConcernsInfo": "vehicle to repair",
+        "confirmationCode": "OSS-W9L0O",
+        "advisor": {
+          "id": 332708,
+          "name": "Albert Pico",
+          "departmentId": 4836
+        },
+        "transportationOption": {
+          "code": "waiter",
+          "description": "waiter",
+          "enabled": false
+        },
+        "services": {
+          "summary": {
+            "taxes": 10.1,
+            "subTotal": 20.1,
+            "total": 30.2
+          },
+          "drs": [],
+          "frs": [
+            {
+              "id": 82893,
+              "name": "Replace engine oil and filter",
+              "opCode": 30,
+              "price": 69.95,
+              "analyticsMsrp": 69.95,
+              "laborHours": 0,
+              "selected": false,
+              "maintenanceKind": "Required",
+              "comment": ""
+            }
+          ],
+          "repair": [],
+          "recalls": []
+        }
       }
     },
     "Appointment": {
@@ -200,6 +268,22 @@
             "$ref": "#/definitions/Appointment"
           }
         }
+      },
+      "example": {
+        "appointments": [
+          {
+            "appointmentId": 53826276,
+            "departmentId": 4836,
+            "scheduledTime": "2020-10-07T09:15:00.00-04:00",
+            "status": "missed"
+          },
+          {
+            "appointmentId": 54194795,
+            "departmentId": 4836,
+            "scheduledTime": "2020-10-19T09:00:00.00-04:00",
+            "status": "booked"
+          }
+        ]
       }
     },
     "PutUpdateResponse": {
@@ -208,6 +292,10 @@
         "confirmationCode": {
           "type": "string"
         }
+      },
+      "example": {
+        "status": "booked",
+        "confirmationCode": "OSS-WAUNV"
       }
     },
     "PostAppointmentResponse": {
@@ -219,6 +307,10 @@
         "confirmationCode": {
           "type": "string"
         }
+      },
+      "example": {
+        "status": "booked",
+        "confirmationCode": "OSS-WAUNV"
       }
     },
     "SlotA": {
@@ -251,9 +343,6 @@
           "items": {
             "$ref": "#/definitions/SlotA"
           }
-        },
-        "totalAvailable": {
-          "type": "number"
         }
       }
     },
@@ -271,22 +360,30 @@
     "Segment": {
       "type": "object",
       "properties": {
-        "time": {
+        "date": {
           "type": "string"
         },
-        "endTime": {
-          "type": "string"
-        },
-        "serviceAdvisors": {
+        "slots": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SA"
-          }
-        },
-        "transportationOptions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ST"
+            "type": "object",
+            "properties": {
+              "time": {
+                "type": "string"
+              },
+              "serviceAdvisors": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/SA"
+                }
+              },
+              "transportationOptions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/ST"
+                }
+              }
+            }
           }
         }
       }
@@ -300,6 +397,34 @@
             "$ref": "#/definitions/Segment"
           }
         }
+      },
+      "example": {
+        "segments": [
+          {
+            "date": "2020-11-25",
+            "slots": [
+              {
+                "time": "07:30:00.00-05:00",
+                "serviceAdvisors": [
+                  {
+                    "id": 101336
+                  },
+                  {
+                    "id": 127487
+                  }
+                ],
+                "transportationOptions": [
+                  {
+                    "code": "waiter"
+                  },
+                  {
+                    "code": "own-ride"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     },
     "Option": {
@@ -316,21 +441,30 @@
     "TransportationOptionResponse": {
       "type": "object",
       "properties": {
-        "transportation-options": {
+        "transportationOptions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Option"
           }
         }
+      },
+      "example": {
+        "transportationOptions": [
+          {
+            "code": "waiter",
+            "description": "Waiter"
+          },
+          {
+            "code": "own-ride",
+            "description": "Own-ride"
+          }
+        ]
       }
     },
     "Advisor": {
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
-        },
-        "memberId": {
           "type": "string"
         },
         "name": {
@@ -347,6 +481,18 @@
             "$ref": "#/definitions/Advisor"
           }
         }
+      },
+      "example": {
+        "serivceAdvisors": [
+          {
+            "id": 332708,
+            "name": "Crystal Rentas"
+          },
+          {
+            "id": 959285,
+            "name": "Jose Gomez"
+          }
+        ]
       }
     },
     "AppointmentSummaryResponse": {
@@ -355,15 +501,17 @@
         "taxes": {
           "type": "number"
         },
-        "taxesGt": {
+        "subTotal": {
           "type": "number"
         },
         "total": {
           "type": "number"
-        },
-        "totalLabourHours": {
-          "type": "number"
         }
+      },
+      "example": {
+        "taxes": 10.1,
+        "subTotal": 20.1,
+        "total": 30.2
       }
     },
     "DealerDepartmentResponse": {
@@ -371,13 +519,10 @@
       "properties": {
         "id": {
           "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "code": {
-          "type": "string"
         }
+      },
+      "example": {
+        "id": 4836
       }
     },
     "SearchVehicles": {
@@ -403,6 +548,11 @@
         "foundType": {
           "type": "string"
         }
+      },
+      "example": {
+        "customerId": "urn:dfx:customer:103129767",
+        "email": "testkh19@gmail.com",
+        "foundType": "byEmail"
       }
     },
     "SearchVin": {
@@ -417,28 +567,15 @@
         "vehicles": {
           "$ref": "#/definitions/SearchVehicles"
         }
-      }
-    },
-    "Link": {
-      "type": "object",
-      "properties": {
-        "rel": {
-          "type": "string"
-        },
-        "href": {
-          "type": "string"
-        }
-      }
-    },
-    "Vehicle": {
-      "type": "object",
-      "properties": {
-        "links": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Link"
+      },
+      "example": {
+        "customerId": "urn:dfx:customer:103129767",
+        "foundType": "byVin",
+        "vehicles": [
+          {
+            "vin": "2C3CCAGG7LH2003XM"
           }
-        }
+        ]
       }
     },
     "ServicePostAppointmentParams": {
@@ -498,9 +635,6 @@
         },
         "services": {
           "$ref": "#/definitions/ServicesPostAppointment"
-        },
-        "vehicle": {
-          "$ref": "#/definitions/Vehicle"
         }
       }
     },
@@ -527,9 +661,6 @@
         },
         "services": {
           "$ref": "#/definitions/ServicesPostAppointment"
-        },
-        "vehicle": {
-          "$ref": "#/definitions/Vehicle"
         }
       }
     },
@@ -564,6 +695,15 @@
             "$ref": "#/definitions/Service"
           }
         }
+      },
+      "example": {
+        "services": [
+          {
+            "id": 82893,
+            "name": "Replace engine oil and filter",
+            "price": 69.95
+          }
+        ]
       }
     },
     "OssVehicleResponse": {
@@ -590,6 +730,15 @@
         "train": {
           "type": "string"
         }
+      },
+      "example": {
+        "vin": "2C3CCAGG7LH2003XM",
+        "make": "CHRYSLER",
+        "year": 2020,
+        "model": "300 (3.6L)",
+        "transmission": "Automatic",
+        "engine": "6CYL",
+        "train": "4WD"
       }
     },
     "TokenResponse": {
@@ -609,6 +758,11 @@
         "expiresIn": {
           "type": "number"
         }
+      },
+      "example": {
+        "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHA6Ly9sb2NhbC9kZWFsZXItaWQiOjUxNTEsInVybjpkZng6YXBwOnRoZW1lIjoiZmNhIiwidXJuOmRmeDphcHA6Y3VsdHVyZSI6ImVuLXVzIiwiYXBwOi8vbG9jYWwvY2xpZW50LWFkZHJlc3MiOiIxMC4wLjEzMC40MyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvYXV0aGVudG",
+        "tokenType": "bearer",
+        "expiresIn": 86399
       }
     },
     "Router400ErrorResponse": {

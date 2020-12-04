@@ -88,8 +88,8 @@ export type GetAdvisorsRequestData = DepartmentRequestData;
 
 export interface GetTimeSegmetsRequestData extends ServiceRequestData {
     departmentId: string;
-    startdate: string;
-    enddate: string;
+    startdate: number;
+    enddate: number;
     dealerToken: string;
 }
 

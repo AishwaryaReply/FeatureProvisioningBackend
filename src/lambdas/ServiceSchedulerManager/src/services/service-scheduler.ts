@@ -518,7 +518,6 @@ export class ServiceScheduler {
             EndDate: ServiceScheduler.formatDate(request.enddate),
             dealerToken: request.dealerToken
         }
-
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsResponse = await SchedulingConectorService.getDealerDepartmentTimeSegments(mappedRequest);
         logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
@@ -823,13 +822,13 @@ export class ServiceScheduler {
         });
     }
 
-    private static checkDate(date: string){
+    private static checkDate(date: number){
         if (!new Date(date).getTime()){
             throw new GCVErrors.BadRequest("Wrong date format");
         }
     }
 
-    private static formatDate(date: string) {
+    private static formatDate(date: number) {
         var selectedDate = new Date(date);
         var dd = String(selectedDate.getDate()).padStart(2, '0');
         var mm = String(selectedDate.getMonth() + 1).padStart(2, '0');

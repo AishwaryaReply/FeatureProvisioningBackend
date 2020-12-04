@@ -2669,14 +2669,14 @@
             "description": "starting date for the research ( timestamp )",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "integer"
           },
           {
             "name": "enddate",
             "description": "ending date for the research ( timestamp )",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "integer"
           }
         ],
         "responses": {

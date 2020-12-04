@@ -396,7 +396,7 @@ describe('ServiceSchedulerService', () => {
             sinon.stub(SchedulingConectorService, 'getDealerDepartmentTimeSegments').resolves(Stubs.mockGetDealerDepartmentTimeSegments);
             
             const expected: DataModels.GetDealerDepartmentTimeSegmentsResponse = Stubs.mockGetDealerDepartmentTimeSegmentsFiltered;
-            const response = await testServiceSchedulerService.getDealerDepartmentTimeSegments(Stubs.mockGetDealerDepartmentTimeSegmentsRequest);
+            const response = await testServiceSchedulerService.getDealerDepartmentTimeSegments(Stubs.mockGetDealerDepartmentTimeSegmentsRequestTimestampData);
             
             expect(response).to.be.deep.equal(expected);
         }) 

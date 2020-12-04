@@ -36,8 +36,8 @@ export namespace Stubs {
         }
     ];
     const TEST_DEPARTMENT = "department";
-    const TEST_END_DATE = "2020-12-21";
-    const TEST_START_DATE = "2019-12-21";
+    const TEST_END_DATE = 1576886647000;
+    const TEST_START_DATE = 1576886647000;
     const TEST_POST_BODY = {
         customerId: "string",
         customerConcernsInfo: "string",
@@ -2417,7 +2417,9 @@ export namespace Stubs {
 
     // InvalidDataRequest
     export const mockGetDealerDepartmentTimeSegmentsRequestInvalidData:DataModels.GetTimeSegmetsRequestData = {
+        //@ts-ignore
         startdate: "data is a string",
+        //@ts-ignore
         enddate: TEST_END_DATE,
         departmentId: TEST_DEPARTMENT,
         dealerToken: TEST_DEALER_TOKEN,
@@ -2426,8 +2428,8 @@ export namespace Stubs {
 
     // TimestampData
     export const mockGetDealerDepartmentTimeSegmentsRequestTimestampData:DataModels.GetTimeSegmetsRequestData = {
-        startdate: "1576886400",
-        enddate: TEST_END_DATE,
+        startdate: 1576886647000,
+        enddate: 1576886647000,
         departmentId: TEST_DEPARTMENT,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS'

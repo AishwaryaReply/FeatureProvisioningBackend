@@ -188,9 +188,8 @@ export type GetDealerDepartmentResponse = {
 
 export type GetAppointmentSummaryResponse = {    
     taxes?: number,
-    taxesGt?: number,
-    total?: number,
-    totalLabourHours?: number
+    subTotal?: number,
+    total?: number
 }
 
 export type serviceAdvisor = {    
@@ -284,9 +283,8 @@ export declare type TransportationOption = {
 };
 export declare type Summary = {
     taxes?: number;
-    taxesGt?: number;
     total?: number;
-    totalLabourHours?: number;
+    subTotal?: number;
 };
 export declare type ServiceAppointment = {
     id?: number;

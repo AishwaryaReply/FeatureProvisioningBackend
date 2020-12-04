@@ -2209,13 +2209,17 @@ export namespace Stubs {
     }
 
     export const mockGetAppointmentSummary:SchedulingServiceDataModels.GetAppointmentSummaryResponse = {
-        "taxes": 17.37,
-        "taxesGt": 2.50,
-        "total": 283.82,
+        "taxes": 10,
+        "taxesGt": 0.10,
+        "total": 30.20,
         "totalLabourHours": 2.10
     }
 
-    export const mockGetAppointmentSummaryFiltered: DataModels.GetAppointmentSummaryResponse = mockGetAppointmentSummary;
+    export const mockGetAppointmentSummaryFiltered: DataModels.GetAppointmentSummaryResponse = {
+        total: 30.20,
+        subTotal: 20.10,
+        taxes: 10.10
+    };
 
     // GetAdvisors
     export const mockGetAdvisorsRequest:DataModels.GetAdvisorsRequestData = {
@@ -4646,9 +4650,9 @@ export namespace Stubs {
         },
         "services": {
             "summary": {
-                "taxes": 2.78,
-                "taxesGt": 2.50,
-                "total": 264.23,
+                "taxes": 20,
+                "taxesGt": 0.10,
+                "total": 30.20,
                 "totalLabourHours": 0.60
             },
             "drs": [
@@ -4818,10 +4822,10 @@ export namespace Stubs {
         },
         services: {
             summary: {
-                taxes: 2.78,
-                taxesGt: 2.50,
-                total: 264.23,
-                totalLabourHours: 0.60
+                taxes: 20.10,
+                subTotal: 10.10,
+                total: 30.20,
+
             },
             drs: [
                 {

@@ -55,10 +55,10 @@
             "type": "object",
             "properties": {
                 "startdate": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "enddate": {
-                    "type": "integer"
+                    "type": "string"
                 }
             },
             "required": [

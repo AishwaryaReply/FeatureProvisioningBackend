@@ -3,6 +3,7 @@ import { SchedulingServiceDataModels, SchedulingConectorService } from 'gcv-meld
 import logger from "gcv-logger";
 import { Constants } from "../../constants";
 import { GCVErrors } from "gcv-utils";
+import { Slot, SlotAdvisor, SlotTransportation } from "../interfaces/data-models";
 
 const LOG_PREFIX_CLASS = 'ServiceScheduler | ';
 
@@ -458,9 +459,9 @@ export class ServiceScheduler {
             const dim: number = response.serviceAdvisors.length;
             for (let i = 0; i < dim; i++) {
                 const elem = response.serviceAdvisors[i];
-                if (elem.id && elem.name) {
+                if (elem.memberId && elem.name) {
                     const service: DataModels.serviceAdvisor = {
-                        id: elem.id,
+                        id: elem.memberId,
                         name: elem.name
                     }
                     serviceAdvisors.push(service);
@@ -521,10 +522,11 @@ export class ServiceScheduler {
             EndDate: ServiceScheduler.formatDate(request.enddate),
             dealerToken: request.dealerToken
         }
+        console.log(ServiceScheduler.formatDate(1603058400000));
+        console.log(ServiceScheduler.formatDate(1603144800000));
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsResponse = await SchedulingConectorService.getDealerDepartmentTimeSegments(mappedRequest);
         logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
-
         let filteredResponse: DataModels.GetDealerDepartmentTimeSegmentsResponse = {};
 
         let segments: DataModels.Segment[] = [];
@@ -533,13 +535,9 @@ export class ServiceScheduler {
             const dim: number = response.segments.length;
             for (let i = 0; i < dim; i++) {
                 const elem = response.segments[i];
-                let serviceAdvisors: DataModels.SA = {
-                    slots: [],
-                    totalAvailable: 0
-                };
-                let transportationOptions: DataModels.ST = {
-                    slots: []
-                };
+                let serviceAdvisors: SlotAdvisor[] = [];
+                let transportationOptions: SlotTransportation[] = [];
+
                 if (elem.time &&
                     elem.endTime &&
                     elem.available &&
@@ -548,45 +546,47 @@ export class ServiceScheduler {
 
                     const dimSlots: number = elem.slots.length;
                     for (let i = 0; i < dimSlots; i++) {
+
                         const slotElem = elem.slots[i];
-                        if (slotElem.name && (slotElem.count != undefined)) {
-                            const slot = {
-                                name: slotElem.name,
-                                count: slotElem.count
-                            }
-                            if (slot.name.includes("service-advisor")) {
-                                const se = slot.name.split(":");
-                                slot.name = se[se.length - 1];
-                                if (slot.name != "service-advisor") {
+                        if (slotElem.name && slotElem.count) {
+                            let name = slotElem.name;
+                            if (name.includes("service-advisor")) {
+                                const se = name.split(":");
+                                name = se[se.length - 1];
+                                if (name != "service-advisor") {
                                     const SA: DataModels.SlotAdvisor = {
-                                        id: slot.name,
-                                        count: slot.count
+                                        id: parseInt(name)
                                     }
-                                    serviceAdvisors?.slots.push(SA);
-                                } else {
-                                    serviceAdvisors.totalAvailable = slot.count;
+                                    serviceAdvisors?.push(SA);
                                 }
-                            } else if (slot.name.includes("transportation-options")) {
-                                const se = slot.name.split(":");
-                                slot.name = se[se.length - 1];
-                                if (slot.name != "transportation-options") {
+                            } else if (name.includes("transportation-options")) {
+                                const se = name.split(":");
+                                name = se[se.length - 1];
+                                if (name != "transportation-options") {
                                     const ST: DataModels.SlotTransportation = {
-                                        code: slot.name,
-                                        count: slot.count
+                                        code: name
                                     }
-                                    transportationOptions.slots.push(ST);
+                                    transportationOptions.push(ST);
                                 }
                             }
                         }
                     }
-
-                    const segment: DataModels.Segment = {
-                        time: elem.time,
-                        endTime: elem.endTime,
+                    const tmpSlot: Slot = {
+                        time: ServiceScheduler.formatTime(new Date(elem.time).getTime()),
                         serviceAdvisors: serviceAdvisors,
                         transportationOptions: transportationOptions
                     }
-                    segments.push(segment);
+                    
+                    // check if a segment with the same "date" is already there 
+                    let segmentFound = ServiceScheduler.getSegmentByDate(ServiceScheduler.formatDate(new Date(elem.time).getTime()), segments);
+                    if (segmentFound) {
+                        segmentFound.slots?.push(tmpSlot);
+                    } else {
+                        segments.push({
+                            date: ServiceScheduler.formatDate(new Date(elem.time).getTime()),
+                            slots: [tmpSlot]
+                        });
+                    }
                 }
             }
             filteredResponse = {
@@ -710,7 +710,7 @@ export class ServiceScheduler {
         const mappedRequest: SchedulingServiceDataModels.UpdateServiceAppointmentParams = {
             departmentId: request.departmentId,
             services: request.body.services,
-            customerId: request.body.customerId,
+            customer: {id: request.body.customerId},
             customerConcernsInfo: request.body.customerConcernsInfo,
             advisorId: request.body.advisorId,
             transportationOptionCode: request.body.transportationOptionCode,
@@ -839,12 +839,27 @@ export class ServiceScheduler {
         }
     }
 
-    private static formatDate(date: number) {
+    private static formatDate(date: number): string{
         var selectedDate = new Date(date);
         var dd = String(selectedDate.getDate()).padStart(2, '0');
         var mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
         var yyyy = selectedDate.getFullYear();
         return yyyy + "-" + mm + "-" + dd;
+    }
+
+    private static formatTime(date: number): string {
+        var selectedDate = new Date(date);
+        var minute = selectedDate.getMinutes();
+        return selectedDate.getHours() + ((minute < 10) ? ':0' : ':') + minute;
+    }
+
+    private static getSegmentByDate(date: string, segments: DataModels.Segment[]):  DataModels.Segment | null {
+        for (let segment of segments) {
+            if (segment.date == date) {
+                return segment
+            }
+        }
+        return null;
     }
 }
 

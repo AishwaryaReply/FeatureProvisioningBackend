@@ -16,7 +16,7 @@ export namespace Stubs {
     const TEST_YEAR = "2020";
     const TEST_MAKE = "make";
     const TEST_CUST_ID = "cust_id";
-    const TEST_SERVICE_LIST = [{id:0},{id:1},{id:2}];
+    const TEST_SERVICE_LIST = [{ id: 0 }, { id: 1 }, { id: 2 }];
     const headers = {
         "clientrequestid": "mock",
         "x-originator-type": "mock",
@@ -36,8 +36,8 @@ export namespace Stubs {
         }
     ];
     const TEST_DEPARTMENT = "department";
-    const TEST_END_DATE = 1576886647000;
-    const TEST_START_DATE = 1576886647000;
+    const TEST_END_DATE = "1576886647000";
+    const TEST_START_DATE = "1576886647000";
     const TEST_POST_BODY = {
         customerId: "string",
         customerConcernsInfo: "string",
@@ -282,7 +282,7 @@ export namespace Stubs {
             departmentid: TEST_DEPARTMENT
         },
         runTimeInfo: {
-            resourcePath: '/v1/servicescheduler/department/{departmentid}/trasportationoption'
+            resourcePath: '/v1/servicescheduler/department/{departmentid}/transportationoption'
         }
     }
 
@@ -448,7 +448,7 @@ export namespace Stubs {
         foundType: "byEmail"
     }
 
-    export const mockSearchByEmailRequest:DataModels.DfxSearchEmailRequestData = {
+    export const mockSearchByEmailRequest: DataModels.DfxSearchEmailRequestData = {
         email: TEST_EMAIL,
         dealerToken: TEST_VIN,
         requestedService: 'DFX_SEARCH_EMAIL'
@@ -457,7 +457,7 @@ export namespace Stubs {
     export const mockSearchByVinFiltered: DataModels.SearchVinResponse = {
         customerId: "urn:dfx:customer:103129767",
         foundType: "byVin",
-        vehicles: [{"vin": "2C3CCAGG7LH2003XM"}]
+        vehicles: [{ "vin": "2C3CCAGG7LH2003XM" }]
     }
 
     export const mockSearchByVin: SchedulingServiceDataModels.GetSearchResponse = {
@@ -496,7 +496,7 @@ export namespace Stubs {
         ]
     }
 
-    export const mockSearchByVinRequest:DataModels.DfxSearchVinRequestData = {
+    export const mockSearchByVinRequest: DataModels.DfxSearchVinRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         dealerToken: TEST_VIN,
@@ -504,7 +504,7 @@ export namespace Stubs {
     }
 
     // GetDfxVehicle
-    export const mockGetDfxVehicleRequest:DataModels.GetDfxVehicleRequestData = {
+    export const mockGetDfxVehicleRequest: DataModels.GetDfxVehicleRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         dealerToken: TEST_VIN,
@@ -616,7 +616,7 @@ export namespace Stubs {
     }
 
     // GetDfxToken
-    export const mockGetDfxTokenRequest:DataModels.GetTokenRequestData = {
+    export const mockGetDfxTokenRequest: DataModels.GetTokenRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         hintdealer: "TEST_HINT",
@@ -636,7 +636,7 @@ export namespace Stubs {
     }
 
     // GetDealerServicesVin
-    export const mockGetDealerServicesVinRequest:DataModels.GetServicesVinRequestData = {
+    export const mockGetDealerServicesVinRequest: DataModels.GetServicesVinRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         mileage: TEST_MILEAGE,
@@ -644,7 +644,7 @@ export namespace Stubs {
         requestedService: 'GET_DEALER_SERVICES_VIN'
     }
 
-    export const mockGetDealerServicesVin:SchedulingServiceDataModels.GetDealerServicesResponse = {
+    export const mockGetDealerServicesVin: SchedulingServiceDataModels.GetDealerServicesResponse = {
         "services": [
             {
                 "id": 80163,
@@ -773,21 +773,21 @@ export namespace Stubs {
     }
 
     // GetDealerServicesWithoutVin
-    export const mockGetDealerServicesWithoutVinRequest:DataModels.GetServicesNoVinRequestData = {
+    export const mockGetDealerServicesWithoutVinRequest: DataModels.GetServicesNoVinRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         mileage: TEST_MILEAGE,
-        make: TEST_MAKE, 
-        year: TEST_YEAR, 
-        model: TEST_MODEL, 
+        make: TEST_MAKE,
+        year: TEST_YEAR,
+        model: TEST_MODEL,
         transmission: TEST_MAKE,
-        train: TEST_TRAIN, 
+        train: TEST_TRAIN,
         engine: TEST_ENGINE,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_DEALER_SERVICES_VIN'
     }
 
-    export const mockGetDealerServicesWithoutVin:SchedulingServiceDataModels.GetDealerServicesResponse = {
+    export const mockGetDealerServicesWithoutVin: SchedulingServiceDataModels.GetDealerServicesResponse = {
         "services": [
             {
                 "id": 80163,
@@ -916,7 +916,7 @@ export namespace Stubs {
     }
 
     // GetFactoryServicesVin
-    export const mockGetFactoryServicesVinRequest:DataModels.GetServicesVinRequestData = {
+    export const mockGetFactoryServicesVinRequest: DataModels.GetServicesVinRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         mileage: TEST_MILEAGE,
@@ -924,7 +924,7 @@ export namespace Stubs {
         requestedService: 'GET_FACTORY_SERVICES_VIN'
     }
 
-    export const mockGetFactoryServicesVin:SchedulingServiceDataModels.GetFactoryServicesResponse = {
+    export const mockGetFactoryServicesVin: SchedulingServiceDataModels.GetFactoryServicesResponse = {
         "services": [
             {
                 "id": 82893,
@@ -1235,21 +1235,21 @@ export namespace Stubs {
     }
 
     // GetFactoryServicesWithoutVin
-    export const mockGetFactoryServicesWithoutVinRequest:DataModels.GetServicesNoVinRequestData = {
+    export const mockGetFactoryServicesWithoutVinRequest: DataModels.GetServicesNoVinRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         mileage: TEST_MILEAGE,
-        make: TEST_MAKE, 
-        year: TEST_YEAR, 
-        model: TEST_MODEL, 
+        make: TEST_MAKE,
+        year: TEST_YEAR,
+        model: TEST_MODEL,
         transmission: TEST_MAKE,
-        train: TEST_TRAIN, 
+        train: TEST_TRAIN,
         engine: TEST_ENGINE,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_FACTORY_SERVICES_WITHOUT_VIN'
     }
 
-    export const mockGetFactoryServicesWithoutVin:SchedulingServiceDataModels.GetFactoryServicesResponse = {
+    export const mockGetFactoryServicesWithoutVin: SchedulingServiceDataModels.GetFactoryServicesResponse = {
         "services": [
             {
                 "id": 82893,
@@ -1560,7 +1560,7 @@ export namespace Stubs {
     }
 
     // GetRepairServicesVin
-    export const mockGetRepairServicesVinRequest:DataModels.GetServicesVinRequestData = {
+    export const mockGetRepairServicesVinRequest: DataModels.GetServicesVinRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         mileage: TEST_MILEAGE,
@@ -1568,7 +1568,7 @@ export namespace Stubs {
         requestedService: 'GET_REPAIR_SERVICES_VIN'
     }
 
-    export const mockGetRepairServicesVin:SchedulingServiceDataModels.GetFactoryServicesResponse = {
+    export const mockGetRepairServicesVin: SchedulingServiceDataModels.GetFactoryServicesResponse = {
         "services": [
             {
                 "id": 47007611,
@@ -1853,21 +1853,21 @@ export namespace Stubs {
     }
 
     // GetRepairServicesWithoutVin
-    export const mockGetRepairServicesWithoutVinRequest:DataModels.GetServicesNoVinRequestData = {
+    export const mockGetRepairServicesWithoutVinRequest: DataModels.GetServicesNoVinRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         mileage: TEST_MILEAGE,
-        make: TEST_MAKE, 
-        year: TEST_YEAR, 
-        model: TEST_MODEL, 
+        make: TEST_MAKE,
+        year: TEST_YEAR,
+        model: TEST_MODEL,
         transmission: TEST_MAKE,
-        train: TEST_TRAIN, 
+        train: TEST_TRAIN,
         engine: TEST_ENGINE,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_REPAIR_SERVICES_WITHOUT_VIN'
     }
 
-    export const mockGetRepairServicesWithoutVin:SchedulingServiceDataModels.GetFactoryServicesResponse = {
+    export const mockGetRepairServicesWithoutVin: SchedulingServiceDataModels.GetFactoryServicesResponse = {
         "services": [
             {
                 "id": 47007611,
@@ -2149,16 +2149,16 @@ export namespace Stubs {
                 price: 160.0000
             }
         ]
-    }    
+    }
 
     // GetDealerDepartment
-    export const mockGetDealerDepartmentRequest:DataModels.GetDealerDepartmentRequestData = {
+    export const mockGetDealerDepartmentRequest: DataModels.GetDealerDepartmentRequestData = {
         servicesList: TEST_SERVICE_LIST,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_DEALER_DEPARTMENT'
     }
 
-    export const mockGetDealerDepartment:SchedulingServiceDataModels.GetDealerDepartmentResponse = {
+    export const mockGetDealerDepartment: SchedulingServiceDataModels.GetDealerDepartmentResponse = {
         "id": 4836,
         "name": "Riverdale Chrysler Jeep - Service",
         "code": "3QC",
@@ -2202,13 +2202,13 @@ export namespace Stubs {
     };
 
     // GetAppointmentSummary
-    export const mockGetAppointmentSummaryRequest:DataModels.GetAppointmentSummaryRequestData = {
+    export const mockGetAppointmentSummaryRequest: DataModels.GetAppointmentSummaryRequestData = {
         servicesList: TEST_SERVICE_LIST,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_APPOINTMENT_SUMMARY'
     }
 
-    export const mockGetAppointmentSummary:SchedulingServiceDataModels.GetAppointmentSummaryResponse = {
+    export const mockGetAppointmentSummary: SchedulingServiceDataModels.GetAppointmentSummaryResponse = {
         "taxes": 10,
         "taxesGt": 0.10,
         "total": 30.20,
@@ -2222,13 +2222,13 @@ export namespace Stubs {
     };
 
     // GetAdvisors
-    export const mockGetAdvisorsRequest:DataModels.GetAdvisorsRequestData = {
+    export const mockGetAdvisorsRequest: DataModels.GetAdvisorsRequestData = {
         departmentId: TEST_DEPARTMENT,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_APPOINTMENT_SUMMARY'
     }
 
-    export const mockGetAdvisors:SchedulingServiceDataModels.GetAdvisorsResponse = {
+    export const mockGetAdvisors: SchedulingServiceDataModels.GetAdvisorsResponse = {
         "serviceAdvisors": [
             {
                 "id": 332708,
@@ -2307,28 +2307,28 @@ export namespace Stubs {
     export const mockGetAdvisorsFiltered: DataModels.GetAdvisorsResponse = {
         serviceAdvisors: [
             {
-                id: 332708,
+                id: 101336,
                 name: "Albert Pico"
             },
             {
-                id: 959285,
+                id: 127487,
                 name: "Crystal Rentas"
             },
             {
-                id: 274509,
+                id: 43032,
                 name: "Jose Gomez"
             }
         ]
     }
 
     // GetTransportationOptions
-    export const mockGetTransportationOptionsRequest:DataModels.GetTransportationOptionsRequestData = {
+    export const mockGetTransportationOptionsRequest: DataModels.GetTransportationOptionsRequestData = {
         departmentId: TEST_DEPARTMENT,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_TRANSPORTATION_OPTIONS'
     }
 
-    export const mockGetTransportationOptions:SchedulingServiceDataModels.GetTransportationOptionsResponse = {
+    export const mockGetTransportationOptions: SchedulingServiceDataModels.GetTransportationOptionsResponse = {
         "options": [
             {
                 "code": "waiter",
@@ -2411,16 +2411,16 @@ export namespace Stubs {
     }
 
     // GetDealerDepartmentTimeSegments
-    export const mockGetDealerDepartmentTimeSegmentsRequest:DataModels.GetTimeSegmetsRequestData = {
-        startdate: TEST_START_DATE,
-        enddate: TEST_END_DATE,
+    export const mockGetDealerDepartmentTimeSegmentsRequest: DataModels.GetTimeSegmetsRequestData = {
+        startdate: parseInt(TEST_START_DATE),
+        enddate: parseInt(TEST_END_DATE),
         departmentId: TEST_DEPARTMENT,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS'
     }
 
     // InvalidDataRequest
-    export const mockGetDealerDepartmentTimeSegmentsRequestInvalidData:DataModels.GetTimeSegmetsRequestData = {
+    export const mockGetDealerDepartmentTimeSegmentsRequestInvalidData: DataModels.GetTimeSegmetsRequestData = {
         //@ts-ignore
         startdate: "data is a string",
         //@ts-ignore
@@ -2431,7 +2431,7 @@ export namespace Stubs {
     }
 
     // TimestampData
-    export const mockGetDealerDepartmentTimeSegmentsRequestTimestampData:DataModels.GetTimeSegmetsRequestData = {
+    export const mockGetDealerDepartmentTimeSegmentsRequestTimestampData: DataModels.GetTimeSegmetsRequestData = {
         startdate: 1576886647000,
         enddate: 1576886647000,
         departmentId: TEST_DEPARTMENT,
@@ -2440,7 +2440,7 @@ export namespace Stubs {
     }
 
 
-    export const mockGetDealerDepartmentTimeSegments:SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsResponse = {
+    export const mockGetDealerDepartmentTimeSegments: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsResponse = {
         "segments": [
             {
                 "time": "2020-11-25T07:30:00.00-05:00",
@@ -2512,7 +2512,7 @@ export namespace Stubs {
                 "links": []
             },
             {
-                "time": "2020-11-25T07:45:00.00-05:00",
+                "time": "2020-11-26T07:45:00.00-05:00",
                 "endTime": "2020-11-25T17:00:00.00-05:00",
                 "state": "opened",
                 "slots": [
@@ -2581,7 +2581,7 @@ export namespace Stubs {
                 "links": []
             },
             {
-                "time": "2020-11-25T08:00:00.00-05:00",
+                "time": "2020-11-27T08:00:00.00-05:00",
                 "endTime": "2020-11-25T17:00:00.00-05:00",
                 "state": "opened",
                 "slots": [
@@ -3349,554 +3349,398 @@ export namespace Stubs {
     }
 
     export const mockGetDealerDepartmentTimeSegmentsFiltered: DataModels.GetDealerDepartmentTimeSegmentsResponse = {
-        segments: [
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 0,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 2
-            },            
-            time: "2020-11-25T07:30:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 0,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 3
-            },            
-            time: "2020-11-25T07:45:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 0,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 3
-            },            
-            time: "2020-11-25T08:00:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 3
-            },            
-            time: "2020-11-25T08:15:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 0,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 2
-            },            
-            time: "2020-11-25T08:30:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 3
-            },            
-            time: "2020-11-25T08:45:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 0,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 2
-            },            
-            time: "2020-11-25T09:00:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 3
-            },            
-            time: "2020-11-25T09:15:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 3
-            },            
-            time: "2020-11-25T09:30:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 3
-            },            
-            time: "2020-11-25T09:45:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 3
-            },            
-            time: "2020-11-25T10:00:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 3
-            },        
-            time: "2020-11-25T10:15:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
-            }
-          },
-          {
-            
-            endTime: "2020-11-25T17:00:00.00-05:00",
-            serviceAdvisors: {
-              slots: [
-                {
-                  count: 1,
-                  id: "101336"
-                },
-                {
-                  count: 1,
-                  id: "127487"
-                },
-                {
-                  count: 1,
-                  id: "43032"
-                }
-              ],
-              totalAvailable: 3
+        "segments": [
+            {
+                "date": "2020-11-25",
+                "slots": [
+                    {
+                        "time": "13:30",
+                        "serviceAdvisors":
+                            // "serviceAdvisors": {
+                            // "slots": [
+                            [
+                                {
+                                    "id": 101336
+                                },
+                                {
+                                    "id": 43032
+                                }
+                            ]
+                        ,
+                        "transportationOptions":
+                            // "slots": 
+                            [
+                                {
+                                    "code": "waiter"
+                                },
+                                {
+                                    "code": "own-ride"
+                                }
+                            ]
+                    }
+                    ,
+                    {
+                        "time": "14:15",
+                        "serviceAdvisors": [
+                            // "slots": [
+                            {
+                                "id": 101336
+                            },
+                            {
+                                "id": 127487
+                            },
+                            {
+                                "id": 43032
+                            }
+                        ]
+                        ,
+                        "transportationOptions": [
+                            // "slots": [
+                            {
+                                "code": "waiter"
+                            },
+                            {
+                                "code": "own-ride"
+                            },
+                            {
+                                "code": "need-pickup"
+                            }
+                        ]
+                    },
+                    {
+                        "time": "14:30",
+                        "serviceAdvisors": [
+                            // "slots": [
+                            {
+                                "id": 127487
+                            },
+                            {
+                                "id": 43032
+                            }
+                        ]
+                        ,
+                        "transportationOptions": [
+                            // "slots": [
+                            {
+                                "code": "waiter"
+                            },
+                            {
+                                "code": "own-ride"
+                            },
+                            {
+                                "code": "need-pickup"
+                            }
+                        ]
+                    }
+                    ,
+                    {
+                        "time": "14:45",
+                        "serviceAdvisors": [
+                            // "slots": [
+                            {
+                                "id": 101336
+                            },
+                            {
+                                "id": 127487
+                            },
+                            {
+                                "id": 43032
+                            }
+                        ],
+                        "transportationOptions": [
+                            // "slots": [
+                            {
+                                "code": "waiter"
+                            },
+                            {
+                                "code": "own-ride"
+                            },
+                            {
+                                "code": "need-pickup"
+                            }
+                        ]
+                    }
+                    ,
+                    {
+                        "time": "15:00",
+                        "serviceAdvisors":
+                            // "slots": [
+                            [
+                                {
+                                    "id": 101336
+                                },
+                                {
+                                    "id": 127487
+                                }
+                            ]
+                        ,
+                        "transportationOptions": [
+                            // "slots": [
+                            {
+                                "code": "waiter"
+                            },
+                            {
+                                "code": "own-ride"
+                            },
+                            {
+                                "code": "need-pickup"
+                            }
+                        ]
+                    }
+                    ,
+                    {
+                        "time": "15:15",
+                        "serviceAdvisors": [
+                            // "slots": [
+                            {
+                                "id": 101336
+                            },
+                            {
+                                "id": 127487
+                            },
+                            {
+                                "id": 43032
+                            }
+                        ]
+                        ,
+                        "transportationOptions": [
+                            // "slots": [
+                            {
+                                "code": "waiter"
+                            },
+                            {
+                                "code": "own-ride"
+                            },
+                            {
+                                "code": "need-pickup"
+                            }
+                        ]
+                    }
+                    ,
+                    {
+                        "time": "15:30",
+                        "serviceAdvisors": [
+                            // "slots": [
+                            {
+                                "id": 101336
+                            },
+                            {
+                                "id": 127487
+                            },
+                            {
+                                "id": 43032
+                            }
+                        ]
+                        ,
+                        "transportationOptions": [
+                            // "slots": [
+                            {
+                                "code": "waiter"
+                            },
+                            {
+                                "code": "own-ride"
+                            },
+                            {
+                                "code": "need-pickup"
+                            }
+                        ]
+                    }
+                    ,
+                    {
+                        "time": "15:45",
+                        "serviceAdvisors": [
+                            // "slots": [
+                            {
+                                "id": 101336
+                            },
+                            {
+                                "id": 127487
+                            },
+                            {
+                                "id": 43032
+                            }
+                        ]
+                        ,
+                        "transportationOptions": [
+                            // "slots": [
+                            {
+                                "code": "waiter"
+                            },
+                            {
+                                "code": "own-ride"
+                            },
+                            {
+                                "code": "need-pickup"
+                            }
+                        ]
+                    }
+                    ,
+                    {
+                        "time": "16:00",
+                        "serviceAdvisors": [
+                            // "slots": [
+                            {
+                                "id": 101336
+                            },
+                            {
+                                "id": 127487
+                            },
+                            {
+                                "id": 43032
+                            }
+                        ]
+                        ,
+                        "transportationOptions": [
+                            // "slots": [
+                            {
+                                "code": "waiter"
+                            },
+                            {
+                                "code": "own-ride"
+                            },
+                            {
+                                "code": "need-pickup"
+                            }
+                        ]
+                    }
+                    ,
+                    {
+                        "time": "16:15",
+                        "serviceAdvisors": [
+                            // "slots": [
+                            {
+                                "id": 101336
+                            },
+                            {
+                                "id": 127487
+                            },
+                            {
+                                "id": 43032
+                            }
+                        ]
+                        ,
+                        "transportationOptions": [
+                            // "slots": [
+                            {
+                                "code": "waiter"
+                            },
+                            {
+                                "code": "own-ride"
+                            },
+                            {
+                                "code": "need-pickup"
+                            }
+                        ]
+                    }
+                    ,
+                    {
+                        "time": "16:30",
+                        "serviceAdvisors": [
+                            // "slots": [
+                            {
+                                "id": 101336
+                            },
+                            {
+                                "id": 127487
+                            },
+                            {
+                                "id": 43032
+                            }
+                        ]
+                        ,
+                        "transportationOptions": [
+                            // "slots": [
+                            {
+                                "code": "waiter"
+                            },
+                            {
+                                "code": "own-ride"
+                            },
+                            {
+                                "code": "need-pickup"
+                            }
+                        ]
+                    }
+
+                ]
             },
-            
-            time: "2020-11-25T10:30:00.00-05:00",
-            transportationOptions: {
-              slots: [
-                {
-                  count: 997,
-                  code: "waiter"
-                },
-                {
-                  count: 1,
-                  code: "own-ride"
-                },
-                {
-                  count: 0,
-                  code: "need-rental"
-                },
-                {
-                  count: 4,
-                  code: "need-pickup"
-                }
-              ]
+            {
+                "date": "2020-11-26",
+                "slots": [
+                    {
+                        "time": "13:45",
+                        "serviceAdvisors": [ 
+                                {
+                                    "id": 101336
+                                },
+                                {
+                                    "id": 127487
+                                },
+                                {
+                                    "id": 43032
+                                }
+                            ]
+                        ,
+                        "transportationOptions": [ 
+                            // "slots": [
+                                {
+                                    "code": "waiter"
+                                },
+                                {
+                                    "code": "own-ride"
+                                }
+                            ]
+                        }
+                    
+                ]
+            },
+            {
+                "date": "2020-11-27",
+                "slots": [
+                    {
+                        "time": "14:00",
+                        "serviceAdvisors": [ 
+                            // "slots": [
+                                {
+                                    "id": 101336
+                                },
+                                {
+                                    "id": 127487
+                                },
+                                {
+                                    "id": 43032
+                                }
+                            ]
+                        ,
+                        "transportationOptions": [ 
+                            // "slots": [
+                                {
+                                    "code": "waiter"
+                                },
+                                {
+                                    "code": "own-ride"
+                                },
+                                {
+                                    "code": "need-pickup"
+                                }
+                            ]
+                        }
+                    
+                ]
             }
-          }
         ]
     }
 
+
     // GetServiceAppointments
-    export const mockGetServiceAppointmentsRequest:DataModels.GetAppointmentsRequestData = {
+    export const mockGetServiceAppointmentsRequest: DataModels.GetAppointmentsRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_SERVICE_APPOINTMENTS'
     }
 
-    export const mockGetServiceAppointments:SchedulingServiceDataModels.GetServiceAppointmentsResponse = {
+    export const mockGetServiceAppointments: SchedulingServiceDataModels.GetServiceAppointmentsResponse = {
         "appointments": [
             {
                 "scheduledTime": "2020-11-20T15:15:00.00-05:00",
@@ -3946,12 +3790,12 @@ export namespace Stubs {
     };
 
     // PostAppointment
-    export const mockPostAppointmentRequest:DataModels.PostAppointmentRequestData = {
+    export const mockPostAppointmentRequest: DataModels.PostAppointmentRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         dealerToken: TEST_DEALER_TOKEN,
         departmentId: TEST_DEPARTMENT,
-        body:{
+        body: {
             customerId: TEST_CUST_ID,
             customerConcernsInfo: "customerConcernsInfo",
             advisorId: 0,
@@ -3963,19 +3807,19 @@ export namespace Stubs {
             },
             services: {
                 drs: [
-                    { 
+                    {
                         id: 0,
                         comment: "string"
                     }
                 ],
                 frs: [
-                    { 
+                    {
                         id: 0,
                         comment: "string"
                     }
                 ],
                 repair: [
-                    { 
+                    {
                         id: 0,
                         comment: "string"
                     }
@@ -3991,7 +3835,7 @@ export namespace Stubs {
         requestedService: 'POST_APPOINTMENT'
     }
 
-    export const mockPostAppointment:SchedulingServiceDataModels.PostAppointmentResponse = {
+    export const mockPostAppointment: SchedulingServiceDataModels.PostAppointmentResponse = {
         "customer": {
             "id": "urn:dfx:customer:103129767",
             "firstName": "TEST",
@@ -4175,14 +4019,14 @@ export namespace Stubs {
     };
 
     // DeleteServiceAppointment
-    export const mockDeleteServiceAppointmentRequest:DataModels.AppointmentRequestData = {
+    export const mockDeleteServiceAppointmentRequest: DataModels.AppointmentRequestData = {
         appointmentId: TEST_APPOINTMENT_ID,
         departmentId: TEST_DEPARTMENT,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'DELETE_SERVICE_APPOINTMENT'
     }
 
-    export const mockDeleteServiceAppointment:SchedulingServiceDataModels.DeleteServiceAppointmentResponse = {
+    export const mockDeleteServiceAppointment: SchedulingServiceDataModels.DeleteServiceAppointmentResponse = {
         "customer": {
             "id": "urn:dfx:customer:103129767",
             "firstName": "TEST",
@@ -4359,13 +4203,13 @@ export namespace Stubs {
     export const mockDeleteServiceAppointmentFiltered: DataModels.DeleteServiceAppointmentResponse = {};
 
     // UpdateServiceAppointment
-    export const mockUpdateServiceAppointmentRequest:DataModels.PutAppointmentRequestData = {
+    export const mockUpdateServiceAppointmentRequest: DataModels.PutAppointmentRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
         dealerToken: TEST_DEALER_TOKEN,
         appointmentId: TEST_APPOINTMENT_ID,
         departmentId: TEST_DEPARTMENT,
-        body:{
+        body: {
             customerId: TEST_CUST_ID,
             customerConcernsInfo: "customerConcernsInfo",
             advisorId: 0,
@@ -4377,19 +4221,19 @@ export namespace Stubs {
             },
             services: {
                 drs: [
-                    { 
+                    {
                         id: 0,
                         comment: "string"
                     }
                 ],
                 frs: [
-                    { 
+                    {
                         id: 0,
                         comment: "string"
                     }
                 ],
                 repair: [
-                    { 
+                    {
                         id: 0,
                         comment: "string"
                     }
@@ -4405,7 +4249,7 @@ export namespace Stubs {
         requestedService: 'UPDATE_SERVICE_APPOINTMENT'
     }
 
-    export const mockUpdateServiceAppointment:SchedulingServiceDataModels.UpdateServiceAppointmentResponse = {
+    export const mockUpdateServiceAppointment: SchedulingServiceDataModels.UpdateServiceAppointmentResponse = {
         "customer": {
             "id": "urn:dfx:customer:103129767",
             "firstName": "TEST",
@@ -4587,14 +4431,14 @@ export namespace Stubs {
     };
 
     // GetServiceAppointmentDetails
-    export const mockGetServiceAppointmentDetailsRequest:DataModels.AppointmentRequestData = {
+    export const mockGetServiceAppointmentDetailsRequest: DataModels.AppointmentRequestData = {
         appointmentId: TEST_APPOINTMENT_ID,
         departmentId: TEST_DEPARTMENT,
         dealerToken: TEST_DEALER_TOKEN,
         requestedService: 'GET_SERVICE_APPOINTMENT_DETAILS'
     }
 
-    export const mockGetServiceAppointmentDetails:SchedulingServiceDataModels.GetServiceAppointmentDetailsResponse = {
+    export const mockGetServiceAppointmentDetails: SchedulingServiceDataModels.GetServiceAppointmentDetailsResponse = {
         "customer": {
             "id": "urn:dfx:customer:103129767",
             "firstName": "TEST",
@@ -4869,6 +4713,6 @@ export namespace Stubs {
             "recalls": []
         }
     }
-    
+
 
 }

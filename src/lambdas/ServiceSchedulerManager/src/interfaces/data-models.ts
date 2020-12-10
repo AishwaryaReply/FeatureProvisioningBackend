@@ -209,25 +209,27 @@ export type GetTransportationOptionsResponse = {
 }
 
 export declare type SlotAdvisor = {
-    id: string;
-    count: number;
+    id: number;
 };
 export declare type SlotTransportation = {
     code: string;
-    count: number;
 };
 export declare type SA = {
-    slots: SlotAdvisor[],
-    totalAvailable: number
+    slots: SlotAdvisor[]
 }
 export declare type ST = {
     slots: SlotTransportation[]
 }
-export declare type Segment = {
+
+export declare type Slot = {
     time: string,
-    endTime: string,
-    serviceAdvisors: SA,
-    transportationOptions: ST
+    serviceAdvisors: SlotAdvisor[],
+    transportationOptions: SlotTransportation[]
+}
+
+export declare type Segment = {
+    date?: string,
+    slots?: Slot[]
 };
 export declare type GetDealerDepartmentTimeSegmentsResponse = {
     segments?: Segment[];

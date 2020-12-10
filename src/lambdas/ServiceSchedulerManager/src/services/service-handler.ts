@@ -199,8 +199,8 @@ export class ServiceHandler {
         return {
             requestedService: 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS',
             departmentId: event.pathParams.departmentid,
-            startdate: event.queryString.startdate,
-            enddate: event.queryString.enddate,
+            startdate: parseInt(event.queryString.startdate),
+            enddate: parseInt(event.queryString.enddate),
             dealerToken: event.headers['dealer-authorization']
         }
     }

@@ -22,28 +22,6 @@
         }
       }
     },
-    "Phone": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "number": {
-          "type": "string"
-        }
-      }
-    },
-    "Email": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        }
-      }
-    },
     "GenericAppointment": {
       "type": "object",
       "properties": {
@@ -53,23 +31,11 @@
         "name": {
           "type": "string"
         },
-        "opCode": {
-          "type": "string"
-        },
         "price": {
-          "type": "number"
-        },
-        "analyticsMsrp": {
-          "type": "number"
-        },
-        "laborHours": {
           "type": "number"
         },
         "selected": {
           "type": "boolean"
-        },
-        "maintenanceKind": {
-          "type": "string"
         },
         "comment": {
           "type": "string"
@@ -99,18 +65,6 @@
         "lastName": {
           "type": "string"
         },
-        "phones": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Phone"
-          }
-        },
-        "emails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Email"
-          }
-        },
         "scheduledTime": {
           "type": "string"
         },
@@ -121,9 +75,6 @@
           "type": "string"
         },
         "customerConcernsInfo": {
-          "type": "string"
-        },
-        "confirmationCode": {
           "type": "string"
         },
         "advisor": {
@@ -177,27 +128,7 @@
         "customer": {
           "id": "urn:dfx:customer:103129767",
           "firstName": "TEST",
-          "lastName": "FCA",
-          "phones": [
-            {
-              "type": "default",
-              "number": 2484206482
-            },
-            {
-              "type": "home",
-              "number": 2484206482
-            }
-          ],
-          "emails": [
-            {
-              "type": "business",
-              "email": "testkh19@gmail.com"
-            },
-            {
-              "type": "personal",
-              "email": "testkh20@gmail.com"
-            }
-          ]
+          "lastName": "FCA"
         },
         "scheduledTime": "2020-10-27T08:45:00.00-04:00",
         "mileage": {
@@ -206,7 +137,6 @@
         },
         "status": "booked",
         "customerConcernsInfo": "vehicle to repair",
-        "confirmationCode": "OSS-W9L0O",
         "advisor": {
           "id": 332708,
           "name": "Albert Pico",
@@ -214,8 +144,7 @@
         },
         "transportationOption": {
           "code": "waiter",
-          "description": "waiter",
-          "enabled": false
+          "description": "waiter"
         },
         "services": {
           "summary": {
@@ -228,12 +157,8 @@
             {
               "id": 82893,
               "name": "Replace engine oil and filter",
-              "opCode": 30,
               "price": 69.95,
-              "analyticsMsrp": 69.95,
-              "laborHours": 0,
               "selected": false,
-              "maintenanceKind": "Required",
               "comment": ""
             }
           ],
@@ -272,14 +197,14 @@
       "example": {
         "appointments": [
           {
-            "appointmentId": 53826276,
-            "departmentId": 4836,
+            "appointmentId": "53826276",
+            "departmentId": "4836",
             "scheduledTime": "2020-10-07T09:15:00.00-04:00",
             "status": "missed"
           },
           {
-            "appointmentId": 54194795,
-            "departmentId": 4836,
+            "appointmentId": "54194795",
+            "departmentId": "4836",
             "scheduledTime": "2020-10-19T09:00:00.00-04:00",
             "status": "booked"
           }
@@ -289,13 +214,21 @@
     "PutUpdateResponse": {
       "type": "object",
       "properties": {
+        "status": {
+          "type": "string"
+        },
         "confirmationCode": {
+          "type": "string"
+        },
+        "appointmentId": {
           "type": "string"
         }
       },
       "example": {
         "status": "booked",
-        "confirmationCode": "OSS-WAUNV"
+        "confirmationCode": "OSS-WAUNV",
+        "appointmentId": "123123"
+
       }
     },
     "PostAppointmentResponse": {
@@ -306,20 +239,21 @@
         },
         "confirmationCode": {
           "type": "string"
+        },
+        "appointmentId": {
+          "type": "string"
         }
       },
       "example": {
         "status": "booked",
-        "confirmationCode": "OSS-WAUNV"
+        "confirmationCode": "OSS-WAUNV",
+        "appointmentId": "123123"
       }
     },
     "SlotA": {
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
-        },
-        "count": {
           "type": "number"
         }
       }
@@ -329,31 +263,6 @@
       "properties": {
         "code": {
           "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
-    },
-    "SA": {
-      "type": "object",
-      "properties": {
-        "slots": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SlotA"
-          }
-        }
-      }
-    },
-    "ST": {
-      "type": "object",
-      "properties": {
-        "slots": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SlotT"
-          }
         }
       }
     },
@@ -374,13 +283,13 @@
               "serviceAdvisors": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/SA"
+                  "$ref": "#/definitions/SlotA"
                 }
               },
               "transportationOptions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/ST"
+                  "$ref": "#/definitions/SlotT"
                 }
               }
             }
@@ -404,7 +313,7 @@
             "date": "2020-11-25",
             "slots": [
               {
-                "time": "07:30:00.00-05:00",
+                "time": "07:30",
                 "serviceAdvisors": [
                   {
                     "id": 101336
@@ -465,10 +374,13 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "number"
         },
         "name": {
           "type": "string"
+        },
+        "memberId": {
+          "type": "number"
         }
       }
     },
@@ -486,11 +398,8 @@
         "serviceAdvisors": [
           {
             "id": 332708,
-            "name": "Crystal Rentas"
-          },
-          {
-            "id": 959285,
-            "name": "Jose Gomez"
+            "name": "Albert Pico",
+            "memberId": 101336
           }
         ]
       }
@@ -518,41 +427,11 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "number"
         }
       },
       "example": {
         "id": 4836
-      }
-    },
-    "SearchVehicles": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "vin": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SearchEmail": {
-      "type": "object",
-      "properties": {
-        "customerId": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "foundType": {
-          "type": "string"
-        }
-      },
-      "example": {
-        "customerId": "urn:dfx:customer:103129767",
-        "email": "testkh19@gmail.com",
-        "foundType": "byEmail"
       }
     },
     "SearchVin": {
@@ -560,22 +439,10 @@
       "properties": {
         "customerId": {
           "type": "string"
-        },
-        "foundType": {
-          "type": "string"
-        },
-        "vehicles": {
-          "$ref": "#/definitions/SearchVehicles"
         }
       },
       "example": {
-        "customerId": "urn:dfx:customer:103129767",
-        "foundType": "byVin",
-        "vehicles": [
-          {
-            "vin": "2C3CCAGG7LH2003XM"
-          }
-        ]
+        "customerId": "urn:dfx:customer:103129767"
       }
     },
     "ServicePostAppointmentParams": {
@@ -612,11 +479,38 @@
         }
       }
     },
+    "SimpleCustomer": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "firstName": "Mahender",
+        "lastName": "Reddy",
+        "email": "cocar@mailinator.com",
+        "phone": "1234567897"
+      },
+      "description": " this object can be setted in two ways: \n- { id: 'urn:dfx:customer:103129767' } \n- {\n 'firstName' :'Mahender',\n 'lastName': 'Reddy',\n'email': 'cocar@mailinator.com',\n'phone': '1234567897' \n}\n\n the phone is not required"
+    },
     "PostAppointmentRequest": {
       "type": "object",
       "properties": {
-        "customerId": {
-          "type": "string"
+        "customer": {
+          "$ref": "#/definitions/SimpleCustomer"
         },
         "customerConcernsInfo": {
           "type": "string"
@@ -641,8 +535,8 @@
     "PutAppointmentRequest": {
       "type": "object",
       "properties": {
-        "customerId": {
-          "type": "string"
+        "customer": {
+          "$ref": "#/definitions/SimpleCustomer"
         },
         "customerConcernsInfo": {
           "type": "string"
@@ -662,6 +556,39 @@
         "services": {
           "$ref": "#/definitions/ServicesPostAppointment"
         }
+      },
+      "example": {
+        "customer": {
+          "id": "urn:dfx:customer:103129767"
+        },
+        "customerConcernsInfo": "string",
+        "advisorId": 0,
+        "transportationOptionCode": "string",
+        "scheduledTime": "string",
+        "mileage": {
+          "value": 1400,
+          "unitsKind": "string"
+        },
+        "services": {
+          "drs": [
+            {
+              "id": 0,
+              "comment": "string"
+            }
+          ],
+          "frs": [
+            {
+              "id": 0,
+              "comment": "string"
+            }
+          ],
+          "repair": [
+            {
+              "id": 0,
+              "comment": "string"
+            }
+          ]
+        }
       }
     },
     "ServiceId": {
@@ -670,19 +597,22 @@
         "id": {
           "type": "number"
         }
+      },
+      "example": {
+        "id": 12345
       }
     },
     "Service": {
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "number"
         },
         "name": {
           "type": "string"
         },
         "price": {
-          "type": "string"
+          "type": "number"
         }
       }
     },
@@ -1741,167 +1671,6 @@
         }
       }
     },
-    "/v1/servicescheduler/search": {
-      "get": {
-        "tags": [
-          "Service Scheduler"
-        ],
-        "summary": "Performs a search of a customer in the OSS system by email.",
-        "description": "This API performs a search of a customer in the OSS system by email.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "x-clientapp-name",
-            "description": "Name of the Client application",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "x-clientapp-version",
-            "description": "Version of the client applications software",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "content-type",
-            "description": "application/json ",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "x-api-key",
-            "description": "API key for the Service ",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "clientrequestid",
-            "description": "To be generated by Client (Last 10 digits of uid_epoch_6digit random)",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "Locale",
-            "description": "Locale of user. Coded according to ISO-639 (e.g. “en”) and optionally extended by a country code (e.g. “en_US”).  ",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "x-device-id",
-            "description": "An identifier that uniquely identifies the client device, or calling system like IMEI code. optional for webapp",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "x-originator-type",
-            "description": "The originating clients type: app, web ,server",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dealer-authorization",
-            "description": "oss token got by the dealer",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "email",
-            "description": "email for searching the customer",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "schema": {
-              "$ref": "#/definitions/SearchEmail"
-            }
-          },
-          "400": {
-            "description": "400 response",
-            "schema": {
-              "$ref": "#/definitions/Router400ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "401 response",
-            "schema": {
-              "$ref": "#/definitions/Router401ErrorResponse"
-            }
-          },
-          "403": {
-            "description": "403 response",
-            "schema": {
-              "$ref": "#/definitions/Router403ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "500 response",
-            "schema": {
-              "$ref": "#/definitions/Router500ErrorResponse"
-            }
-          },
-          "502": {
-            "description": "502 response",
-            "schema": {
-              "$ref": "#/definitions/Router502ErrorResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          },
-          {
-            "sigv4": []
-          }
-        ],
-        "x-amazon-apigateway-integration": {
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:SDPR_${FEATURE_CODE}_${ENVIRONMENT}_${DEPLOY_REGION}_SC001-service-scheduler-manager:gsdp/invocations",
-          "responses": {
-            "default": {
-              "statusCode": "200"
-            }
-          },
-          "passthroughBehavior": "when_no_match",
-          "httpMethod": "POST",
-          "contentHandling": "CONVERT_TO_TEXT",
-          "type": "aws_proxy"
-        }
-      },
-      "options": {
-        "responses": {},
-        "x-amazon-apigateway-integration": {
-          "credentials": "arn:aws:iam::${SDPR_ACCOUNT_ID}:role/${CORS_LAMBDA_INVOKE_ROLE_NAME}",
-          "uri": "arn:aws:apigateway:${DEPLOY_REGION}:lambda:path/2015-03-31/functions/arn:aws:lambda:${DEPLOY_REGION}:${SDPR_ACCOUNT_ID}:function:${CORS_LAMBDA_NAME}/invocations",
-          "responses": {
-            "default": {
-              "statusCode": "200"
-            }
-          },
-          "passthroughBehavior": "when_no_match",
-          "httpMethod": "POST",
-          "contentHandling": "CONVERT_TO_TEXT",
-          "type": "aws_proxy"
-        }
-      }
-    },
     "/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/search": {
       "get": {
         "tags": [
@@ -1927,6 +1696,13 @@
             "name": "vin",
             "description": "Vehicle Identifier",
             "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "Vehicle Identifier",
+            "in": "query",
             "required": true,
             "type": "string"
           },
@@ -2823,14 +2599,14 @@
             "description": "starting date for the research ( timestamp )",
             "in": "query",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "enddate",
             "description": "ending date for the research ( timestamp )",
             "in": "query",
             "required": true,
-            "type": "integer"
+            "type": "string"
           }
         ],
         "responses": {

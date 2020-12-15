@@ -130,14 +130,13 @@ export type Vehicle = {
 }
 
 export type AppointmentBody = {
-    customerId: string;
+    customer: Customer;
     customerConcernsInfo: string;
     advisorId: number;
     transportationOptionCode: string;
     scheduledTime: string;
     mileage: Mileage;
     services: ServicesPostAppointment;
-    vehicle: Link[];
 }
 
 export interface AppointmentRequestData extends ServiceRequestData {
@@ -194,7 +193,8 @@ export type GetAppointmentSummaryResponse = {
 
 export type serviceAdvisor = {    
     id: number,
-    name: string
+    name: string,
+    memberId: number
 }
 export type GetAdvisorsResponse = {    
     serviceAdvisors?: serviceAdvisor[],
@@ -247,14 +247,16 @@ export declare type GetServiceAppointmentsResponse = {
 
 export type PostAppointmentResponse = {    
     status?: string,   
-    confirmationCode?: string
+    confirmationCode?: string,
+    appointmentId?: string
 }
 
 export type DeleteServiceAppointmentResponse = {}
 
 export type PutAppointmentRequestResponse = {    
     status?: string,   
-    confirmationCode?: string
+    confirmationCode?: string,
+    appointmentId?: string
 }
 
 export declare type Phone = {
@@ -292,13 +294,9 @@ export declare type ServiceAppointment = {
     id?: number;
     name?: string;
     price?: number;
-    opCode?: string;
-    analyticsMsrp?: number;
-    laborHours?: number;
     selected?: boolean;
     benefitsDescription?: string;
     benefitsImage?: string;
-    maintenanceKind?: string;
     comment?: string;
 };
 export declare type Services = {
@@ -314,7 +312,6 @@ export type GetServiceAppointmentDetailsResponse = {
     mileage?: Mileage;
     status?: string;
     customerConcernsInfo?: string;
-    confirmationCode?: string;
     advisor?: Advisor;
     transportationOption?: TransportationOption;
     services?: Services;

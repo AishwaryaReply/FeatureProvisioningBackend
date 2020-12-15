@@ -431,7 +431,7 @@ export class ServiceScheduler {
             response.total) {
             const localTaxes = response.taxes + response.taxesGt;
             filteredResponse = {
-                taxes: localTaxes,
+                taxes: Number.parseFloat(localTaxes.toFixed(2)),
                 subTotal: Number.parseFloat((response.total - localTaxes).toFixed(2)),
                 total: response.total
             }
@@ -459,10 +459,11 @@ export class ServiceScheduler {
             const dim: number = response.serviceAdvisors.length;
             for (let i = 0; i < dim; i++) {
                 const elem = response.serviceAdvisors[i];
-                if (elem.memberId && elem.name) {
+                if (elem.id && elem.memberId && elem.name) {
                     const service: DataModels.serviceAdvisor = {
-                        id: elem.memberId,
-                        name: elem.name
+                        id: elem.id,
+                        name: elem.name,
+                        memberId: elem.memberId
                     }
                     serviceAdvisors.push(service);
                 }
@@ -522,8 +523,6 @@ export class ServiceScheduler {
             EndDate: ServiceScheduler.formatDate(request.enddate),
             dealerToken: request.dealerToken
         }
-        console.log(ServiceScheduler.formatDate(1603058400000));
-        console.log(ServiceScheduler.formatDate(1603144800000));
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsResponse = await SchedulingConectorService.getDealerDepartmentTimeSegments(mappedRequest);
         logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
@@ -618,6 +617,7 @@ export class ServiceScheduler {
                 const elem = response.appointments[i];
                 if (elem.scheduledTime &&
                     elem.status &&
+                    elem.status == "booked" &&
                     elem.links &&
                     elem.links.length != 0) {
 
@@ -657,10 +657,11 @@ export class ServiceScheduler {
 
     public async postAppointment(request: DataModels.PostAppointmentRequestData): Promise<DataModels.PostAppointmentResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} postAppointment |`;
+        //TODO check consistency of customer (id , or other info)
         const mappedRequest: SchedulingServiceDataModels.PostAppointmentParams = {
             departmentId: request.departmentId,
             services: request.body.services,
-            customerId: request.body.customerId,
+            customer: request.body.customer,
             customerConcernsInfo: request.body.customerConcernsInfo,
             advisorId: request.body.advisorId,
             transportationOptionCode: request.body.transportationOptionCode,
@@ -674,11 +675,11 @@ export class ServiceScheduler {
         logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.PostAppointmentResponse = {};
-
-        if (response.status && response.confirmationCode) {
+        if (response.status && response.confirmationCode && response.links) {
             filteredResponse = {
                 status: response.status,
-                confirmationCode: response.confirmationCode
+                confirmationCode: response.confirmationCode,
+                appointmentId: ServiceScheduler.getAppointmentId(response.links)
             }
         }
         return filteredResponse;
@@ -707,10 +708,11 @@ export class ServiceScheduler {
 
     public async updateServiceAppointment(request: DataModels.PutAppointmentRequestData): Promise<DataModels.PutAppointmentRequestResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} updateServiceAppointment |`;
+        //TODO check only with customer id 
         const mappedRequest: SchedulingServiceDataModels.UpdateServiceAppointmentParams = {
             departmentId: request.departmentId,
             services: request.body.services,
-            customer: {id: request.body.customerId},
+            customer: request.body.customer,
             customerConcernsInfo: request.body.customerConcernsInfo,
             advisorId: request.body.advisorId,
             transportationOptionCode: request.body.transportationOptionCode,
@@ -726,9 +728,10 @@ export class ServiceScheduler {
 
         let filteredResponse: DataModels.PutAppointmentRequestResponse = {};
 
-        if (response.confirmationCode) {
+        if (response.confirmationCode && response.links) {
             filteredResponse = {
-                confirmationCode: response.confirmationCode
+                confirmationCode: response.confirmationCode,
+                appointmentId: ServiceScheduler.getAppointmentId(response.links)
             }
             this.copyElement(response, ["status"], filteredResponse);
         }
@@ -751,13 +754,13 @@ export class ServiceScheduler {
         let filteredResponse: DataModels.GetServiceAppointmentDetailsResponse = {};
 
         if (response?.confirmationCode) {
-            this.copyElement(response, ["status", "scheduledTime", "customerConcernsInfo", "confirmationCode"], filteredResponse);
+            this.copyElement(response, ["status", "scheduledTime", "customerConcernsInfo"], filteredResponse);
 
             if (response?.customer?.id) {
                 const elem: SchedulingServiceDataModels.Customer = response.customer;
                 let cust: DataModels.Customer = {};
                 cust.id = elem.id;
-                this.copyElement(elem, ["firstName", "lastName", "emails", "phones"], cust);
+                this.copyElement(elem, ["firstName", "lastName"], cust);
                 filteredResponse.customer = cust;
             }
             if (response?.mileage) {
@@ -789,7 +792,7 @@ export class ServiceScheduler {
                     elem.summary?.total) {
                     const localTaxes = elem.summary.taxes + elem.summary.taxesGt;
                     servs.summary = {
-                        taxes: localTaxes,
+                        taxes: Number.parseFloat(localTaxes.toFixed(2)),
                         subTotal: Number.parseFloat((elem.summary.total - localTaxes).toFixed(2)),
                         total: elem.summary.total
                     }
@@ -820,7 +823,9 @@ export class ServiceScheduler {
             if (elem[i].links) {
                 delete elem[i].links;
             }
-            se.push(elem[i]);
+            let filteredElem: DataModels.ServiceAppointment = {};
+            this.copyElement(elem[i], ['id','name','price','selected','comment'], filteredElem);
+            se.push(filteredElem);
         }
         return se;
     }
@@ -860,6 +865,17 @@ export class ServiceScheduler {
             }
         }
         return null;
+    }
+
+    private static getAppointmentId(links: SchedulingServiceDataModels.Link[]): string{
+        let appointemtnId = "";
+        links.forEach(element => {
+            if (element.rel == "self"){
+                const data = element.href.split("/"); 
+                appointemtnId = data[data.length - 1];
+            }
+        });
+        return appointemtnId;
     }
 }
 

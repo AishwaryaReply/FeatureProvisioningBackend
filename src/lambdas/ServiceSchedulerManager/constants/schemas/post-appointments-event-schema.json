@@ -50,7 +50,27 @@
                     "type":"string"
                 }
             }
-        }
+        },
+        "Customer": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        } 
     },
     "type": "object",
     "properties": {
@@ -113,8 +133,8 @@
         "requestBody": {
             "type": "object",
             "properties": {
-                "customerId": {
-                    "type": "string"
+                "customer": {
+                    "$ref": "#/definitions/Customer"
                 },
                 "customerConcernsInfo": {
                     "type": "string"
@@ -141,28 +161,16 @@
                 },
                 "services": {
                     "$ref": "#/definitions/Services"
-                },
-                "vehicle": {
-                    "type": "object",
-					"properties": {
-						"links" : {
-							"type":"array",
-							"items": {
-								"$ref": "#/definitions/Link"
-							}
-						}
-					}
                 }
             },
             "required": [
-				"customerId",
+                "customer",
 				"customerConcernsInfo",
 				"advisorId",
 				"transportationOptionCode",
 				"scheduledTime",
 				"mileage",
-				"services",
-				"vehicle"
+				"services"
             ]
         }
     },

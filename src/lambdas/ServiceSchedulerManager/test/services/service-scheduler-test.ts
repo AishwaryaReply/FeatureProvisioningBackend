@@ -550,7 +550,7 @@ describe('ServiceSchedulerService', () => {
             
             const expected: DataModels.GetServiceAppointmentDetailsResponse = Stubs.mockGetServiceAppointmentDetailsFiltered;
             const response = await testServiceSchedulerService.getServiceAppointmentDetails(Stubs.mockGetServiceAppointmentDetailsRequest);
-            
+
             expect(response).to.be.deep.equal(expected);
         }) 
 

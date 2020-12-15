@@ -39,7 +39,7 @@ export namespace Stubs {
     const TEST_END_DATE = "1576886647000";
     const TEST_START_DATE = "1576886647000";
     const TEST_POST_BODY = {
-        customerId: "string",
+        customer: {id: "string"},
         customerConcernsInfo: "string",
         advisorId: 0,
         transportationOptionCode: "string",
@@ -78,7 +78,7 @@ export namespace Stubs {
         }
     }
     const TEST_PUT_BODY = {
-        customerId: "string",
+        customer: {id: "string"},
         customerConcernsInfo: "string",
         advisorId: 0,
         transportationOptionCode: "string",
@@ -2307,16 +2307,20 @@ export namespace Stubs {
     export const mockGetAdvisorsFiltered: DataModels.GetAdvisorsResponse = {
         serviceAdvisors: [
             {
-                id: 101336,
-                name: "Albert Pico"
+                id: 332708,
+                name: "Albert Pico",
+                memberId: 101336
             },
             {
-                id: 127487,
-                name: "Crystal Rentas"
+                id: 959285,
+                name: "Crystal Rentas",
+                memberId: 127487
+
             },
             {
-                id: 43032,
-                name: "Jose Gomez"
+                id: 274509,
+                name: "Jose Gomez",
+                memberId: 43032
             }
         ]
     }
@@ -3744,7 +3748,7 @@ export namespace Stubs {
         "appointments": [
             {
                 "scheduledTime": "2020-11-20T15:15:00.00-05:00",
-                "status": "missed",
+                "status": "booked",
                 "serviceAdvisor": {
                     "name": "Albert Pico"
                 },
@@ -3782,7 +3786,7 @@ export namespace Stubs {
         appointments: [
             {
                 scheduledTime: "2020-11-20T15:15:00.00-05:00",
-                status: "missed",
+                status: "booked",
                 appointmentId: "55292010",
                 departmentId: "4836"
             }
@@ -3796,7 +3800,7 @@ export namespace Stubs {
         dealerToken: TEST_DEALER_TOKEN,
         departmentId: TEST_DEPARTMENT,
         body: {
-            customerId: TEST_CUST_ID,
+            customer: {id : TEST_CUST_ID},
             customerConcernsInfo: "customerConcernsInfo",
             advisorId: 0,
             transportationOptionCode: "transportationOptionCode",
@@ -3824,13 +3828,7 @@ export namespace Stubs {
                         comment: "string"
                     }
                 ]
-            },
-            vehicle: [
-                {
-                    rel: "string",
-                    href: "string"
-                }
-            ]
+            }
         },
         requestedService: 'POST_APPOINTMENT'
     }
@@ -4015,7 +4013,8 @@ export namespace Stubs {
 
     export const mockPostAppointmentFiltered: DataModels.PostAppointmentResponse = {
         status: "missed",
-        confirmationCode: "DFX-WX3L6"
+        confirmationCode: "DFX-WX3L6",
+        appointmentId: "55292010"
     };
 
     // DeleteServiceAppointment
@@ -4210,7 +4209,7 @@ export namespace Stubs {
         appointmentId: TEST_APPOINTMENT_ID,
         departmentId: TEST_DEPARTMENT,
         body: {
-            customerId: TEST_CUST_ID,
+            customer: {id: TEST_CUST_ID},
             customerConcernsInfo: "customerConcernsInfo",
             advisorId: 0,
             transportationOptionCode: "transportationOptionCode",
@@ -4238,13 +4237,7 @@ export namespace Stubs {
                         comment: "string"
                     }
                 ]
-            },
-            vehicle: [
-                {
-                    rel: "string",
-                    href: "string"
-                }
-            ]
+            }
         },
         requestedService: 'UPDATE_SERVICE_APPOINTMENT'
     }
@@ -4427,7 +4420,8 @@ export namespace Stubs {
     }
 
     export const mockUpdateServiceAppointmentFiltered: DataModels.PutAppointmentRequestResponse = {
-        confirmationCode: "DFX-WX5WN"
+        confirmationCode: "DFX-WX5WN",
+        appointmentId: "55295015"
     };
 
     // GetServiceAppointmentDetails
@@ -4443,30 +4437,6 @@ export namespace Stubs {
             "id": "urn:dfx:customer:103129767",
             "firstName": "TEST",
             "lastName": "FCA",
-            "phones": [
-                {
-                    "type": "default",
-                    "number": "2484206482"
-                },
-                {
-                    "type": "home",
-                    "number": "2484206482"
-                }
-            ],
-            "emails": [
-                {
-                    "type": "business",
-                    "email": "testkh19@gmail.com"
-                },
-                {
-                    "type": "personal",
-                    "email": "testkh19@gmail.com"
-                },
-                {
-                    "type": "default",
-                    "email": "testkh19@gmail.com"
-                }
-            ]
         },
         "scheduledTime": "2020-11-20T15:15:00.00-05:00",
         "mileage": {
@@ -4497,18 +4467,13 @@ export namespace Stubs {
                 "taxes": 20,
                 "taxesGt": 0.10,
                 "total": 30.20,
-                "totalLabourHours": 0.60
             },
             "drs": [
                 {
                     "id": 2982763,
                     "name": "Service Contract Lube, Oil and Filter",
-                    "opCode": "EXLOF",
                     "price": 29.0000,
-                    "analyticsMsrp": 29.0000,
-                    "laborHours": 0.0,
                     "selected": false,
-                    "maintenanceKind": "Recommended",
                     "comment": "Service Contract Lube, Oil and Filter",
                     "links": [
                         {
@@ -4521,12 +4486,8 @@ export namespace Stubs {
                 {
                     "id": 82893,
                     "name": "Replace engine oil and filter",
-                    "opCode": "30",
                     "price": 69.9500,
-                    "analyticsMsrp": 69.9500,
-                    "laborHours": 0.0,
                     "selected": false,
-                    "maintenanceKind": "Required",
                     "comment": "Replace engine oil and filter",
                     "links": [
                         {
@@ -4539,12 +4500,8 @@ export namespace Stubs {
                 {
                     "id": 70417486,
                     "name": "ABS Light Diagnosis",
-                    "opCode": "05",
                     "price": 160.0000,
-                    "analyticsMsrp": 160.0000,
-                    "laborHours": 0.0,
                     "selected": false,
-                    "maintenanceKind": "Repair",
                     "comment": "ABS Light Diagnosis",
                     "links": [
                         {
@@ -4622,30 +4579,6 @@ export namespace Stubs {
             id: "urn:dfx:customer:103129767",
             firstName: "TEST",
             lastName: "FCA",
-            phones: [
-                {
-                    type: "default",
-                    number: "2484206482"
-                },
-                {
-                    type: "home",
-                    number: "2484206482"
-                }
-            ],
-            emails: [
-                {
-                    type: "business",
-                    email: "testkh19@gmail.com"
-                },
-                {
-                    type: "personal",
-                    email: "testkh19@gmail.com"
-                },
-                {
-                    type: "default",
-                    email: "testkh19@gmail.com"
-                }
-            ]
         },
         scheduledTime: "2020-11-20T15:15:00.00-05:00",
         mileage: {
@@ -4654,7 +4587,6 @@ export namespace Stubs {
         },
         status: "missed",
         customerConcernsInfo: "MY FIRST APP",
-        confirmationCode: "DFX-WX7HU",
         advisor: {
             id: 332708,
             name: "Albert Pico",
@@ -4675,12 +4607,8 @@ export namespace Stubs {
                 {
                     id: 2982763,
                     name: "Service Contract Lube, Oil and Filter",
-                    opCode: "EXLOF",
                     price: 29.0000,
-                    analyticsMsrp: 29.0000,
-                    laborHours: 0.0,
                     selected: false,
-                    maintenanceKind: "Recommended",
                     comment: "Service Contract Lube, Oil and Filter"
                 }
             ],
@@ -4688,12 +4616,8 @@ export namespace Stubs {
                 {
                     id: 82893,
                     name: "Replace engine oil and filter",
-                    opCode: "30",
                     price: 69.9500,
-                    analyticsMsrp: 69.9500,
-                    laborHours: 0.0,
                     selected: false,
-                    maintenanceKind: "Required",
                     comment: "Replace engine oil and filter"
                 }
             ],
@@ -4701,12 +4625,8 @@ export namespace Stubs {
                 {
                     id: 70417486,
                     name: "ABS Light Diagnosis",
-                    opCode: "05",
                     price: 160.0000,
-                    analyticsMsrp: 160.0000,
-                    laborHours: 0.0,
                     selected: false,
-                    maintenanceKind: "Repair",
                     comment: "ABS Light Diagnosis"
                 }
             ],

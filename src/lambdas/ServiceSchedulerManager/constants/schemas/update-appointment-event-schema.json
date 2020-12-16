@@ -150,7 +150,7 @@
                     "type": "string"
                 },
                 "scheduledTime": {
-                    "type": "string"
+                    "type": "number"
                 },
                 "mileage": {
 					"type":"object",

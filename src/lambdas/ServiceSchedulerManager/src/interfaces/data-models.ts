@@ -134,7 +134,7 @@ export type AppointmentBody = {
     customerConcernsInfo: string;
     advisorId: number;
     transportationOptionCode: string;
-    scheduledTime: string;
+    scheduledTime: number;
     mileage: Mileage;
     services: ServicesPostAppointment;
 }
@@ -222,13 +222,13 @@ export declare type ST = {
 }
 
 export declare type Slot = {
-    time: string,
+    time: number,
     serviceAdvisors: SlotAdvisor[],
     transportationOptions: SlotTransportation[]
 }
 
 export declare type Segment = {
-    date?: string,
+    date?: number,
     slots?: Slot[]
 };
 export declare type GetDealerDepartmentTimeSegmentsResponse = {
@@ -238,7 +238,7 @@ export declare type GetDealerDepartmentTimeSegmentsResponse = {
 export declare type Appointment = {
     appointmentId: string;
     departmentId: string;
-    scheduledTime: string;
+    scheduledTime: number;
     status: string;
 };
 export declare type GetServiceAppointmentsResponse = {
@@ -308,7 +308,7 @@ export declare type Services = {
 };
 export type GetServiceAppointmentDetailsResponse = {    
     customer?: Customer;
-    scheduledTime?: string;
+    scheduledTime?: number;
     mileage?: Mileage;
     status?: string;
     customerConcernsInfo?: string;

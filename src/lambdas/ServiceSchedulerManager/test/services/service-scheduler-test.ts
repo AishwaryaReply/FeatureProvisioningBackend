@@ -386,9 +386,9 @@ describe('ServiceSchedulerService', () => {
         it('should return the expected response with date in timestamp', async () => {
             sinon.stub(SchedulingConectorService, 'getDealerDepartmentTimeSegments').resolves(Stubs.mockGetDealerDepartmentTimeSegments);
             
-            // const expected: DataModels.GetDealerDepartmentTimeSegmentsResponse = Stubs.mockGetDealerDepartmentTimeSegmentsFiltered;
-            // const response = await testServiceSchedulerService.getDealerDepartmentTimeSegments(Stubs.mockGetDealerDepartmentTimeSegmentsRequestTimestampData);
-            // expect(response).to.be.deep.equal(expected);
+            const expected: DataModels.GetDealerDepartmentTimeSegmentsResponse = Stubs.mockGetDealerDepartmentTimeSegmentsFiltered;
+            const response = await testServiceSchedulerService.getDealerDepartmentTimeSegments(Stubs.mockGetDealerDepartmentTimeSegmentsRequestTimestampData);
+            expect(response).to.be.deep.equal(expected);
         }) 
 
         it('should throw an error for wrong date', async () => {

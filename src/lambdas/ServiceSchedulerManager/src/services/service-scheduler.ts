@@ -571,18 +571,18 @@ export class ServiceScheduler {
                         }
                     }
                     const tmpSlot: Slot = {
-                        time: ServiceScheduler.formatTime(new Date(elem.time).getTime()),
+                        time: new Date(elem.time).getTime(),
                         serviceAdvisors: serviceAdvisors,
                         transportationOptions: transportationOptions
                     }
                     
                     // check if a segment with the same "date" is already there 
-                    let segmentFound = ServiceScheduler.getSegmentByDate(ServiceScheduler.formatDate(new Date(elem.time).getTime()), segments);
+                    let segmentFound = ServiceScheduler.getSegmentByDate(elem.time, segments);
                     if (segmentFound) {
                         segmentFound.slots?.push(tmpSlot);
                     } else {
                         segments.push({
-                            date: ServiceScheduler.formatDate(new Date(elem.time).getTime()),
+                            date: ServiceScheduler.getDayTimestamp(new Date(elem.time).getTime()),
                             slots: [tmpSlot]
                         });
                     }
@@ -638,7 +638,7 @@ export class ServiceScheduler {
                         }
                     }
                     const appointment: DataModels.Appointment = {
-                        scheduledTime: elem.scheduledTime,
+                        scheduledTime: new Date(elem.scheduledTime).getTime(),
                         status: elem.status,
                         appointmentId: appointmentid,
                         departmentId: departmentid
@@ -665,7 +665,7 @@ export class ServiceScheduler {
             customerConcernsInfo: request.body.customerConcernsInfo,
             advisorId: request.body.advisorId,
             transportationOptionCode: request.body.transportationOptionCode,
-            scheduledTime: request.body.scheduledTime,
+            scheduledTime: new Date(request.body.scheduledTime).toISOString(),
             mileage: request.body.mileage,
             dealerToken: request.dealerToken,
             vin: request.vin
@@ -716,7 +716,7 @@ export class ServiceScheduler {
             customerConcernsInfo: request.body.customerConcernsInfo,
             advisorId: request.body.advisorId,
             transportationOptionCode: request.body.transportationOptionCode,
-            scheduledTime: request.body.scheduledTime,
+            scheduledTime: new Date(request.body.scheduledTime).toISOString(),
             mileage: request.body.mileage,
             dealerToken: request.dealerToken,
             vin: request.vin,
@@ -754,8 +754,11 @@ export class ServiceScheduler {
         let filteredResponse: DataModels.GetServiceAppointmentDetailsResponse = {};
 
         if (response?.confirmationCode) {
-            this.copyElement(response, ["status", "scheduledTime", "customerConcernsInfo"], filteredResponse);
-
+            this.copyElement(response, ["status", "customerConcernsInfo"], filteredResponse);
+            
+            if (response.scheduledTime){
+                filteredResponse.scheduledTime = new Date(response.scheduledTime).getTime();
+            }
             if (response?.customer?.id) {
                 const elem: SchedulingServiceDataModels.Customer = response.customer;
                 let cust: DataModels.Customer = {};
@@ -852,15 +855,24 @@ export class ServiceScheduler {
         return yyyy + "-" + mm + "-" + dd;
     }
 
-    private static formatTime(date: number): string {
-        var selectedDate = new Date(date);
-        var minute = selectedDate.getMinutes();
-        return selectedDate.getHours() + ((minute < 10) ? ':0' : ':') + minute;
+    // private static formatTime(date: number): string {
+    //     var selectedDate = new Date(date);
+    //     var minute = selectedDate.getMinutes();
+    //     return selectedDate.getHours() + ((minute < 10) ? ':0' : ':') + minute;
+    // }
+
+    private static getDayTimestamp(date: number):  number {
+        let tmpDate = new Date(date);
+        tmpDate.setUTCHours(0);
+        tmpDate.setUTCMinutes(0);
+        tmpDate.setUTCSeconds(0);
+        tmpDate.setUTCMilliseconds(0);
+        return tmpDate.getTime();
     }
 
     private static getSegmentByDate(date: string, segments: DataModels.Segment[]):  DataModels.Segment | null {
         for (let segment of segments) {
-            if (segment.date == date) {
+            if (segment.date == ServiceScheduler.getDayTimestamp(new Date(date).getTime())) {
                 return segment
             }
         }

@@ -64,9 +64,17 @@
         },
         "lastName": {
           "type": "string"
+        }
+      }
+    },
+    "GetAppointmentDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "customer": {
+          "$ref": "#/definitions/Customer"
         },
         "scheduledTime": {
-          "type": "string"
+          "type": "number"
         },
         "mileage": {
           "$ref": "#/definitions/Mileage"
@@ -115,14 +123,6 @@
             }
           }
         }
-      }
-    },
-    "GetAppointmentDetailsResponse": {
-      "type": "object",
-      "properties": {
-        "customer": {
-          "$ref": "#/definitions/Customer"
-        }
       },
       "example": {
         "customer": {
@@ -130,7 +130,7 @@
           "firstName": "TEST",
           "lastName": "FCA"
         },
-        "scheduledTime": "2020-10-27T08:45:00.00-04:00",
+        "scheduledTime": 1606260600000,
         "mileage": {
           "value": 120,
           "unitsKind": "mileage"
@@ -177,7 +177,7 @@
           "type": "string"
         },
         "scheduledTime": {
-          "type": "string"
+          "type": "number"
         },
         "status": {
           "type": "string"
@@ -197,15 +197,9 @@
       "example": {
         "appointments": [
           {
-            "appointmentId": "53826276",
-            "departmentId": "4836",
-            "scheduledTime": "2020-10-07T09:15:00.00-04:00",
-            "status": "missed"
-          },
-          {
             "appointmentId": "54194795",
             "departmentId": "4836",
-            "scheduledTime": "2020-10-19T09:00:00.00-04:00",
+            "scheduledTime": 1606260600000,
             "status": "booked"
           }
         ]
@@ -228,7 +222,6 @@
         "status": "booked",
         "confirmationCode": "OSS-WAUNV",
         "appointmentId": "123123"
-
       }
     },
     "PostAppointmentResponse": {
@@ -270,7 +263,7 @@
       "type": "object",
       "properties": {
         "date": {
-          "type": "string"
+          "type": "number"
         },
         "slots": {
           "type": "array",
@@ -278,7 +271,7 @@
             "type": "object",
             "properties": {
               "time": {
-                "type": "string"
+                "type": "number"
               },
               "serviceAdvisors": {
                 "type": "array",
@@ -310,10 +303,10 @@
       "example": {
         "segments": [
           {
-            "date": "2020-11-25",
+            "date": 1606176000000,
             "slots": [
               {
-                "time": "07:30",
+                "time": 1606260600000,
                 "serviceAdvisors": [
                   {
                     "id": 101336
@@ -522,7 +515,7 @@
           "type": "string"
         },
         "scheduledTime": {
-          "type": "string"
+          "type": "number"
         },
         "mileage": {
           "$ref": "#/definitions/Mileage"
@@ -548,7 +541,7 @@
           "type": "string"
         },
         "scheduledTime": {
-          "type": "string"
+          "type": "number"
         },
         "mileage": {
           "$ref": "#/definitions/Mileage"
@@ -564,7 +557,7 @@
         "customerConcernsInfo": "string",
         "advisorId": 0,
         "transportationOptionCode": "string",
-        "scheduledTime": "string",
+        "scheduledTime": 1606260600000,
         "mileage": {
           "value": 1400,
           "unitsKind": "string"

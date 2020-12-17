@@ -13,18 +13,6 @@ describe('ServiceHandler', () => {
 
     describe('SearchDFX', () => {
 
-        it('should not throw any error calling get search by email', () => {
-            const devices = testedServiceHandler.getServiceParams(Stubs.DfxSearchByEmailEvent);
-            expect(devices.requestedService).to.be.eqls("DFX_SEARCH_EMAIL");
-        })
-
-        it('should throw an error validating an invalid get search request', () => {
-            const invalidRequest = Stubs.clone(Stubs.DfxSearchByEmailEvent);
-            delete invalidRequest.queryString;
-            expect(() => testedServiceHandler.getServiceParams(invalidRequest))
-                .to.throw(GCVErrors.InvalidRequestParameter);
-        })
-
 
         it('should not throw any error calling get search by vin', () => {
             const devices = testedServiceHandler.getServiceParams(Stubs.DfxSearchByVinEvent);

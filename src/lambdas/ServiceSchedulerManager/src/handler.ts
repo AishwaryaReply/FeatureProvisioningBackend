@@ -139,8 +139,6 @@ async function initializeFunction(event: APIGatewayProxyEvent, context: Context)
 async function invokeService(requestData: DataModels.ServiceRequestData): Promise<any> {
     const service = ServiceFactory.getServiceScheduler();
     switch (requestData.requestedService) {
-        case 'DFX_SEARCH_EMAIL': 
-            return await service.searchByEmail(requestData as DataModels.DfxSearchEmailRequestData);
         case 'DFX_SEARCH_VIN': 
             return await service.searchByVin(requestData as DataModels.DfxSearchVinRequestData);
         case 'GET_DFX_VEHICLE': 

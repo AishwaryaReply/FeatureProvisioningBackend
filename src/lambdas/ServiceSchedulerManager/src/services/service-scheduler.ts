@@ -21,17 +21,7 @@ export class ServiceScheduler {
         let filteredResponse: DataModels.SearchEmailResponse = {};
 
         if (response.customerPreviews.length != 0 && response.customerPreviews[0].email && response.customerPreviews[0].foundType) {
-            let customerId: string = "";
-
-            let dim: number = response.customerPreviews[0].links.length;
-            for (let i = 0; i < dim; i++) {
-                if (response.customerPreviews[0].links[i].rel &&
-                    response.customerPreviews[0].links[i].rel == Constants.REL_CUSTOMER_ID) {
-                    const hrefArray = response.customerPreviews[0].links[i].href.split("/");
-                    customerId = hrefArray[hrefArray.length - 2];
-                }
-            }
-
+            const customerId = ServiceScheduler.extractCustomerId(response.customerPreviews);
             filteredResponse = {
                 customerId: customerId,
                 email: response.customerPreviews[0].email,
@@ -53,40 +43,26 @@ export class ServiceScheduler {
         const response: SchedulingServiceDataModels.GetSearchResponse = await SchedulingConectorService.getDfxSearch(mappedRequest);
         logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
 
-        let filteredResponse: DataModels.SearchVinResponse = {};
-
         if (response.customerPreviews.length != 0 && response.customerPreviews[0].email && response.customerPreviews[0].foundType) {
-            let customerId: string = "";
-            let vin: string = "";
+            // extracting customerId from search by vin
+            const customerId = ServiceScheduler.extractCustomerId(response.customerPreviews);
 
-            let dim: number = response.customerPreviews[0].links.length;
-            for (let i = 0; i < dim; i++) {
-                if (response.customerPreviews[0].links[i].rel &&
-                    response.customerPreviews[0].links[i].rel == Constants.REL_CUSTOMER_ID) {
-                    const hrefArray = response.customerPreviews[0].links[i].href.split("/");
-                    customerId = hrefArray[hrefArray.length - 2];
-                }
-            }
-
-            if (response.customerPreviews[0].vehicle) {
-                let dim: number = response.customerPreviews[0].vehicle.links.length;
-                for (let i = 0; i < dim; i++) {
-                    if (response.customerPreviews[0].vehicle.links[i].rel &&
-                        response.customerPreviews[0].vehicle.links[i].rel == Constants.REL_VEHICLE_VIN) {
-                        const hrefArray = response.customerPreviews[0].vehicle.links[i].href.split("/");
-                        vin = hrefArray[hrefArray.length - 1];
-                    }
-                }
-
-            }
-
-            filteredResponse = {
+            let mappedVerifyRequest: SchedulingServiceDataModels.VerifyParams = {
                 customerId: customerId,
-                foundType: response.customerPreviews[0].foundType,
-                vehicles: [{ "vin": vin }]
+                dealerToken: request.dealerToken,
+                vin: request.vin,
+                email: request.email
+            }
+            const verifyResponse: SchedulingServiceDataModels.VerifyResponse = await SchedulingConectorService.verify(mappedVerifyRequest);
+            logger.debug(logPrefix, `verify response:  ${JSON.stringify(verifyResponse)}`);
+            // if the customerId is valid return it
+            if (verifyResponse.isValid) {
+                return { customerId: customerId };
             }
         }
-        return filteredResponse;
+        // if the customer is not valid or there is no customerPreviews call the search by email
+        logger.debug(logPrefix, `search by vin FAILED, proceed with the search by email:  ${JSON.stringify(response)}`);
+        return await this.wrapSearchByEmail(logPrefix, request.dealerToken, request.email);
     }
 
 
@@ -575,7 +551,7 @@ export class ServiceScheduler {
                         serviceAdvisors: serviceAdvisors,
                         transportationOptions: transportationOptions
                     }
-                    
+
                     // check if a segment with the same "date" is already there 
                     let segmentFound = ServiceScheduler.getSegmentByDate(elem.time, segments);
                     if (segmentFound) {
@@ -755,8 +731,8 @@ export class ServiceScheduler {
 
         if (response?.confirmationCode) {
             this.copyElement(response, ["status", "customerConcernsInfo"], filteredResponse);
-            
-            if (response.scheduledTime){
+
+            if (response.scheduledTime) {
                 filteredResponse.scheduledTime = new Date(response.scheduledTime).getTime();
             }
             if (response?.customer?.id) {
@@ -827,7 +803,7 @@ export class ServiceScheduler {
                 delete elem[i].links;
             }
             let filteredElem: DataModels.ServiceAppointment = {};
-            this.copyElement(elem[i], ['id','name','price','selected','comment'], filteredElem);
+            this.copyElement(elem[i], ['id', 'name', 'price', 'selected', 'comment'], filteredElem);
             se.push(filteredElem);
         }
         return se;
@@ -847,7 +823,7 @@ export class ServiceScheduler {
         }
     }
 
-    private static formatDate(date: number): string{
+    private static formatDate(date: number): string {
         var selectedDate = new Date(date);
         var dd = String(selectedDate.getDate()).padStart(2, '0');
         var mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
@@ -855,13 +831,19 @@ export class ServiceScheduler {
         return yyyy + "-" + mm + "-" + dd;
     }
 
-    // private static formatTime(date: number): string {
-    //     var selectedDate = new Date(date);
-    //     var minute = selectedDate.getMinutes();
-    //     return selectedDate.getHours() + ((minute < 10) ? ':0' : ':') + minute;
-    // }
-
-    private static getDayTimestamp(date: number):  number {
+    private async wrapSearchByEmail(logPrefix: string, dealerToken: string, email: string): Promise<DataModels.SearchVinResponse> {
+        const searchByEmailRequest: DataModels.DfxSearchEmailRequestData = {
+            dealerToken: dealerToken,
+            email: email
+        }
+        const searchByEmailResponse: DataModels.SearchEmailResponse = await this.searchByEmail(searchByEmailRequest);
+        logger.debug(logPrefix, `search by email response:  ${JSON.stringify(searchByEmailResponse)}`);
+        if (searchByEmailResponse.customerId) {
+            return { customerId: searchByEmailResponse.customerId };
+        }
+        return {};
+    }
+    private static getDayTimestamp(date: number): number {
         let tmpDate = new Date(date);
         tmpDate.setUTCHours(0);
         tmpDate.setUTCMinutes(0);
@@ -870,7 +852,7 @@ export class ServiceScheduler {
         return tmpDate.getTime();
     }
 
-    private static getSegmentByDate(date: string, segments: DataModels.Segment[]):  DataModels.Segment | null {
+    private static getSegmentByDate(date: string, segments: DataModels.Segment[]): DataModels.Segment | null {
         for (let segment of segments) {
             if (segment.date == ServiceScheduler.getDayTimestamp(new Date(date).getTime())) {
                 return segment
@@ -879,15 +861,29 @@ export class ServiceScheduler {
         return null;
     }
 
-    private static getAppointmentId(links: SchedulingServiceDataModels.Link[]): string{
+    private static getAppointmentId(links: SchedulingServiceDataModels.Link[]): string {
         let appointemtnId = "";
         links.forEach(element => {
-            if (element.rel == "self"){
-                const data = element.href.split("/"); 
+            if (element.rel == "self") {
+                const data = element.href.split("/");
                 appointemtnId = data[data.length - 1];
             }
         });
         return appointemtnId;
+    }
+
+    private static extractCustomerId(customerPreviews: SchedulingServiceDataModels.DfxSearchResponse[]) {
+        let customerId: string = "";
+
+        let dim: number = customerPreviews[0].links.length;
+        for (let i = 0; i < dim; i++) {
+            if (customerPreviews[0].links[i].rel &&
+                customerPreviews[0].links[i].rel == Constants.REL_CUSTOMER_ID) {
+                const hrefArray = customerPreviews[0].links[i].href.split("/");
+                customerId = hrefArray[hrefArray.length - 2];
+            }
+        }
+        return customerId;
     }
 }
 

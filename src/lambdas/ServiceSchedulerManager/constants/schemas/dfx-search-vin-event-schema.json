@@ -54,10 +54,22 @@
                 "userid",
                 "vin"
             ]
+        },
+        "queryString": {
+            "type":"object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "email"
+            ]
         }
     },
     "required": [
         "headers",
-        "pathParams"
+        "pathParams",
+        "queryString"
     ]
 }

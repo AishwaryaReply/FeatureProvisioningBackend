@@ -15,52 +15,47 @@ const expect = chai.expect;
 describe('ServiceSchedulerService', () => {
     const testServiceSchedulerService = new ServiceScheduler();
 
-    describe('searchByEmail', () => {
-        afterEach(sinon.restore);
-
-        it('should return the expected response', async () => {
-            sinon.stub(SchedulingConectorService, 'getDfxSearch').resolves(Stubs.mockSearchByEmail);
-            
-            const expected: DataModels.SearchEmailResponse = Stubs.mockSearchByEmailFiltered;
-            const response = await testServiceSchedulerService.searchByEmail(Stubs.mockSearchByEmailRequest);
-            
-            expect(response).to.be.deep.equal(expected);
-        }) 
-
-        it('should return the expected empty response', async () => {
-            let resp:SchedulingServiceDataModels.GetSearchResponse = Stubs.mockSearchByEmail;
-            delete resp.customerPreviews[0].foundType;
-            sinon.stub(SchedulingConectorService, 'getDfxSearch').resolves(resp);
-            
-            const expected: DataModels.SearchEmailResponse = {};
-            const response = await testServiceSchedulerService.searchByEmail(Stubs.mockSearchByEmailRequest);
-            
-            expect(response).to.be.deep.equal(expected);
-        }) 
-
-        it('should return the expected empty response', async () => {            
-            const noSearchByEmailResponse = {
-                customerPreviews: []
-            };
-
-            sinon.stub(SchedulingConectorService, 'getDfxSearch').resolves(noSearchByEmailResponse);
-            const response = await testServiceSchedulerService.searchByEmail(Stubs.mockSearchByEmailRequest);
-            
-            expect(response).to.be.deep.equal({});
-        })       
-    });
+    
 
     describe('searchByVin', () => {
         afterEach(sinon.restore);
 
-        it('should return the expected response', async () => {
-            sinon.stub(SchedulingConectorService, 'getDfxSearch').resolves(Stubs.mockSearchByVin);
+        it('should return the expected response, when the searchByVin goes well', async () => {
+            sinon.stub(SchedulingConectorService, 'getDfxSearch').resolves(Stubs.mockSearchByVin)
+            sinon.stub(SchedulingConectorService, 'verify').resolves(Stubs.mockVerify);
             
             const expected: DataModels.SearchVinResponse = Stubs.mockSearchByVinFiltered;
             const response = await testServiceSchedulerService.searchByVin(Stubs.mockSearchByVinRequest);
-            
             expect(response).to.be.deep.equal(expected);
         }) 
+
+        it('should return the expected response, when the searchbyvin does not go well, so it calls the search by email', async () => {
+            sinon.stub(SchedulingConectorService, 'getDfxSearch').onFirstCall()
+                    .resolves(Stubs.mockSearchByVinEmpty)
+                    .onSecondCall()
+                    .resolves(Stubs.mockSearchByEmail)
+            
+            const expected: DataModels.SearchVinResponse = Stubs.mockSearchByVinFiltered;
+            const response = await testServiceSchedulerService.searchByVin(Stubs.mockSearchByVinRequest);
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+        it('should return the expected response, when the searchbyvin goes well, so it calls the verify which does not go well, so finally it should call the search by email', async () => {
+            sinon.stub(SchedulingConectorService, 'getDfxSearch').onFirstCall()
+                    .resolves(Stubs.mockSearchByVin)
+                    .onSecondCall()
+                    .resolves(Stubs.mockSearchByEmail)
+            
+            sinon.stub(SchedulingConectorService, 'verify').resolves(Stubs.mockVerifyNotValid);
+
+            const expected: DataModels.SearchVinResponse = Stubs.mockSearchByVinFiltered;
+            const response = await testServiceSchedulerService.searchByVin(Stubs.mockSearchByVinRequest);
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
+   
+
+       
 
         it('should return the expected empty response', async () => {
             let resp:SchedulingServiceDataModels.GetSearchResponse = Stubs.mockSearchByVin;

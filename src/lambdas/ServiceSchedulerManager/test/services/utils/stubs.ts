@@ -3,7 +3,7 @@ import { DataModels } from "../../../src/interfaces";
 
 export namespace Stubs {
 
-    const TEST_DEALER_TOKEN = "dealerTokenTest"
+    const TEST_DEALER_TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHA6Ly9sb2NhbC9kZWFsZXItaWQiOjUxNTEsInVybjpkZng6YXBwOnRoZW1lIjoiZmNhIiwidXJuOmRmeDphcHA6Y3VsdHVyZSI6ImVuLXVzIiwiYXBwOi8vbG9jYWwvY2xpZW50LWFkZHJlc3MiOiIxMC4wLjAuMTU3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9hdXRoZW50aWNhdGlvbmluc3RhbnQiOiIyMDIwLTEyLTE2VDExOjE4OjQ2LjQyNTAxOTBaIiwidXJuOmFwcDphdXRoOmVuZHBvaW50IjoiaHR0cHM6Ly90ZXN0c2NoZWR1bGVyLmRlYWxlci1meC5jb20vIiwiYXBwOi8vbG9jYWwvZW5hYmxlLXBhY2thZ2VzIjoiRmFsc2UiLCJhcHA6Ly9sb2NhbC9kZWFsZXItdHoiOiJFYXN0ZXJuIFN0YW5kYXJkIFRpbWUiLCJhcHA6Ly9hdXRob3JpemF0aW9uL2FwcG9pbnRtZW50L3NlcnZpY2UtYWR2aXNvci9zZWxlY3Rpb24iOiJvbmxpbmUtb25seSIsImFwcDovL2F1dGhvcml6YXRpb24vc2VydmljZS1kZXBhcnRtZW50L3RpbWUtc2VnbWVudC9zZXJ2aWNlLW1lbWJlciI6Im9ubGluZS1vbmx5IiwibmJmIjoxNjA4MTE3NTI2LCJleHAiOjE2MDgyMDM5MjYsImlhdCI6MTYwODExNzUyNiwiaXNzIjoiT1NTIElkZW50aXR5IFByb3ZpZGVyIiwiYXVkIjoidXJuOm9zcyJ9.exPdtlz8wL63I4MiKdV3zExcolcLJmxd7X2HAprnawGMF4apY0X_iZeB60WBWX2mEpCjE6MX43zXTt7HiBaHdMmcuLacMq0enrjqO7s6U9jKMlfgk5D0Z__mfd3ZrZ5ZXCEa2-ma_KJae2VR5syAOBsufHOeiKIM-4XFDV25_0jD3OIUZWKaRKlVU6GrXE5gfPVQfDalRbnrIIG0KPvwJrpCQTctE23Pmcpcif3YEc6y0mt2Q1-ZMviHo2yJkBNWkeRRoLPNE1xdN3c7-nhfjRdKgE2REdRA9IMPwY_B9YHbnleiwBdzBdQLTAqJhC8fDToQtCXYTjWFdr-7TaEFig"
     const TEST_USERID = "userid";
     const TEST_VIN = "vin";
     const TEST_EMAIL = "test@test.it";
@@ -39,7 +39,7 @@ export namespace Stubs {
     const TEST_END_DATE = "1576886647000";
     const TEST_START_DATE = "1576886647000";
     const TEST_POST_BODY = {
-        customer: {id: "string"},
+        customer: { id: "string" },
         customerConcernsInfo: "string",
         advisorId: 0,
         transportationOptionCode: "string",
@@ -117,7 +117,7 @@ export namespace Stubs {
         }
     }
     const TEST_APPOINTMENT_ID = "test appointment";
-
+    const TEST_VIN_WRONG = "2C3CCAGG7LH2003XM";
     export const clone = <T>(obj: T): T => {
         return JSON.parse(JSON.stringify(obj))
     }
@@ -148,6 +148,9 @@ export namespace Stubs {
         pathParams: {
             vin: TEST_VIN,
             userid: TEST_USERID
+        },
+        queryString: {
+            email: TEST_EMAIL
         },
         runTimeInfo: {
             resourcePath: '/v1/accounts/{userid}/vehicles/{vin}/servicescheduler/search'
@@ -448,16 +451,9 @@ export namespace Stubs {
         foundType: "byEmail"
     }
 
-    export const mockSearchByEmailRequest: DataModels.DfxSearchEmailRequestData = {
-        email: TEST_EMAIL,
-        dealerToken: TEST_VIN,
-        requestedService: 'DFX_SEARCH_EMAIL'
-    }
 
     export const mockSearchByVinFiltered: DataModels.SearchVinResponse = {
-        customerId: "urn:dfx:customer:103129767",
-        foundType: "byVin",
-        vehicles: [{ "vin": "2C3CCAGG7LH2003XM" }]
+        customerId: "urn:dfx:customer:103129767"
     }
 
     export const mockSearchByVin: SchedulingServiceDataModels.GetSearchResponse = {
@@ -496,11 +492,25 @@ export namespace Stubs {
         ]
     }
 
+    export const mockSearchByVinEmpty: SchedulingServiceDataModels.GetSearchResponse = {
+        "customerPreviews": [
+        ]
+    }
+
     export const mockSearchByVinRequest: DataModels.DfxSearchVinRequestData = {
         vin: TEST_VIN,
         userid: TEST_USERID,
-        dealerToken: TEST_VIN,
-        requestedService: 'DFX_SEARCH_VIN'
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'DFX_SEARCH_VIN',
+        email: TEST_EMAIL
+    }
+
+    export const mockSearchByWrongVinRequest: DataModels.DfxSearchVinRequestData = {
+        vin: TEST_VIN_WRONG,
+        userid: TEST_USERID,
+        dealerToken: TEST_DEALER_TOKEN,
+        requestedService: 'DFX_SEARCH_VIN',
+        email: TEST_EMAIL
     }
 
     // GetDfxVehicle
@@ -509,6 +519,58 @@ export namespace Stubs {
         userid: TEST_USERID,
         dealerToken: TEST_VIN,
         requestedService: 'DFX_SEARCH_VIN'
+    }
+
+    export const mockVerifyNotValid: SchedulingServiceDataModels.VerifyResponse = {
+        "isValid": false,
+        "customer": {
+            
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/customers/urn:dfx:customer:104028449/verify"
+            }
+        ]
+    }
+
+    export const mockVerify: SchedulingServiceDataModels.VerifyResponse = {
+        "isValid": true,
+        "customer": {
+            "id": "urn:dfx:customer:104028449",
+            "firstName": "RANDALL",
+            "lastName": "MALEC",
+            "phones": [
+                {
+                    "type": "default",
+                    "number": "2484258202"
+                },
+                {
+                    "type": "home",
+                    "number": "2484258202"
+                }
+            ],
+            "emails": [
+                {
+                    "type": "business",
+                    "email": "malec1rs@yahoo.com"
+                },
+                {
+                    "type": "personal",
+                    "email": "malec1rs@yahoo.com"
+                },
+                {
+                    "type": "default",
+                    "email": "malec1rs@yahoo.com"
+                }
+            ]
+        },
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://scheduler.dealer-fx.com/catalog/customers/urn:dfx:customer:104028449/verify"
+            }
+        ]
     }
 
     export const mockGetDfxVehicle: SchedulingServiceDataModels.GetVehicleResponse = {

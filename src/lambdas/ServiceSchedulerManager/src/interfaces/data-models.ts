@@ -1,6 +1,5 @@
 export type ServiceRequested =
     'DFX_SEARCH_VIN' |
-    'DFX_SEARCH_EMAIL' |
     'GET_DFX_VEHICLE' |
     'GET_DFX_TOKEN' |
     'GET_DEALER_SERVICES_VIN' |
@@ -30,7 +29,7 @@ export interface GetTokenRequestData extends ServiceRequestData {
     hintdealer: string;
 }
 
-export interface DfxSearchEmailRequestData extends ServiceRequestData {
+export interface DfxSearchEmailRequestData{
     email: string;
     dealerToken: string;
 }
@@ -48,8 +47,11 @@ export interface VinRequestData extends ServiceRequestData {
 }
 
 export type GetDfxVehicleRequestData = VinRequestData;
-export type DfxSearchVinRequestData = VinRequestData;
 export type GetAppointmentsRequestData = VinRequestData;
+
+export interface DfxSearchVinRequestData extends VinRequestData {
+    email: string
+}
 
 export interface GetServicesNoVinRequestData extends ServiceRequestData {
     mileage: string;
@@ -150,9 +152,7 @@ export type Vin = {
     vin:string
 }
 export type SearchVinResponse = {
-    customerId?: string,
-    foundType?: string
-    vehicles?: Vin[],
+    customerId?: string
 }
 
 export type GetDfxVehicleResponse = {    

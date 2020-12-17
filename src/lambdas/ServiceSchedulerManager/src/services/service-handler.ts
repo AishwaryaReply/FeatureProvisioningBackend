@@ -2,7 +2,7 @@ import logger from 'gcv-logger';
 import { UtilityObjects, GCVErrors } from 'gcv-utils';
 import { Utilities } from 'gcv-utilities';
 import { DataModels } from '../interfaces';
-import { Constants, GetFactoryNoVinSchema, GetRepairNoVinSchema, GetAppointmentDetailsSchema, GetAppointmentSchema, GetTimeSegmentsSchema, GetTransportationOptionSchema, PostAppointmentSchema, PutAppointmentSchema, GetFactoryVinSchema, GetDealerNoVinSchema, GetDealerVinSchema, GetDealerDepartmentSchema, GetAdvisorsSchema, GetVehicleSchema, GetTokenSchema, SearchVinSchema, SearchEmailSchema, DeleteAppointmentSchema, GetRepairVinSchema, GetSummaryAppointmentSchema } from '../../constants';
+import { Constants, GetFactoryNoVinSchema, GetRepairNoVinSchema, GetAppointmentDetailsSchema, GetAppointmentSchema, GetTimeSegmentsSchema, GetTransportationOptionSchema, PostAppointmentSchema, PutAppointmentSchema, GetFactoryVinSchema, GetDealerNoVinSchema, GetDealerVinSchema, GetDealerDepartmentSchema, GetAdvisorsSchema, GetVehicleSchema, GetTokenSchema, SearchVinSchema, DeleteAppointmentSchema, GetRepairVinSchema, GetSummaryAppointmentSchema } from '../../constants';
 import { ServiceRequestData, ServiceRequested, } from '../interfaces/data-models';
 
 const LOG_PREFIX_CLASS = 'ServiceSchedulerHandler | ';
@@ -15,9 +15,6 @@ export class ServiceHandler {
         switch (requestedService) {
             case 'DFX_SEARCH_VIN':
                 this.validateEvent(inputEvent, SearchVinSchema);
-                break;
-            case 'DFX_SEARCH_EMAIL':
-                this.validateEvent(inputEvent, SearchEmailSchema);
                 break;
             case 'GET_DFX_VEHICLE':
                 this.validateEvent(inputEvent, GetVehicleSchema);
@@ -80,10 +77,9 @@ export class ServiceHandler {
 
     private prepareRequestData(event: UtilityObjects.TransformedInputEvent, service: DataModels.ServiceRequested): DataModels.ServiceRequestData {
         switch (service) {
-            case 'DFX_SEARCH_EMAIL':
-                return this.prepareDfxSearchEmail(event);
-            case 'GET_SERVICE_APPOINTMENTS':
             case 'DFX_SEARCH_VIN':
+                return this.prepareDfxSearchVin(event);
+            case 'GET_SERVICE_APPOINTMENTS':
             case 'GET_DFX_VEHICLE':
                 return this.prepareVinRequest(event, service);
             case 'GET_DFX_TOKEN':
@@ -116,7 +112,7 @@ export class ServiceHandler {
     }
 
     private prepareGetDfxToken(event: UtilityObjects.TransformedInputEvent): DataModels.GetTokenRequestData {
-        const logPrefix = `${LOG_PREFIX_CLASS} prepareGetDfxSearch |`;
+        const logPrefix = `${LOG_PREFIX_CLASS} prepareGetDfxToken |`;
         logger.debug(logPrefix, `dealer: ${event.queryString.hintdealer}`);
         return {
             requestedService: 'GET_DFX_TOKEN',
@@ -124,12 +120,14 @@ export class ServiceHandler {
         }
     }
 
-    private prepareDfxSearchEmail(event: UtilityObjects.TransformedInputEvent): DataModels.DfxSearchEmailRequestData {
-        const logPrefix = `${LOG_PREFIX_CLASS} prepareDfxSerachEmail |`;
-        logger.debug(logPrefix, `email: ${event.queryString.email}, dealerToken: ${event.headers['dealer-authorization']}`);
+    private prepareDfxSearchVin(event: UtilityObjects.TransformedInputEvent): DataModels.DfxSearchVinRequestData {
+        const logPrefix = `${LOG_PREFIX_CLASS} prepareDfxSearchVin |`;
+        logger.debug(logPrefix, `email: ${event.queryString.email}, vin: ${event.pathParams.vin}, dealerToken: ${event.headers['dealer-authorization']}`);
         return {
-            requestedService: 'DFX_SEARCH_EMAIL',
+            requestedService: 'DFX_SEARCH_VIN',
             email: event.queryString.email,
+            vin: event.pathParams.vin,
+            userid: event.pathParams.userid,
             dealerToken: event.headers['dealer-authorization']
         }
     }
@@ -260,9 +258,6 @@ export class ServiceHandler {
         const resourcePath: string = runTimeInfo.resourcePath;
         const resourceMethod: string = runTimeInfo.httpMethod;
         logger.debug(`${logPrefix} path: ${resourcePath}`);
-        if (resourcePath.search(new RegExp(Constants.DFX_SEARCH_EMAIL_API_PATH_REGEX)) > -1) {
-            return 'DFX_SEARCH_EMAIL';
-        }
         if (resourcePath.search(new RegExp(Constants.DFX_SEARCH_VIN_API_PATH_REGEX)) > -1) {
             return 'DFX_SEARCH_VIN';
         }

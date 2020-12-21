@@ -133,8 +133,8 @@ export type Vehicle = {
 
 export type AppointmentBody = {
     customer: Customer;
-    customerConcernsInfo: string;
-    advisorId: number;
+    customerConcernsInfo?: string;
+    advisorId?: number;
     transportationOptionCode: string;
     scheduledTime: number;
     mileage: Mileage;

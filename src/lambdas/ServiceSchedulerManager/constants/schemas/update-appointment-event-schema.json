@@ -141,10 +141,10 @@
                     "$ref": "#/definitions/Customer"
                 },
                 "customerConcernsInfo": {
-                    "type": "string"
+                    "type": ["string", "null"]
                 },
                 "advisorId": {
-                    "type": "number"
+                    "type": ["number","null"]
                 },
                 "transportationOptionCode": {
                     "type": "string"
@@ -169,8 +169,6 @@
             },
             "required": [
 				"customer",
-				"customerConcernsInfo",
-				"advisorId",
 				"transportationOptionCode",
 				"scheduledTime",
 				"mileage",

@@ -16,6 +16,7 @@ export namespace Stubs {
     const TEST_YEAR = "2020";
     const TEST_MAKE = "make";
     const TEST_CUST_ID = "cust_id";
+    const ONE_DAY = 1000 * 60 * 60 *24;
     const TEST_SERVICE_LIST = [{ id: 0 }, { id: 1 }, { id: 2 }];
     const headers = {
         "clientrequestid": "mock",
@@ -43,7 +44,7 @@ export namespace Stubs {
         customerConcernsInfo: "string",
         advisorId: 0,
         transportationOptionCode: "string",
-        scheduledTime: 1606307400000,
+        scheduledTime: new Date().getTime() + ONE_DAY,
         mileage: {
             value: 0,
             unitsKind: "string"
@@ -3783,7 +3784,47 @@ export namespace Stubs {
             customerConcernsInfo: "customerConcernsInfo",
             advisorId: 0,
             transportationOptionCode: "transportationOptionCode",
-            scheduledTime: 1605903300000,
+            scheduledTime: new Date().getTime() + ONE_DAY,
+            mileage: {
+                value: 0,
+                unitsKind: "unitsKind"
+            },
+            services: {
+                drs: [
+                    {
+                        id: 0,
+                        comment: "string"
+                    }
+                ],
+                frs: [
+                    {
+                        id: 0,
+                        comment: "string"
+                    }
+                ],
+                repair: [
+                    {
+                        id: 0,
+                        comment: "string"
+                    }
+                ]
+            }
+        },
+        requestedService: 'POST_APPOINTMENT'
+    }
+
+     // PostAppointment
+     export const mockPostPastAppointmentRequest: DataModels.PostAppointmentRequestData = {
+        vin: TEST_VIN,
+        userid: TEST_USERID,
+        dealerToken: TEST_DEALER_TOKEN,
+        departmentId: TEST_DEPARTMENT,
+        body: {
+            customer: { id: TEST_CUST_ID },
+            customerConcernsInfo: "customerConcernsInfo",
+            advisorId: 0,
+            transportationOptionCode: "transportationOptionCode",
+            scheduledTime: new Date().getTime() - ONE_DAY,
             mileage: {
                 value: 0,
                 unitsKind: "unitsKind"
@@ -4192,7 +4233,7 @@ export namespace Stubs {
             customerConcernsInfo: "customerConcernsInfo",
             advisorId: 0,
             transportationOptionCode: "transportationOptionCode",
-            scheduledTime: 1605903300000,
+            scheduledTime: new Date().getTime() + ONE_DAY,
             mileage: {
                 value: 0,
                 unitsKind: "unitsKind"

@@ -633,18 +633,24 @@ export class ServiceScheduler {
 
     public async postAppointment(request: DataModels.PostAppointmentRequestData): Promise<DataModels.PostAppointmentResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} postAppointment |`;
-        //TODO check consistency of customer (id , or other info)
         const mappedRequest: SchedulingServiceDataModels.PostAppointmentParams = {
             departmentId: request.departmentId,
             services: request.body.services,
             customer: request.body.customer,
-            customerConcernsInfo: request.body.customerConcernsInfo,
-            advisorId: request.body.advisorId,
             transportationOptionCode: request.body.transportationOptionCode,
             scheduledTime: new Date(request.body.scheduledTime).toISOString(),
             mileage: request.body.mileage,
             dealerToken: request.dealerToken,
             vin: request.vin
+        }
+        if (request.body.scheduledTime < new Date().getTime() ){
+            throw new GCVErrors.ProxyIntegration("An appointment cannot be scheduled in the past");
+        }
+        if (request.body.advisorId){
+            mappedRequest.advisorId = request.body.advisorId;
+        }
+        if (request.body.customerConcernsInfo) {
+            mappedRequest.customerConcernsInfo = request.body.customerConcernsInfo;
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.PostAppointmentResponse = await SchedulingConectorService.postAppointment(mappedRequest);
@@ -684,19 +690,28 @@ export class ServiceScheduler {
 
     public async updateServiceAppointment(request: DataModels.PutAppointmentRequestData): Promise<DataModels.PutAppointmentRequestResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} updateServiceAppointment |`;
-        //TODO check only with customer id 
+        if (!request.body.customer.id){
+            throw new GCVErrors.ProxyIntegration("To update the appointment you must specify the customer id");
+        }
+        if (request.body.scheduledTime < new Date().getTime() ){
+            throw new GCVErrors.ProxyIntegration("An appointment cannot be scheduled in the past");
+        }
         const mappedRequest: SchedulingServiceDataModels.UpdateServiceAppointmentParams = {
             departmentId: request.departmentId,
             services: request.body.services,
             customer: request.body.customer,
-            customerConcernsInfo: request.body.customerConcernsInfo,
-            advisorId: request.body.advisorId,
             transportationOptionCode: request.body.transportationOptionCode,
             scheduledTime: new Date(request.body.scheduledTime).toISOString(),
             mileage: request.body.mileage,
             dealerToken: request.dealerToken,
             vin: request.vin,
             appointmentId: request.appointmentId
+        }
+        if (request.body.advisorId){
+            mappedRequest.advisorId = request.body.advisorId;
+        }
+        if (request.body.customerConcernsInfo) {
+            mappedRequest.customerConcernsInfo = request.body.customerConcernsInfo;
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.UpdateServiceAppointmentResponse = await SchedulingConectorService.updateServiceAppointment(mappedRequest);

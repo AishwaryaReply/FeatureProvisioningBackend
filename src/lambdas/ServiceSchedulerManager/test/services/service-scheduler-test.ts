@@ -447,7 +447,14 @@ describe('ServiceSchedulerService', () => {
             const response = await testServiceSchedulerService.postAppointment(Stubs.mockPostAppointmentRequest);
             
             expect(response).to.be.deep.equal({});
-        })       
+        })  
+        
+        it('should return an error when trying to book an appoointment in the past', async () => {            
+            sinon.stub(SchedulingConectorService, 'postAppointment').resolves(Stubs.mockPostAppointment);
+            
+            const response = testServiceSchedulerService.postAppointment(Stubs.mockPostPastAppointmentRequest);
+            expect(response).to.be.eventually.rejectedWith(GCVErrors.ProxyIntegration);
+        })  
     });
 
     describe('deleteServiceAppointment', () => {
@@ -472,31 +479,6 @@ describe('ServiceSchedulerService', () => {
             const response = testServiceSchedulerService.deleteServiceAppointment(Stubs.mockDeleteServiceAppointmentRequest);
             
             expect(response).to.be.eventually.rejectedWith(GCVErrors.NotFound);
-        })       
-    });
-
-    describe('postAppointment', () => {
-        afterEach(sinon.restore);
-
-        it('should return the expected response', async () => {
-            sinon.stub(SchedulingConectorService, 'postAppointment').resolves(Stubs.mockPostAppointment);
-            
-            const expected: DataModels.PostAppointmentResponse = Stubs.mockPostAppointmentFiltered;
-            const response = await testServiceSchedulerService.postAppointment(Stubs.mockPostAppointmentRequest);
-            
-            expect(response).to.be.deep.equal(expected);
-        }) 
-
-        it('should return the expected empty response', async () => {            
-            const noPostAppointment:SchedulingServiceDataModels.PostAppointmentResponse = {
-                status: "",
-                confirmationCode: ""
-            };
-
-            sinon.stub(SchedulingConectorService, 'postAppointment').resolves(noPostAppointment);
-            const response = await testServiceSchedulerService.postAppointment(Stubs.mockPostAppointmentRequest);
-            
-            expect(response).to.be.deep.equal({});
         })       
     });
 

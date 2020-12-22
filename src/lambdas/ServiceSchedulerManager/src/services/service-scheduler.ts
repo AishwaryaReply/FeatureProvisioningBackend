@@ -3,7 +3,7 @@ import { SchedulingServiceDataModels, SchedulingConectorService } from 'gcv-meld
 import logger from "gcv-logger";
 import { Constants } from "../../constants";
 import { GCVErrors } from "gcv-utils";
-import { Slot, SlotAdvisor, SlotTransportation } from "../interfaces/data-models";
+import { DeliveryInfo, Slot, SlotAdvisor, SlotTransportation } from "../interfaces/data-models";
 
 const LOG_PREFIX_CLASS = 'ServiceScheduler | ';
 
@@ -652,6 +652,15 @@ export class ServiceScheduler {
         if (request.body.customerConcernsInfo) {
             mappedRequest.customerConcernsInfo = request.body.customerConcernsInfo;
         }
+        // TODO handle the deliveryInfo
+        if (request.body.transportationOptionCode == "need-pickup"){
+            let deliveryInfo: DeliveryInfo = {
+                deliveryAddress: "",
+                pickupAddress: ""
+            }
+            mappedRequest.deliveryInfo = deliveryInfo;
+
+        } 
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.PostAppointmentResponse = await SchedulingConectorService.postAppointment(mappedRequest);
         logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
@@ -712,6 +721,14 @@ export class ServiceScheduler {
         }
         if (request.body.customerConcernsInfo) {
             mappedRequest.customerConcernsInfo = request.body.customerConcernsInfo;
+        }
+        // TODO handle the deliveryInfo
+        if (request.body.transportationOptionCode == "need-pickup"){
+            let deliveryInfo: DeliveryInfo = {
+                deliveryAddress: "",
+                pickupAddress: ""
+            }
+            mappedRequest.deliveryInfo = deliveryInfo;
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.UpdateServiceAppointmentResponse = await SchedulingConectorService.updateServiceAppointment(mappedRequest);

@@ -375,7 +375,12 @@
         "memberId": {
           "type": "number"
         }
-      }
+      },
+      "required":[
+        "id",
+        "name",
+        "memberId"
+      ]
     },
     "GetAdvisorsResponse": {
       "type": "object",
@@ -591,6 +596,9 @@
           "type": "number"
         }
       },
+      "required":[
+        "id"
+      ],
       "example": {
         "id": 12345
       }
@@ -607,7 +615,12 @@
         "price": {
           "type": "number"
         }
-      }
+      },
+      "required": [
+        "id",
+        "name",
+        "price"
+      ]
     },
     "ServicesResponse": {
       "type": "object",
@@ -2038,7 +2051,10 @@
                     "$ref": "#/definitions/ServiceId"
                   }
                 }
-              }
+              },
+              "required":[
+                "servicesList"
+              ]
             }
           },
           {

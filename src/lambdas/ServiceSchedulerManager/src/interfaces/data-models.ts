@@ -1,3 +1,4 @@
+
 export type ServiceRequested =
     'DFX_SEARCH_VIN' |
     'GET_DFX_VEHICLE' |
@@ -141,6 +142,12 @@ export type AppointmentBody = {
     services: ServicesPostAppointment;
 }
 
+export type DeliveryInfo = {
+    pickupAddress: string,
+    deliveryAddress: string
+}
+
+
 export interface AppointmentRequestData extends ServiceRequestData {
     appointmentId: string;
     departmentId: string;
@@ -223,13 +230,13 @@ export declare type ST = {
 
 export declare type Slot = {
     time: number,
-    serviceAdvisors: SlotAdvisor[],
+    serviceAdvisors?: SlotAdvisor[],
     transportationOptions: SlotTransportation[]
 }
 
 export declare type Segment = {
-    date?: number,
-    slots?: Slot[]
+    date: number,
+    slots: Slot[]
 };
 export declare type GetDealerDepartmentTimeSegmentsResponse = {
     segments?: Segment[];
@@ -286,9 +293,9 @@ export declare type TransportationOption = {
     description?: string;
 };
 export declare type Summary = {
-    taxes?: number;
-    total?: number;
-    subTotal?: number;
+    taxes: number;
+    total: number;
+    subTotal: number;
 };
 export declare type ServiceAppointment = {
     id?: number;

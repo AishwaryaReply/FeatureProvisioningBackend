@@ -22,7 +22,7 @@
         "gcv-utilities": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPSdpRouter/gcv-utilities.git#v1.0.9",
         "gcv-utils": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPSdpRouter/gcv-utils.git#v2.9",
         "gcv-vehicle-dao": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPCustomLayer/gcv-vehicle-dao.git#v2.48",
-        "gcv-meld": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPSdpRouter/gcv-meld.git#v1.1.8"
+        "gcv-meld": "git+ssh://git@gsdp.github.intra.fcagroup.com/GSDPSdpRouter/gcv-meld.git#v1.1.10"
     },
     "devDependencies": {
         "@types/aws-lambda": "^8.10.57",

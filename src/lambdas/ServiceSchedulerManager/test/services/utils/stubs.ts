@@ -3783,7 +3783,7 @@ export namespace Stubs {
             customer: { id: TEST_CUST_ID },
             customerConcernsInfo: "customerConcernsInfo",
             advisorId: 0,
-            transportationOptionCode: "transportationOptionCode",
+            transportationOptionCode: "need-pickup",
             scheduledTime: new Date().getTime() + ONE_DAY,
             mileage: {
                 value: 0,
@@ -4232,7 +4232,7 @@ export namespace Stubs {
             customer: { id: TEST_CUST_ID },
             customerConcernsInfo: "customerConcernsInfo",
             advisorId: 0,
-            transportationOptionCode: "transportationOptionCode",
+            transportationOptionCode: "need-pickup",
             scheduledTime: new Date().getTime() + ONE_DAY,
             mileage: {
                 value: 0,

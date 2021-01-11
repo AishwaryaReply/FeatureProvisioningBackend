@@ -659,7 +659,6 @@ export class ServiceScheduler {
                 pickupAddress: ""
             }
             mappedRequest.deliveryInfo = deliveryInfo;
-
         } 
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.PostAppointmentResponse = await SchedulingConectorService.postAppointment(mappedRequest);

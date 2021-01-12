@@ -1,18 +1,21 @@
 import { DataModels } from "../interfaces";
-import { SchedulingServiceDataModels, SchedulingConectorService } from 'gcv-meld';
+import { SchedulingServiceDataModels, SchedulingConectorService, MeldDataModels } from 'gcv-meld';
 import logger from "gcv-logger";
 import { Constants } from "../../constants";
 import { GCVErrors } from "gcv-utils";
 import { DeliveryInfo, Slot, SlotAdvisor, SlotTransportation } from "../interfaces/data-models";
+import { ServiceFactory } from "./service-factory";
 
 const LOG_PREFIX_CLASS = 'ServiceScheduler | ';
 
 export class ServiceScheduler {
     public async searchByEmail(request: DataModels.DfxSearchEmailRequestData): Promise<DataModels.SearchEmailResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} searchByEmail |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetSearchRequestParams = {
             email: request.email,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetSearchResponse = await SchedulingConectorService.getDfxSearch(mappedRequest);
@@ -35,9 +38,11 @@ export class ServiceScheduler {
 
     public async searchByVin(request: DataModels.DfxSearchVinRequestData): Promise<DataModels.SearchVinResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} searchByVin |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetSearchRequestParams = {
             vin: request.vin,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetSearchResponse = await SchedulingConectorService.getDfxSearch(mappedRequest);
@@ -51,7 +56,8 @@ export class ServiceScheduler {
                 customerId: customerId,
                 dealerToken: request.dealerToken,
                 vin: request.vin,
-                email: request.email
+                email: request.email,
+                environment: environment as MeldDataModels.Environment
             }
             const verifyResponse: SchedulingServiceDataModels.VerifyResponse = await SchedulingConectorService.verify(mappedVerifyRequest);
             logger.debug(logPrefix, `verify response:  ${JSON.stringify(verifyResponse)}`);
@@ -68,9 +74,11 @@ export class ServiceScheduler {
 
     public async getDfxVehicle(request: DataModels.GetDfxVehicleRequestData): Promise<DataModels.GetDfxVehicleResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getDfxVehicle |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetVehicleRequestParams = {
             vin: request.vin,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetVehicleResponse = await SchedulingConectorService.getDfxVehicle(mappedRequest);
@@ -100,8 +108,10 @@ export class ServiceScheduler {
 
     public async getDfxToken(request: DataModels.GetTokenRequestData): Promise<DataModels.GetDfxTokenResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getDfxToken |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetTokenRequestParams = {
-            hint_dealer: request.hintdealer
+            hint_dealer: request.hintdealer,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.TokenResponse = await SchedulingConectorService.getDfxToken(mappedRequest);
@@ -125,10 +135,12 @@ export class ServiceScheduler {
 
     public async getDealerServicesVin(request: DataModels.GetServicesVinRequestData): Promise<DataModels.GetServicesResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getDealerServicesVin |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsVin = {
             vin: request.vin,
             mileage: request.mileage,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetDealerServicesResponse = await SchedulingConectorService.getDealerServicesVin(mappedRequest);
@@ -162,6 +174,7 @@ export class ServiceScheduler {
 
     public async getDealerServicesWithoutVin(request: DataModels.GetServicesNoVinRequestData): Promise<DataModels.GetServicesResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getDealerServicesWithoutVin |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsWithoutVin = {
             mileage: request.mileage,
             make: request.make,
@@ -170,7 +183,8 @@ export class ServiceScheduler {
             transmission: request.transmission,
             train: request.train,
             engine: request.engine,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetDealerServicesResponse = await SchedulingConectorService.getDealerServicesWithoutVin(mappedRequest);
@@ -204,10 +218,12 @@ export class ServiceScheduler {
 
     public async getFactoryServicesVin(request: DataModels.GetServicesVinRequestData): Promise<DataModels.GetServicesResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getFactoryServicesVin |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsVin = {
             vin: request.vin,
             mileage: request.mileage,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetFactoryServicesResponse = await SchedulingConectorService.getFactoryServicesVin(mappedRequest);
@@ -243,6 +259,7 @@ export class ServiceScheduler {
 
     public async getFactoryServicesWithoutVin(request: DataModels.GetServicesNoVinRequestData): Promise<DataModels.GetServicesResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getFactoryServicesWithoutVin |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsWithoutVin = {
             mileage: request.mileage,
             make: request.make,
@@ -251,7 +268,8 @@ export class ServiceScheduler {
             transmission: request.transmission,
             train: request.train,
             engine: request.engine,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetFactoryServicesResponse = await SchedulingConectorService.getFactoryServicesWithoutVin(mappedRequest);
@@ -286,10 +304,12 @@ export class ServiceScheduler {
 
     public async getRepairServicesVin(request: DataModels.GetServicesVinRequestData): Promise<DataModels.GetServicesResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getRepairServicesVin |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsVin = {
             vin: request.vin,
             mileage: request.mileage,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetRepairServicesResponse = await SchedulingConectorService.getRepairServicesVin(mappedRequest);
@@ -326,6 +346,7 @@ export class ServiceScheduler {
 
     public async getRepairServicesWithoutVin(request: DataModels.GetServicesNoVinRequestData): Promise<DataModels.GetServicesResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getRepairServicesWithoutVin |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetDealerServicesRequestParamsWithoutVin = {
             mileage: request.mileage,
             make: request.make,
@@ -334,7 +355,8 @@ export class ServiceScheduler {
             transmission: request.transmission,
             train: request.train,
             engine: request.engine,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetRepairServicesResponse = await SchedulingConectorService.getRepairServicesWithoutVin(mappedRequest);
@@ -371,9 +393,11 @@ export class ServiceScheduler {
 
     public async getDealerDepartment(request: DataModels.GetDealerDepartmentRequestData): Promise<DataModels.GetDealerDepartmentResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getDealerDepartment |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetDealerDepartmentRequestParams = {
             services: request.servicesList,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetDealerDepartmentResponse = await SchedulingConectorService.getDealerDepartment(mappedRequest);
@@ -393,9 +417,11 @@ export class ServiceScheduler {
 
     public async getAppointmentSummary(request: DataModels.GetAppointmentSummaryRequestData): Promise<DataModels.GetAppointmentSummaryResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getAppointmentSummary |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetAppointmentSummaryRequestParams = {
             services: request.servicesList,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetAppointmentSummaryResponse = await SchedulingConectorService.getAppointmentSummary(mappedRequest);
@@ -419,9 +445,11 @@ export class ServiceScheduler {
 
     public async getAdvisors(request: DataModels.GetAdvisorsRequestData): Promise<DataModels.GetAdvisorsResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getAdvisors |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetAdvisorsRequestParams = {
             departmentId: request.departmentId,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetAdvisorsResponse = await SchedulingConectorService.getAdvisors(mappedRequest);
@@ -455,9 +483,11 @@ export class ServiceScheduler {
 
     public async getTransportationOptions(request: DataModels.GetTransportationOptionsRequestData): Promise<DataModels.GetTransportationOptionsResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getTransportationOptions |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetTransportationOptionsParams = {
             departmentId: request.departmentId,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetTransportationOptionsResponse = await SchedulingConectorService.getTransportationOptions(mappedRequest);
@@ -492,12 +522,14 @@ export class ServiceScheduler {
         const logPrefix = `${LOG_PREFIX_CLASS} getDealerDepartmentTimeSegments |`;
         ServiceScheduler.checkDate(request.startdate);
         ServiceScheduler.checkDate(request.enddate);
+        const environment = ServiceFactory.getEnvironment();
 
         const mappedRequest: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsParams = {
             departmentId: request.departmentId,
             StartDate: ServiceScheduler.formatDate(request.startdate),
             EndDate: ServiceScheduler.formatDate(request.enddate),
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetDealerDepartmentTimeSegmentsResponse = await SchedulingConectorService.getDealerDepartmentTimeSegments(mappedRequest);
@@ -575,9 +607,11 @@ export class ServiceScheduler {
 
     public async getServiceAppointments(request: DataModels.GetAppointmentsRequestData): Promise<DataModels.GetServiceAppointmentsResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getServiceAppointments |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetServiceAppointmentsParams = {
             vin: request.vin,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetServiceAppointmentsResponse = await SchedulingConectorService.getServiceAppointments(mappedRequest);
@@ -633,6 +667,7 @@ export class ServiceScheduler {
 
     public async postAppointment(request: DataModels.PostAppointmentRequestData): Promise<DataModels.PostAppointmentResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} postAppointment |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.PostAppointmentParams = {
             departmentId: request.departmentId,
             services: request.body.services,
@@ -641,7 +676,8 @@ export class ServiceScheduler {
             scheduledTime: new Date(request.body.scheduledTime).toISOString(),
             mileage: request.body.mileage,
             dealerToken: request.dealerToken,
-            vin: request.vin
+            vin: request.vin,
+            environment: environment as MeldDataModels.Environment
         }
         if (request.body.scheduledTime < new Date().getTime() ){
             throw new GCVErrors.ProxyIntegration("An appointment cannot be scheduled in the past");
@@ -676,13 +712,14 @@ export class ServiceScheduler {
     }
 
 
-
     public async deleteServiceAppointment(request: DataModels.AppointmentRequestData): Promise<DataModels.DeleteServiceAppointmentResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} deleteServiceAppointment |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.DeleteServiceAppointmentParams = {
             departmentId: request.departmentId,
             appointmentId: request.appointmentId,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.DeleteServiceAppointmentResponse = await SchedulingConectorService.deleteServiceAppointment(mappedRequest);
@@ -698,6 +735,7 @@ export class ServiceScheduler {
 
     public async updateServiceAppointment(request: DataModels.PutAppointmentRequestData): Promise<DataModels.PutAppointmentRequestResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} updateServiceAppointment |`;
+        const environment = ServiceFactory.getEnvironment();
         if (!request.body.customer.id){
             throw new GCVErrors.ProxyIntegration("To update the appointment you must specify the customer id");
         }
@@ -713,7 +751,8 @@ export class ServiceScheduler {
             mileage: request.body.mileage,
             dealerToken: request.dealerToken,
             vin: request.vin,
-            appointmentId: request.appointmentId
+            appointmentId: request.appointmentId,
+            environment: environment as MeldDataModels.Environment
         }
         if (request.body.advisorId){
             mappedRequest.advisorId = request.body.advisorId;
@@ -749,10 +788,12 @@ export class ServiceScheduler {
 
     public async getServiceAppointmentDetails(request: DataModels.AppointmentRequestData): Promise<DataModels.GetServiceAppointmentDetailsResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} getServiceAppointmentDetails |`;
+        const environment = ServiceFactory.getEnvironment();
         const mappedRequest: SchedulingServiceDataModels.GetServiceAppointmentDetailsParams = {
             departmentId: request.departmentId,
             appointmentId: request.appointmentId,
-            dealerToken: request.dealerToken
+            dealerToken: request.dealerToken,
+            environment: environment as MeldDataModels.Environment
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: SchedulingServiceDataModels.GetServiceAppointmentDetailsResponse = await SchedulingConectorService.getServiceAppointmentDetails(mappedRequest);

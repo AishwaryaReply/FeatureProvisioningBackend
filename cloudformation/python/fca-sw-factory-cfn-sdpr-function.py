@@ -68,7 +68,7 @@ parameters['feature_code'] = Parameter(
     Default=base_info['Feature Code'],
     Description='Feature Code for this feature')
 parameters['lambda_layer_arn'] = Parameter(
-    '0006ParamAppDynamicsLayer',
+    '0006ParamLambdaTracerLayer',
     Type='String',
     Description='Lambda layer to attach to the lambda functions')
 parameters['multichannels_api_id'] = Parameter(

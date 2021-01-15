@@ -629,7 +629,8 @@ export class ServiceScheduler {
                     elem.status &&
                     elem.status == "booked" &&
                     elem.links &&
-                    elem.links.length != 0) {
+                    elem.links.length != 0 &&
+                    new Date(elem.scheduledTime).getTime() > new Date().getTime()) {
 
                     let appointmentid: string = "";
                     let departmentid: string = "";

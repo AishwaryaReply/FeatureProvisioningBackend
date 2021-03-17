@@ -428,9 +428,9 @@ export class ServiceScheduler {
         logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
         let filteredResponse: DataModels.GetAppointmentSummaryResponse = {};
 
-        if (response.taxes &&
-            response.taxesGt &&
-            response.total) {
+        if (response.taxes != undefined &&
+            response.taxesGt != undefined &&
+            response.total != undefined) {
             const localTaxes = response.taxes + response.taxesGt;
             filteredResponse = {
                 taxes: Number.parseFloat(localTaxes.toFixed(2)),
@@ -602,7 +602,6 @@ export class ServiceScheduler {
         }
         return filteredResponse;
     }
-
 
 
     public async getServiceAppointments(request: DataModels.GetAppointmentsRequestData): Promise<DataModels.GetServiceAppointmentsResponse> {

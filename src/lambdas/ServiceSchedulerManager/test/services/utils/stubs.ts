@@ -2278,10 +2278,23 @@ export namespace Stubs {
         "totalLabourHours": 2.10
     }
 
+    export const mockGetAppointmentSummary2: SchedulingServiceDataModels.GetAppointmentSummaryResponse = {
+        "taxes": 10,
+        "taxesGt": 0,
+        "total": 30.20,
+        "totalLabourHours": 2.10
+    }
+
     export const mockGetAppointmentSummaryFiltered: DataModels.GetAppointmentSummaryResponse = {
         total: 30.20,
         subTotal: 20.10,
         taxes: 10.10
+    };
+
+    export const mockGetAppointmentSummaryFiltered2: DataModels.GetAppointmentSummaryResponse = {
+        total: 30.20,
+        subTotal: 20.20,
+        taxes: 10
     };
 
     // GetAdvisors

@@ -343,8 +343,18 @@ describe('ServiceSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
+        it('should return the expected response 2', async () => {
+            sinon.stub(SchedulingConectorService, 'getAppointmentSummary').resolves(Stubs.mockGetAppointmentSummary2);
+            sinon.stub(ServiceFactory, 'getEnvironment').resolves('int');
+            
+            const expected: DataModels.GetAppointmentSummaryResponse = Stubs.mockGetAppointmentSummaryFiltered2;
+            const response = await testServiceSchedulerService.getAppointmentSummary(Stubs.mockGetAppointmentSummaryRequest);
+            
+            expect(response).to.be.deep.equal(expected);
+        }) 
+
         it('should return the expected empty response', async () => {            
-            const noGetAppointmentSummary:SchedulingServiceDataModels.GetAppointmentSummaryResponse = { };
+            const noGetAppointmentSummary:SchedulingServiceDataModels.GetAppointmentSummaryResponse = { "taxes": 10 };
             sinon.stub(ServiceFactory, 'getEnvironment').resolves('int');
 
             sinon.stub(SchedulingConectorService, 'getAppointmentSummary').resolves(noGetAppointmentSummary);

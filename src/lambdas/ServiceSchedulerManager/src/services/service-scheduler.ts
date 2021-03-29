@@ -838,9 +838,9 @@ export class ServiceScheduler {
                 const elem: SchedulingServiceDataModels.Services = response.services;
                 let servs: DataModels.Services = {};
 
-                if (elem.summary?.taxes &&
-                    elem.summary?.taxesGt &&
-                    elem.summary?.total) {
+                if (elem.summary?.taxes != undefined &&
+                    elem.summary?.taxesGt != undefined &&
+                    elem.summary?.total != undefined) {
                     const localTaxes = elem.summary.taxes + elem.summary.taxesGt;
                     servs.summary = {
                         taxes: Number.parseFloat(localTaxes.toFixed(2)),

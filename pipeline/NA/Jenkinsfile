@@ -183,7 +183,7 @@ pipeline {
                   '0003ParamProjectComponent': "${PROJECT_COMPONENT}",
                   '0004ParamFeatureName': "${FEATURE_NAME}",
                   '0005ParamFeatureCode': "${FEATURE_CODE}",
-                  '0006ParamLambdaTracerLayer': "${PARAM_GCV_LAMBDA_TRACER_LAYER}",
+                  '0006ParamLambdaTracerLayer': "${PARAM_GCV_LAMBDA_TRACER_XRAY_LAYER}",
                   '0201ParamMultichannelsApiID': "${MULTICHANNELS_API_ID}",
                   '0202ParamMultichannelsAPIAccountID': "${SDPR_ACCOUNT_ID}",
                   '0301ParamLambdaSubnetIdList': "${PARAM_SUBNET_ID_LIST_LAMBDA}",
@@ -237,7 +237,7 @@ pipeline {
                   '0003ParamProjectComponent': "${PROJECT_COMPONENT}",
                   '0004ParamFeatureName': "${FEATURE_NAME}",
                   '0005ParamFeatureCode': "${FEATURE_CODE}",
-                  '0006ParamLambdaTracerLayer': "${PARAM_GCV_LAMBDA_TRACER_LAYER}",
+                  '0006ParamLambdaTracerLayer': "${PARAM_GCV_LAMBDA_TRACER_XRAY_LAYER}",
                   '0201ParamMultichannelsApiID': "${MULTICHANNELS_API_ID}",
                   '0202ParamMultichannelsAPIAccountID': "${SDPR_ACCOUNT_ID}",
                   '0301ParamLambdaSubnetIdList': "${PARAM_SUBNET_ID_LIST_LAMBDA}",
@@ -282,6 +282,7 @@ pipeline {
           steps {
             // Create/Update cloudformation stack
             script {
+              triggerSecurityPipeline()
               JenkinsConfig.loadEnvVariablesGlobal()
               JenkinsConfigRegional.loadDeployEnvVariablesPrepUsEast1()
               JenkinsConfigRegional.loadDeploySdprEnvVariablesPrepUsEast1()
@@ -298,7 +299,7 @@ pipeline {
                   '0003ParamProjectComponent': "${PROJECT_COMPONENT}",
                   '0004ParamFeatureName': "${FEATURE_NAME}",
                   '0005ParamFeatureCode': "${FEATURE_CODE}",
-                  '0006ParamLambdaTracerLayer': "${PARAM_GCV_LAMBDA_TRACER_LAYER}",
+                  '0006ParamLambdaTracerLayer': "${PARAM_GCV_LAMBDA_TRACER_XRAY_LAYER}",
                   '0201ParamMultichannelsApiID': "${MULTICHANNELS_API_ID}",
                   '0202ParamMultichannelsAPIAccountID': "${SDPR_ACCOUNT_ID}",
                   '0301ParamLambdaSubnetIdList': "${PARAM_SUBNET_ID_LIST_LAMBDA}",
@@ -327,6 +328,34 @@ pipeline {
               sh 'sh ./scripts/deploy/api-deploy.sh'
             }
           }
+        }
+      }
+    }
+    stage('Mail Approval') {
+      when {
+        allOf {
+          expression { return ParametersStore.store.DEPLOY_PROD == 'true' }
+          //only release branches can be deployed in prep
+          branch 'release/v*'
+        }
+      }
+      steps {
+        script {
+          emailRecipients.requestToApprove()
+        }
+      }
+    }
+    stage('Approval') {
+       when {
+        allOf {
+          expression { return ParametersStore.store.DEPLOY_PROD == 'true' }
+          //only release branches can be deployed in prep
+          branch 'release/v*'
+        }
+      }
+      steps {
+        script {
+          approvers.approvers()
         }
       }
     }
@@ -359,7 +388,7 @@ pipeline {
                   '0003ParamProjectComponent': "${PROJECT_COMPONENT}",
                   '0004ParamFeatureName': "${FEATURE_NAME}",
                   '0005ParamFeatureCode': "${FEATURE_CODE}",
-                  '0006ParamLambdaTracerLayer': "${PARAM_GCV_LAMBDA_TRACER_LAYER}",
+                  '0006ParamLambdaTracerLayer': "${PARAM_GCV_LAMBDA_TRACER_XRAY_LAYER}",
                   '0201ParamMultichannelsApiID': "${MULTICHANNELS_API_ID}",
                   '0202ParamMultichannelsAPIAccountID': "${SDPR_ACCOUNT_ID}",
                   '0301ParamLambdaSubnetIdList': "${PARAM_SUBNET_ID_LIST_LAMBDA}",
@@ -390,6 +419,24 @@ pipeline {
           }
         }
       }
+    }
+  }
+  post {
+    success {
+      script {
+        if (!isStageToBeSkipped(ParametersStore, 'PROD')) {
+          println("Sending success email")
+          emailRecipients.emailSuccess()
+        }
+      }
+    }
+    failure {
+      script {
+        if (!isStageToBeSkipped(ParametersStore, 'PROD')) {
+          println("Sending failure email")
+          emailRecipients.emailFailed()
+        }
+      }     
     }
   }
 }

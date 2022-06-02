@@ -36,16 +36,12 @@ export class ServiceScheduler {
     }
 
 
-    public async searchByVin(request: DataModels.DfxSearchVinRequestData): Promise<DataModels.SearchVinResponse> {
+    public async searchByVin(request: DataModels.FeatureSearchListRequestData): Promise<DataModels.SearchVinResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} searchByVin |`;
-        const environment = ServiceFactory.getEnvironment();
-        const mappedRequest: SchedulingServiceDataModels.GetSearchRequestParams = {
-            vin: request.vin,
-            dealerToken: request.dealerToken,
-            environment: environment as MeldDataModels.Environment
-        }
-        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
-        const response: SchedulingServiceDataModels.GetSearchResponse = await SchedulingConectorService.getDfxSearch(mappedRequest);
+        
+        logger.debug(logPrefix, `request: ${JSON.stringify(request)}`);
+        //import and call my library and function
+        const response: SchedulingServiceDataModels.GetSearchResponse = await SchedulingConectorService.getDfxSearch(request);
         logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
 
         if (response.customerPreviews.length != 0 && response.customerPreviews[0].email && response.customerPreviews[0].foundType) {

@@ -1,11 +1,12 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "description": "schema to validate the DFX search by vin event",
+    "description": "schema to validate search feature",
     "type": "object",
     "properties": {
         "headers": {
             "type": "object",
             "properties": {
+                
                 "x-device-id": {
                     "type": "string"
                 },
@@ -24,9 +25,6 @@
                 "locale": {
                     "type": "string"
                 },
-				"dealer-authorization": {
-                    "type": "string"
-				},
                 "content-type": {
                     "type": "string",
                     "pattern": "^(application\/json)(.*)?$"
@@ -40,36 +38,23 @@
 				"content-type"
             ]
         },
-        "pathParams": {
-            "type": "object",
-            "properties": {
-                "vin": {
-                    "type": "string"
-                },
-                "userid": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "userid",
-                "vin"
-            ]
-        },
         "queryString": {
             "type":"object",
             "properties": {
-                "email": {
+                "code": {
+                    "type": "string"
+                },                
+                "description": {
+                    "type": "string"
+                },
+                "channel": {
                     "type": "string"
                 }
-            },
-            "required": [
-                "email"
-            ]
+            }
         }
     },
     "required": [
         "headers",
-        "pathParams",
         "queryString"
     ]
 }

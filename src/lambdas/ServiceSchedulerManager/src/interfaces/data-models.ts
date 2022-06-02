@@ -1,29 +1,12 @@
 
 export type ServiceRequested =
-    'DFX_SEARCH_VIN' |
-    'GET_DFX_VEHICLE' |
-    'GET_DFX_TOKEN' |
-    'GET_DEALER_SERVICES_VIN' |
-    'GET_FACTORY_SERVICES_WITHOUT_VIN' |
-    'GET_FACTORY_SERVICES_VIN' |
-    'GET_DEALER_SERVICES_WITHOUT_VIN' |
-    'GET_DEALER_DEPARTMENT' |
-    'GET_APPOINTMENT_SUMMARY' |
-    'GET_REPAIR_SERVICES_VIN' |
-    'GET_REPAIR_SERVICES_WITHOUT_VIN' |
-    'GET_ADVISORS' |
-    'GET_TRANSPORTATION_OPTIONS' |
-    'GET_DEALER_DEPARTMENT_TIME_SEGMENTS' |
-    'GET_SERVICE_APPOINTMENTS' |
-    'POST_APPOINTMENT' |
-    'DELETE_SERVICE_APPOINTMENT' |
-    'UPDATE_SERVICE_APPOINTMENT' |
-    'GET_SERVICE_APPOINTMENT_DETAILS';
+    'FEATURE_SEARCH_LIST' |
+    'FEATURE_CREATE' |
+    'FEATURE_DELETE';
 
 export type ServiceRequestData = {
     requestedService: ServiceRequested;
-    vin?: string;
-    userid?: string;
+    
 }
 
 export interface GetTokenRequestData extends ServiceRequestData {
@@ -52,6 +35,23 @@ export type GetAppointmentsRequestData = VinRequestData;
 
 export interface DfxSearchVinRequestData extends VinRequestData {
     email: string
+}
+
+
+export interface FeatureSearchListRequestData extends ServiceRequestData {    
+    cfeature: string;
+    featureDescription: string;
+    cchannel: string;
+}
+
+export interface FeatureCreateData extends ServiceRequestData {    
+    cfeature: string;
+    featureDescription: string;
+    cchannel: string;
+}
+
+export interface FeatureDeleteData extends ServiceRequestData {    
+    cfeature: string;
 }
 
 export interface GetServicesNoVinRequestData extends ServiceRequestData {

@@ -34,17 +34,7 @@ module.exports.handler = async (event: APIGatewayProxyEvent, context: Context): 
         // filtering event for required parameters
         const serviceHandler = ServiceFactory.getServiceHandler();
         const requestData = serviceHandler.getServiceParams(transformedEvent); // return request format
-
-        // Validating the request for the specific service from the vin and userid
-        const vds = ServiceFactory.getVehicleDiscoveryService();
-        if (requestData.vin && requestData.userid) {
-                const vehicleDiscovery = await vds.getVehicleDetails(requestData.userid, requestData.vin);
-                // If vehicle details does not exists
-                if (!vehicleDiscovery || !vehicleDiscovery.vehicles || !vehicleDiscovery.vehicles[0]) {
-                    throw new GCVErrors.NotFound('Userid vin combination does not exist');
-                }
-                logger.info(LOG_PREFIX, 'Userid vin combination exists');
-        }
+ 
         lambdaResp.body = await invokeService(requestData);
     } catch (error) {
         logger.error(`${LOG_PREFIX} Error: ${JSON.stringify(error)} stack ${error.stack}`);
@@ -89,46 +79,17 @@ async function initializeFunction(event: APIGatewayProxyEvent, context: Context)
  * @param {DataModels.ServiceRequestData} requestData
  * @returns {Promise<any>}
  */
+//CALL FROM THE GCV LIBRARY.METHOD
 async function invokeService(requestData: DataModels.ServiceRequestData): Promise<any> {
     const service = ServiceFactory.getServiceScheduler();
     switch (requestData.requestedService) {
-        case 'DFX_SEARCH_VIN': 
+        case 'FEATURE_SEARCH_LIST': 
+        //To BE CHANGED ACCORDING TO THE METHOD
             return await service.searchByVin(requestData as DataModels.DfxSearchVinRequestData);
-        case 'GET_DFX_VEHICLE': 
-            return await service.getDfxVehicle(requestData as DataModels.GetDfxVehicleRequestData);
-        case 'GET_DFX_TOKEN': 
-            return await service.getDfxToken(requestData as DataModels.GetTokenRequestData);
-        case 'GET_DEALER_SERVICES_VIN': 
-            return await service.getDealerServicesVin(requestData as DataModels.GetServicesVinRequestData);
-        case 'GET_DEALER_SERVICES_WITHOUT_VIN': 
-            return await service.getDealerServicesWithoutVin(requestData as DataModels.GetServicesNoVinRequestData);
-        case 'GET_FACTORY_SERVICES_VIN': 
-            return await service.getFactoryServicesVin(requestData as DataModels.GetServicesVinRequestData);
-        case 'GET_FACTORY_SERVICES_WITHOUT_VIN': 
-            return await service.getFactoryServicesWithoutVin(requestData as DataModels.GetServicesNoVinRequestData);
-        case 'GET_REPAIR_SERVICES_VIN': 
-            return await service.getRepairServicesVin(requestData as DataModels.GetServicesVinRequestData);
-        case 'GET_REPAIR_SERVICES_WITHOUT_VIN': 
-            return await service.getRepairServicesWithoutVin(requestData as DataModels.GetServicesNoVinRequestData);
-        case 'GET_DEALER_DEPARTMENT': 
-            return await service.getDealerDepartment(requestData as DataModels.GetDealerDepartmentRequestData);
-        case 'GET_APPOINTMENT_SUMMARY': 
-            return await service.getAppointmentSummary(requestData as DataModels.GetAppointmentSummaryRequestData);        
-        case 'GET_ADVISORS': 
-            return await service.getAdvisors(requestData as DataModels.GetAdvisorsRequestData);
-        case 'GET_TRANSPORTATION_OPTIONS': 
-            return await service.getTransportationOptions(requestData as DataModels.GetTransportationOptionsRequestData);
-        case 'GET_DEALER_DEPARTMENT_TIME_SEGMENTS': 
-            return await service.getDealerDepartmentTimeSegments(requestData as DataModels.GetTimeSegmetsRequestData);
-        case 'GET_SERVICE_APPOINTMENTS': 
-            return await service.getServiceAppointments(requestData as DataModels.GetAppointmentsRequestData);
-        case 'POST_APPOINTMENT': 
-            return await service.postAppointment(requestData as DataModels.PostAppointmentRequestData);
-        case 'DELETE_SERVICE_APPOINTMENT': 
-            return await service.deleteServiceAppointment(requestData as DataModels.AppointmentRequestData);
-        case 'UPDATE_SERVICE_APPOINTMENT': 
-            return await service.updateServiceAppointment(requestData as DataModels.PutAppointmentRequestData);
-        case 'GET_SERVICE_APPOINTMENT_DETAILS':
-            return await service.getServiceAppointmentDetails(requestData as DataModels.AppointmentRequestData);
+        
+        case 'FEATURE_CREATE': 
+        //To BE CHANGED ACCORDING TO THE 
+            return await service.searchByVin(requestData as DataModels.DfxSearchVinRequestData);
+        
     }
 }

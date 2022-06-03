@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "description": "schema to remove rule group from feature",
+    "type": "object",
+    "properties": {
+        "headers": {
+            "type": "object",
+            "properties": { 
+                
+                "x-clientapp-name": {
+                    "type": "string"
+                },
+                "x-clientapp-version": {
+                    "type": "string"
+                },
+                "content-type": {
+                    "type": "string",
+                    "pattern": "^(application\/json)(.*)?$"
+                },
+                "x-api-key": {
+                    "type": "string"
+                },
+                "clientrequestid": {
+                    "type": "string"
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "x-device-id": {
+                    "type": "string"
+                },
+                "x-originator-type": {
+                    "type": "string"
+                }
+              
+                
+               },
+            "required": [ 
+                "x-clientapp-version",
+                "content-type",
+                "x-api-key",
+                "clientrequestid", 
+                "x-originator-type"	
+            ]
+        },
+        "queryString": { 
+            "type":"object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },                
+                "id": {
+                    "type": "number"
+                }
+            },
+            "required": [ 
+                "code",
+                "id"
+            ]
+            
+        }
+    },
+    "required": [
+        "headers",
+        "queryString"
+    ]
+}

@@ -5,31 +5,57 @@ import { FeaturesFactory } from "./features-factory";
 
 
 export class FeaturesScheduler{
-    public async getListFeatures(request: DataModels.FeatureSearchListRequestData): Promise<DataModels.GetFeatureResponse> {
+
+    /**
+     * this fn is used to get list of features
+     * @param request 
+     * @returns 
+     */    
+    public async getListFeatures(code: string, description: string, channel: string): Promise<DataModels.GetFeatureResponse> {
 
        const logPrefix = `${LOG_PREFIX_CLASS} getListFeatures |`;
         const environment = FeaturesFactory.getEnvironment();
-        const mappedRequest:  DataModels.FeatureWithChannels = {
-            code: request.cfeature,
-            description: request.featureDescription,
-            channels: request.cchannel
+        const mappedRequest:  DataModels.FeatureSearchListRequestData = {
+            cfeature: code,
+            featureDescription: description,
+            cchannel: channel
         }
+
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: DataModels.GetFeatureResponse = {};
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.GetFeatureResponse = {};
 
-        for( let i =0; i < response.features?.length; i++){
-            if(response.features[i].code && response.features[i].description && response.features[i].channels[0].code && response.features[i].channels[0].description){
-                filteredResponse.features[i].code : response.features[i].code,
-                filteredResponse.features[i].description : response.features[i].description,
-                filteredResponse.features[i].channels[0].code: response.features[0].channels[0].code,
-                filteredResponse.features[i].channels[0].description : response.features[0].channels[0].description
+        let features: DataModels.FeatureWithChannels[] = [];
+        if(response.features.length != 0){
+            const dim: number = response.features.length;
+
+            for( let i =0; i < dim; i++){
+                const elem =  response.features[i];
+                if(elem.code && elem.description && elem.channels[0].code && elem.channels[0].description){
+                    const feature: DataModels.FeatureWithChannels = {
+                        code: elem.code,
+                        description: elem.description,
+                        channels[0].code: elem.channels[0].code,
+                        channels[0].description: elem.channels[0].description
+                    }
+                    features.push(feature);
+                }
+
+            }
+            filteredResponse = {
+                features: features
             }
         }
-        return response;
+        return filteredResponse;
     }
+
+    /**
+     * 
+     * @param request 
+     * @returns 
+     */
     public async insertFeature(request: DataModels.FeatureCreateData): Promise<DataModels.PostResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} insertFeature |`;
         const environment = FeaturesFactory.getEnvironment();
@@ -86,7 +112,7 @@ export class FeaturesScheduler{
          logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
          const response: DataModels.DeleteResponse = await FeaturesDao.deleteFeature(mappedRequest);
          logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
-         
+
          let filteredResponse: DataModels.DeleteResponse = {};
 
         if(response.message){

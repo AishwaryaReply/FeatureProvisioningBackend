@@ -3,12 +3,31 @@ import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import sinon from 'sinon';
 
-import { FeaturesFactory, FeaturesScheduler } from '../../src/features';
+import { RuleFactory, RuleScheduler } from '../../src/rule';
 import { Stubs } from './utils/stubs';
 import { DataModels } from '../../src/interfaces';
 
 chai.use(chaiAsPromised)
 const expect = chai.expect;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 describe('FeatureSchedulerService', () => {
     //const testServiceSchedulerService = new ServiceScheduler();

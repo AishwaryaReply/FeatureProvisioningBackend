@@ -3,12 +3,110 @@ import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import sinon from 'sinon';
 
-import { FeaturesFactory, FeaturesScheduler } from '../../src/features';
+import { VehicleGroupFactory, VehicleGroupScheduler } from '../../src/vehicleGroup';
 import { Stubs } from './utils/stubs';
 import { DataModels } from '../../src/interfaces';
 
 chai.use(chaiAsPromised)
 const expect = chai.expect;
+
+describe ('VehicleGroupSchedulerService', () => {
+    const testServiceVehicleGroupScheduler= new VehicleGroupScheduler();
+
+    describe('insertVehicleGroup',() => {
+        afterEach(sinon.restore);
+
+        it('should return the expected repsonse with uppercase, when the insertVehicleGroup goes well', async () => {
+            sinon.stub(VehicleGroupDao, 'insertVehicleGroupToDB').resolves(Stubs.mockOutputInsertVehicleGroup);
+            sinon.stub(VehicleGroupFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.PostResponse = Stubs.mockOutputInsertVehicleGroup;
+            const response = await testServiceVehicleGroupScheduler.insertVehicleGroup(Stubs.mockInputInsertVehicleGroup);
+            expect(response).to.be.deep.equal(expected);
+        })
+
+        it('should return the expected repsonse with null, when the insertVehicleGroup goes well', async () => {
+            sinon.stub(VehicleGroupDao, 'insertVehicleGroupToDB').resolves(Stubs.mockOutputInsertVehicleGroup);
+            sinon.stub(VehicleGroupFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.PostResponse = Stubs.mockOutputInsertVehicleGroup;
+            const response = await testServiceVehicleGroupScheduler.insertVehicleGroup(Stubs.mockInputInsertVehicleGroupNull);
+            expect(response).to.not.equal(expected);
+        })
+
+        it('should return the expected repsonse with special character values, when the insertVehicleGroup goes well', async () => {
+            sinon.stub(VehicleGroupDao, 'insertVehicleGroupToDB').resolves(Stubs.mockOutputInsertVehicleGroup);
+            sinon.stub(VehicleGroupFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.PostResponse = Stubs.mockOutputInsertVehicleGroup;
+            const response = await testServiceVehicleGroupScheduler.insertVehicleGroup(Stubs.mockInputInsertVehicleGroupSpecialChar);
+            expect(response).to.be.deep.equal(expected);
+        })
+
+        it('should return the expected repsonse with special character values, when the insertVehicleGroup goes well', async () => {
+            sinon.stub(VehicleGroupDao, 'insertVehicleGroupToDB').resolves(Stubs.mockOutputInsertVehicleGroupDelete);
+            sinon.stub(VehicleGroupFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.PostResponse = Stubs.mockOutputInsertVehicleGroupDelete;
+            const response = await testServiceVehicleGroupScheduler.insertVehicleGroup(Stubs.mockInputInsertVehicleGroupSpecialChar);
+            expect(response).to.not.equal(expected);
+        })
+
+        it('should return the expected repsonse with lowercase values, when the insertVehicleGroup goes well', async () => {
+            sinon.stub(VehicleGroupDao, 'insertVehicleGroupToDB').resolves(Stubs.mockOutputInsertVehicleGroup);
+            sinon.stub(VehicleGroupFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.PostResponse = Stubs.mockOutputInsertVehicleGroup;
+            const response = await testServiceVehicleGroupScheduler.insertVehicleGroup(Stubs.mockInputInsertVehicleGroupLowercase);
+            expect(response).to.be.deep.equal(expected);
+        })
+        
+        it('should return the expected repsonse with uppercase, when the insertVehicleGroup goes well', async () => {
+            sinon.stub(VehicleGroupDao, 'insertVehicleGroupToDB').resolves(Stubs.mockOutputInsertVehicleGroupUpdate);
+            sinon.stub(VehicleGroupFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.PostResponse = Stubs.mockOutputInsertVehicleGroupUpdate;
+            const response = await testServiceVehicleGroupScheduler.insertVehicleGroup(Stubs.mockInputInsertVehicleGroup);
+            expect(response).to.not.equal(expected);
+        })
+
+        it('should return the expected repsonse with numeric values, when the insertVehicleGroup goes well', async () => {
+            sinon.stub(VehicleGroupDao, 'insertVehicleGroupToDB').resolves(Stubs.mockOutputInsertVehicleGroup);
+            sinon.stub(VehicleGroupFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.PostResponse = Stubs.mockOutputInsertVehicleGroup;
+            const response = await testServiceVehicleGroupScheduler.insertVehicleGroup(Stubs.mockInputInsertVehicleGroupNumerics);
+            expect(response).to.be.deep.equal(expected);
+        })
+
+    });
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 describe('FeatureSchedulerService', () => {
     //const testServiceSchedulerService = new ServiceScheduler();

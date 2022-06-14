@@ -25,6 +25,50 @@ export namespace Stubs {
         "content-type": "application/json"
     };
 
+    //insertVehicleGroup
+    export const mockInputInsertVehicleGroup: DataModels.NewVehicleGroup={
+        description: "XXX"
+    };
+
+    export const mockInputInsertVehicleGroupNull: DataModels.NewVehicleGroup={
+        description: null
+    };
+
+    export const mockInputInsertVehicleGroupSpecialChar: DataModels.NewVehicleGroup={
+        description: "@#$%&"
+    };
+
+    export const mockInputInsertVehicleGroupLowercase: DataModels.NewVehicleGroup={
+        description: "xxx"
+    };
+
+    export const mockInputInsertVehicleGroupNumerics: DataModels.NewVehicleGroup={
+        description: "1234"
+    };
+
+    export const mockOutputInsertVehicleGroup: DataModels.PostResponse={
+        message: "inserted"
+    };
+
+    export const mockOutputInsertVehicleGroupDelete: DataModels.PostResponse={
+        message: "deleted"
+    };
+
+    export const mockOutputInsertVehicleGroupUpdate: DataModels.PostResponse={
+        message: "updates"
+    };
+
+
+
+
+
+
+
+
+
+
+
+
     //insertFeature
     export const mockInputInsertFeature: DataModels.FeatureCreateData={
         cfeature: "XXX",

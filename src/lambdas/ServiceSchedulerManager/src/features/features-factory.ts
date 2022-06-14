@@ -17,7 +17,7 @@ export class FeaturesFactory{
         if(!ENVIRONMENT){
             throw new GCVErrors.SystemException('Failed to get environment stage!');
         }
-        return ENVIRONMENT;
+        return ENVIRONMENT; //string
     }
 
 

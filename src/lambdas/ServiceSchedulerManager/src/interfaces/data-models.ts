@@ -335,7 +335,6 @@ channels?: Channel[];
 }
 export type GetFeatureResponse ={
 features?: FeatureWithChannels[];
-
 }
 
 export type PostResponse = {

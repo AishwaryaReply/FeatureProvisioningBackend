@@ -409,3 +409,16 @@ export type Router502ErrorResponse = {
 name?: string;
 message?: string;
 }
+
+export type RulePost = {
+  igroup?: string;
+  cfeature : string,
+	cregion: string,
+	cmarket: string,
+	cbrand: string,
+	cmodel: string,
+	imodelyear: string,
+	cservice: string
+}
+
+

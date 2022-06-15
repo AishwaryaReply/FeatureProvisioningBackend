@@ -41,13 +41,14 @@ email: string
 export interface FeatureSearchListRequestData extends ServiceRequestData {    
 cfeature: string;
 featureDescription: string;
-cchannel: string;
+cchannel: Channel[];
 }
 
 export interface FeatureCreateData extends ServiceRequestData {    
 cfeature: string;
 featureDescription: string;
-cchannel: string;
+cchannel: Channel[];
+
 }
 
 export interface FeatureDeleteData extends ServiceRequestData {    
@@ -335,7 +336,6 @@ channels?: Channel[];
 }
 export type GetFeatureResponse ={
 features?: FeatureWithChannels[];
-
 }
 
 export type PostResponse = {
@@ -410,3 +410,18 @@ export type Router502ErrorResponse = {
 name?: string;
 message?: string;
 }
+
+export type RulePost = {
+  igroup?: string;
+  cfeature : string,
+	cregion: string,
+	cmarket: string,
+	cbrand: string,
+	cmodel: string,
+	imodelyear: string,
+	cservice: string
+}
+
+
+
+

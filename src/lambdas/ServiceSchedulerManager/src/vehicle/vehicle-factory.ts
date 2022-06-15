@@ -1,14 +1,14 @@
 import { CommonServices } from "gcv-common-services";
 import { GCVErrors } from "gcv-utils/lib/error/gcv-error";
-import { ServiceScheduler, ServiceHandler } from ".";
+import { VehicleScheduler, VehicleHandler } from ".";
 
-export class ServiceFactory {
-    public static getServiceHandler(): ServiceHandler {
-        return new ServiceHandler();
+export class VehicleFactory {
+    public static getVehicleHandler(): VehicleHandler {
+        return new VehicleHandler();
     }
 
-    public static getServiceScheduler(): ServiceScheduler {
-        return new ServiceScheduler();
+    public static getVehcileScheduler(): VehicleScheduler {
+        return new VehicleScheduler();
     }
 
     public static getVehicleDiscoveryService(): CommonServices.VehicleDiscoveryService{

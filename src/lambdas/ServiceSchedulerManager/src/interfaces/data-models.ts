@@ -48,6 +48,7 @@ export interface FeatureCreateData extends ServiceRequestData {
 cfeature: string;
 featureDescription: string;
 cchannel: Channel[];
+
 }
 
 export interface FeatureDeleteData extends ServiceRequestData {    
@@ -420,5 +421,7 @@ export type RulePost = {
 	imodelyear: string,
 	cservice: string
 }
+
+
 
 

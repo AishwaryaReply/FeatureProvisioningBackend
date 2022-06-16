@@ -9,13 +9,13 @@ export class RuleScheduler{
      * @param code string for code of the feature
      * @returns list of rules fro the specific feature
      */
-    public async getRulesForFeature(code: string): Promise<DataModels.GetFeaturesRulesResponse> {
+    public async getRulesForFeature(request: DataModels.RuleSearchListData): Promise<DataModels.GetFeaturesRulesResponse> {
         
         const logPrefix = `${LOG_PREFIX_CLASS} | getRulesForFeature |`;
         const environment = RuleFactory.getEnvironment();
         
-        logger.debug(logPrefix, `code: ${code}`);
-        const response: DataModels.GetFeaturesRulesResponse = await GroupFeatureDao.selectRulesForFeatureFromDB(code);
+        logger.debug(logPrefix, `code: ${request.code}`);
+        const response: DataModels.GetFeaturesRulesResponse = await GroupFeatureDao.selectRulesForFeatureFromDB(request.code);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.GetFeaturesRulesResponse = {};
@@ -38,21 +38,21 @@ export class RuleScheduler{
      * @param request values to be inserted
      * @returns Promise as PostResponse
      */
-    public async insertRuleForFeature(code:string, request:DataModels.NewConfigurateRule): Promise<DataModels.PostResponse> {
+    public async insertRuleForFeature(request:DataModels.RuleCreateData): Promise<DataModels.PostResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} | insertRulesForFeature |`;
         const environment = RuleFactory.getEnvironment();
-        const mappedRequest: DataModels.RulePost= {
+        const mappedRequest = {
             igroup: "",
-            cfeature: code,
-            cregion: request.region,
-            cbrand: request.brand,
-            cmarket: request.market,
-            cmodel: request.model,
-            cservice: request.service,
-            imodelyear: request.modelYear            
+            cfeature: request.cfeature,
+            cregion: request.cregion,
+            cbrand: request.cbrand,
+            cmarket: request.cmarket,
+            cmodel: request.cmodel,
+            cservice: request.cservice,
+            imodelyear: request.imodelyear     
         }
 
-        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        logger.debug(logPrefix, `request: ${JSON.stringify(request)}`);
         const response: DataModels.PostResponse = await GroupFeatureDao.insertGroupFeatureRule(mappedRequest);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
@@ -72,12 +72,12 @@ export class RuleScheduler{
      * @param id identifier of the rule 
      * @returns Promise as DeleteResponse
      */
-    public async deleteRuleFromFeature(code: string, id: number): Promise<DataModels.DeleteResponse>{
+    public async deleteRuleFromFeature(request:DataModels.RuleDeleteData): Promise<DataModels.DeleteResponse>{
         const logPrefix = `${LOG_PREFIX_CLASS} | deleteRulesForFeature |`;
         const environment = RuleFactory.getEnvironment();
         const mappedRequest = {
-            igroup: id,
-            cfeature: code
+            cfeature: request.cfeature,
+            irule: request.irule
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: DataModels.DeleteResponse = await GroupFeatureDao.deleteGroupFeatureRule(mappedRequest);

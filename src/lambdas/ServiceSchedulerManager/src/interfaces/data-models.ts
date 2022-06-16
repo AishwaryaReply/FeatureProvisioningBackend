@@ -2,7 +2,21 @@
 export type ServiceRequested =
 'FEATURE_SEARCH_LIST' |
 'FEATURE_CREATE' |
-'FEATURE_DELETE';
+'FEATURE_DELETE' |
+'FEATURE_UPDATE' |
+'RULE_SEARCH_LIST'|
+'RULE_CREATE' |
+'RULE_DELETE' |
+'VEHICLEGROUP_FEATURE_INSERT' |
+'VEHICLEGROUP_FEATURE_DELETE' |
+'VEHICLEGROUP_SEARCH_LIST' |
+'VEHICLEGROUP_CREATE' |
+'VEHICLEGROUP_UPDATE' |
+'VEHICLEGROUP_DELETE' |
+'VEHICLE_SEARCH_LIST' |
+'VEHICLE_CREATE' |
+'VEHICLE_DELETE'
+;
 
 export type ServiceRequestData = {
 requestedService: ServiceRequested;
@@ -53,6 +67,12 @@ cchannel: Channel[];
 
 export interface FeatureDeleteData extends ServiceRequestData {    
 cfeature: string;
+}
+
+export interface FeatureUpdateData extends ServiceRequestData {
+	cfeature: string;
+	featureDescription: string;
+	channels: Channel[];
 }
 
 export interface GetServicesNoVinRequestData extends ServiceRequestData {
@@ -411,7 +431,7 @@ name?: string;
 message?: string;
 }
 
-export type RulePost = {
+export interface RuleCreateData extends ServiceRequestData {
   igroup?: string;
   cfeature : string,
 	cregion: string,
@@ -422,6 +442,49 @@ export type RulePost = {
 	cservice: string
 }
 
+export interface RuleDeleteData extends ServiceRequestData  {
+	cfeature: string;
+	irule: number;
+}
 
+export interface RuleSearchListData extends ServiceRequestData {
+	code: string;
+}
 
+export interface VehicleGroupFeatureCreateData extends ServiceRequestData {
+	code: string;
+	id: number;
+}
+
+export interface VehicleGroupFeatureDeleteData extends ServiceRequestData {
+	code: string;
+	id: number;
+}
+
+export interface VehicleGroupSearchListData extends ServiceRequestData {
+	feature: string;
+}
+
+export interface VehicleGroupCreateData extends ServiceRequestData {
+	description: string;
+
+}
+
+export interface VehicleGroupUpdateData extends ServiceRequestData {
+	id: number;
+	description: string;
+}
+
+export interface VehicleGroupDeleteData extends ServiceRequestData {
+	id: number;
+}
+
+export interface VehicleSearchListData extends ServiceRequestData {
+	id:string;
+}
+
+export interface VehicleCreateDeleteData extends ServiceRequestData {
+	id: string;
+	vin: string;
+}
 

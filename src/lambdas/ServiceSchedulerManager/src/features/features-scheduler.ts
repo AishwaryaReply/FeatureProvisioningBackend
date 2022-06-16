@@ -59,8 +59,8 @@ export class FeaturesScheduler{
     public async insertFeature(request: DataModels.FeatureCreateData): Promise<DataModels.PostResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} insertFeature |`;
         const environment = FeaturesFactory.getEnvironment();
-        const mappedRequest: DataModels.FeatureWithChannels = {
-            code: request.cfeature,
+        const mappedRequest = {
+            cfeature: request.cfeature,
             description: request.featureDescription,
             channels: request.cchannel
         }
@@ -81,7 +81,7 @@ export class FeaturesScheduler{
         return filteredResponse;
     }
 
-    public async updateFeature(request: DataModels.UpdatedFeature): Promise<DataModels.PatchResponse>{
+    public async updateFeature(request: DataModels.FeatureUpdateData): Promise<DataModels.PatchResponse>{
 
         const logPrefix = `${LOG_PREFIX_CLASS} updateFeature |`;
         const environment = FeaturesFactory.getEnvironment();
@@ -98,15 +98,16 @@ export class FeaturesScheduler{
 
         return filteredResponse;
 
-    }
+     }
 
-    public async deleteFeature(code: string): Promise<DataModels.DeleteResponse>{
+    public async deleteFeature(request: DataModels.FeatureDeleteData): Promise<DataModels.DeleteResponse>{
 
-         const logPrefix = `${LOG_PREFIX_CLASS} updateFeature |`;
+         const logPrefix = `${LOG_PREFIX_CLASS} deleteFeature |`;
          const environment = FeaturesFactory.getEnvironment();
-         const mappedRequest: DataModels.FeatureDeleteData = {
-             cfeature: code,
-             requestedService: "FEATURE_DELETE"
+         const mappedRequest = {
+             cfeature: request.cfeature,
+             igroup:""
+
          }
 
          logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);

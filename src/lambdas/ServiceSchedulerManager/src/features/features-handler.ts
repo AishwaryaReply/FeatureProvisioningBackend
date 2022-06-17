@@ -1,20 +1,24 @@
 import logger from 'gcv-logger';
-import { DataModels } from '../interfaces'; 
-import {Constants, FeatureSearchListSchema, FeatureUpdateSchema, FeatureInsertSchema, FeatureDeleteSchema} from '../../constants'
+import { DataModels } from '../interfaces';
+import { Constants, FeatureSearchListSchema, FeatureUpdateSchema, FeatureInsertSchema, FeatureDeleteSchema } from '../../constants'
 import { UtilityObjects, GCVErrors } from 'gcv-utils';
 import { Utilities } from 'gcv-utilities';
 
 
 export class FeaturesHandler {
-    public getFeatureParams(inputEvent: UtilityObjects.TransformedInputEvent): DataModels.ServiceRequestData
-    {
-        
+    /**
+     * this fn looks at event type and returns required data for the api method to be called
+     * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api
+     * @returns data as ServiceRequestData
+     */
+    public getFeatureParams(inputEvent: UtilityObjects.TransformedInputEvent): DataModels.ServiceRequestData {
+
 
         const logPrefix = `${LOG_PREFIX_CLASS} getFeatureParams |`;
         const requestedService: DataModels.ServiceRequested = this.getServiceRequested(inputEvent.runTimeInfo);
 
         logger.debug(logPrefix, 'requestedService', requestedService);
-        switch (requestedService){
+        switch (requestedService) {
             case 'FEATURE_SEARCH_LIST':
                 this.validateEvent(inputEvent, FeatureSearchListSchema);
                 break;
@@ -25,27 +29,35 @@ export class FeaturesHandler {
             case 'FEATURE_DELETE':
                 this.validateEvent(inputEvent, FeatureDeleteSchema);
                 break;
-            }
+        }
             case 'FEATURE_UPDATE':
-                this.validateEvent(inputEvent,FeatureUpdateSchema);
-                break;
-            
+        this.validateEvent(inputEvent, FeatureUpdateSchema);
+        break;
+
         return this.prepareRequestData(inputEvent, requestedService);
 
     }
- 
+    /**
+     * this fn call method based on service request to get data in required format
+     * @param event UtilityObjects.TransformedInputEvent
+     * @param service DataModels.ServiceRequested
+     * @returns 
+     */
     private prepareRequestData(event: UtilityObjects.TransformedInputEvent, service: DataModels.ServiceRequested): DataModels.ServiceRequestData {
+        const logPrefix = `${LOG_PREFIX_CLASS} prepareRequestData |`;
+
+        logger.debug(logPrefix, 'Service', service);
         switch (service) {
             case 'FEATURE_SEARCH_LIST':
-                return this.prepareFeatureSearchList(event);  
+                return this.prepareFeatureSearchList(event);
             case 'FEATURE_CREATE':
-                return this.prepareFeatureCreate(event);  
+                return this.prepareFeatureCreate(event);
             case 'FEATURE_DELETE':
-                return this.prepareFeatureDelete(event); 
-           case 'FEATURE_UPDATE':
+                return this.prepareFeatureDelete(event);
+            case 'FEATURE_UPDATE':
                 return this.prepareFeatureUpdate(event);
-
-        } 
+           
+        }
     }
 
 
@@ -65,13 +77,13 @@ export class FeaturesHandler {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareFeatureSearchList |`;
         let body: DataModels.FeatureWithChannels = JSON.parse(event.body);
         logger.debug(logPrefix, `code: ${body.code}, Description: ${body.description}, channel: ${body.channels}`);
-        
-      
+
+
         return {
             requestedService: 'FEATURE_CREATE',
-            cfeature:  body.code != undefined?body.code:"",
-            featureDescription: body.description!== undefined?body.description:"",
-            cchannel: body.channels?.length != 0 && body.channels != undefined?body.channels:[]
+            cfeature: body.code != undefined ? body.code : "",
+            featureDescription: body.description !== undefined ? body.description : "",
+            cchannel: body.channels?.length != 0 && body.channels != undefined ? body.channels : []
         }
 
     }
@@ -90,20 +102,20 @@ export class FeaturesHandler {
 
         const logPrefix = `${LOG_PREFIX_CLASS} prepareUpdateFeature |`;
         let body: DataModels.UpdatedFeature = JSON.parse(event.body);
-        logger.debug(logPrefix, `code: ${event.queryString.code}, body: ${body}` );
+        logger.debug(logPrefix, `code: ${event.queryString.code}, body: ${body}`);
 
         return {
             requestedService: 'FEATURE_UPDATE',
             cfeature: event.queryString.code,
-            featureDescription: body.description!= undefined?body.description:"",
-            channels: body.channels != undefined?body.channels:[]
+            featureDescription: body.description != undefined ? body.description : "",
+            channels: body.channels != undefined ? body.channels : []
 
         }
 
 
     }
 
-    
+
     private validateEvent(event: UtilityObjects.TransformedInputEvent, eventSchema: any): void {
         const logPrefix = `${LOG_PREFIX_CLASS} validateEvent |`;
         const validator = new Utilities.JsonValidator();
@@ -119,7 +131,7 @@ export class FeaturesHandler {
         const resourceMethod: string = runTimeInfo.httpMethod;
         logger.debug(`${logPrefix} path: ${resourcePath}`);
         if (resourcePath.search(new RegExp(Constants.FEATURE_CODE_DELETE_API_PATH_REGEX)) > -1) {
-            return 'FEATURE_DELETE';
+            return 'FEATURE_DELETE;'
         }
         else if (resourcePath.search(new RegExp(Constants.FEATURE_SEARCH_LIST_API_PATH_REGEX)) > -1) {
             switch (resourceMethod) {

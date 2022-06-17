@@ -22,7 +22,7 @@ export class FeaturesScheduler{
         }
 
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
-        const response: DataModels.GetFeatureResponse = {};
+        const response: DataModels.GetFeatureResponse = await FeaturesDao.selectFeaturesFromDB(mappedRequest);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.GetFeatureResponse = {};
@@ -85,8 +85,14 @@ export class FeaturesScheduler{
 
         const logPrefix = `${LOG_PREFIX_CLASS} updateFeature |`;
         const environment = FeaturesFactory.getEnvironment();
-        logger.debug(logPrefix, `request: ${JSON.stringify(request)}`); 
-        const response: DataModels.PatchResponse = await FeaturesDao.updateFeatureToDatabase(request);
+        const mappedRequest = {
+            cfeature: request.cfeature,
+            featureDescription: request.featureDescription,
+            channels: request.channels
+        }
+
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`); 
+        const response: DataModels.PatchResponse = await FeaturesDao.updateFeatureToDatabase(mappedRequest);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
         let filteredResponse: DataModels.PatchResponse = {};
 

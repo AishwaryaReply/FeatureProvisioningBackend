@@ -13,9 +13,12 @@ export class RuleScheduler{
         
         const logPrefix = `${LOG_PREFIX_CLASS} | getRulesForFeature |`;
         const environment = RuleFactory.getEnvironment();
-        
-        logger.debug(logPrefix, `code: ${request.code}`);
-        const response: DataModels.GetFeaturesRulesResponse = await GroupFeatureDao.selectRulesForFeatureFromDB(request.code);
+        const mappedRequest = {
+            cfeature: request.code
+        }
+
+        logger.debug(logPrefix, `request: ${mappedRequest}`);
+        const response: DataModels.GetFeaturesRulesResponse = await GroupFeatureDao.selectRulesForFeatureFromDB(mappedRequest);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.GetFeaturesRulesResponse = {};

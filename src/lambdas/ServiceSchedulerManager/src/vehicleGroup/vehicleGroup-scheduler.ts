@@ -7,8 +7,7 @@ export class VehicleGroupScheduler{
     
     /**
      * @description this fn inserts vehicle group for a feature into the database
-     * @param code string
-     * @param id number
+     * @param request VehicleGroupFeatureCreateData object
      * @returns Promise as PostResponse Interface
      */
      public async insertFeatureVehicleGroup(request: DataModels.VehicleGroupFeatureCreateData):Promise<DataModels.PostResponse> {
@@ -16,7 +15,7 @@ export class VehicleGroupScheduler{
         const logPrefix = `${LOG_PREFIX_CLASS} insertFeatureVehicleGroup |`;
         const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
-            cfeature: request.codecode,
+            cfeature: request.code,
             igroup: request.id
         };
 
@@ -74,7 +73,7 @@ export class VehicleGroupScheduler{
         const logPrefix = `${LOG_PREFIX_CLASS} | getVehicleGroup |`;
         const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
-            igroup: request.
+            cfeature: request.feature,
         }
 
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
@@ -148,7 +147,7 @@ export class VehicleGroupScheduler{
         }
 
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
-        const response: DataModels.PatchResponse = await VehicleGroupDao.updateVehicleGroupToDB(mappedRequest);
+        const response: DataModels.PatchResponse = await VehicleGroupDao.updateVehicleGroupToDatabase(mappedRequest);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.PatchResponse = {};

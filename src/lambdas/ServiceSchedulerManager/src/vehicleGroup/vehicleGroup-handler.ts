@@ -5,6 +5,12 @@ import { Utilities } from 'gcv-utilities';
 import { Constants, VehicleGroupDeleteForFeatureSchema, VehicleGroupDeleteSchema, VehicleGroupInsertForFeatureSchema, VehicleGroupInsertSchema, VehicleGroupSearchListSchema, VehicleGroupUpdateSchema } from '../../constants';
 
 export class VehicleGroupHandler {
+
+    /**
+    * this fn looks at event type and returns required data for the api method to be called
+    * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api
+    * @returns data as ServiceRequestData
+    */
     public getVehicleGroupParams(inputEvent: UtilityObjects.TransformedInputEvent): DataModels.ServiceRequestData {
 
         const logPrefix = `${LOG_PREFIX_CLASS} getVehicleGroupParams |`;
@@ -32,11 +38,20 @@ export class VehicleGroupHandler {
                 break;
 
         }
-
-
+        return this.prepareRequestData(inputEvent, requestedService);
     }
-
+    /**
+     * this fn call method based on service request to get data in required format
+     * @param event UtilityObjects.TransformedInputEvent
+     * @param service DataModels.ServiceRequested
+     * @returns 
+     */
     private prepareRequestData(event: UtilityObjects.TransformedInputEvent, service: DataModels.ServiceRequested): DataModels.ServiceRequestData {
+
+        const logPrefix = `${LOG_PREFIX_CLASS} prepareRequestData |`;
+
+        logger.debug(logPrefix, 'Service', service);
+
         switch (service) {
             case 'VEHICLEGROUP_FEATURE_INSERT':
                 return this.prepareVGFeatureCreate(event);
@@ -62,7 +77,7 @@ export class VehicleGroupHandler {
             requestedService: "VEHICLEGROUP_FEATURE_INSERT",
             code: event.queryString.code,
             id: event.queryString.id
-        } 
+        }
     }
 
     private prepareVGFeatureDelete(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupFeatureDeleteData {
@@ -136,7 +151,7 @@ export class VehicleGroupHandler {
         logger.debug(`${logPrefix} path: ${resourcePath}`);
         if (resourcePath.search(new RegExp(Constants.VEHICLEGROUP_FEATURE_CODE_ID_API_PATH_REGEX)) > -1) {
             switch (resourceMethod) {
-                case 'PUT':
+                case 'POST':
                     return 'VEHICLEGROUP_FEATURE_INSERT';
                 case 'DELETE':
                     return 'VEHICLEGROUP_FEATURE_DELETE';

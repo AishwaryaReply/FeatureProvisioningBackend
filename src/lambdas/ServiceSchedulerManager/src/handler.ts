@@ -4,6 +4,10 @@ import { APIGatewayProxyEvent, Context } from 'aws-lambda';
 import { Config, Common, UtilityObjects, Message, GCVErrors } from 'gcv-utils';
 import { DataModels } from './interfaces';
 import { ServiceFactory } from './services';
+import { Constants } from '../constants';
+import { FeaturesFactory } from './features';
+import { RuleFactory } from './rule';
+import { VehicleGroupFactory } from './vehicleGroup';
 
 const lambdaTracer  = new LambdaTracer();
 const gcvCommonFunctions = new Common();
@@ -19,7 +23,7 @@ const LOG_PREFIX = 'ServiceSchedulerHandler |';
  */
 module.exports.handler = async (event: APIGatewayProxyEvent, context: Context): Promise<any> => {
     logger.info(`${LOG_PREFIX} #LAMBDA_START#`);
-
+    
     let transformedEvent: UtilityObjects.TransformedEvent = {} as UtilityObjects.TransformedEvent;
     let lambdaResp: UtilityObjects.LambdaResponse = {
         statusCode: 200
@@ -32,6 +36,24 @@ module.exports.handler = async (event: APIGatewayProxyEvent, context: Context): 
 
         // CORE
         // filtering event for required parameters
+        let resourcePath: string = transformedEvent.runTimeInfo.resourcePath;
+        if (resourcePath.search(new RegExp(Constants.FEATURE_CODE_DELETE_API_PATH_REGEX)) > -1 || 
+            resourcePath.search(new RegExp(Constants.FEATURE_SEARCH_LIST_API_PATH_REGEX)) > -1){
+                const featureHandler = FeaturesFactory.getFeaturesHandler();
+                const requestData = featureHandler.getFeatureParams(transformedEvent);
+        }
+        else if(resourcePath.search(new RegExp(Constants.RULE_ID_DELETE_API_PATH_REGEX)) > -1 || resourcePath.search(new RegExp(Constants.RULE_SEARCH_LIST_API_PATH_REGEX))> -1) {
+            const ruleHandler = RuleFactory.getRuleHandler();
+            const requestData = ruleHandler.getRuleParams(transformedEvent);
+        }
+        else if(resourcePath.search(new RegExp(Constants.VEHICLEGROUP_FEATURE_CODE_ID_API_PATH_REGEX))> -1 || resourcePath.search(new RegExp(Constants.VEHICLEGROUP_SEARCH_LIST_API_PATH_REGEX))>-1 || resourcePath.search(new RegExp(Constants.VEHICLEGROUP_ID_API_PATH_REGEX))>-1){
+            const vehicleGroupHandler = VehicleGroupFactory.getVehicleGroupHandler();
+            const requestData = vehicleGroupHandler.getVehicleGroupParams(transformedEvent);   
+        }
+        else if(resourcePath.search(new RegExp))
+    )
+
+        
         const serviceHandler = ServiceFactory.getServiceHandler();
         const requestData = serviceHandler.getServiceParams(transformedEvent); // return request format
  

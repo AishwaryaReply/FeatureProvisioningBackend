@@ -8,6 +8,7 @@ import { Constants } from '../constants';
 import { FeaturesFactory } from './features';
 import { RuleFactory } from './rule';
 import { VehicleGroupFactory } from './vehicleGroup';
+import { VehicleFactory, VehicleHandler } from './vehicle';
 
 const lambdaTracer  = new LambdaTracer();
 const gcvCommonFunctions = new Common();
@@ -32,31 +33,31 @@ module.exports.handler = async (event: APIGatewayProxyEvent, context: Context): 
 
     try {
         // INIT
-        transformedEvent = await initializeFunction(event, context)
-
+        transformedEvent = await initializeFunction(event, context);
+        let requestData: DataModels.ServiceRequestData = {
+        }
+        requestData.requestedService = 'FEATURE_SEARCH_LIST';
         // CORE
         // filtering event for required parameters
         let resourcePath: string = transformedEvent.runTimeInfo.resourcePath;
         if (resourcePath.search(new RegExp(Constants.FEATURE_CODE_DELETE_API_PATH_REGEX)) > -1 || 
             resourcePath.search(new RegExp(Constants.FEATURE_SEARCH_LIST_API_PATH_REGEX)) > -1){
                 const featureHandler = FeaturesFactory.getFeaturesHandler();
-                const requestData = featureHandler.getFeatureParams(transformedEvent);
+                 requestData = featureHandler.getFeatureParams(transformedEvent);
         }
         else if(resourcePath.search(new RegExp(Constants.RULE_ID_DELETE_API_PATH_REGEX)) > -1 || resourcePath.search(new RegExp(Constants.RULE_SEARCH_LIST_API_PATH_REGEX))> -1) {
             const ruleHandler = RuleFactory.getRuleHandler();
-            const requestData = ruleHandler.getRuleParams(transformedEvent);
+             requestData = ruleHandler.getRuleParams(transformedEvent);
         }
         else if(resourcePath.search(new RegExp(Constants.VEHICLEGROUP_FEATURE_CODE_ID_API_PATH_REGEX))> -1 || resourcePath.search(new RegExp(Constants.VEHICLEGROUP_SEARCH_LIST_API_PATH_REGEX))>-1 || resourcePath.search(new RegExp(Constants.VEHICLEGROUP_ID_API_PATH_REGEX))>-1){
             const vehicleGroupHandler = VehicleGroupFactory.getVehicleGroupHandler();
-            const requestData = vehicleGroupHandler.getVehicleGroupParams(transformedEvent);   
+             requestData = vehicleGroupHandler.getVehicleGroupParams(transformedEvent);   
         }
-        else if(resourcePath.search(new RegExp))
-    )
+        else if(resourcePath.search(new RegExp(Constants.VEHICLE_ID_VIN_API_PATH_REGEX)) > -1 || resourcePath.search(new RegExp(Constants.VEHICLE_SEARCH_LIST_API_PATH_REGEX)) > -1){
+            const vehicleHandler = VehicleFactory.getVehicleHandler();
+             requestData = vehicleHandler.getVehicleParams(transformedEvent);
+        }        
 
-        
-        const serviceHandler = ServiceFactory.getServiceHandler();
-        const requestData = serviceHandler.getServiceParams(transformedEvent); // return request format
- 
         lambdaResp.body = await invokeService(requestData);
     } catch (error) {
         logger.error(`${LOG_PREFIX} Error: ${JSON.stringify(error)} stack ${error.stack}`);
@@ -103,15 +104,40 @@ async function initializeFunction(event: APIGatewayProxyEvent, context: Context)
  */
 //CALL FROM THE GCV LIBRARY.METHOD
 async function invokeService(requestData: DataModels.ServiceRequestData): Promise<any> {
-    const service = ServiceFactory.getServiceScheduler();
+    
     switch (requestData.requestedService) {
-        case 'FEATURE_SEARCH_LIST': 
-        //To BE CHANGED ACCORDING TO THE METHOD
-            return await service.searchByVin(requestData as DataModels.DfxSearchVinRequestData);
-        
+        case 'FEATURE_SEARCH_LIST':
+            return await FeaturesFactory.getFeaturesScheduler().getListFeatures(requestData as DataModels.FeatureSearchListRequestData);
         case 'FEATURE_CREATE': 
-        //To BE CHANGED ACCORDING TO THE 
-            return await service.searchByVin(requestData as DataModels.DfxSearchVinRequestData);
+            return await FeaturesFactory.getFeaturesScheduler().insertFeature(requestData as DataModels.FeatureCreateData);
+        case'FEATURE_DELETE' :
+            return await FeaturesFactory.getFeaturesScheduler().deleteFeature(requestData as DataModels.FeatureDeleteData);
+        case 'FEATURE_UPDATE' :
+            return await FeaturesFactory.getFeaturesScheduler().updateFeature(requestData as DataModels.FeatureUpdateData);
+        case  'RULE_SEARCH_LIST':
+            return await RuleFactory.getRuleScheduler().getRulesForFeature(requestData as DataModels.RuleSearchListData);
+        case 'RULE_CREATE' :
+            return await RuleFactory.getRuleScheduler().insertRuleForFeature(requestData as DataModels.RuleCreateData);
+        case 'RULE_DELETE' :
+            return await RuleFactory.getRuleScheduler().deleteRuleFromFeature(requestData as DataModels.RuleDeleteData);
+        case 'VEHICLEGROUP_FEATURE_INSERT':
+            return await VehicleGroupFactory.getVehcileGroupScheduler().insertFeatureVehicleGroup(requestData as DataModels.VehicleGroupFeatureDeleteData);
+        case 'VEHICLEGROUP_FEATURE_DELETE':
+            return await VehicleGroupFactory.getVehcileGroupScheduler().deleteFeatureVehicleGroup(requestData as DataModels.VehicleGroupFeatureDeleteData);
+        case 'VEHICLEGROUP_SEARCH_LIST':
+            return await VehicleGroupFactory.getVehcileGroupScheduler().getVehicleGroup(requestData as DataModels.VehicleGroupSearchListData);
+        case 'VEHICLEGROUP_CREATE':
+            return await VehicleGroupFactory.getVehcileGroupScheduler().insertVehicleGroup(requestData as DataModels.VehicleGroupCreateData);
+        case 'VEHICLEGROUP_UPDATE' :
+            return await VehicleGroupFactory.getVehcileGroupScheduler().updateVehicleGroup(requestData as DataModels.VehicleGroupUpdateData);
+        case 'VEHICLEGROUP_DELETE' :
+            return await VehicleGroupFactory.getVehcileGroupScheduler().deleteVehicleGroup(requestData as DataModels.VehicleGroupDeleteData);
+        case 'VEHICLE_SEARCH_LIST':
+            return await VehicleFactory.getVehcileScheduler().getVehicleFromVehicleGroup(requestData as DataModels.VehicleSearchListData);
+        case 'VEHICLE_CREATE':
+            return await VehicleFactory.getVehcileScheduler().insertVehicleForVehicleGroup(requestData as DataModels.VehicleCreateDeleteData);
+        case 'VEHICLE_DELETE':
+            return await VehicleFactory.getVehcileScheduler().insertVehicleForVehicleGroup(requestData as DataModels.VehicleCreateDeleteData);
         
     }
 }

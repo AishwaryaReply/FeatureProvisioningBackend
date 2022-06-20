@@ -4,21 +4,21 @@ import { DataModels } from "../interfaces";
 import { FeaturesFactory } from "./features-factory";
 
 
-export class FeaturesScheduler{
+export class FeaturesScheduler {
 
     /**
      * this fn is used to get list of features
      * @param request 
      * @returns 
-     */    
-    public async getListFeatures(code: string, description: string, channel: string): Promise<DataModels.GetFeatureResponse> {
+     */
+    public async getListFeatures(request: DataModels.FeatureSearchListRequestData): Promise<DataModels.GetFeatureResponse> {
 
-       const logPrefix = `${LOG_PREFIX_CLASS} getListFeatures |`;
+        const logPrefix = `${LOG_PREFIX_CLASS} getListFeatures |`;
         const environment = FeaturesFactory.getEnvironment();
-        const mappedRequest:  DataModels.FeatureSearchListRequestData = {
-            cfeature: code,
-            featureDescription: description,
-            cchannel: channel
+        const mappedRequest = {
+            cfeature: request.cfeature,
+            featureDescription: request.featureDescription,
+            cchannel: request.cchannel
         }
 
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
@@ -28,21 +28,23 @@ export class FeaturesScheduler{
         let filteredResponse: DataModels.GetFeatureResponse = {};
 
         let features: DataModels.FeatureWithChannels[] = [];
-        if(response.features.length != 0){
+        if (response.features != undefined) {
             const dim: number = response.features.length;
 
-            for( let i =0; i < dim; i++){
-                const elem =  response.features[i];
-                if(elem.code && elem.description && elem.channels[0].code && elem.channels[0].description){
-                    const feature: DataModels.FeatureWithChannels = {
-                        code: elem.code,
-                        description: elem.description,
-                        channels[0].code: elem.channels[0].code,
-                        channels[0].description: elem.channels[0].description
+            for (let i = 0; i < dim; i++) {
+                const elem = response.features[i];
+                const channels = elem.channels;
+                for (let j = 0; j < channels.length; j++) {
+                    if (elem.code && elem.description && channels[j].code && channels[j].description) {
+                        const feature: DataModels.FeatureWithChannels = {
+                            code: elem.code,
+                            description: elem.description,
+                            channels[j].code: channels[j].code,
+                            channels[j].description: channels[j].description
+                        }
+                        features.push(feature);
                     }
-                    features.push(feature);
                 }
-
             }
             filteredResponse = {
                 features: features
@@ -65,13 +67,13 @@ export class FeaturesScheduler{
             channels: request.cchannel
         }
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
-        const response : DataModels.PostResponse = await FeaturesDao.insertFeaturesToDB(mappedRequest);
+        const response: DataModels.PostResponse = await FeaturesDao.insertFeaturesToDB(mappedRequest);
         logger.debug(logPrefix, `response:  ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.PostResponse = {};
 
-        if(response.message){
-            filteredResponse= {
+        if (response.message) {
+            filteredResponse = {
                 message: response.message
             }
         }
@@ -81,7 +83,7 @@ export class FeaturesScheduler{
         return filteredResponse;
     }
 
-    public async updateFeature(request: DataModels.FeatureUpdateData): Promise<DataModels.PatchResponse>{
+    public async updateFeature(request: DataModels.FeatureUpdateData): Promise<DataModels.PatchResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} updateFeature |`;
         const environment = FeaturesFactory.getEnvironment();
@@ -91,39 +93,39 @@ export class FeaturesScheduler{
             channels: request.channels
         }
 
-        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`); 
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
         const response: DataModels.PatchResponse = await FeaturesDao.updateFeatureToDatabase(mappedRequest);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
         let filteredResponse: DataModels.PatchResponse = {};
 
-        if(response.message){
-            filteredResponse= {
+        if (response.message) {
+            filteredResponse = {
                 message: response.message
             }
         }
 
         return filteredResponse;
 
-     }
+    }
 
-    public async deleteFeature(request: DataModels.FeatureDeleteData): Promise<DataModels.DeleteResponse>{
+    public async deleteFeature(request: DataModels.FeatureDeleteData): Promise<DataModels.DeleteResponse> {
 
-         const logPrefix = `${LOG_PREFIX_CLASS} deleteFeature |`;
-         const environment = FeaturesFactory.getEnvironment();
-         const mappedRequest = {
-             cfeature: request.cfeature,
-             igroup:""
+        const logPrefix = `${LOG_PREFIX_CLASS} deleteFeature |`;
+        const environment = FeaturesFactory.getEnvironment();
+        const mappedRequest = {
+            cfeature: request.cfeature,
+            igroup: ""
 
-         }
+        }
 
-         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
-         const response: DataModels.DeleteResponse = await FeaturesDao.deleteFeature(mappedRequest);
-         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: DataModels.DeleteResponse = await FeaturesDao.deleteFeature(mappedRequest);
+        logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
-         let filteredResponse: DataModels.DeleteResponse = {};
+        let filteredResponse: DataModels.DeleteResponse = {};
 
-        if(response.message){
-            filteredResponse= {
+        if (response.message) {
+            filteredResponse = {
                 message: response.message
             }
         }
@@ -135,7 +137,7 @@ export class FeaturesScheduler{
 
 
 
-        
+
 
 
 

@@ -45,7 +45,7 @@ export class FeaturesHandler {
      */
     private prepareRequestData(event: UtilityObjects.TransformedInputEvent, service: DataModels.ServiceRequested): DataModels.ServiceRequestData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareRequestData |`;
-
+        const temp: DataModels.ServiceRequestData = {requestedService: ""};
         logger.debug(logPrefix, 'Service', service);
         switch (service) {
             case 'FEATURE_SEARCH_LIST':
@@ -56,6 +56,8 @@ export class FeaturesHandler {
                 return this.prepareFeatureDelete(event);
             case 'FEATURE_UPDATE':
                 return this.prepareFeatureUpdate(event);
+            default:
+                return temp ;
            
         }
     }

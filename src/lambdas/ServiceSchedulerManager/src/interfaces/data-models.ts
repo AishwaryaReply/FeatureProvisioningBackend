@@ -15,7 +15,7 @@ export type ServiceRequested =
 'VEHICLEGROUP_DELETE' |
 'VEHICLE_SEARCH_LIST' |
 'VEHICLE_CREATE' |
-'VEHICLE_DELETE'
+'VEHICLE_DELETE' 
 ;
 
 export type ServiceRequestData = {

@@ -1,7 +1,5 @@
 export class FeaturesHandler {
-<<<<<<< Updated upstream
     
-=======
     /**
      * this fn looks at event type and returns required data for the api method to be called
      * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api
@@ -147,5 +145,4 @@ export class FeaturesHandler {
         }
         throw new GCVErrors.ServiceNotSupported(`service ${resourcePath} is not supported`);
     }
->>>>>>> Stashed changes
 }

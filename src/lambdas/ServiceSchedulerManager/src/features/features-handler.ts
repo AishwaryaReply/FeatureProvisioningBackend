@@ -1,5 +1,15 @@
+import logger from 'gcv-logger';
+import { DataModels } from '../interfaces';
+import { Constants, FeatureSearchListSchema, FeatureUpdateSchema, FeatureInsertSchema, FeatureDeleteSchema } from '../../constants'
+import { UtilityObjects, GCVErrors } from 'gcv-utils';
+import { Utilities } from 'gcv-utilities';
+
+
 export class FeaturesHandler {
+<<<<<<< Updated upstream
     
+=======
+>>>>>>> Stashed changes
     /**
      * this fn looks at event type and returns required data for the api method to be called
      * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api
@@ -23,11 +33,19 @@ export class FeaturesHandler {
             case 'FEATURE_DELETE':
                 this.validateEvent(inputEvent, FeatureDeleteSchema);
                 break;
+<<<<<<< Updated upstream
         
             case 'FEATURE_UPDATE':
                 this.validateEvent(inputEvent, FeatureUpdateSchema);
                 break;
         }
+=======
+        }
+            case 'FEATURE_UPDATE':
+        this.validateEvent(inputEvent, FeatureUpdateSchema);
+        break;
+
+>>>>>>> Stashed changes
         return this.prepareRequestData(inputEvent, requestedService);
 
     }

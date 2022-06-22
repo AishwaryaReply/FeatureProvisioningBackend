@@ -8,8 +8,8 @@ export class FeaturesScheduler {
 
     /**
      * this fn is used to get list of features
-     * @param request 
-     * @returns 
+     * @param request input as DataModels.FeatureSearchListRequestData
+     * @returns the response as DataModels.GetFeatureResponse
      */
     public async getListFeatures(request: DataModels.FeatureSearchListRequestData): Promise<DataModels.GetFeatureResponse> {
 
@@ -54,9 +54,9 @@ export class FeaturesScheduler {
     }
 
     /**
-     * 
-     * @param request 
-     * @returns 
+     * this fn inserts the new feature into the database
+     * @param request new feature configuration as DataModels.FeatureCreateData
+     * @returns response of the database operation as DataModels.PostResponse
      */
     public async insertFeature(request: DataModels.FeatureCreateData): Promise<DataModels.PostResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} insertFeature |`;
@@ -78,11 +78,14 @@ export class FeaturesScheduler {
             }
         }
 
-
-
         return filteredResponse;
     }
 
+    /**
+     * this fn updates the exisiting feature with new feature configuration
+     * @param request input as DataModels.FeatureUpdateData
+     * @returns response of database operation as DataModels.PatchResponse
+     */
     public async updateFeature(request: DataModels.FeatureUpdateData): Promise<DataModels.PatchResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} updateFeature |`;
@@ -106,8 +109,13 @@ export class FeaturesScheduler {
 
         return filteredResponse;
 
-    }
+    }   
 
+    /**
+     * this fn deletes the feature from the database
+     * @param request input as DataModels.FeatureDeleteData
+     * @returns response of the database operation as DataModels.DeleteResponse
+     */
     public async deleteFeature(request: DataModels.FeatureDeleteData): Promise<DataModels.DeleteResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} deleteFeature |`;

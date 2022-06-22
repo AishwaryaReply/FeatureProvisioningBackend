@@ -7,10 +7,10 @@ import { Constants, VehicleGroupDeleteForFeatureSchema, VehicleGroupDeleteSchema
 export class VehicleGroupHandler {
 
     /**
-    * this fn looks at event type and returns required data for the api method to be called
-    * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api
-    * @returns data as ServiceRequestData
-    */
+     * this fn looks at event type and returns required data for the api method to be called
+     * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api, it is any object because it set to any in gcv-utils library
+     * @returns data as ServiceRequestData
+     */
     public getVehicleGroupParams(inputEvent: UtilityObjects.TransformedInputEvent): DataModels.ServiceRequestData {
 
         const logPrefix = `${LOG_PREFIX_CLASS} getVehicleGroupParams |`;
@@ -40,11 +40,12 @@ export class VehicleGroupHandler {
         }
         return this.prepareRequestData(inputEvent, requestedService);
     }
+
     /**
      * this fn call method based on service request to get data in required format
-     * @param event UtilityObjects.TransformedInputEvent
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
      * @param service DataModels.ServiceRequested
-     * @returns 
+     * @returns data as ServicRequestData for one of the API event
      */
     private prepareRequestData(event: UtilityObjects.TransformedInputEvent, service: DataModels.ServiceRequested): DataModels.ServiceRequestData {
 
@@ -68,7 +69,11 @@ export class VehicleGroupHandler {
         }
     }
 
-
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.VehicleGroupFeatureCreateData
+     */
     private prepareVGFeatureCreate(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupFeatureCreateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVGFeatureCreate |`;
         logger.debug(logPrefix, `code: ${event.queryString.code}, id: ${event.queryString.id}`);
@@ -80,6 +85,11 @@ export class VehicleGroupHandler {
         }
     }
 
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent  it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.VehicleGroupFeatureDeleteData
+     */
     private prepareVGFeatureDelete(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupFeatureDeleteData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVGFeatureDelete |`;
         logger.debug(logPrefix, `code: ${event.queryString.code}, id: ${event.queryString.id}`);
@@ -91,6 +101,11 @@ export class VehicleGroupHandler {
         }
     }
 
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.VehicleGroupSearchListData
+     */
     private prepareVGSearchList(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupSearchListData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVGSearchList |`;
         logger.debug(logPrefix, `feature: ${event.queryString.feature}`);
@@ -101,6 +116,11 @@ export class VehicleGroupHandler {
         }
     }
 
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.VehicleGroupCreateData
+     */
     private prepareVGCreate(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupCreateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVGCreate |`;
         let body: DataModels.NewVehicleGroup = JSON.parse(event.body);
@@ -112,6 +132,11 @@ export class VehicleGroupHandler {
         }
     }
 
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.VehicleGroupUpdateData
+     */
     private prepareVGUpdate(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupUpdateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVCUdpate |`;
         let body: DataModels.NewVehicleGroup = JSON.parse(event.body);
@@ -124,6 +149,11 @@ export class VehicleGroupHandler {
         }
     }
 
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.VehicleGroupDeleteData
+     */
     private prepareVGDelete(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupDeleteData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVGUdpate |`;
         logger.debug(logPrefix, `id: ${event.queryString.id}`);
@@ -135,6 +165,12 @@ export class VehicleGroupHandler {
 
     }
 
+    /**
+     * this fn validate the event data with the event schema
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @param eventSchema any object takes in the schema of event
+     * @returns Data as DataModels.FeatureSearchListRequestData
+     */
     private validateEvent(event: UtilityObjects.TransformedInputEvent, eventSchema: any): void {
         const logPrefix = `${LOG_PREFIX_CLASS} validateEvent |`;
         const validator = new Utilities.JsonValidator();
@@ -144,6 +180,11 @@ export class VehicleGroupHandler {
         logger.info(`${logPrefix} event is valid`);
     }
 
+    /**
+     * this fn returns the request type string based on the resourceMethod(http method)
+     * @param runTimeInfo any object because it is assigned any in gcv-util library
+     * @returns string as ServiceRequested
+     */
     public getServiceRequested(runTimeInfo: any): DataModels.ServiceRequested {
         const logPrefix = `${LOG_PREFIX_CLASS} getServiceRequested |`;
         const resourcePath: string = runTimeInfo.resourcePath;

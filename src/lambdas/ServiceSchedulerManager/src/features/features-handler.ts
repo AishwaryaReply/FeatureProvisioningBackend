@@ -8,7 +8,7 @@ import { Utilities } from 'gcv-utilities';
 export class FeaturesHandler {
     /**
      * this fn looks at event type and returns required data for the api method to be called
-     * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api
+     * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api, it is any object because it set to any in gcv-utils library
      * @returns data as ServiceRequestData
      */
     public getFeatureParams(inputEvent: UtilityObjects.TransformedInputEvent): DataModels.ServiceRequestData {
@@ -39,9 +39,9 @@ export class FeaturesHandler {
     }
     /**
      * this fn call method based on service request to get data in required format
-     * @param event UtilityObjects.TransformedInputEvent
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
      * @param service DataModels.ServiceRequested
-     * @returns 
+     * @returns data as ServicRequestData for one of the API event
      */
     private prepareRequestData(event: UtilityObjects.TransformedInputEvent, service: DataModels.ServiceRequested): DataModels.ServiceRequestData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareRequestData |`;
@@ -63,6 +63,11 @@ export class FeaturesHandler {
     }
 
 
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.FeatureSearchListRequestData
+     */
     private prepareFeatureSearchList(event: UtilityObjects.TransformedInputEvent): DataModels.FeatureSearchListRequestData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareFeatureSearchList |`;
         logger.debug(logPrefix, `code: ${event.queryString.code}, Description: ${event.queryString.description}, channel: ${event.queryString.channel}`);
@@ -74,7 +79,11 @@ export class FeaturesHandler {
         }
 
     }
-
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.FeatureCreateData
+     */
     private prepareFeatureCreate(event: UtilityObjects.TransformedInputEvent): DataModels.FeatureCreateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareFeatureSearchList |`;
         let body: DataModels.FeatureWithChannels = JSON.parse(event.body);
@@ -89,7 +98,11 @@ export class FeaturesHandler {
         }
 
     }
-
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.FeatureDeleteData
+     */
     private prepareFeatureDelete(event: UtilityObjects.TransformedInputEvent): DataModels.FeatureDeleteData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareFeatureSearchList |`;
         logger.debug(logPrefix, `description: ${body.description}, channel: ${body.channels}`);
@@ -100,6 +113,11 @@ export class FeaturesHandler {
 
     }
 
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.FeatureUpdateData
+     */
     private prepareFeatureUpdate(event: UtilityObjects.TransformedInputEvent): DataModels.FeatureUpdateData {
 
         const logPrefix = `${LOG_PREFIX_CLASS} prepareUpdateFeature |`;
@@ -117,7 +135,12 @@ export class FeaturesHandler {
 
     }
 
-
+    /**
+     * this fn validate the event data with the event schema
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @param eventSchema any object takes in the schema of event
+     * @returns Data as DataModels.FeatureSearchListRequestData
+     */
     private validateEvent(event: UtilityObjects.TransformedInputEvent, eventSchema: any): void {
         const logPrefix = `${LOG_PREFIX_CLASS} validateEvent |`;
         const validator = new Utilities.JsonValidator();
@@ -126,14 +149,19 @@ export class FeaturesHandler {
         }
         logger.info(`${logPrefix} event is valid`);
     }
-
+    
+    /**
+     * this fn returns the request type string based on the resourceMethod(http method)
+     * @param runTimeInfo any object because it is assigned as any in gcv-util library
+     * @returns string as ServiceRequested
+     */
     public getServiceRequested(runTimeInfo: any): DataModels.ServiceRequested {
         const logPrefix = `${LOG_PREFIX_CLASS} getServiceRequested |`;
         const resourcePath: string = runTimeInfo.resourcePath;
         const resourceMethod: string = runTimeInfo.httpMethod;
         logger.debug(`${logPrefix} path: ${resourcePath}`);
         if (resourcePath.search(new RegExp(Constants.FEATURE_CODE_DELETE_API_PATH_REGEX)) > -1) {
-            return 'FEATURE_DELETE;'
+            return 'FEATURE_DELETE';
         }
         else if (resourcePath.search(new RegExp(Constants.FEATURE_SEARCH_LIST_API_PATH_REGEX)) > -1) {
             switch (resourceMethod) {

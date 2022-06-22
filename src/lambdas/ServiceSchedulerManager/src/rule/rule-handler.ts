@@ -6,11 +6,11 @@ import { Utilities } from 'gcv-utilities';
 
 export class RuleHandler {
 
-    /**
-    * this fn looks at event type and returns required data for the api method to be called
-    * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api
-    * @returns data as ServiceRequestData
-    */
+   /**
+     * this fn looks at event type and returns required data for the api method to be called
+     * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api, it is any object because it set to any in gcv-utils library
+     * @returns data as ServiceRequestData
+     */
     public getRuleParams(inputEvent: UtilityObjects.TransformedInputEvent): DataModels.ServiceRequestData {
 
         const logPrefix = `${LOG_PREFIX_CLASS} getRuleParams |`;
@@ -31,11 +31,11 @@ export class RuleHandler {
         }
         return this.prepareRequestData(inputEvent, requestedService);
     }
-    /**
-     * this fn call method based on service request to get data in required format
-     * @param event UtilityObjects.TransformedInputEvent
+     /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
      * @param service DataModels.ServiceRequested
-     * @returns 
+     * @returns data as ServicRequestData for one of the API event
      */
     private prepareRequestData(event: UtilityObjects.TransformedInputEvent, service: DataModels.ServiceRequested): DataModels.ServiceRequestData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareRequestData |`;
@@ -51,7 +51,11 @@ export class RuleHandler {
 
         }
     }
-
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.RuleSearchListData
+     */
     private prepareRuleSearchList(event: UtilityObjects.TransformedInputEvent): DataModels.RuleSearchListData {
 
         const logPrefix = `${LOG_PREFIX_CLASS} prepareRuleSearchList |`;
@@ -63,6 +67,11 @@ export class RuleHandler {
         };
     }
 
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.RuleCreateData
+     */
     private prepareRuleCreate(event: UtilityObjects.TransformedInputEvent): DataModels.RuleCreateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareRuleCreate |`;
         let body: DataModels.NewConfigurateRule = JSON.parse(event.body);
@@ -81,6 +90,11 @@ export class RuleHandler {
         }
     }
 
+    /**
+     * this fn returns the event data as a DataModels interface needed for the api method
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @returns Data as DataModels.RuleDeleteData
+     */
     private prepareRuleDelete(event: UtilityObjects.TransformedInputEvent): DataModels.RuleDeleteData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareRuleCreate |`;
         logger.debug(logPrefix, `code: ${event.queryString.code}, id: ${event.queryString.id}`);
@@ -91,6 +105,13 @@ export class RuleHandler {
             irule: event.queryString.id
         }
     }
+
+    /**
+     * this fn validate the event data with the event schema
+     * @param event UtilityObjects.TransformedInputEvent it is any object because it set to any in gcv-utils library
+     * @param eventSchema any object takes in the schema of event
+     * @returns Data as DataModels.FeatureSearchListRequestData
+     */
     private validateEvent(event: UtilityObjects.TransformedInputEvent, eventSchema: any): void {
         const logPrefix = `${LOG_PREFIX_CLASS} validateEvent |`;
         const validator = new Utilities.JsonValidator();
@@ -100,8 +121,11 @@ export class RuleHandler {
         logger.info(`${logPrefix} event is valid`);
     }
 
-
-
+    /**
+     * this fn returns the request type string based on the resourceMethod(http method)
+     * @param runTimeInfo any object because it is assigned any in gcv-util library
+     * @returns string as ServiceRequested
+     */
     public getServiceRequested(runTimeInfo: any): DataModels.ServiceRequested {
         const logPrefix = `${LOG_PREFIX_CLASS} getServiceRequested |`;
         const resourcePath: string = runTimeInfo.resourcePath;

@@ -17,7 +17,7 @@ const LOG_PREFIX = 'ServiceSchedulerHandler |';
 
 /**
     * @description
-    * 
+    * this fn is entry point for the api method call from the frontend
     * @param {APIGatewayProxyEvent} event: Request in JSON format received by Lambda.
     * @param {Context} context: AWS Lambda uses this parameter to provide details of your Lambda function's execution.
     * @param {*} callback: Used to explicitly return information back to the API gateway.
@@ -77,10 +77,10 @@ lambdaTracer.tracerFinalize(module);
 
 /**
  *
- *
+ * this fn transforms the event into inputevent type of UtilityObjects.TransformedEvent
  * @param {APIGatewayProxyEvent} event
  * @param {Context} context
- * @returns {Promise<UtilityObjects.TransformedEvent>}
+ * @returns {Promise<UtilityObjects.TransformedEvent>} any object because it is any in the gcv-utils library
  */
 async function initializeFunction(event: APIGatewayProxyEvent, context: Context): Promise<UtilityObjects.TransformedEvent> {
 
@@ -97,10 +97,9 @@ async function initializeFunction(event: APIGatewayProxyEvent, context: Context)
 }
 
 /**
- *
- *
+ * this fn is called to initialize the api method based on the requestData.requestedService
  * @param {DataModels.ServiceRequestData} requestData
- * @returns {Promise<any>}
+ * @returns {Promise<any>} because the response depends on the method being called
  */
 //CALL FROM THE GCV LIBRARY.METHOD
 async function invokeService(requestData: DataModels.ServiceRequestData): Promise<any> {

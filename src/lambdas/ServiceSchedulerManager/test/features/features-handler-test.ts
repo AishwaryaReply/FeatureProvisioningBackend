@@ -1,12 +1,42 @@
 import 'mocha'
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
-import { ServiceHandler } from '../../src/services';
+import { FeaturesHandler } from '../../src/features';
 import { Stubs } from './utils/stubs'
 import { GCVErrors } from 'gcv-utils';
 
 chai.use(chaiAsPromised)
 const expect = chai.expect;
+
+describe('FeatureHandlerService', () => {
+    //const testServiceSchedulerService = new ServiceScheduler();
+    const testServiceFeatureHandler = new FeaturesHandler();
+
+    describe('getFeatureParams', () => {
+        afterEach(sinon.restore);
+
+        it('should return the expected repsonse with uppercase, when the getFeatureParams goes well', async () => {
+            //sinon.stub(className,'methodName').resolves(Stubs.variableName)
+            sinon.stub(FeaturesDao, 'selectFeaturesFromDB').resolves(Stubs.mockOutputGetListFeatures);
+            sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeatures;
+            const response = await testServiceFeatureScheduler.getListFeatures(Stubs.mockInputGetListFeatures);
+            expect(response).to.be.deep.equal(expected);
+        })
+    });
+})
+
+
+
+
+
+
+
+
+
+
+
 
 describe('ServiceHandler', () => {
     const testedServiceHandler = new ServiceHandler();

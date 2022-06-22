@@ -25,6 +25,49 @@ export namespace Stubs {
         "content-type": "application/json"
     };
 
+    //getListFeatures
+    export const mockInputGetListFeatures: DataModels.FeatureSearchListRequestData={
+        cfeature: "XXX",
+        featureDescription: "XXX",
+        cchannel: [{ code: "XXX", description: "XXX" }, 
+                   { code: "YYY", description: "YYY" }],
+        requestedService: "FEATURE_SEARCH_LIST"
+    };
+
+    export const mockInputGetListFeaturesNumerics: DataModels.FeatureSearchListRequestData={
+        cfeature: "123x",
+        featureDescription: "123x",
+        cchannel: [{ code: "123x", description: "123x" }, 
+                   { code: "456x", description: "456x" }],
+        requestedService: "FEATURE_SEARCH_LIST"
+    };
+
+    export const mockInputGetListFeaturesSpecialChar: DataModels.FeatureSearchListRequestData={
+        cfeature: "@#$%",
+        featureDescription: "@#$%",
+        cchannel: [{ code: "@#$%", description: "@#$%" }, 
+                   { code: "$%&", description: "$%&" }],
+        requestedService: "FEATURE_SEARCH_LIST"
+    };
+
+    export const mockInputGetListFeaturesNull: DataModels.FeatureSearchListRequestData={
+        cfeature: null,
+        featureDescription: null,
+        cchannel: [{ code: null, description: null }, 
+                   { code: null, description:null }],
+        requestedService: "FEATURE_SEARCH_LIST"
+    };
+
+    export const mockOutputGetListFeatures: DataModels.GetFeatureResponse={
+        features: [{ code: "XXX", description: "Feature XXX", channels: [{code: "GMA", description: "Global Mobile App"}] }, 
+                   { code: "YYY", description: "Feature YYY", channels: [{code: "YYY", description: "YYY"}] }]
+    };
+
+    export const mockOutputGetListFeaturesNull: DataModels.GetFeatureResponse={
+        features: [{ code: null, description: null, channels: [{code: null, description: null}] }, 
+                   { code: null, description: null, channels: [{code: null, description: null}] }]
+    };
+
     //insertFeature
     export const mockInputInsertFeature: DataModels.FeatureCreateData={
         cfeature: "XXX",

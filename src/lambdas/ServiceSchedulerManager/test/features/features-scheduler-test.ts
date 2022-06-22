@@ -14,11 +14,65 @@ describe('FeatureSchedulerService', () => {
     //const testServiceSchedulerService = new ServiceScheduler();
     const testServiceFeatureScheduler = new FeaturesScheduler();
 
+    describe('getListFeatures', () => {
+        afterEach(sinon.restore);
+
+        it('should return the expected repsonse with uppercase, when the getListFeatures goes well', async () => {
+            //sinon.stub(className,'methodName').resolves(Stubs.variableName)
+            sinon.stub(FeaturesDao, 'selectFeaturesFromDB').resolves(Stubs.mockOutputGetListFeatures);
+            sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeatures;
+            const response = await testServiceFeatureScheduler.getListFeatures(Stubs.mockInputGetListFeatures);
+            expect(response).to.be.deep.equal(expected);
+        })
+
+        it('should return the expected repsonse with special character values, when the getListFeatures goes well', async () => {
+            //sinon.stub(className,'methodName').resolves(Stubs.variableName)
+            sinon.stub(FeaturesDao, 'selectFeaturesFromDB').resolves(Stubs.mockOutputGetListFeatures);
+            sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeatures;
+            const response = await testServiceFeatureScheduler.getListFeatures(Stubs.mockInputGetListFeaturesSpecialChar);
+            expect(response).to.be.deep.equal(expected);
+        })
+
+        it('should return the expected repsonse with null values, when the getListFeatures goes well', async () => {
+            //sinon.stub(className,'methodName').resolves(Stubs.variableName)
+            sinon.stub(FeaturesDao, 'selectFeaturesFromDB').resolves(Stubs.mockOutputGetListFeatures);
+            sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeatures;
+            const response = await testServiceFeatureScheduler.getListFeatures(Stubs.mockInputGetListFeaturesNull);
+            expect(response).to.not.equal(expected);
+        })
+
+        it('should return the expected repsonse with numeric values, when the getListFeatures goes well', async () => {
+            //sinon.stub(className,'methodName').resolves(Stubs.variableName)
+            sinon.stub(FeaturesDao, 'selectFeaturesFromDB').resolves(Stubs.mockOutputGetListFeaturesNull);
+            sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeaturesNull;
+            const response = await testServiceFeatureScheduler.getListFeatures(Stubs.mockInputGetListFeaturesNumerics);
+            expect(response).to.not.equal(expected);
+        })
+
+        it('should return the expected repsonse with numeric values, when the getListFeatures goes well', async () => {
+            //sinon.stub(className,'methodName').resolves(Stubs.variableName)
+            sinon.stub(FeaturesDao, 'selectFeaturesFromDB').resolves(Stubs.mockOutputGetListFeatures);
+            sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
+
+            const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeatures;
+            const response = await testServiceFeatureScheduler.getListFeatures(Stubs.mockInputGetListFeaturesNumerics);
+            expect(response).to.be.deep.equal(expected);
+        })
+
+    });
+
     describe('insertFeature', () => {
         afterEach(sinon.restore);
 
         it('should return the expected repsonse with uppercase, when the insertFeature goes well', async () => {
-            //sinon.stub(className,'methodName').resolves(Stubs.variableName)
             sinon.stub(FeaturesDao, 'insertFeaturesToDB').resolves(Stubs.mockOutputInsertFeature);
             sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
 

@@ -119,8 +119,8 @@ export namespace Stubs {
 
 
     export const mockOutputGetVehicleGroup: DataModels.GetGroupsResponse={
-        features: [{ id: 123, description: "XXX" }, 
-        { id: 456, description: "YYY" }]
+        features: [{ id: 1, description: "Group 1" }, 
+        { id: 2, description: "Group 2" }]
     };
 
     export const mockOutputGetVehicleGroupNull: DataModels.GetGroupsResponse={

@@ -25,7 +25,7 @@ export namespace Stubs {
         "content-type": "application/json"
     };
 
-    //insertFeature
+    //getVehicleFromVehicleGroup
     export const mockInputGetVehicleFromVehicleGroup: DataModels.VehicleSearchListData={
         id: "XXX",
         requestedService: "VEHICLE_SEARCH_LIST"

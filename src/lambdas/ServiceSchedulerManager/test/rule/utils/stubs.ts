@@ -25,7 +25,7 @@ export namespace Stubs {
         "content-type": "application/json"
     };
 
-    //RuleSchedulerService
+    //getRulesForFeature
     export const mockInputGetRulesForFeature: DataModels.RuleSearchListData={
         code: "XXX",
         requestedService: "RULE_SEARCH_LIST"
@@ -47,7 +47,7 @@ export namespace Stubs {
     };
 
     export const mockOutputGetRulesForFeature: DataModels.GetFeaturesRulesResponse={
-        rules: [{ id: 123, region: "XXX", market: "XXX", brand: "XXX", model: "XXX", modelYear: 123, service: "XXX" }, 
+        rules: [{ id: 1, region: "XXX", market: "XXX", brand: "XXX", model: "XXX", modelYear: 0, service: "XXX" }, 
                    { id: 345, region: "YYY", market: "YYY", brand: "YYY", model: "YYY", modelYear: 456, service: "YYY" }],
     };
 

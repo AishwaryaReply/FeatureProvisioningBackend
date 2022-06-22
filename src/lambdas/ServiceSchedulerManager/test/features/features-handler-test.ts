@@ -1,20 +1,23 @@
 import 'mocha'
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
-import { ServiceHandler } from '../../src/services';
-import { Stubs } from './utils/stubs'
+import { FeaturesHandler } from '../../src/features';
+import { stubsHandler  } from './utils/stubs-handler'
 import { GCVErrors } from 'gcv-utils';
 
 chai.use(chaiAsPromised)
 const expect = chai.expect;
 
-describe('ServiceHandler', () => {
-    const testedServiceHandler = new ServiceHandler();
+describe('FeaturesHandler', () => {
+    const testedFeaturesHandler = new FeaturesHandler();
 
-    describe('SearchDFX', () => {
+    describe('getFeatureParams', () => {
 
 
-        it('should not throw any error calling get search by vin', () => {
+        it('should give the correct output while calling FEATURE_SEARCH_LIST', () => {
+            const expected= FeaturesHandler, 'getServiceRequested').resolves(stubsHandler.mockInputEventGet);
+
+           // const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeatures;
             const devices = testedServiceHandler.getServiceParams(Stubs.DfxSearchByVinEvent);
             expect(devices.requestedService).to.be.eqls("DFX_SEARCH_VIN");
         })

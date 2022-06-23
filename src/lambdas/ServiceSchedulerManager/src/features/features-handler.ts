@@ -15,7 +15,7 @@ export class FeaturesHandler {
 
 
         const logPrefix = `${LOG_PREFIX_CLASS} getFeatureParams |`;
-        const requestedService: DataModels.ServiceRequested = this.getServiceRequested(inputEvent.runTimeInfo);
+        const requestedService: DataModels.ServiceRequested = this.getServiceRequested(inputEvent.runTimeInfo); //4 input types 
 
         logger.debug(logPrefix, 'requestedService', requestedService);
         switch (requestedService) {

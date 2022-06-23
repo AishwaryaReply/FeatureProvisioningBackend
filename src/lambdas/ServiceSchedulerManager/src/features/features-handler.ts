@@ -29,11 +29,11 @@ export class FeaturesHandler {
             case 'FEATURE_DELETE':
                 this.validateEvent(inputEvent, FeatureDeleteSchema);
                 break;
-        }
+        
             case 'FEATURE_UPDATE':
-        this.validateEvent(inputEvent, FeatureUpdateSchema);
-        break;
-
+                this.validateEvent(inputEvent, FeatureUpdateSchema);
+                break;
+        }
         return this.prepareRequestData(inputEvent, requestedService);
 
     }
@@ -169,8 +169,8 @@ export class FeaturesHandler {
                     return 'FEATURE_SEARCH_LIST';
                 case 'POST':
                     return 'FEATURE_CREATE';
-                case 'DELETE':
-                    return 'FEATURE_DELETE';
+                //case 'DELETE':
+                   // return 'FEATURE_DELETE';
                 case 'PUT':
                     return 'FEATURE_UPDATE';
                 default:

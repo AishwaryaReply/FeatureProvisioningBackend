@@ -432,8 +432,8 @@ message?: string;
 }
 
 export interface RuleCreateData extends ServiceRequestData {
-  igroup?: string;
-  cfeature : string,
+	igroup?: string;
+	cfeature : string,
 	cregion: string,
 	cmarket: string,
 	cbrand: string,

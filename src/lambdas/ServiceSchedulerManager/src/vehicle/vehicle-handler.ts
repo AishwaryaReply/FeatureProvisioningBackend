@@ -131,16 +131,18 @@ export class VehicleHandler {
                     return 'VEHICLE_CREATE';
                 case 'DELETE':
                     return 'VEHICLE_DELETE';
+                default:
+                    throw new GCVErrors.HttpMethodNotAllowed('HttpMethod is not valid');
             }
         }
-        else if (resourcePath.search(new RegExp(Constants.VEHICLE_SEARCH_LIST_API_PATH_REGEX)) > -1) {  //same path
+        else if (resourcePath.search(new RegExp(Constants.VEHICLE_ID_API_PATH_REGEX)) > -1) {  //same path
             switch (resourceMethod) {
                 case 'GET':
                     return 'VEHICLE_SEARCH_LIST';
-                case 'POST':
-                    return 'VEHICLE_CREATE';
-                case 'DELETE':
-                    return 'VEHICLE_DELETE';
+                // case 'POST':
+                //     return 'VEHICLE_CREATE';
+                // case 'DELETE':
+                //     return 'VEHICLE_DELETE';
                 //case 'PUT':
                 //     return '';
                 default:

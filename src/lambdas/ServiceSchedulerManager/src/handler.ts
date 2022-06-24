@@ -53,7 +53,7 @@ module.exports.handler = async (event: APIGatewayProxyEvent, context: Context): 
             const vehicleGroupHandler = VehicleGroupFactory.getVehicleGroupHandler();
              requestData = vehicleGroupHandler.getVehicleGroupParams(transformedEvent);   
         }
-        else if(resourcePath.search(new RegExp(Constants.VEHICLE_ID_VIN_API_PATH_REGEX)) > -1 || resourcePath.search(new RegExp(Constants.VEHICLE_SEARCH_LIST_API_PATH_REGEX)) > -1){
+        else if(resourcePath.search(new RegExp(Constants.VEHICLE_ID_VIN_API_PATH_REGEX)) > -1 || resourcePath.search(new RegExp(Constants.VEHICLE_ID_API_PATH_REGEX)) > -1){
             const vehicleHandler = VehicleFactory.getVehicleHandler();
              requestData = vehicleHandler.getVehicleParams(transformedEvent);
         }        

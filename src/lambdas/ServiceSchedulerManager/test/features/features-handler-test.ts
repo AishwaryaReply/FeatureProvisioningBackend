@@ -54,6 +54,16 @@ describe('FeaturesHandler', () => {
             expect(expected).to.be.eqls("FEATURE_DELETE");
         })
 
+        it('testing invalid httpMethod and invalid resourcePath', () => {
+            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventInvalidHTTPMethodResourcePath.runTimeInfo);
+            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${resourcePath} is not supported`));
+        })
+
+        it('testing valid httpMethod and invalid resourcePath', () => {
+            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventInvalidResourcePath.runTimeInfo);
+            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${resourcePath} is not supported`));
+        })
+
     })  
 
 })

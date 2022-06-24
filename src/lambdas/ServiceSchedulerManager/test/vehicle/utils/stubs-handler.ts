@@ -6,15 +6,22 @@ export namespace stubsHandler {
     //getVehicleParams
     export const mockInputEventPostVehicleByID: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
-            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle',
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle\/{vin}',
             httpMethod: 'POST'
         }
     }
 
     export const mockInputEventDeleteVehicleByID: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
-            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle',
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle\/{vin}',
             httpMethod: 'DELETE'
+        }
+    }
+
+    export const mockInputEventInvalidHTTPMethodPut: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle\/{vin}',
+            httpMethod: 'PUT'
         }
     }
 
@@ -32,48 +39,32 @@ export namespace stubsHandler {
         }
     }
 
-
-
-
-
-
-
-
-
-   
-
-    export const mockInputEventDelete: UtilityObjects.TransformedInputEvent = {
+    export const mockInputEventGetVehicleBySearch: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
-            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/rule\/{id}',
-            httpMethod: 'DELETE'
-        }
-    }
-
-    export const mockInputEventInvalidHTTPMethodPut: UtilityObjects.TransformedInputEvent = {
-        runTimeInfo: {
-            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/rule',
-            httpMethod: 'PUT'
-        }
-    }
-
-    export const mockInputEventInvalidPost: UtilityObjects.TransformedInputEvent = {
-        runTimeInfo: {
-            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/rule',
-            httpMethod: 'POST'
-        }
-    }
-
-    export const mockInputEventInvalidGet: UtilityObjects.TransformedInputEvent = {
-        runTimeInfo: {
-            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/rule',
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle',
             httpMethod: 'GET'
         }
     }
 
     export const mockInputEventInvalidHTTPMethodPatch: UtilityObjects.TransformedInputEvent = {
-        runTimeInfo: {
-            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/rule',
+        runTimeInfo: { 
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle',
             httpMethod: 'PATCH'
         }
     }
+
+    export const mockInputEventInvalidHTTPMethodResourcePath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'PATCH'
+        }
+    }
+
+    export const mockInputEventInvalidResourcePath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'POST'
+        }
+    }
+   
 }

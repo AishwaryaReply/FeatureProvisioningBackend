@@ -66,4 +66,19 @@ export namespace stubsHandler {
             httpMethod: 'PATCH'
         }
     }
+
+    export const mockInputEventInvalidHTTPMethodResourcePath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'PATCH'
+        }
+    }
+
+    export const mockInputEventInvalidResourcePath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'PUT'
+        }
+    }
+
 }

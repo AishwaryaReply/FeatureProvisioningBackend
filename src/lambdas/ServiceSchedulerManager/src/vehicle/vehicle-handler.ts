@@ -125,7 +125,7 @@ export class VehicleHandler {
         const resourcePath: string = runTimeInfo.resourcePath;
         const resourceMethod: string = runTimeInfo.httpMethod;
         logger.debug(`${logPrefix} path: ${resourcePath}`);
-        if (resourcePath.search(new RegExp(Constants.VEHICLE_ID_VIN_API_PATH_REGEX)) > -1) {    //same path
+        if (resourcePath.search(new RegExp(Constants.VEHICLE_ID_VIN_API_PATH_REGEX)) > -1) { 
             switch (resourceMethod) {
                 case 'POST':
                     return 'VEHICLE_CREATE';
@@ -135,14 +135,14 @@ export class VehicleHandler {
                     throw new GCVErrors.HttpMethodNotAllowed('HttpMethod is not valid');
             }
         }
-        else if (resourcePath.search(new RegExp(Constants.VEHICLE_ID_API_PATH_REGEX)) > -1) {  //same path
+        else if (resourcePath.search(new RegExp(Constants.VEHICLE_ID_API_PATH_REGEX)) > -1) { 
             switch (resourceMethod) {
                 case 'GET':
                     return 'VEHICLE_SEARCH_LIST';
-                // case 'POST':
-                //     return 'VEHICLE_CREATE';
-                // case 'DELETE':
-                //     return 'VEHICLE_DELETE';
+                case 'POST':
+                    return 'VEHICLE_CREATE';
+                case 'DELETE':
+                    return 'VEHICLE_DELETE';
                 //case 'PUT':
                 //     return '';
                 default:

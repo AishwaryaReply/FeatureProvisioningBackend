@@ -53,6 +53,16 @@ describe('RuleHandler', () => {
             const expected= testedRuleHandler.getServiceRequested(stubsHandler.mockInputEventInvalidHTTPMethodPatchRule.runTimeInfo);
             expect(expected).to.throw(new GCVErrors.HttpMethodNotAllowed('HttpMethod is not valid'));
         })
+
+        it('testing invalid httpMethod and invalid resourcePath', () => {
+            const expected= testedRuleHandler.getServiceRequested(stubsHandler.mockInputEventInvalidHTTPMethodResourcePath.runTimeInfo);
+            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${resourcePath} is not supported`));
+        })
+
+        it('testing invalid resourcePath', () => {
+            const expected= testedRuleHandler.getServiceRequested(stubsHandler.mockInputEventInvalidResourcePath.runTimeInfo);
+            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${resourcePath} is not supported`));
+        })
     })  
 
 })

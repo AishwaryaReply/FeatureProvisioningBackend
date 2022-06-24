@@ -169,8 +169,8 @@ export class FeaturesHandler {
                     return 'FEATURE_SEARCH_LIST';
                 case 'POST':
                     return 'FEATURE_CREATE';
-                //case 'DELETE':
-                   // return 'FEATURE_DELETE';
+                case 'DELETE':
+                    return 'FEATURE_DELETE';
                 case 'PUT':
                     return 'FEATURE_UPDATE';
                 default:

@@ -227,6 +227,5 @@ export namespace Stubs {
 
     export const mockOutputDeleteVehicleGroupNull: DataModels.DeleteResponse={
         message: null
-    };
-
+    }
 }

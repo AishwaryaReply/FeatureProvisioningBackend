@@ -2,14 +2,16 @@ import { DataModels } from "../../../src/interfaces";
 import { UtilityObjects, GCVErrors } from 'gcv-utils';
 
 export namespace stubsHandler { 
-    export const mockInputEventGet: UtilityObjects.TransformedInputEvent = {
+
+    //getFeatureParams
+    export const mockInputEventGetFeature: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
             httpMethod: 'GET'
         }
     }
 
-    export const mockInputEventGetInvalid: UtilityObjects.TransformedInputEvent = {
+    export const mockInputEventGetInvalidPostFeature: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
             httpMethod: 'POST'
@@ -23,21 +25,36 @@ export namespace stubsHandler {
         }
     }
 
-    export const mockInputEventPost: UtilityObjects.TransformedInputEvent = {
-        runTimeInfo: {
-            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
-            httpMethod: 'POST'
-        }
-    }
-
-    export const mockInputEventDelete: UtilityObjects.TransformedInputEvent = {
+    export const mockInputEventInvalidDeleteFeature: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}',
             httpMethod: 'DELETE'
         }
     }
 
-    export const mockInputEventPut: UtilityObjects.TransformedInputEvent = {
+
+    export const mockInputEventPostFeature: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'POST'
+        }
+    }
+
+    export const mockInputEventDeleteFeatureByCode: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}',
+            httpMethod: 'DELETE'
+        }
+    }
+
+    export const mockInputEventDeleteFeatureBySearch: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'DELETE'
+        }
+    }
+
+    export const mockInputEventPutFeature: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
             httpMethod: 'PUT'

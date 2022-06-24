@@ -5,6 +5,6 @@ export const VEHICLEGROUP_SEARCH_LIST_API_PATH_REGEX = '^\/v[1-9][0-9]*\/feature
 export const VEHICLEGROUP_ID_API_PATH_REGEX = '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}';
 export const RULE_ID_DELETE_API_PATH_REGEX = '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/rule\/{id}';
 export const RULE_SEARCH_LIST_API_PATH_REGEX = '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/rule';
-export const VEHICLE_ID_VIN_API_PATH_REGEX = '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle';
+export const VEHICLE_ID_VIN_API_PATH_REGEX =   '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle';
 export const VEHICLE_SEARCH_LIST_API_PATH_REGEX = '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle';
 

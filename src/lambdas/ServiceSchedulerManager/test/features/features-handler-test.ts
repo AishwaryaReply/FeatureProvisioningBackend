@@ -15,25 +15,45 @@ describe('FeaturesHandler', () => {
 
 
         it('should give the correct output while calling FEATURE_SEARCH_LIST', () => {
-            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventGet.runTimeInfo);
+            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventGetFeature.runTimeInfo);
             expect(expected).to.be.eqls("FEATURE_SEARCH_LIST");
         })
 
         it('should give an error while calling FEATURE_SEARCH_LIST', () => {
-            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventGetInvalid.runTimeInfo);
+            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventGetInvalidPostFeature.runTimeInfo);
             expect(expected).to.not.eqls("FEATURE_SEARCH_LIST");
+        })
+
+        it('should give an error while calling FEATURE_CREATE', () => {
+            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventInvalidDeleteFeature.runTimeInfo);
+            expect(expected).to.not.eqls("FEATURE_CREATE");
         })
 
         it('testing default section with invalidHttpMethod', () => {
             const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventInvalidHTTPMethod.runTimeInfo);
-            //expect(expected).to.not.eqls("FEATURE_SEARCH_LIST");
             expect(expected).to.throw(new GCVErrors.HttpMethodNotAllowed('HttpMethod is not valid'));
         })
-
-        
+    
         it('should give the correct output while calling FEATURE_CREATE', () => {
-            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventPost.runTimeInfo);
+            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventPostFeature.runTimeInfo);
             expect(expected).to.be.eqls("FEATURE_CREATE");
         })
-    })
+
+        it('should give the correct output while calling FEATURE_UPDATE', () => {
+            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventPutFeature.runTimeInfo);
+            expect(expected).to.be.eqls("FEATURE_UPDATE");
+        })
+
+        it('should give the correct output while calling FEATURE_DELETE by code', () => {
+            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventDeleteFeatureByCode.runTimeInfo);
+            expect(expected).to.be.eqls("FEATURE_DELETE");
+        })
+
+        it('should give the correct output while calling FEATURE_DELETE by search', () => {
+            const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputEventDeleteFeatureBySearch.runTimeInfo);
+            expect(expected).to.be.eqls("FEATURE_DELETE");
+        })
+
+    })  
+
 })

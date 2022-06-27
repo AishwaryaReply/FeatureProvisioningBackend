@@ -4,49 +4,63 @@ import { UtilityObjects, GCVErrors } from 'gcv-utils';
 export namespace stubsHandler { 
 
     //getVehicleParams
-    export const mockInputEventPostVehicleByID: UtilityObjects.TransformedInputEvent = {
+    export const mockInputEventPostVehicleByIDVin: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle\/{vin}',
             httpMethod: 'POST'
         }
     }
 
-    export const mockInputEventDeleteVehicleByID: UtilityObjects.TransformedInputEvent = {
+    export const mockInputEventDeleteVehicleByIDVin: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle\/{vin}',
             httpMethod: 'DELETE'
         }
     }
 
-    export const mockInputEventInvalidHTTPMethodPut: UtilityObjects.TransformedInputEvent = {
+    export const mockInputEventInvalidHTTPMethodPutByIDVin: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle\/{vin}',
             httpMethod: 'PUT'
         }
     }
 
-    export const mockInputEventPostVehicleBySearch: UtilityObjects.TransformedInputEvent = {
+    export const mockInputEventPostVehicleByID: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle',
             httpMethod: 'POST'
         }
     }
 
-    export const mockInputEventDeleteVehicleBySearch: UtilityObjects.TransformedInputEvent = {
+    export const mockInputEventDeleteVehicleByID: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle',
             httpMethod: 'DELETE'
         }
     }
 
-    export const mockInputEventGetVehicleBySearch: UtilityObjects.TransformedInputEvent = {
+    export const mockInputEventInvalidDeleteVehicleByID: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle',
+            httpMethod: 'DELETE'
+        }
+    }
+
+    export const mockInputEventGetVehicleByID: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle',
             httpMethod: 'GET'
         }
     }
 
-    export const mockInputEventInvalidHTTPMethodPatch: UtilityObjects.TransformedInputEvent = {
+    export const mockInputEventInvalidGetVehicleByID: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle',
+            httpMethod: 'GET'
+        }
+    }
+
+    export const mockInputEventInvalidHTTPMethodPatchByID: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: { 
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}\/vehicle',
             httpMethod: 'PATCH'

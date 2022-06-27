@@ -11,7 +11,21 @@ export namespace stubsHandler {
         }
     }
 
+    export const mockInputEventInvalidPostVehicleGroupByCode: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/vehicleGroup\/{id}',
+            httpMethod: 'POST'
+        }
+    }
+
     export const mockInputEventDeleteVehicleGroupByCode: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/vehicleGroup\/{id}',
+            httpMethod: 'DELETE'
+        }
+    }
+
+    export const mockInputInvalidEventDeleteVehicleGroupByCode: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/vehicleGroup\/{id}',
             httpMethod: 'DELETE'

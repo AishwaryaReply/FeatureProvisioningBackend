@@ -56,12 +56,12 @@ describe('RuleHandler', () => {
 
         it('testing invalid httpMethod and invalid resourcePath', () => {
             const expected= testedRuleHandler.getServiceRequested(stubsHandler.mockInputEventInvalidHTTPMethodResourcePath.runTimeInfo);
-            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${resourcePath} is not supported`));
+            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${stubsHandler.mockInputEventInvalidHTTPMethodResourcePath.runTimeInfo.resourcePath} is not supported`));
         })
 
         it('testing invalid resourcePath', () => {
             const expected= testedRuleHandler.getServiceRequested(stubsHandler.mockInputEventInvalidResourcePath.runTimeInfo);
-            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${resourcePath} is not supported`));
+            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${stubsHandler.mockInputEventInvalidResourcePath.runTimeInfo.resourcePath} is not supported`));
         })
     })  
 

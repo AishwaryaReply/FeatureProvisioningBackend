@@ -60,12 +60,22 @@ describe('VehicleGroupHandler', () => {
 
         it('testing invalid httpMethod and invalid resourcePath', () => {
             const expected= testedVehicleGroupHandler.getServiceRequested(stubsHandler.mockInputEventInvalidHTTPMethodResourcePath.runTimeInfo);
-            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${resourcePath} is not supported`));
+            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${stubsHandler.mockInputEventInvalidHTTPMethodResourcePath.runTimeInfo.resourcePath} is not supported`));
         })
 
         it('testing invalid resourcePath', () => {
             const expected= testedVehicleGroupHandler.getServiceRequested(stubsHandler.mockInputEventInvalidResourcePath.runTimeInfo);
-            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${resourcePath} is not supported`));
+            expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${stubsHandler.mockInputEventInvalidResourcePath.runTimeInfo.resourcePath} is not supported`));
+        })
+
+        it('should give an error while calling VEHICLEGROUP_SEARCH_LIST', () => {
+            const expected= testedVehicleGroupHandler.getServiceRequested(stubsHandler.mockInputEventInvalidPostVehicleGroupByCode.runTimeInfo);
+            expect(expected).to.not.eqls("VEHICLEGROUP_SEARCH_LIST");
+        })
+
+        it('should give an error while calling VEHICLEGROUP_CREATE', () => {
+            const expected= testedVehicleGroupHandler.getServiceRequested(stubsHandler.mockInputInvalidEventDeleteVehicleGroupByCode.runTimeInfo);
+            expect(expected).to.not.eqls("VEHICLEGROUP_CREATE");
         })
 
     })  

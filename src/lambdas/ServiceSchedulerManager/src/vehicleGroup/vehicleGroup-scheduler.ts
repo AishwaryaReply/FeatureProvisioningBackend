@@ -7,17 +7,16 @@ export class VehicleGroupScheduler{
     
     /**
      * @description this fn inserts vehicle group for a feature into the database
-     * @param code string
-     * @param id number
+     * @param request VehicleGroupFeatureCreateData object
      * @returns Promise as PostResponse Interface
      */
-     public async insertFeatureVehicleGroup(code: string, id: number):Promise<DataModels.PostResponse> {
+     public async insertFeatureVehicleGroup(request: DataModels.VehicleGroupFeatureCreateData):Promise<DataModels.PostResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} insertFeatureVehicleGroup |`;
         const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
-            cfeature: code,
-            igroup: id
+            cfeature: request.code,
+            igroup: request.id
         };
 
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
@@ -40,13 +39,13 @@ export class VehicleGroupScheduler{
      * @param id number
      * @returns Promise as DeleteResponse Interface
      */
-    public async deleteFeatureVehicleGroup(code: string, id: number): Promise<DataModels.DeleteResponse> {
+    public async deleteFeatureVehicleGroup(request: DataModels.VehicleGroupFeatureDeleteData): Promise<DataModels.DeleteResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} deleteFeatureVehicleGroup |`;
         const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
-            cfeature: code,
-            igroup: id
+            cfeature: request.code,
+            igroup: request.id
         };
 
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
@@ -69,12 +68,12 @@ export class VehicleGroupScheduler{
      * @param feature string of the feature
      * @returns list of vehicle groups
      */
-    public async getVehicleGroup(feature: string): Promise<DataModels.GetGroupsResponse> {
+    public async getVehicleGroup(request:DataModels.VehicleGroupSearchListData): Promise<DataModels.GetGroupsResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} | getVehicleGroup |`;
         const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
-            igroup: feature
+            cfeature: request.feature,
         }
 
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
@@ -111,13 +110,15 @@ export class VehicleGroupScheduler{
      * @param request new vehicle group
      * @returns promise as post response
      */
-    public async insertVehicleGroup(request: DataModels.NewVehicleGroup): Promise<DataModels.PostResponse> {
+    public async insertVehicleGroup(request: DataModels.VehicleGroupCreateData): Promise<DataModels.PostResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} | insertVehicleGroup |`;
         const environment = VehicleGroupFactory.getEnvironment();
-        
-
-        const response:DataModels.PostResponse = await VehicleGroupDao.insertVehicleGroupToDB(request.description);
+        const mappedRequest = {
+            vehicleGroupDescription: request.description
+        }
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);a
+        const response:DataModels.PostResponse = await VehicleGroupDao.insertVehicleGroupToDB(mappedRequest);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.PostResponse = {};
@@ -136,17 +137,17 @@ export class VehicleGroupScheduler{
      * @param request new values for vehicle group
      * @returns Promise as PatchResponse
      */
-    public async updateVehicleGroup(id: number, request: DataModels.NewVehicleGroup): Promise<DataModels.PatchResponse> {
+    public async updateVehicleGroup(request: DataModels.VehicleGroupUpdateData): Promise<DataModels.PatchResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} | updateVehicleGroup |`;
         const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
-            igroup: id,
+            igroup: request.id,
             description: request.description
         }
 
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
-        const response: DataModels.PatchResponse = await VehicleGroupDao.updateVehicleGroupToDB(mappedRequest);
+        const response: DataModels.PatchResponse = await VehicleGroupDao.updateVehicleGroupToDatabase(mappedRequest);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.PatchResponse = {};
@@ -165,12 +166,16 @@ export class VehicleGroupScheduler{
      * @param id identifier of the vehicle
      * @returns Promise as DeleteResponse
      */
-    public async deleteVehicleGroup(id: number): Promise<DataModels.DeleteResponse> {
+    public async deleteVehicleGroup(request: DataModels.VehicleGroupDeleteData): Promise<DataModels.DeleteResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} | deleteVehicleGroup |`;
         const environment = VehicleGroupFactory.getEnvironment();
+        const mappedRequest = {
+            igroup: request.id
+        }
 
-        const response: DataModels.DeleteResponse = await VehicleGroupDao.deleteVehicleGroupFromDB(id);
+        logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
+        const response: DataModels.DeleteResponse = await VehicleGroupDao.deleteVehicleGroupFromDB(mappedRequest);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.DeleteResponse = {};
@@ -184,29 +189,7 @@ export class VehicleGroupScheduler{
         return filteredResponse;
     }
     
-    /**
-     * this fn is used to get vehicle from vehicle group
-     * @param id identifier of the vehicle group
-     * @returns list of vehicles from vehicle group
-     */
-    public async getVehicleFromVehicleGroup(id: string): Promise<DataModels.GetVehiclesResponse>{
-
-        const logPrefix = `${LOG_PREFIX_CLASS} | getVehicleFromVehicleGroup |`;
-        const environment = VehicleGroupFactory.getEnvironment();
-        
-        const response: DataModels.GetVehiclesResponse = await VehicleGroupDao.selectVehicleFromVehicleGroupFromDB(id);
-        logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
-
-        let filteredResponse: DataModels.GetVehiclesResponse = {};
-
-        if(response.vehicles?.length != 0){
-            filteredResponse = {
-                vehicles: response.vehicles
-            }
-        }
-        
-        return filteredResponse;
-    }
+    
 
  
 }

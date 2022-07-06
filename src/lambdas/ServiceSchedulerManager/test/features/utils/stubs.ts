@@ -50,22 +50,14 @@ export namespace Stubs {
         requestedService: "FEATURE_SEARCH_LIST"
     };
 
-    export const mockInputGetListFeaturesNull: DataModels.FeatureSearchListRequestData={
-        cfeature: null,
-        featureDescription: null,
-        cchannel: [{ code: null, description: null }, 
-                   { code: null, description:null }],
-        requestedService: "FEATURE_SEARCH_LIST"
-    };
-
     export const mockOutputGetListFeatures: DataModels.GetFeatureResponse={
         features: [{ code: "XXX", description: "Feature XXX", channels: [{code: "GMA", description: "Global Mobile App"}] }, 
                    { code: "YYY", description: "Feature YYY", channels: [{code: "YYY", description: "YYY"}] }]
     };
 
-    export const mockOutputGetListFeaturesNull: DataModels.GetFeatureResponse={
-        features: [{ code: null, description: null, channels: [{code: null, description: null}] }, 
-                   { code: null, description: null, channels: [{code: null, description: null}] }]
+    export const mockOutputGetListFeaturesLowercase: DataModels.GetFeatureResponse={
+        features: [{ code: "xxx", description:  "xxx", channels: [{code:  "xxx", description:  "xxx"}] }, 
+                   { code:  "yyy", description: "yyy", channels: [{code: "yyy", description: "yyy"}] }]
     };
 
     //insertFeature
@@ -90,14 +82,6 @@ export namespace Stubs {
         featureDescription: "243x",
         cchannel: [{ code: "3647x", description: "4657x" }, 
                    { code: "4578x", description: "748x" }],
-        requestedService: "FEATURE_CREATE"
-    };
-
-    export const mockInputInsertFeatureNull: DataModels.FeatureCreateData={
-        cfeature: null,
-        featureDescription: null,
-        cchannel: [{ code: null, description: null}, 
-                   { code: null, description: null }],
         requestedService: "FEATURE_CREATE"
     };
 
@@ -130,14 +114,6 @@ export namespace Stubs {
         requestedService: "FEATURE_UPDATE"
     };
 
-    export const mockInputUpdateFeatureNull:  DataModels.FeatureUpdateData={
-        cfeature:  null,
-        featureDescription:  null,
-        channels: [{ code: null, description: null }, 
-                   { code: null, description: null }],
-        requestedService: "FEATURE_UPDATE"
-    };
-
     export const mockInputUpdateFeatureSpecialCharNumerics:  DataModels.FeatureUpdateData={
         cfeature: "3546@$%",
         featureDescription: "3546@$%",
@@ -147,10 +123,10 @@ export namespace Stubs {
     };
 
     export const mockInputUpdateFeatureLowercase:  DataModels.FeatureUpdateData={
-        cfeature: "XXX",
-        featureDescription: "XXX",
-        channels: [{ code: "XXX", description: "XXX" }, 
-                   { code: "YYY", description: "YYY" }],
+        cfeature: "xxx",
+        featureDescription: "xxx",
+        channels: [{ code: "xxx", description: "xxx" }, 
+                   { code: "yyy", description: "yyy" }],
         requestedService: "FEATURE_UPDATE"
     };
 
@@ -172,11 +148,6 @@ export namespace Stubs {
     //deleteFeature
     export const mockInputDeleteFeature: DataModels.FeatureDeleteData={
         cfeature: "XXX",
-        requestedService: "FEATURE_DELETE"
-    };
-
-    export const mockInputDeleteFeatureNull: DataModels.FeatureDeleteData={
-        cfeature: null,
         requestedService: "FEATURE_DELETE"
     };
 

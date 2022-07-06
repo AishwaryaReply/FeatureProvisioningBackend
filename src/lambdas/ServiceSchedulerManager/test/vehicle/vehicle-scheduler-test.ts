@@ -16,7 +16,7 @@ describe('VehicleSchedulerService', () => {
     describe('getVehicleFromVehicleGroup', () => {
         afterEach(sinon.restore);
 
-        it('should return the expected repsonse with uppercase, when the getVehicleFromVehicleGroup goes well', async () => {
+        it('should return the expected response with uppercase, when the getVehicleFromVehicleGroup goes well', async () => {
             sinon.stub(VehicleGroupDao, 'selectVehicleFromVehicleGroupFromDB').resolves(Stubs.mockOutputGetVehicleFromVehicleGroup);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
@@ -25,7 +25,7 @@ describe('VehicleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         })
 
-        it('should return the expected repsonse with special character values, when the getVehicleFromVehicleGroup goes well', async () => {
+        it('should return the expected response with special character values, when the getVehicleFromVehicleGroup goes well', async () => {
             sinon.stub(VehicleGroupDao, 'selectVehicleFromVehicleGroupFromDB').resolves(Stubs.mockOutputGetVehicleFromVehicleGroup);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
@@ -34,31 +34,31 @@ describe('VehicleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         })
 
-        it('should return the expected repsonse with null values, when the getVehicleFromVehicleGroup goes well', async () => {
+        it('should return the expected response with lowercase values, when the getVehicleFromVehicleGroup goes well', async () => {
             sinon.stub(VehicleGroupDao, 'selectVehicleFromVehicleGroupFromDB').resolves(Stubs.mockOutputGetVehicleFromVehicleGroup);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
             const expected: DataModels.GetVehiclesResponse = Stubs.mockOutputGetVehicleFromVehicleGroup;
-            const response = await testServiceVehicleScheduler.getVehicleFromVehicleGroup(Stubs.mockInputGetVehicleFromVehicleGroupNull);
-            expect(response).to.not.equal(expected);
+            const response = await testServiceVehicleScheduler.getVehicleFromVehicleGroup(Stubs.mockInputGetVehicleFromVehicleGroupLowercase);
+            expect(response).to.be.deep.equal(expected);
         })
 
-        it('should return the expected repsonse with numeric values, when the getVehicleFromVehicleGroup goes well', async () => {
-            sinon.stub(VehicleGroupDao, 'selectVehicleFromVehicleGroupFromDB').resolves(Stubs.mockOutputGetVehicleFromVehicleGroupNull);
+        it('should return the expected response with numeric values, when the getVehicleFromVehicleGroup goes well', async () => {
+            sinon.stub(VehicleGroupDao, 'selectVehicleFromVehicleGroupFromDB').resolves(Stubs.mockOutputGetVehicleFromVehicleGroupNumerics);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
-            const expected: DataModels.GetVehiclesResponse = Stubs.mockOutputGetVehicleFromVehicleGroupNull;
+            const expected: DataModels.GetVehiclesResponse = Stubs.mockOutputGetVehicleFromVehicleGroupNumerics;
             const response = await testServiceVehicleScheduler.getVehicleFromVehicleGroup(Stubs.mockInputGetVehicleFromVehicleGroupNumerics);
-            expect(response).to.not.equal(expected);
+            expect(response).to.be.deep.equal(expected);
         })
 
-        it('should return the expected repsonse with uppercase values, when the getVehicleFromVehicleGroup goes well', async () => {
-            sinon.stub(VehicleGroupDao, 'selectVehicleFromVehicleGroupFromDB').resolves(Stubs.mockOutputGetVehicleFromVehicleGroupNull);
+        it('should return the expected response with uppercase values, when the getVehicleFromVehicleGroup goes well', async () => {
+            sinon.stub(VehicleGroupDao, 'selectVehicleFromVehicleGroupFromDB').resolves(Stubs.mockOutputGetVehicleFromVehicleGroupNumerics);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
-            const expected: DataModels.GetVehiclesResponse = Stubs.mockOutputGetVehicleFromVehicleGroupNull;
+            const expected: DataModels.GetVehiclesResponse = Stubs.mockOutputGetVehicleFromVehicleGroupNumerics;
             const response = await testServiceVehicleScheduler.getVehicleFromVehicleGroup(Stubs.mockInputGetVehicleFromVehicleGroup);
-            expect(response).to.not.equal(expected);
+            expect(response).to.be.deep.equal(expected);
         })
 
     });
@@ -66,7 +66,7 @@ describe('VehicleSchedulerService', () => {
     describe('insertVehicleForVehicleGroup', () => {
         afterEach(sinon.restore);
 
-        it('should return the expected repsonse with uppercase, when the insertVehicleForVehicleGroup goes well', async () => {
+        it('should return the expected response with uppercase, when the insertVehicleForVehicleGroup goes well', async () => {
             sinon.stub(GroupVinDao, 'insertGroupVinToDB').resolves(Stubs.mockOutputInsertVehicleForVehicleGroup);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
@@ -75,7 +75,7 @@ describe('VehicleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         })
 
-        it('should return the expected repsonse with special character values, when the insertVehicleForVehicleGroup goes well', async () => {
+        it('should return the expected response with special character values, when the insertVehicleForVehicleGroup goes well', async () => {
             sinon.stub(GroupVinDao, 'insertGroupVinToDB').resolves(Stubs.mockOutputInsertVehicleForVehicleGroup);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
@@ -84,16 +84,7 @@ describe('VehicleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         })
 
-        it('should return the expected repsonse with null values, when the insertVehicleForVehicleGroup goes well', async () => {
-            sinon.stub(GroupVinDao, 'insertGroupVinToDB').resolves(Stubs.mockOutputInsertVehicleForVehicleGroup);
-            sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
-
-            const expected: DataModels.PostResponse = Stubs.mockOutputInsertVehicleForVehicleGroup;
-            const response = await testServiceVehicleScheduler.insertVehicleForVehicleGroup(Stubs.mockInputInsertVehicleForVehicleGroupNull);
-            expect(response).to.not.equal(expected);
-        })
-
-        it('should return the expected repsonse with numeric values first, when the insertVehicleForVehicleGroup goes well', async () => {
+        it('should return the expected response with numeric values first, when the insertVehicleForVehicleGroup goes well', async () => {
             sinon.stub(GroupVinDao, 'insertGroupVinToDB').resolves(Stubs.mockOutputInsertVehicleForVehicleGroupUpdate);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
@@ -102,7 +93,7 @@ describe('VehicleSchedulerService', () => {
             expect(response).to.not.equal(expected);
         })
 
-        it('should return the expected repsonse with numeric values last, when the insertVehicleForVehicleGroup goes well', async () => {
+        it('should return the expected response with numeric values last, when the insertVehicleForVehicleGroup goes well', async () => {
             sinon.stub(GroupVinDao, 'insertGroupVinToDB').resolves(Stubs.mockOutputInsertVehicleForVehicleGroupDelete);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
@@ -116,7 +107,7 @@ describe('VehicleSchedulerService', () => {
     describe('deleteVehicleFromVehicleGroup', () => {
         afterEach(sinon.restore);
 
-        it('should return the expected repsonse with uppercase, when the deleteVehicleFromVehicleGroup goes well', async () => {
+        it('should return the expected response with uppercase, when the deleteVehicleFromVehicleGroup goes well', async () => {
             sinon.stub(GroupVinDao, 'deleteGroupVinToDatabase').resolves(Stubs.mockOutputDeleteVehicleFromVehicleGroup);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
@@ -125,16 +116,16 @@ describe('VehicleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         })
 
-        it('should return the expected repsonse with null values, when the deleteVehicleFromVehicleGroup goes well', async () => {
+        it('should return the expected response with lowercase values, when the deleteVehicleFromVehicleGroup goes well', async () => {
             sinon.stub(GroupVinDao, 'deleteGroupVinToDatabase').resolves(Stubs.mockOutputDeleteVehicleFromVehicleGroup);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
             const expected: DataModels.DeleteResponse= Stubs.mockOutputDeleteVehicleFromVehicleGroup;
-            const response = await testServiceVehicleScheduler.deleteVehicleFromVehicleGroup(Stubs.mockInputDeleteVehicleFromVehicleGroupNull);
-            expect(response).to.not.equal(expected);
+            const response = await testServiceVehicleScheduler.deleteVehicleFromVehicleGroup(Stubs.mockInputDeleteVehicleFromVehicleGroupLowercase);
+            expect(response).to.be.deep.equal(expected);
         })
 
-        it('should return the expected repsonse with special character values, when the deleteVehicleFromVehicleGroup goes well', async () => {
+        it('should return the expected response with special character values, when the deleteVehicleFromVehicleGroup goes well', async () => {
             sinon.stub(GroupVinDao, 'deleteGroupVinToDatabase').resolves(Stubs.mockOutputDeleteVehicleFromVehicleGroup);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
@@ -143,7 +134,7 @@ describe('VehicleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         })
 
-        it('should return the expected repsonse with uppercase, when the deleteVehicleFromVehicleGroup goes well', async () => {
+        it('should return the expected response with uppercase, when the deleteVehicleFromVehicleGroup goes well', async () => {
             sinon.stub(GroupVinDao, 'deleteGroupVinToDatabase').resolves(Stubs.mockOutputDeleteVehicleFromVehicleGroupUpdate);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 
@@ -152,7 +143,7 @@ describe('VehicleSchedulerService', () => {
             expect(response).to.not.equal(expected);
         })
 
-        it('should return the expected repsonse with numeric values, when the deleteVehicleFromVehicleGroup goes well', async () => {
+        it('should return the expected response with numeric values, when the deleteVehicleFromVehicleGroup goes well', async () => {
             sinon.stub(GroupVinDao, 'deleteGroupVinToDatabase').resolves(Stubs.mockOutputDeleteVehicleFromVehicleGroupInsert);
             sinon.stub(VehicleFactory, 'getEnvironment').resolves('int');
 

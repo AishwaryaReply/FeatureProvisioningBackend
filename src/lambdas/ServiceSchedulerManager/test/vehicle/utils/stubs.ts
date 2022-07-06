@@ -31,13 +31,13 @@ export namespace Stubs {
         requestedService: "VEHICLE_SEARCH_LIST"
     };
 
-    export const mockInputGetVehicleFromVehicleGroupNull: DataModels.VehicleSearchListData={
-        id: null,
+    export const mockInputGetVehicleFromVehicleGroupLowercase: DataModels.VehicleSearchListData={
+        id: "xxx",
         requestedService: "VEHICLE_SEARCH_LIST"
     };
 
     export const mockInputGetVehicleFromVehicleGroupNumerics: DataModels.VehicleSearchListData={
-        id: "123x",
+        id: "123",
         requestedService: "VEHICLE_SEARCH_LIST"
     };
 
@@ -50,20 +50,14 @@ export namespace Stubs {
         vehicles: [ "VIN1", "VIN2" ]
     };
 
-    export const mockOutputGetVehicleFromVehicleGroupNull: DataModels.GetVehiclesResponse={
-        vehicles: [ null, null ]
+    export const mockOutputGetVehicleFromVehicleGroupNumerics: DataModels.GetVehiclesResponse={
+        vehicles: [ "123", "123" ]
     };
 
     //insertVehicleForVehicleGroup
     export const mockInputInsertVehicleForVehicleGroup: DataModels.VehicleCreateDeleteData={
         id: "XXX",
 	    vin: "XXX",
-        requestedService: "VEHICLE_CREATE"
-    };
-
-    export const mockInputInsertVehicleForVehicleGroupNull: DataModels.VehicleCreateDeleteData={
-        id: null,
-	    vin: null,
         requestedService: "VEHICLE_CREATE"
     };
 
@@ -104,15 +98,15 @@ export namespace Stubs {
         requestedService: "VEHICLE_DELETE"
     };
 
-    export const mockInputDeleteVehicleFromVehicleGroupNull: DataModels.VehicleCreateDeleteData={
-        id: null,
-	    vin: null,
+    export const mockInputDeleteVehicleFromVehicleGroupLowercase: DataModels.VehicleCreateDeleteData={
+        id: "xxx",
+	    vin: "xxx",
         requestedService: "VEHICLE_DELETE"
     };
 
     export const mockInputDeleteVehicleFromVehicleGroupNumerics: DataModels.VehicleCreateDeleteData={
-        id: "123x",
-	    vin: "123x",
+        id: "123",
+	    vin: "123",
         requestedService: "VEHICLE_DELETE"
     };
 

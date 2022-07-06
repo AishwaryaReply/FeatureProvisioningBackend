@@ -31,11 +31,6 @@ export namespace Stubs {
         requestedService: "VEHICLEGROUP_CREATE"
     };
 
-    export const mockInputInsertVehicleGroupNull: DataModels.VehicleGroupCreateData={
-        description: null,
-        requestedService: "VEHICLEGROUP_CREATE"
-    };
-
     export const mockInputInsertVehicleGroupSpecialChar: DataModels.VehicleGroupCreateData={
         description: "@#$%&",
         requestedService: "VEHICLEGROUP_CREATE"
@@ -70,9 +65,9 @@ export namespace Stubs {
         requestedService: "VEHICLEGROUP_FEATURE_DELETE"
     };
 
-    export const mockInputDeleteFeatureVehicleGroupNull: DataModels.VehicleGroupFeatureDeleteData={
-        code: null,
-	    id: null,
+    export const mockInputDeleteFeatureVehicleGroupLowercase: DataModels.VehicleGroupFeatureDeleteData={
+        code: "xxx",
+	    id: 123,
         requestedService: "VEHICLEGROUP_FEATURE_DELETE"
     };
 
@@ -103,7 +98,7 @@ export namespace Stubs {
     };
 
     export const mockInputGetVehicleGroupNumerics: DataModels.VehicleGroupSearchListData={
-        feature: "123x",
+        feature: "123",
         requestedService: "VEHICLEGROUP_SEARCH_LIST"
     };
 
@@ -112,8 +107,8 @@ export namespace Stubs {
         requestedService: "VEHICLEGROUP_SEARCH_LIST"
     };
 
-    export const mockInputGetVehicleGroupNull: DataModels.VehicleGroupSearchListData={
-        feature: null,
+    export const mockInputGetVehicleGroupNullLowercase: DataModels.VehicleGroupSearchListData={
+        feature: "xxx",
         requestedService: "VEHICLEGROUP_SEARCH_LIST"
     };
 
@@ -123,9 +118,9 @@ export namespace Stubs {
         { id: 2, description: "Group 2" }]
     };
 
-    export const mockOutputGetVehicleGroupNull: DataModels.GetGroupsResponse={
-        features: [{ id: null, description: null }, 
-        { id: null, description: null }]
+    export const mockOutputGetVehicleGroupLowercase: DataModels.GetGroupsResponse={
+        features: [{ id: 567, description: "xxx" }, 
+        { id: 123, description: "yyy" }]
     };
 
     //insertFeatureVehicleGroup
@@ -135,9 +130,9 @@ export namespace Stubs {
         requestedService: "VEHICLEGROUP_FEATURE_INSERT"
     };
 
-    export const mockInputInsertFeatureVehicleGroupNull: DataModels.VehicleGroupFeatureCreateData={
-        code: null,
-	    id: null,
+    export const mockInputInsertFeatureVehicleGroupLowercase: DataModels.VehicleGroupFeatureCreateData={
+        code: "xxx",
+	    id: 123,
         requestedService: "VEHICLEGROUP_FEATURE_INSERT"
     };
 
@@ -184,9 +179,9 @@ export namespace Stubs {
         requestedService: "VEHICLEGROUP_UPDATE"
     };
 
-    export const mockInputUpdateVehicleGroupNull: DataModels.VehicleGroupUpdateData={
-        id: null,
-	    description: null,
+    export const mockInputUpdateVehicleGroupLowercase: DataModels.VehicleGroupUpdateData={
+        id: 123,
+	    description: "xxx",
         requestedService: "VEHICLEGROUP_UPDATE"
     };
 
@@ -208,11 +203,6 @@ export namespace Stubs {
         requestedService: "VEHICLEGROUP_DELETE"
     };
 
-    export const mockInputDeleteVehicleGroupNull: DataModels.VehicleGroupDeleteData={
-        id: null,
-        requestedService: "VEHICLEGROUP_DELETE"
-    };
-
     export const mockOutputDeleteVehicleGroup: DataModels.DeleteResponse={
         message: "deleted"
     };
@@ -224,8 +214,4 @@ export namespace Stubs {
     export const mockOutputDeleteVehicleGroupInsert: DataModels.DeleteResponse={
         message: "inserted"
     };
-
-    export const mockOutputDeleteVehicleGroupNull: DataModels.DeleteResponse={
-        message: null
-    }
 }

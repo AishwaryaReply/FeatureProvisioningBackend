@@ -1,3 +1,4 @@
+import logger from "gcv-logger";
 import { ObjectFlags } from "typescript";
 import { FeaturesScheduler } from "../features";
 import { DataModels } from "../interfaces";

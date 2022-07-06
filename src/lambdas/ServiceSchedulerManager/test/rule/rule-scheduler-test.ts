@@ -17,7 +17,7 @@ describe('RuleSchedulerService', () => {
     describe('getRulesForFeature', () => {
         afterEach(sinon.restore);
 
-        it('should return the expected repsonse with uppercase, when the getRulesForFeature goes well', async () => {
+        it('should return the expected response with uppercase, when the getRulesForFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'selectRulesForFeatureFromDB').resolves(Stubs.mockOutputGetRulesForFeature);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
@@ -26,16 +26,16 @@ describe('RuleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected repsonse with null values, when the getRulesForFeature goes well', async () => {
+        it('should return the expected response with lowercase values, when the getRulesForFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'selectRulesForFeatureFromDB').resolves(Stubs.mockOutputGetRulesForFeature);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
             const expected: DataModels.GetFeaturesRulesResponse = Stubs.mockOutputGetRulesForFeature;
-            const response = await testServiceRuleScheduler.getRulesForFeature(Stubs.mockInputGetRulesForFeatureNull);
-            expect(response).to.not.equal(expected);
+            const response = await testServiceRuleScheduler.getRulesForFeature(Stubs.mockInputGetRulesForFeatureLowercase);
+            expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected repsonse with special character values, when the getRulesForFeature goes well', async () => {
+        it('should return the expected response with special character values, when the getRulesForFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'selectRulesForFeatureFromDB').resolves(Stubs.mockOutputGetRulesForFeature);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
@@ -44,23 +44,16 @@ describe('RuleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected repsonse with numeric values, when the getRulesForFeature goes well', async () => {
-            sinon.stub(GroupFeatureDao, 'selectRulesForFeatureFromDB').resolves(Stubs.mockOutputGetRulesForFeatureNull);
+        it('should return the expected response with numeric values, when the getRulesForFeature goes well', async () => {
+            sinon.stub(GroupFeatureDao, 'selectRulesForFeatureFromDB').resolves(Stubs.mockOutputGetRulesForFeature);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
-            const expected: DataModels.GetFeaturesRulesResponse = Stubs.mockOutputGetRulesForFeatureNull;
+            const expected: DataModels.GetFeaturesRulesResponse = Stubs.mockOutputGetRulesForFeature;
             const response = await testServiceRuleScheduler.getRulesForFeature(Stubs.mockInputGetRulesForFeatureNumerics);
-            expect(response).to.not.equal(expected);
+            expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected repsonse with uppercase, when the getRulesForFeature goes well', async () => {
-            sinon.stub(GroupFeatureDao, 'selectRulesForFeatureFromDB').resolves(Stubs.mockOutputGetRulesForFeatureNull);
-            sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
-
-            const expected: DataModels.GetFeaturesRulesResponse = Stubs.mockOutputGetRulesForFeatureNull;
-            const response = await testServiceRuleScheduler.getRulesForFeature(Stubs.mockInputGetRulesForFeature);
-            expect(response).to.not.equal(expected);
-        }) 
+       
 
     });
 
@@ -68,7 +61,7 @@ describe('RuleSchedulerService', () => {
     describe('insertRuleForFeature', () => {
         afterEach(sinon.restore);
 
-        it('should return the expected repsonse with uppercase, when the insertRuleForFeature goes well', async () => {
+        it('should return the expected response with uppercase, when the insertRuleForFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'insertGroupFeatureRule').resolves(Stubs.mockOutputInsertRuleForFeature);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
@@ -77,7 +70,7 @@ describe('RuleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected repsonse with special character values, when the insertRuleForFeature goes well', async () => {
+        it('should return the expected response with special character values, when the insertRuleForFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'insertGroupFeatureRule').resolves(Stubs.mockOutputInsertRuleForFeature);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
@@ -86,16 +79,16 @@ describe('RuleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected repsonse with null values, when the insertRuleForFeature goes well', async () => {
+        it('should return the expected response with lowercase values, when the insertRuleForFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'insertGroupFeatureRule').resolves(Stubs.mockOutputInsertRuleForFeature);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
             const expected: DataModels.PostResponse = Stubs.mockOutputInsertRuleForFeature;
-            const response = await testServiceRuleScheduler.insertRuleForFeature(Stubs.mockInputInsertRuleForFeatureNull);
-            expect(response).to.not.equal(expected);
+            const response = await testServiceRuleScheduler.insertRuleForFeature(Stubs.mockInputInsertRuleForFeatureLowercase);
+            expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected repsonse with uppercase, when the insertRuleForFeature goes well', async () => {
+        it('should return the expected response with uppercase, when the insertRuleForFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'insertGroupFeatureRule').resolves(Stubs.mockOutputInsertRuleForFeatureUpdate);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
@@ -104,7 +97,7 @@ describe('RuleSchedulerService', () => {
             expect(response).to.not.equal(expected);
         }) 
 
-        it('should return the expected repsonse with numeric values, when the insertRuleForFeature goes well', async () => {
+        it('should return the expected response with numeric values, when the insertRuleForFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'insertGroupFeatureRule').resolves(Stubs.mockOutputInsertRuleForFeatureDelete);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
@@ -119,7 +112,7 @@ describe('RuleSchedulerService', () => {
     describe('deleteRuleFromFeature', () => {
         afterEach(sinon.restore);
 
-        it('should return the expected repsonse with uppercase and numeric values, when the deleteRuleFromFeature goes well', async () => {
+        it('should return the expected response with uppercase and numeric values, when the deleteRuleFromFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'deleteGroupFeatureRule').resolves(Stubs.mockOutputDeleteRuleFromFeature);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
@@ -128,7 +121,7 @@ describe('RuleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected repsonse with numeric values, when the deleteRuleFromFeature goes well', async () => {
+        it('should return the expected response with numeric values, when the deleteRuleFromFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'deleteGroupFeatureRule').resolves(Stubs.mockOutputDeleteRuleFromFeature);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
@@ -137,16 +130,16 @@ describe('RuleSchedulerService', () => {
             expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected repsonse with null values, when the deleteRuleFromFeature goes well', async () => {
+        it('should return the expected response with numeric and lowercase values, when the deleteRuleFromFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'deleteGroupFeatureRule').resolves(Stubs.mockOutputDeleteRuleFromFeature);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
             const expected: DataModels.DeleteResponse = Stubs.mockOutputDeleteRuleFromFeature;
-            const response = await testServiceRuleScheduler.deleteRuleFromFeature(Stubs.mockInputDeleteRuleFromFeatureNull);
-            expect(response).to.not.equal(expected);
+            const response = await testServiceRuleScheduler.deleteRuleFromFeature(Stubs.mockInputDeleteRuleFromFeatureLowercase);
+            expect(response).to.be.deep.equal(expected);
         }) 
 
-        it('should return the expected repsonse with special character and numeric values, when the deleteRuleFromFeature goes well', async () => {
+        it('should return the expected response with special character and numeric values, when the deleteRuleFromFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'deleteGroupFeatureRule').resolves(Stubs.mockOutputDeleteRuleFromFeatureUpdate);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 
@@ -155,7 +148,7 @@ describe('RuleSchedulerService', () => {
             expect(response).to.not.equal(expected);
         }) 
 
-        it('should return the expected repsonse with uppercase and numeric values, when the deleteRuleFromFeature goes well', async () => {
+        it('should return the expected response with uppercase and numeric values, when the deleteRuleFromFeature goes well', async () => {
             sinon.stub(GroupFeatureDao, 'deleteGroupFeatureRule').resolves(Stubs.mockOutputDeleteRuleFromFeatureInsert);
             sinon.stub(RuleFactory, 'getEnvironment').resolves('int');
 

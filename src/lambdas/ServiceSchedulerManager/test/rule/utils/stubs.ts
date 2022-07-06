@@ -31,8 +31,8 @@ export namespace Stubs {
         requestedService: "RULE_SEARCH_LIST"
     };
 
-    export const mockInputGetRulesForFeatureNull: DataModels.RuleSearchListData={
-        code: null,
+    export const mockInputGetRulesForFeatureLowercase: DataModels.RuleSearchListData={
+        code: "xxx",
         requestedService: "RULE_SEARCH_LIST"
     };
 
@@ -42,18 +42,13 @@ export namespace Stubs {
     };
 
     export const mockInputGetRulesForFeatureNumerics: DataModels.RuleSearchListData={
-        code: "123x",
+        code: "123",
         requestedService: "RULE_SEARCH_LIST"
     };
 
     export const mockOutputGetRulesForFeature: DataModels.GetFeaturesRulesResponse={
         rules: [{ id: 1, region: "XXX", market: "XXX", brand: "XXX", model: "XXX", modelYear: 0, service: "XXX" }, 
                    { id: 345, region: "YYY", market: "YYY", brand: "YYY", model: "YYY", modelYear: 456, service: "YYY" }],
-    };
-
-    export const mockOutputGetRulesForFeatureNull: DataModels.GetFeaturesRulesResponse={
-        rules: [{ id: null, region: null, market: null, brand: null, model: null, modelYear: null, service: null}, 
-                   { id: null, region: null, market: null, brand: null, model: null, modelYear: null, service: null }],
     };
 
     //insertRuleForFeature
@@ -69,15 +64,15 @@ export namespace Stubs {
         requestedService: "RULE_CREATE"
     };
 
-    export const mockInputInsertRuleForFeatureNull: DataModels.RuleCreateData={
-        igroup: null,
-        cfeature : null,
-        cregion: null,
-        cmarket: null,
-        cbrand: null,
-        cmodel: null,
-        imodelyear: null,
-        cservice: null,
+    export const mockInputInsertRuleForFeatureLowercase: DataModels.RuleCreateData={
+        igroup: "xxx",
+        cfeature : "xxx",
+        cregion: "xxx",
+        cmarket: "xxx",
+        cbrand: "xxx",
+        cmodel: "xxx",
+        imodelyear: "xxx",
+        cservice: "xxx",
         requestedService: "RULE_CREATE"
     };
 
@@ -94,14 +89,14 @@ export namespace Stubs {
     };
 
     export const mockInputInsertRuleForFeatureNumerics: DataModels.RuleCreateData={
-        igroup: "123x",
-        cfeature : "123x",
-        cregion: "123x",
-        cmarket: "123x",
-        cbrand: "123x",
-        cmodel: "123x",
-        imodelyear: "123x",
-        cservice: "123x",
+        igroup: "123",
+        cfeature : "123",
+        cregion: "123",
+        cmarket: "123",
+        cbrand: "123",
+        cmodel: "123",
+        imodelyear: "123",
+        cservice: "123",
         requestedService: "RULE_CREATE"
     };
     
@@ -124,9 +119,9 @@ export namespace Stubs {
         requestedService: "RULE_DELETE"
     };
 
-    export const mockInputDeleteRuleFromFeatureNull: DataModels.RuleDeleteData={
-        cfeature : null,
-        irule: null,
+    export const mockInputDeleteRuleFromFeatureLowercase: DataModels.RuleDeleteData={
+        cfeature : "xxx",
+        irule: 123,
         requestedService: "RULE_DELETE"
     };
 

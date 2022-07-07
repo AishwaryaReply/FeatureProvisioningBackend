@@ -1,3 +1,4 @@
+import logger from "gcv-logger";
 import { DataModels } from "../interfaces";
 import { RuleFactory } from "./rule-factory";
 

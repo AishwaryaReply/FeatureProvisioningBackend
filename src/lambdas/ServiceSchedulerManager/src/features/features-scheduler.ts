@@ -1,6 +1,5 @@
+import logger from "gcv-logger";
 import { DataModels } from "../interfaces";
-
-//import logger from "gcv-logger";
 import { FeaturesFactory } from "./features-factory";
 
 

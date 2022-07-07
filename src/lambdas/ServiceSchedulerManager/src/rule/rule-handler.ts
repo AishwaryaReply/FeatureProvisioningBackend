@@ -2,7 +2,10 @@ import { DataModels } from '../interfaces';
 import { Constants, RuleDeleteSchema, RuleInsertSchema, RuleSearchListSchema } from '../../constants';
 import { UtilityObjects, GCVErrors } from 'gcv-utils';
 import { Utilities } from 'gcv-utilities';
+import logger from 'gcv-logger';
 
+
+const LOG_PREFIX_CLASS = 'RuleHandler | ';
 
 export class RuleHandler {
 
@@ -74,13 +77,13 @@ export class RuleHandler {
      */
     private prepareRuleCreate(event: UtilityObjects.TransformedInputEvent): DataModels.RuleCreateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareRuleCreate |`;
-        let body: DataModels.NewConfigurateRule = JSON.parse(event.body);
+        let body: DataModels.NewConfigurateRule = JSON.parse(event.requestBody);
         logger.debug(logPrefix, `code: ${event.queryString.code}, body: ${body}`);
 
         return {
             requestedService: 'RULE_CREATE',
             igroup: "",
-            cfeature: event.code,
+            cfeature: event.queryString.code,
             cregion: body.region != undefined ? body.region : "",
             cbrand: body.brand != undefined ? body.brand : "",
             cmarket: body.market != undefined ? body.market : "",

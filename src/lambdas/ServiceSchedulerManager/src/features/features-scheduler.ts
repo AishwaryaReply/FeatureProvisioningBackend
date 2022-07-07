@@ -1,10 +1,11 @@
 import logger from "gcv-logger";
 import { DataModels } from "../interfaces";
-import { FeaturesFactory } from "./features-factory";
+//import { FeaturesFactory } from "./features-factory";
 
+const LOG_PREFIX_CLASS = 'FeaturesScheduler | '; 
 
 export class FeaturesScheduler {
-
+z
     /**
      * this fn is used to get list of features
      * @param request input as DataModels.FeatureSearchListRequestData
@@ -13,15 +14,15 @@ export class FeaturesScheduler {
     public async getListFeatures(request: DataModels.FeatureSearchListRequestData): Promise<DataModels.GetFeatureResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} getListFeatures |`;
-        const environment = FeaturesFactory.getEnvironment();
+   //     const environment = FeaturesFactory.getEnvironment();
         const mappedRequest = {
             cfeature: request.cfeature,
             featureDescription: request.featureDescription,
             cchannel: request.cchannel
         }
-
+        
         logger.debug(logPrefix, `request: ${JSON.stringify(mappedRequest)}`);
-        const response: DataModels.GetFeatureResponse = await FeaturesDao.selectFeaturesFromDB(mappedRequest);
+        const response: DataModels.GetFeatureResponse = await FeaturesDao.selectFeatureFromDB(mappedRequest);
         logger.debug(logPrefix, `response: ${JSON.stringify(response)}`);
 
         let filteredResponse: DataModels.GetFeatureResponse = {};
@@ -32,17 +33,17 @@ export class FeaturesScheduler {
 
             for (let i = 0; i < dim; i++) {
                 const elem = response.features[i];
-                const channels = elem.channels;
-                for (let j = 0; j < channels.length; j++) {
-                    if (elem.code && elem.description && channels[j].code && channels[j].description) {
-                        const feature: DataModels.FeatureWithChannels = {
-                            code: elem.code,
-                            description: elem.description,
-                            channels[j].code: channels[j].code,
-                            channels[j].description: channels[j].description
-                        }
-                        features.push(feature);
+                if(elem.channels == undefined) break;
+
+                for (let j = 0; j < elem.channels.length; j++) {
+                
+                    let feature: DataModels.FeatureWithChannels = {
+                        code: elem.code,
+                        description: elem.description,
                     }
+                    feature.channels?.push(elem.channels[j]);
+                    features.push(feature);
+                    
                 }
             }
             filteredResponse = {
@@ -59,7 +60,7 @@ export class FeaturesScheduler {
      */
     public async insertFeature(request: DataModels.FeatureCreateData): Promise<DataModels.PostResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} insertFeature |`;
-        const environment = FeaturesFactory.getEnvironment();
+     //   const environment = FeaturesFactory.getEnvironment();
         const mappedRequest = {
             cfeature: request.cfeature,
             description: request.featureDescription,
@@ -88,7 +89,7 @@ export class FeaturesScheduler {
     public async updateFeature(request: DataModels.FeatureUpdateData): Promise<DataModels.PatchResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} updateFeature |`;
-        const environment = FeaturesFactory.getEnvironment();
+      //  const environment = FeaturesFactory.getEnvironment();
         const mappedRequest = {
             cfeature: request.cfeature,
             featureDescription: request.featureDescription,
@@ -118,7 +119,7 @@ export class FeaturesScheduler {
     public async deleteFeature(request: DataModels.FeatureDeleteData): Promise<DataModels.DeleteResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} deleteFeature |`;
-        const environment = FeaturesFactory.getEnvironment();
+    //    const environment = FeaturesFactory.getEnvironment();
         const mappedRequest = {
             cfeature: request.cfeature,
             igroup: ""

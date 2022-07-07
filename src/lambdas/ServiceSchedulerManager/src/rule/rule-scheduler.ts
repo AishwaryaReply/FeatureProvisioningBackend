@@ -1,7 +1,9 @@
 import logger from "gcv-logger";
 import { DataModels } from "../interfaces";
-import { RuleFactory } from "./rule-factory";
 
+
+
+const LOG_PREFIX_CLASS = 'RuleScheduler | ';
 
 export class RuleScheduler{
 
@@ -13,7 +15,7 @@ export class RuleScheduler{
     public async getRulesForFeature(request: DataModels.RuleSearchListData): Promise<DataModels.GetFeaturesRulesResponse> {
         
         const logPrefix = `${LOG_PREFIX_CLASS} | getRulesForFeature |`;
-        const environment = RuleFactory.getEnvironment();
+        //const environment = RuleFactory.getEnvironment();
         const mappedRequest = {
             cfeature: request.code
         }
@@ -44,7 +46,7 @@ export class RuleScheduler{
      */
     public async insertRuleForFeature(request:DataModels.RuleCreateData): Promise<DataModels.PostResponse> {
         const logPrefix = `${LOG_PREFIX_CLASS} | insertRulesForFeature |`;
-        const environment = RuleFactory.getEnvironment();
+        //const environment = RuleFactory.getEnvironment();
         const mappedRequest = {
             igroup: "",
             cfeature: request.cfeature,
@@ -78,7 +80,7 @@ export class RuleScheduler{
      */
     public async deleteRuleFromFeature(request:DataModels.RuleDeleteData): Promise<DataModels.DeleteResponse>{
         const logPrefix = `${LOG_PREFIX_CLASS} | deleteRulesForFeature |`;
-        const environment = RuleFactory.getEnvironment();
+        //const environment = RuleFactory.getEnvironment();
         const mappedRequest = {
             cfeature: request.cfeature,
             irule: request.irule

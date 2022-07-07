@@ -4,6 +4,7 @@ import { Constants, FeatureSearchListSchema, FeatureUpdateSchema, FeatureInsertS
 import { UtilityObjects, GCVErrors } from 'gcv-utils';
 import { Utilities } from 'gcv-utilities';
 
+const LOG_PREFIX_CLASS = 'FeaturesHandler | ';
 
 export class FeaturesHandler {
     /**
@@ -86,7 +87,7 @@ export class FeaturesHandler {
      */
     private prepareFeatureCreate(event: UtilityObjects.TransformedInputEvent): DataModels.FeatureCreateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareFeatureSearchList |`;
-        let body: DataModels.FeatureWithChannels = JSON.parse(event.body);
+        let body: DataModels.FeatureWithChannels = JSON.parse(event.requestBody);
         logger.debug(logPrefix, `code: ${body.code}, Description: ${body.description}, channel: ${body.channels}`);
 
 
@@ -105,7 +106,7 @@ export class FeaturesHandler {
      */
     private prepareFeatureDelete(event: UtilityObjects.TransformedInputEvent): DataModels.FeatureDeleteData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareFeatureSearchList |`;
-        logger.debug(logPrefix, `description: ${body.description}, channel: ${body.channels}`);
+        logger.debug(logPrefix, `description: ${event.requestBody.description}, channel: ${event.requestBody.channels}`);
         return {
             requestedService: 'FEATURE_DELETE',
             cfeature: event.queryString.code
@@ -121,7 +122,7 @@ export class FeaturesHandler {
     private prepareFeatureUpdate(event: UtilityObjects.TransformedInputEvent): DataModels.FeatureUpdateData {
 
         const logPrefix = `${LOG_PREFIX_CLASS} prepareUpdateFeature |`;
-        let body: DataModels.UpdatedFeature = JSON.parse(event.body);
+        let body: DataModels.UpdatedFeature = JSON.parse(event.requestBody);
         logger.debug(logPrefix, `code: ${event.queryString.code}, body: ${body}`);
 
         return {

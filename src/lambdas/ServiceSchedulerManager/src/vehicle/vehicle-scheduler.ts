@@ -1,6 +1,8 @@
 import logger from "gcv-logger";
 import { DataModels } from "../interfaces";
-import { VehicleFactory } from "./vehicle-factory";
+
+
+const LOG_PREFIX_CLASS = 'VehicleScheduler | ';
 
 export class VehicleScheduler {
 
@@ -13,7 +15,7 @@ export class VehicleScheduler {
      public async getVehicleFromVehicleGroup(request: DataModels.VehicleSearchListData): Promise<DataModels.GetVehiclesResponse>{
 
         const logPrefix = `${LOG_PREFIX_CLASS} | getVehicleFromVehicleGroup |`;
-        const environment = VehicleFactory.getEnvironment();
+        //const environment = VehicleFactory.getEnvironment();
         const mappedRequest = {
             igroup: request.id,
         }       
@@ -42,7 +44,7 @@ export class VehicleScheduler {
     public async insertVehicleForVehicleGroup(request:DataModels.VehicleCreateDeleteData): Promise<DataModels.PostResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} insertVehicleForVehicleGroup |`;
-        const environment = VehicleFactory.getEnvironment();
+        //const environment = VehicleFactory.getEnvironment();
         const mappedRequest = {
             igroup: request.id,
             ivin: request.vin
@@ -71,7 +73,7 @@ export class VehicleScheduler {
     public async deleteVehicleFromVehicleGroup(request: DataModels.VehicleCreateDeleteData): Promise<DataModels.DeleteResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} deleteVehicleForVehicleGroup|`;
-        const environment = VehicleFactory.getEnvironment();
+        //const environment = VehicleFactory.getEnvironment();
         const mappedRequest = {
             igroup: request.id,
             ivin: request.vin

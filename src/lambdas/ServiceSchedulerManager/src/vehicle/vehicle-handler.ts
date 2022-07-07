@@ -2,7 +2,9 @@ import { DataModels } from '../interfaces';
 import { UtilityObjects, GCVErrors } from 'gcv-utils';
 import { Utilities } from 'gcv-utilities';
 import { Constants, VehicleAddToVehicleGroup, VehicleDeleteFromVehicleGroup, VehicleGroupDeleteSchema, VehicleGroupInsertSchema, VehicleGroupSearchListSchema, VehicleGroupUpdateSchema, VehicleListFromVehicleGroup } from '../../constants'
+import logger from 'gcv-logger';
 
+const LOG_PREFIX_CLASS = 'VehicleHandler | ';
 
 export class VehicleHandler {
 

@@ -1,8 +1,7 @@
 import logger from "gcv-logger";
-import { ObjectFlags } from "typescript";
-import { FeaturesScheduler } from "../features";
 import { DataModels } from "../interfaces";
-import { VehicleGroupFactory } from "./vehiclegroup-factory";
+
+const LOG_PREFIX_CLASS = 'VehicleGroupScheduler | ';
 
 export class VehicleGroupScheduler{
     
@@ -14,7 +13,7 @@ export class VehicleGroupScheduler{
      public async insertFeatureVehicleGroup(request: DataModels.VehicleGroupFeatureCreateData):Promise<DataModels.PostResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} insertFeatureVehicleGroup |`;
-        const environment = VehicleGroupFactory.getEnvironment();
+        //const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
             cfeature: request.code,
             igroup: request.id
@@ -43,7 +42,7 @@ export class VehicleGroupScheduler{
     public async deleteFeatureVehicleGroup(request: DataModels.VehicleGroupFeatureDeleteData): Promise<DataModels.DeleteResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} deleteFeatureVehicleGroup |`;
-        const environment = VehicleGroupFactory.getEnvironment();
+        //const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
             cfeature: request.code,
             igroup: request.id
@@ -72,7 +71,7 @@ export class VehicleGroupScheduler{
     public async getVehicleGroup(request:DataModels.VehicleGroupSearchListData): Promise<DataModels.GetGroupsResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} | getVehicleGroup |`;
-        const environment = VehicleGroupFactory.getEnvironment();
+        //const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
             cfeature: request.feature,
         }
@@ -114,7 +113,7 @@ export class VehicleGroupScheduler{
     public async insertVehicleGroup(request: DataModels.VehicleGroupCreateData): Promise<DataModels.PostResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} | insertVehicleGroup |`;
-        const environment = VehicleGroupFactory.getEnvironment();
+        //const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
             vehicleGroupDescription: request.description
         }
@@ -141,7 +140,7 @@ export class VehicleGroupScheduler{
     public async updateVehicleGroup(request: DataModels.VehicleGroupUpdateData): Promise<DataModels.PatchResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} | updateVehicleGroup |`;
-        const environment = VehicleGroupFactory.getEnvironment();
+        //const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
             igroup: request.id,
             description: request.description
@@ -170,7 +169,7 @@ export class VehicleGroupScheduler{
     public async deleteVehicleGroup(request: DataModels.VehicleGroupDeleteData): Promise<DataModels.DeleteResponse> {
 
         const logPrefix = `${LOG_PREFIX_CLASS} | deleteVehicleGroup |`;
-        const environment = VehicleGroupFactory.getEnvironment();
+        //const environment = VehicleGroupFactory.getEnvironment();
         const mappedRequest = {
             igroup: request.id
         }

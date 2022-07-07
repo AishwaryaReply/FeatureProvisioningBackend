@@ -4,6 +4,8 @@ import { UtilityObjects, GCVErrors } from 'gcv-utils';
 import { Utilities } from 'gcv-utilities';
 import { Constants, VehicleGroupDeleteForFeatureSchema, VehicleGroupDeleteSchema, VehicleGroupInsertForFeatureSchema, VehicleGroupInsertSchema, VehicleGroupSearchListSchema, VehicleGroupUpdateSchema } from '../../constants';
 
+const LOG_PREFIX_CLASS = 'VehicleGroupHandler | ';
+
 export class VehicleGroupHandler {
 
     /**
@@ -123,7 +125,7 @@ export class VehicleGroupHandler {
      */
     private prepareVGCreate(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupCreateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVGCreate |`;
-        let body: DataModels.NewVehicleGroup = JSON.parse(event.body);
+        let body: DataModels.NewVehicleGroup = JSON.parse(event.requestBody);
         logger.debug(logPrefix, `body: ${body}`);
 
         return {
@@ -139,7 +141,7 @@ export class VehicleGroupHandler {
      */
     private prepareVGUpdate(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupUpdateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVCUdpate |`;
-        let body: DataModels.NewVehicleGroup = JSON.parse(event.body);
+        let body: DataModels.NewVehicleGroup = JSON.parse(event.requestBody);
         logger.debug(logPrefix, `body: ${body}`);
 
         return {

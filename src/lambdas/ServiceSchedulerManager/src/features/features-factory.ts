@@ -1,6 +1,6 @@
 import { FeaturesScheduler } from "./features-scheduler";
 import { FeaturesHandler } from "./features-handler";
-import { GCVErrors } from 'gcv-utils';
+import {GCVErrors} from "gcv-utils"
 
 export class FeaturesFactory{
 
@@ -22,5 +22,3 @@ export class FeaturesFactory{
 
 
 }
-
-//export class FeaturesFactory{}

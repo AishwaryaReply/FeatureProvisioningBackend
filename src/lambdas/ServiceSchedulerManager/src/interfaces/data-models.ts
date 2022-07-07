@@ -55,7 +55,7 @@ email: string
 export interface FeatureSearchListRequestData extends ServiceRequestData {    
 cfeature: string;
 featureDescription: string;
-cchannel: Channel[];
+cchannel: string;
 }
 
 export interface FeatureCreateData extends ServiceRequestData {    

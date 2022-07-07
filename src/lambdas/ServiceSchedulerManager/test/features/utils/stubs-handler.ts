@@ -74,5 +74,31 @@ export namespace stubsHandler {
             httpMethod: 'POST'
         }
     }
+
+    export const mockOutputFeatureSearchList: DataModels.FeatureSearchListRequestData = {
+        requestedService: 'FEATURE_SEARCH_LIST',
+        cfeature: "XXX",
+        featureDescription: "XXX",
+        cchannel: "XXX"
+    }
+
+    export const mockOutputFeatureSearchListSpecialChar: DataModels.FeatureSearchListRequestData = {
+        requestedService: 'FEATURE_SEARCH_LIST',
+        cfeature: "@#$%",
+        featureDescription: "@#$%",
+        cchannel: "@#$%"
+    }
+
+    export const mockInputFeatureSearchList: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'GET'
+        },
+        queryString: {
+            code: "XXX",
+            description: "XXX",
+            channel: "XXX"
+        }
+    }
     
 }

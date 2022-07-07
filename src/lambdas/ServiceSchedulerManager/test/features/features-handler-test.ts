@@ -64,6 +64,20 @@ describe('FeaturesHandler', () => {
             expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${stubsHandler.mockInputEventInvalidResourcePath.runTimeInfo.resourcePath} is not supported`));
         })
 
+
+
+        //Testing each switch case in prepareRequestData
+        it('should give the correct output while calling FEATURE_SEARCH_LIST', () => {
+            //const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputFeatureSearchList.runTimeInfo);
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureSearchList);
+            expect(output).to.be.eqls(stubsHandler.mockOutputFeatureSearchList);
+        })
+
+        it('should give the correct output with special character values, while calling FEATURE_SEARCH_LIST', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureSearchList);
+            expect(output).to.be.eqls(stubsHandler.mockOutputFeatureSearchListSpecialChar);
+        })
+
     })  
 
 })

@@ -95,4 +95,48 @@ export namespace stubsHandler {
         }
     }
 
+
+
+    
+
+    export const mockOutputVGSearchList: DataModels.VehicleGroupSearchListData = {
+        requestedService: 'VEHICLEGROUP_SEARCH_LIST',
+        feature: "XXX"
+    }
+
+    export const mockOutputVGSearchListSpecialChar: DataModels.VehicleGroupSearchListData = {
+        requestedService: 'VEHICLEGROUP_SEARCH_LIST',
+        feature: "@#$%"
+    }
+
+    export const mockInputVGSearchList: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath:  '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup',
+            httpMethod: 'GET'
+        },
+        queryString: {
+            feature: "XXX"
+        }
+    }
+
+    export const mockOutputVGCreate: DataModels.VehicleGroupCreateData= {
+        requestedService: 'VEHICLEGROUP_CREATE',
+        description: "XXX"
+    }
+
+    export const mockOutputVGCreateSpecialChar: DataModels.VehicleGroupCreateData = {
+        requestedService: 'VEHICLEGROUP_CREATE',
+        description: "@#$%"
+    }
+
+    export const mockInputVGCreate: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup',
+            httpMethod: 'POST'
+        },
+        requestBody: {
+            description: "XXX"
+        }
+    }
+
 }

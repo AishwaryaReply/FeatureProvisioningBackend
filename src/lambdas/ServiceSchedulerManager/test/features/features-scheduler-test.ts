@@ -19,7 +19,7 @@ describe('FeatureSchedulerService', () => {
 
         it('should return the expected response with uppercase, when the getListFeatures goes well', async () => {
             //sinon.stub(className,'methodName').resolves(Stubs.variableName)
-            sinon.stub(FeaturesDao, 'selectFeaturesFromDB').resolves(Stubs.mockOutputGetListFeatures);
+            sinon.stub(FeaturesDao, 'selectFeatureFromDB').resolves(Stubs.mockOutputGetListFeatures);
             sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
 
             const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeatures;
@@ -28,7 +28,7 @@ describe('FeatureSchedulerService', () => {
         })
 
         it('should return the expected response with special character values, when the getListFeatures goes well', async () => {
-            sinon.stub(FeaturesDao, 'selectFeaturesFromDB').resolves(Stubs.mockOutputGetListFeatures);
+            sinon.stub(FeaturesDao, 'selectFeatureFromDB').resolves(Stubs.mockOutputGetListFeatures);
             sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
 
             const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeatures;
@@ -37,7 +37,7 @@ describe('FeatureSchedulerService', () => {
         })
 
         it('should return the expected response with numeric values, when the getListFeatures goes well', async () => {
-            sinon.stub(FeaturesDao, 'selectFeaturesFromDB').resolves(Stubs.mockOutputGetListFeaturesLowercase);
+            sinon.stub(FeaturesDao, 'selectFeatureFromDB').resolves(Stubs.mockOutputGetListFeaturesLowercase);
             sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
 
             const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeaturesLowercase;
@@ -46,7 +46,7 @@ describe('FeatureSchedulerService', () => {
         })
 
         it('should return the expected response with numeric values, when the getListFeatures goes well', async () => {
-            sinon.stub(FeaturesDao, 'selectFeaturesFromDB').resolves(Stubs.mockOutputGetListFeatures);
+            sinon.stub(FeaturesDao, 'selectFeatureFromDB').resolves(Stubs.mockOutputGetListFeatures);
             sinon.stub(FeaturesFactory, 'getEnvironment').resolves('int');
 
             const expected: DataModels.GetFeatureResponse = Stubs.mockOutputGetListFeatures;

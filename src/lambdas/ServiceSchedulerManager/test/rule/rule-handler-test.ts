@@ -63,6 +63,18 @@ describe('RuleHandler', () => {
             const expected= testedRuleHandler.getServiceRequested(stubsHandler.mockInputEventInvalidResourcePath.runTimeInfo);
             expect(expected).to.throw(new GCVErrors.ServiceNotSupported(`service ${stubsHandler.mockInputEventInvalidResourcePath.runTimeInfo.resourcePath} is not supported`));
         })
+
+          //Testing each switch case in prepareRequestData
+          it('should give the correct output while calling RULE_SEARCH_LIST', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleSearchList);
+            expect(output).to.be.eqls(stubsHandler.mockOutputRuleSearchList);
+        })
+
+        it('should give the correct output with special character values, while calling RULE_SEARCH_LIST', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleSearchList);
+            expect(output).to.be.eqls(stubsHandler.mockOutputRuleSearchListSpecialChar);
+        })
+
     })  
 
 })

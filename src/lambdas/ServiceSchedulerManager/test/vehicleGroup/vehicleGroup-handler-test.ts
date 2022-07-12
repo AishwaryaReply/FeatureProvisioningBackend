@@ -78,6 +78,27 @@ describe('VehicleGroupHandler', () => {
             expect(expected).to.not.eqls("VEHICLEGROUP_CREATE");
         })
 
+        //Testing each switch case in prepareRequestData
+        it('should give the correct output while calling VEHICLEGROUP_SEARCH_LIST', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGSearchList);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVGSearchList);
+        })
+
+        it('should give the correct output with special character values, while calling VEHICLEGROUP_SEARCH_LIST', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGSearchList);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVGSearchListSpecialChar);
+        })
+
+        it('should give the correct output while calling VEHICLEGROUP_CREATE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGCreate);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVGCreate);
+        })
+
+        it('should give the correct output with special character values, while calling VEHICLEGROUP_CREATE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGCreate);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVGCreateSpecialChar);
+        })
+
     })  
 
 })

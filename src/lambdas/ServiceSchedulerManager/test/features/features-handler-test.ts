@@ -78,6 +78,28 @@ describe('FeaturesHandler', () => {
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureSearchListSpecialChar);
         })
 
+        it('should give the correct output while calling FEATURE_CREATE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureCreate);
+            expect(output).to.be.eqls(stubsHandler.mockOutputFeatureCreate);
+        })
+
+        it('should give the correct output with special character values, while calling FEATURE_CREATE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureCreate);
+            expect(output).to.be.eqls(stubsHandler.mockOutputFeatureCreateSpecialChar);
+        })
+
+       /* FEATURE_UPDATE
+        it('should give the correct output while calling FEATURE_UPDATE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureUpdate);
+            expect(output).to.be.eqls(stubsHandler.mockOutputFeatureUpdate);
+        })
+
+        it('should give the correct output with special character values, while calling FEATURE_UPDATE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureUpdate);
+            expect(output).to.be.eqls(stubsHandler.mockOutputFeatureUpdateSpecialChar);
+        })
+        */
+
     })  
 
 })

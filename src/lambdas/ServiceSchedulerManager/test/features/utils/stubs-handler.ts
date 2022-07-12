@@ -100,5 +100,89 @@ export namespace stubsHandler {
             channel: "XXX"
         }
     }
+
+    export const mockOutputFeatureCreate: DataModels.FeatureCreateData = {
+        requestedService: 'FEATURE_CREATE',
+        cfeature: "XXX",
+        featureDescription: "XXX",
+        cchannel: [{code: "XXX", description: "XXX"},
+                   {code: "YYY", description: "YYY"}]
+    }
+
+    export const mockOutputFeatureCreateSpecialChar: DataModels.FeatureCreateData = {
+        requestedService: 'FEATURE_CREATE',
+        cfeature: "@#$%",
+        featureDescription: "@#$%",
+        cchannel: [{code: "@#$%", description: "@#$%"},
+                   {code: "$%#@", description: "$#%@"}]
+    }
+
+    export const mockInputFeatureCreate: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'POST'
+        },
+        requestBody: {
+            code: "XXX",
+            description: "XXX",
+            channels: [{code: "@#$%", description: "@#$%"},
+                       {code: "$%#@", description: "$#%@"}]
+        }
+    }
+
+   /* export const mockOutputFeatureUpdate: DataModels.FeatureUpdateData  = {
+        requestedService: 'FEATURE_UPDATE',
+        cfeature: "XXX",
+        featureDescription: "XXX",
+        channels: [{code: "XXX", description: "XXX"},
+                   {code: "YYY", description: "YYY"}]
+    }
+
+    export const mockOutputFeatureUpdateSpecialChar: DataModels.FeatureUpdateData  = {
+        requestedService: 'FEATURE_UPDATE',
+        cfeature: "@#$%",
+        featureDescription: "@#$%",
+        channels: [{code: "@#$%", description: "@#$%"},
+                   {code: "$%#@", description: "$#%@"}]
+    }
+
+    export const mockInputFeatureUpdate: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'PUT'
+        },
+        requestBody: {
+            code: "XXX",
+            description: "XXX",
+            channels: [{code: "@#$%", description: "@#$%"},
+                       {code: "$%#@", description: "$#%@"}]
+        }
+    }
+    */ //transformed input
+
+    export const mockOutputFeatureDeleteByCode: DataModels.FeatureDeleteData  = {
+        requestedService: 'FEATURE_DELETE',
+        cfeature: "XXX"
+    }
+
+    export const mockOutputFeatureDeleteByCodeSpecialChar: DataModels.FeatureDeleteData  = {
+        requestedService: 'FEATURE_DELETE',
+        cfeature: "@#$%"
+    }
+
+    export const mockInputFeatureDeleteByCode: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}',
+            httpMethod: 'DELETE'
+        },
+        requestBody: {
+            code: "XXX",
+            description: "XXX",
+            channels: [{code: "@#$%", description: "@#$%"},
+                       {code: "$%#@", description: "$#%@"}]
+        }
+    }
+
+    
     
 }

@@ -82,6 +82,12 @@ export namespace stubsHandler {
         cchannel: "XXX"
     }
 
+    export const mockOutputFeatureSearchListInvalid: DataModels.FeatureSearchListRequestData = {
+        requestedService: 'FEATURE_CREATE',
+        cfeature: "XXX",
+        featureDescription: "XXX",
+        cchannel: "XXX"
+    }
     export const mockOutputFeatureSearchListSpecialChar: DataModels.FeatureSearchListRequestData = {
         requestedService: 'FEATURE_SEARCH_LIST',
         cfeature: "@#$%",
@@ -101,8 +107,28 @@ export namespace stubsHandler {
         }
     }
 
+    export const mockInputFeatureSearchListInvalidPath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/rule\/{id}',
+            httpMethod: 'GET'
+        },
+        queryString: {
+            code: "XXX",
+            description: "XXX",
+            channel: "XXX"
+        }
+    }
+
     export const mockOutputFeatureCreate: DataModels.FeatureCreateData = {
         requestedService: 'FEATURE_CREATE',
+        cfeature: "XXX",
+        featureDescription: "XXX",
+        cchannel: [{code: "XXX", description: "XXX"},
+                   {code: "YYY", description: "YYY"}]
+    }
+
+    export const mockOutputFeatureCreateInvalid: DataModels.FeatureCreateData = {
+        requestedService: 'FEATURE_SEARCH_LIST',
         cfeature: "XXX",
         featureDescription: "XXX",
         cchannel: [{code: "XXX", description: "XXX"},
@@ -120,6 +146,19 @@ export namespace stubsHandler {
     export const mockInputFeatureCreate: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'POST'
+        },
+        requestBody: {
+            code: "XXX",
+            description: "XXX",
+            channels: [{code: "@#$%", description: "@#$%"},
+                       {code: "$%#@", description: "$#%@"}]
+        }
+    }
+
+    export const mockInputFeatureCreateInvalidPath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/rule\/{id}',
             httpMethod: 'POST'
         },
         requestBody: {

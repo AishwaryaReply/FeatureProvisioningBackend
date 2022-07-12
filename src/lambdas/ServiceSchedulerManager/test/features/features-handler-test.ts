@@ -78,6 +78,19 @@ describe('FeaturesHandler', () => {
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureSearchListSpecialChar);
         })
 
+        it('should give an error while calling FEATURE_SEARCH_LIST', () => {
+            //const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputFeatureSearchList.runTimeInfo);
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureSearchListInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputFeatureSearchList);
+        })
+
+        it('should give an error while calling FEATURE_SEARCH_LIST', () => {
+            //const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputFeatureSearchList.runTimeInfo);
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureSearchList);
+            expect(output).to.not.eqls(stubsHandler.mockOutputFeatureSearchListInvalid);
+        })
+
+
         it('should give the correct output while calling FEATURE_CREATE', () => {
             const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureCreate);
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureCreate);
@@ -86,6 +99,16 @@ describe('FeaturesHandler', () => {
         it('should give the correct output with special character values, while calling FEATURE_CREATE', () => {
             const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureCreate);
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureCreateSpecialChar);
+        })
+
+        it('should give an error while calling FEATURE_CREATE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureCreateInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputFeatureCreate);
+        })
+
+        it('should give an error while calling FEATURE_CREATE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureCreate);
+            expect(output).to.not.eqls(stubsHandler.mockOutputFeatureCreateInvalid);
         })
 
        /* FEATURE_UPDATE

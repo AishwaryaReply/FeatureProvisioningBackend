@@ -109,9 +109,24 @@ export namespace stubsHandler {
         feature: "@#$%"
     }
 
+    export const mockOutputVGSearchListInvalid: DataModels.VehicleGroupSearchListData = {
+        requestedService: 'VEHICLEGROUP_CREATE',
+        feature: "XXX"
+    }
+
     export const mockInputVGSearchList: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath:  '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup',
+            httpMethod: 'GET'
+        },
+        queryString: {
+            feature: "XXX"
+        }
+    }
+
+    export const mockInputVGSearchListInvalidPath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath:  '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/vehicleGroup\/{id}',
             httpMethod: 'GET'
         },
         queryString: {
@@ -124,6 +139,11 @@ export namespace stubsHandler {
         description: "XXX"
     }
 
+    export const mockOutputVGCreateInvalid: DataModels.VehicleGroupCreateData= {
+        requestedService: 'VEHICLEGROUP_SEARCH_LIST',
+        description: "XXX"
+    }
+
     export const mockOutputVGCreateSpecialChar: DataModels.VehicleGroupCreateData = {
         requestedService: 'VEHICLEGROUP_CREATE',
         description: "@#$%"
@@ -132,6 +152,16 @@ export namespace stubsHandler {
     export const mockInputVGCreate: UtilityObjects.TransformedInputEvent = {
         runTimeInfo: {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup',
+            httpMethod: 'POST'
+        },
+        requestBody: {
+            description: "XXX"
+        }
+    }
+
+    export const mockInputVGCreateInvalidPath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/vehicleGroup\/{id}',
             httpMethod: 'POST'
         },
         requestBody: {

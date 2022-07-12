@@ -89,6 +89,16 @@ describe('VehicleGroupHandler', () => {
             expect(output).to.be.eqls(stubsHandler.mockOutputVGSearchListSpecialChar);
         })
 
+        it('should give an error while calling VEHICLEGROUP_SEARCH_LIST', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGSearchList);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVGSearchListInvalid);
+        })
+
+        it('should give an error while calling VEHICLEGROUP_SEARCH_LIST', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGSearchListInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVGSearchList);
+        })
+
         it('should give the correct output while calling VEHICLEGROUP_CREATE', () => {
             const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGCreate);
             expect(output).to.be.eqls(stubsHandler.mockOutputVGCreate);
@@ -97,6 +107,16 @@ describe('VehicleGroupHandler', () => {
         it('should give the correct output with special character values, while calling VEHICLEGROUP_CREATE', () => {
             const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGCreate);
             expect(output).to.be.eqls(stubsHandler.mockOutputVGCreateSpecialChar);
+        })
+
+        it('should give tan error while calling VEHICLEGROUP_CREATE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGCreate);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVGCreateInvalid);
+        })
+
+        it('should give an error while calling VEHICLEGROUP_CREATE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGCreateInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVGCreateSpecialChar);
         })
 
     })  

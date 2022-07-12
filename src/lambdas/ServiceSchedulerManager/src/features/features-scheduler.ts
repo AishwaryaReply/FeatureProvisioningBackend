@@ -5,7 +5,7 @@ import { DataModels } from "../interfaces";
 const LOG_PREFIX_CLASS = 'FeaturesScheduler | '; 
 
 export class FeaturesScheduler {
-z
+
     /**
      * this fn is used to get list of features
      * @param request input as DataModels.FeatureSearchListRequestData

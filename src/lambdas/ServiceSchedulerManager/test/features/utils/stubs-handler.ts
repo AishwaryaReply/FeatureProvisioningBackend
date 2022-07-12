@@ -169,8 +169,16 @@ export namespace stubsHandler {
         }
     }
 
-   /* export const mockOutputFeatureUpdate: DataModels.FeatureUpdateData  = {
+    export const mockOutputFeatureUpdate: DataModels.FeatureUpdateData  = {
         requestedService: 'FEATURE_UPDATE',
+        cfeature: "XXX",
+        featureDescription: "XXX",
+        channels: [{code: "XXX", description: "XXX"},
+                   {code: "YYY", description: "YYY"}]
+    }
+
+    export const mockOutputFeatureUpdateInvalid: DataModels.FeatureUpdateData  = {
+        requestedService: 'FEATURE_CREATE',
         cfeature: "XXX",
         featureDescription: "XXX",
         channels: [{code: "XXX", description: "XXX"},
@@ -190,14 +198,32 @@ export namespace stubsHandler {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
             httpMethod: 'PUT'
         },
-        requestBody: {
+        queryString: {
             code: "XXX",
-            description: "XXX",
-            channels: [{code: "@#$%", description: "@#$%"},
-                       {code: "$%#@", description: "$#%@"}]
+            body: {
+                description: "XXX",
+                channels: [{code: "XXX", description: "XXX"},
+                       {code: "YYY", description: "YYY"}]
+            }
         }
+
     }
-    */ //transformed input
+
+    export const mockInputFeatureUpdateinvalidPath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}',
+            httpMethod: 'PUT'
+        },
+        pathParams: {
+            code: "XXX",
+            body: {
+                description: "XXX",
+                channels: [{code: "XXX", description: "XXX"},
+                       {code: "YYY", description: "YYY"}]
+            }
+        }
+
+    }
 
     export const mockOutputFeatureDeleteByCode: DataModels.FeatureDeleteData  = {
         requestedService: 'FEATURE_DELETE',

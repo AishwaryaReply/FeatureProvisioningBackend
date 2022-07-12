@@ -111,7 +111,6 @@ describe('FeaturesHandler', () => {
             expect(output).to.not.eqls(stubsHandler.mockOutputFeatureCreateInvalid);
         })
 
-       /* FEATURE_UPDATE
         it('should give the correct output while calling FEATURE_UPDATE', () => {
             const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureUpdate);
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureUpdate);
@@ -121,7 +120,16 @@ describe('FeaturesHandler', () => {
             const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureUpdate);
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureUpdateSpecialChar);
         })
-        */
+        
+        it('should give an error while calling FEATURE_UPDATE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureUpdateinvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputFeatureUpdate);
+        })
+
+        it('should give an error while calling FEATURE_UPDATE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureUpdate);
+            expect(output).to.not.eqls(stubsHandler.mockOutputFeatureUpdateInvalid);
+        })
 
     })  
 

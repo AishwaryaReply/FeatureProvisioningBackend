@@ -106,10 +106,10 @@ export class FeaturesHandler {
      */
     private prepareFeatureDelete(event: UtilityObjects.TransformedInputEvent): DataModels.FeatureDeleteData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareFeatureSearchList |`;
-        logger.debug(logPrefix, `description: ${event.requestBody.description}, channel: ${event.requestBody.channels}`);
+        logger.debug(logPrefix, `code: ${event.pathParams.code}`);
         return {
             requestedService: 'FEATURE_DELETE',
-            cfeature: event.queryString.code
+            cfeature: event.pathParams.code
         }
 
     }
@@ -123,11 +123,11 @@ export class FeaturesHandler {
 
         const logPrefix = `${LOG_PREFIX_CLASS} prepareUpdateFeature |`;
         let body: DataModels.UpdatedFeature = JSON.parse(event.requestBody);
-        logger.debug(logPrefix, `code: ${event.queryString.code}, body: ${body}`);
+        logger.debug(logPrefix, `code: ${event.pathParams.code}, body: ${body}`);
 
         return {
             requestedService: 'FEATURE_UPDATE',
-            cfeature: event.queryString.code,
+            cfeature: event.pathParams.code,
             featureDescription: body.description != undefined ? body.description : "",
             channels: body.channels != undefined ? body.channels : []
 

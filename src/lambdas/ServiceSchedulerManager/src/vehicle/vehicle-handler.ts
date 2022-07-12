@@ -61,11 +61,11 @@ export class VehicleHandler {
      */
     private prepareVehicleSearchList(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleSearchListData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVehicleSearchList |`;
-        logger.debug(logPrefix, `id: ${event.queryString.id}`);
+        logger.debug(logPrefix, `id: ${event.pathParams.id}`);
 
         return {
             requestedService: 'VEHICLE_SEARCH_LIST',
-            id: event.queryString.id
+            id: event.pathParams.id
         }
     }
 
@@ -76,12 +76,12 @@ export class VehicleHandler {
      */
     private prepareVehicleCreate(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleCreateDeleteData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVehicleCreate |`;
-        logger.debug(logPrefix, `id: ${event.queryString.id}, vin: ${event.queryString.vin}`);
+        logger.debug(logPrefix, `id: ${event.pathParams.id}, vin: ${event.pathParams.vin}`);
 
         return {
             requestedService: 'VEHICLE_CREATE',
-            id: event.queryString.id,
-            vin: event.queryString.vin
+            id: event.pathParams.id,
+            vin: event.pathParams.vin
         }
 
     }
@@ -93,12 +93,12 @@ export class VehicleHandler {
      */
     private prepareVehicleDelete(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleCreateDeleteData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVehicleDelete |`;
-        logger.debug(logPrefix, `id: ${event.queryString.id}, vin: ${event.queryString.vin}`);
+        logger.debug(logPrefix, `id: ${event.pathParams.id}, vin: ${event.pathParams.vin}`);
 
         return {
             requestedService: 'VEHICLE_DELETE',
-            id: event.queryString.id,
-            vin: event.queryString.vin
+            id: event.pathParams.id,
+            vin: event.pathParams.vin
         }
     }
 

@@ -78,12 +78,12 @@ export class VehicleGroupHandler {
      */
     private prepareVGFeatureCreate(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupFeatureCreateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVGFeatureCreate |`;
-        logger.debug(logPrefix, `code: ${event.queryString.code}, id: ${event.queryString.id}`);
+        logger.debug(logPrefix, `code: ${event.pathParams.code}, id: ${event.pathParams.id}`);
 
         return {
             requestedService: "VEHICLEGROUP_FEATURE_INSERT",
-            code: event.queryString.code,
-            id: event.queryString.id
+            code: event.pathParams.code,
+            id: event.pathParams.id
         }
     }
 
@@ -94,12 +94,12 @@ export class VehicleGroupHandler {
      */
     private prepareVGFeatureDelete(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupFeatureDeleteData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVGFeatureDelete |`;
-        logger.debug(logPrefix, `code: ${event.queryString.code}, id: ${event.queryString.id}`);
+        logger.debug(logPrefix, `code: ${event.pathParams.code}, id: ${event.pathParams.id}`);
 
         return {
             requestedService: "VEHICLEGROUP_FEATURE_DELETE",
-            code: event.queryString.code,
-            id: event.queryString.id
+            code: event.pathParams.code,
+            id: event.pathParams.id
         }
     }
 
@@ -142,11 +142,11 @@ export class VehicleGroupHandler {
     private prepareVGUpdate(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupUpdateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareVCUdpate |`;
         let body: DataModels.NewVehicleGroup = JSON.parse(event.requestBody);
-        logger.debug(logPrefix, `body: ${body}`);
+        logger.debug(logPrefix,`id: ${event.pathParams.id}`, `body: ${body}`);
 
         return {
             requestedService: "VEHICLEGROUP_UPDATE",
-            id: event.queryString.id,
+            id: event.pathParams.id,
             description: body.description != undefined ? body.description : ""
         }
     }
@@ -157,12 +157,12 @@ export class VehicleGroupHandler {
      * @returns Data as DataModels.VehicleGroupDeleteData
      */
     private prepareVGDelete(event: UtilityObjects.TransformedInputEvent): DataModels.VehicleGroupDeleteData {
-        const logPrefix = `${LOG_PREFIX_CLASS} prepareVGUdpate |`;
-        logger.debug(logPrefix, `id: ${event.queryString.id}`);
+        const logPrefix = `${LOG_PREFIX_CLASS} prepareVGDelete |`;
+        logger.debug(logPrefix, `id: ${event.pathParams.id}`);
 
         return {
             requestedService: "VEHICLEGROUP_DELETE",
-            id: event.queryString.id
+            id: event.pathParams.id
         }
 
     }

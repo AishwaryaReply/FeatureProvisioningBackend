@@ -62,11 +62,11 @@ export class RuleHandler {
     private prepareRuleSearchList(event: UtilityObjects.TransformedInputEvent): DataModels.RuleSearchListData {
 
         const logPrefix = `${LOG_PREFIX_CLASS} prepareRuleSearchList |`;
-        logger.debug(logPrefix, `code: ${event.queryString.code}`);
+        logger.debug(logPrefix, `code: ${event.pathParams.code}`);
 
         return {
             requestedService: 'RULE_SEARCH_LIST',
-            code: event.queryString.code
+            code: event.pathParams.code
         };
     }
 
@@ -78,12 +78,12 @@ export class RuleHandler {
     private prepareRuleCreate(event: UtilityObjects.TransformedInputEvent): DataModels.RuleCreateData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareRuleCreate |`;
         let body: DataModels.NewConfigurateRule = JSON.parse(event.requestBody);
-        logger.debug(logPrefix, `code: ${event.queryString.code}, body: ${body}`);
+        logger.debug(logPrefix, `code: ${event.pathParams.code}, body: ${body}`);
 
         return {
             requestedService: 'RULE_CREATE',
             igroup: "",
-            cfeature: event.queryString.code,
+            cfeature: event.pathParams.code,
             cregion: body.region != undefined ? body.region : "",
             cbrand: body.brand != undefined ? body.brand : "",
             cmarket: body.market != undefined ? body.market : "",
@@ -100,12 +100,12 @@ export class RuleHandler {
      */
     private prepareRuleDelete(event: UtilityObjects.TransformedInputEvent): DataModels.RuleDeleteData {
         const logPrefix = `${LOG_PREFIX_CLASS} prepareRuleCreate |`;
-        logger.debug(logPrefix, `code: ${event.queryString.code}, id: ${event.queryString.id}`);
+        logger.debug(logPrefix, `code: ${event.pathParams.code}, id: ${event.pathParams.id}`);
 
         return {
             requestedService: "RULE_DELETE",
-            cfeature: event.queryString.code,
-            irule: event.queryString.id
+            cfeature: event.pathParams.code,
+            irule: event.pathParams.id
         }
     }
 

@@ -65,14 +65,84 @@ describe('RuleHandler', () => {
         })
 
           //Testing each switch case in prepareRequestData
-          it('should give the correct output while calling RULE_SEARCH_LIST', () => {
+        it('should give the correct output while calling RULE_SEARCH_LIST', () => {
             const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleSearchList);
             expect(output).to.be.eqls(stubsHandler.mockOutputRuleSearchList);
         })
 
-        it('should give the correct output with special character values, while calling RULE_SEARCH_LIST', () => {
+        it('should give the correct output with special character output values, while calling RULE_SEARCH_LIST', () => {
             const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleSearchList);
             expect(output).to.be.eqls(stubsHandler.mockOutputRuleSearchListSpecialChar);
+        })
+
+        it('should give an error while calling RULE_SEARCH_LIST', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleSearchList);
+            expect(output).to.not.eqls(stubsHandler.mockOutputRuleSearchListInvalid);
+        })
+
+        it('should give an error while calling RULE_SEARCH_LIST', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleSearchListInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputRuleSearchList);
+        })
+
+        it('should give the correct output while calling RULE_DELETE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleDeleteBySearch);
+            expect(output).to.be.eqls(stubsHandler.mockOutputRuleDeleteBySearch);
+        })
+
+        it('should give the correct output with numeric output values, while calling RULE_DELETE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleDeleteBySearch);
+            expect(output).to.be.eqls(stubsHandler.mockOutputRuleDeleteBySearchNumerics);
+        })
+
+        it('should give an error while calling RULE_DELETE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleDeleteBySearchInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputRuleDeleteBySearch);
+        })
+
+        it('should give an error while calling RULE_DELETE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleDeleteBySearch);
+            expect(output).to.not.eqls(stubsHandler.mockOutputRuleDeleteBySearchInvalid);
+        })
+
+        it('should give the correct output while calling RULE_DELETE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleDeleteById);
+            expect(output).to.be.eqls(stubsHandler.mockOutputRuleDeleteById);
+        })
+
+        it('should give the correct output with numeric output values, while calling RULE_DELETE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleDeleteById);
+            expect(output).to.be.eqls(stubsHandler.mockOutputRuleDeleteByIdNumerics);
+        })
+
+        it('should give an error while calling RULE_DELETE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleDeleteByIdInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputRuleDeleteById);
+        })
+
+        it('should give an error while calling RULE_DELETE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleDeleteById);
+            expect(output).to.not.eqls(stubsHandler.mockOutputRuleDeleteByIdInvalid);
+        })
+
+        it('should give the correct output while calling RULE_CREATE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleCreate);
+            expect(output).to.be.eqls(stubsHandler.mockOutputRuleCreate);
+        })
+
+        it('should give the correct output with special character output values, while calling RULE_CREATE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleCreate);
+            expect(output).to.be.eqls(stubsHandler.mockOutputRuleCreateSpecialChar);
+        })
+
+        it('should give an error while calling RULE_CREATE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleCreate);
+            expect(output).to.not.eqls(stubsHandler.mockOutputRuleCreateInvalid);
+        })
+
+        it('should give an error while calling RULE_CREATE', () => {
+            const output= testedRuleHandler.getRuleParams(stubsHandler.mockInputRuleCreateInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputRuleCreate);
         })
 
     })  

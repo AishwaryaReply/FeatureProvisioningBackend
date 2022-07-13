@@ -1,7 +1,7 @@
 import logger from "gcv-logger";
 import { DataModels } from "../interfaces";
 //import { FeaturesFactory } from "./features-factory";
-
+import {FeaturesDao} from "gcv-channel-feature-provisioning";
 const LOG_PREFIX_CLASS = 'FeaturesScheduler | '; 
 
 export class FeaturesScheduler {

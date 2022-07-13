@@ -73,19 +73,17 @@ describe('FeaturesHandler', () => {
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureSearchList);
         })
 
-        it('should give the correct output with special character values, while calling FEATURE_SEARCH_LIST', () => {
+        it('should give the correct output with special character output values, while calling FEATURE_SEARCH_LIST', () => {
             const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureSearchList);
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureSearchListSpecialChar);
         })
 
         it('should give an error while calling FEATURE_SEARCH_LIST', () => {
-            //const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputFeatureSearchList.runTimeInfo);
             const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureSearchListInvalidPath);
             expect(output).to.not.eqls(stubsHandler.mockOutputFeatureSearchList);
         })
 
         it('should give an error while calling FEATURE_SEARCH_LIST', () => {
-            //const expected= testedFeaturesHandler.getServiceRequested(stubsHandler.mockInputFeatureSearchList.runTimeInfo);
             const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureSearchList);
             expect(output).to.not.eqls(stubsHandler.mockOutputFeatureSearchListInvalid);
         })
@@ -96,7 +94,7 @@ describe('FeaturesHandler', () => {
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureCreate);
         })
 
-        it('should give the correct output with special character values, while calling FEATURE_CREATE', () => {
+        it('should give the correct output with special character output values, while calling FEATURE_CREATE', () => {
             const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureCreate);
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureCreateSpecialChar);
         })
@@ -116,7 +114,7 @@ describe('FeaturesHandler', () => {
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureUpdate);
         })
 
-        it('should give the correct output with special character values, while calling FEATURE_UPDATE', () => {
+        it('should give the correct output with special character output values, while calling FEATURE_UPDATE', () => {
             const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureUpdate);
             expect(output).to.be.eqls(stubsHandler.mockOutputFeatureUpdateSpecialChar);
         })
@@ -131,6 +129,45 @@ describe('FeaturesHandler', () => {
             expect(output).to.not.eqls(stubsHandler.mockOutputFeatureUpdateInvalid);
         })
 
+        it('should give the correct output while calling FEATURE_DELETE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureDeleteByCode);
+            expect(output).to.be.eqls(stubsHandler.mockOutputFeatureDeleteByCode);
+        })
+
+        it('should give the correct output with special character output values, while calling FEATURE_DELETE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureDeleteByCode);
+            expect(output).to.be.eqls(stubsHandler.mockOutputFeatureDeleteByCodeSpecialChar);
+        })
+
+        it('should give an error while calling FEATURE_DELETE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureDeleteByCodeInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputFeatureDeleteByCode);
+        })
+
+        it('should give an error while calling FEATURE_DELETE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureDeleteByCode);
+            expect(output).to.not.eqls(stubsHandler.mockOutputFeatureDeleteByCodeInvalid);
+        })
+        
+        it('should give the correct output while calling FEATURE_DELETE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureDeleteBySearch);
+            expect(output).to.be.eqls(stubsHandler.mockOutputFeatureDeleteBySearch);
+        })
+
+        it('should give the correct output with special character output values, while calling FEATURE_DELETE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureDeleteBySearch);
+            expect(output).to.be.eqls(stubsHandler.mockOutputFeatureDeleteBySearchSpecialChar);
+        })
+
+        it('should give an error while calling FEATURE_DELETE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureDeleteBySearchInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputFeatureDeleteBySearch);
+        })
+
+        it('should give an error while calling FEATURE_DELETE', () => {
+            const output= testedFeaturesHandler.getFeatureParams(stubsHandler.mockInputFeatureDeleteBySearch);
+            expect(output).to.not.eqls(stubsHandler.mockOutputFeatureDeleteBySearchInvalid);
+        })
     })  
 
 })

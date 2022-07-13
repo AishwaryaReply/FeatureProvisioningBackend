@@ -198,7 +198,7 @@ export namespace stubsHandler {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
             httpMethod: 'PUT'
         },
-        queryString: {
+        pathParams: {
             code: "XXX",
             body: {
                 description: "XXX",
@@ -230,6 +230,11 @@ export namespace stubsHandler {
         cfeature: "XXX"
     }
 
+    export const mockOutputFeatureDeleteByCodeInvalid: DataModels.FeatureDeleteData  = {
+        requestedService: 'FEATURE_UPDATE',
+        cfeature: "XXX"
+    }
+
     export const mockOutputFeatureDeleteByCodeSpecialChar: DataModels.FeatureDeleteData  = {
         requestedService: 'FEATURE_DELETE',
         cfeature: "@#$%"
@@ -240,13 +245,56 @@ export namespace stubsHandler {
             resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}',
             httpMethod: 'DELETE'
         },
-        requestBody: {
-            code: "XXX",
-            description: "XXX",
-            channels: [{code: "@#$%", description: "@#$%"},
-                       {code: "$%#@", description: "$#%@"}]
+        pathParams: {
+            code: "XXX"
         }
     }
+
+    export const mockInputFeatureDeleteByCodeInvalidPath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'DELETE'
+        },
+        pathParams: {
+            code: "XXX"
+        }
+    }
+
+    export const mockOutputFeatureDeleteBySearch: DataModels.FeatureDeleteData  = {
+        requestedService: 'FEATURE_DELETE',
+        cfeature: "XXX"
+    }
+
+    export const mockOutputFeatureDeleteBySearchInvalid: DataModels.FeatureDeleteData  = {
+        requestedService: 'FEATURE_UPDATE',
+        cfeature: "XXX"
+    }
+
+    export const mockOutputFeatureDeleteBySearchSpecialChar: DataModels.FeatureDeleteData  = {
+        requestedService: 'FEATURE_DELETE',
+        cfeature: "@#$%"
+    }
+
+    export const mockInputFeatureDeleteBySearch: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature',
+            httpMethod: 'DELETE'
+        },
+        pathParams: {
+            code: "XXX"
+        }
+    }
+
+    export const mockInputFeatureDeleteBySearchInvalidPath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}',
+            httpMethod: 'DELETE'
+        },
+        pathParams: {
+            code: "XXX"
+        }
+    }
+
 
     
     

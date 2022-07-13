@@ -169,4 +169,48 @@ export namespace stubsHandler {
         }
     }
 
+    export const mockOutputVGUpdate: DataModels.VehicleGroupUpdateData= {
+        requestedService: 'VEHICLEGROUP_UPDATE',
+        id: 123,
+        description: "XXX"
+    }
+
+    export const mockOutputVGUpdateInvalid: DataModels.VehicleGroupUpdateData= {
+        requestedService: 'VEHICLEGROUP_CREATE',
+        id: 123,
+        description: "XXX"
+    }
+
+    export const mockOutputVGUpdateNumerics: DataModels.VehicleGroupUpdateData= {
+        requestedService: 'VEHICLEGROUP_UPDATE',
+        id: 123,
+        description: "123"
+    }
+
+    export const mockInputVGUpdate: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}',
+            httpMethod: 'PUT'
+        },
+        pathParams: {
+            id: 123,
+            body: {
+                description: "XXX"
+            },
+        }
+    }
+
+    export const mockInputVGUpdateInvalidPath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup',
+            httpMethod: 'PUT'
+        },
+        pathParams: {
+            id: 123,
+            body: {
+                description: "XXX"
+            },
+        }
+    }
+
 }

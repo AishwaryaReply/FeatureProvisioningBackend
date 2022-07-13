@@ -84,7 +84,7 @@ describe('VehicleGroupHandler', () => {
             expect(output).to.be.eqls(stubsHandler.mockOutputVGSearchList);
         })
 
-        it('should give the correct output with special character values, while calling VEHICLEGROUP_SEARCH_LIST', () => {
+        it('should give the correct output with special character output values, while calling VEHICLEGROUP_SEARCH_LIST', () => {
             const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGSearchList);
             expect(output).to.be.eqls(stubsHandler.mockOutputVGSearchListSpecialChar);
         })
@@ -104,7 +104,7 @@ describe('VehicleGroupHandler', () => {
             expect(output).to.be.eqls(stubsHandler.mockOutputVGCreate);
         })
 
-        it('should give the correct output with special character values, while calling VEHICLEGROUP_CREATE', () => {
+        it('should give the correct output with special character output values, while calling VEHICLEGROUP_CREATE', () => {
             const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGCreate);
             expect(output).to.be.eqls(stubsHandler.mockOutputVGCreateSpecialChar);
         })
@@ -119,6 +119,25 @@ describe('VehicleGroupHandler', () => {
             expect(output).to.not.eqls(stubsHandler.mockOutputVGCreateSpecialChar);
         })
 
+        it('should give the correct output while calling VEHICLEGROUP_UPDATE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGUpdate);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVGUpdate);
+        })
+
+        it('should give the correct output with numeric output values, while calling VEHICLEGROUP_UPDATE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGUpdate);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVGUpdateNumerics);
+        })
+
+        it('should give an error while calling VEHICLEGROUP_UPDATE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGUpdateInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVGUpdate);
+        })
+
+        it('should give an error while calling VEHICLEGROUP_UPDATE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGUpdate);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVGUpdateInvalid);
+        })
     })  
 
 })

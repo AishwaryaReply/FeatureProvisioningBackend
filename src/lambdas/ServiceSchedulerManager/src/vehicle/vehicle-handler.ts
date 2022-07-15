@@ -7,7 +7,6 @@ import logger from 'gcv-logger';
 const LOG_PREFIX_CLASS = 'VehicleHandler | ';
 
 export class VehicleHandler {
-
     /**
      * this fn looks at event type and returns required data for the api method to be called
      * @param inputEvent UtilityObjects.TransformedInputEvent contains the input event data for the api, it is any object because it set to any in gcv-utils library

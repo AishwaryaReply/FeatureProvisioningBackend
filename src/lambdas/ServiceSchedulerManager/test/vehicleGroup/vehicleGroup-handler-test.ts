@@ -138,6 +138,41 @@ describe('VehicleGroupHandler', () => {
             const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGUpdate);
             expect(output).to.not.eqls(stubsHandler.mockOutputVGUpdateInvalid);
         })
+
+        it('should give the correct output while calling VEHICLEGROUP_DELETE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGDelete);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVGDelete);
+        })
+
+        it('should give an error while calling VEHICLEGROUP_DELETE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGDelete);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVGDeleteInvalid);
+        })
+
+        it('should give an error while calling VEHICLEGROUP_DELETE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGDeleteInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVGDelete);
+        })
+
+        it('should give the correct output while calling VEHICLEGROUP_FEATURE_DELETE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGFeatureDelete);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVGFeatureDelete);
+        })
+
+        it('should give the correct output with numeric output values, while calling VEHICLEGROUP_FEATURE_DELETE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGFeatureDelete);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVGFeatureDeleteNumerics);
+        })
+
+        it('should give give an error while calling VEHICLEGROUP_FEATURE_DELETE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGFeatureDelete);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVGFeatureDeleteInvalid);
+        })
+
+        it('should give give an error while calling VEHICLEGROUP_FEATURE_DELETE', () => {
+            const output= testedVehicleGroupHandler.getVehicleGroupParams(stubsHandler.mockInputVGFeatureDeleteInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVGFeatureDelete);
+        })
     })  
 
 })

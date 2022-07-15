@@ -1,5 +1,5 @@
 import { DataModels } from "../../../src/interfaces";
-import { UtilityObjects, GCVErrors } from 'gcv-utils';
+import { UtilityObjects } from 'gcv-utils';
 
 export namespace stubsHandler { 
 
@@ -210,6 +210,116 @@ export namespace stubsHandler {
             body: {
                 description: "XXX"
             },
+        }
+    }
+
+    export const mockOutputVGDelete: DataModels.VehicleGroupDeleteData= {
+        requestedService: 'VEHICLEGROUP_DELETE',
+        id: 123
+    }
+
+    export const mockOutputVGDeleteInvalid: DataModels.VehicleGroupDeleteData= {
+        requestedService: 'VEHICLEGROUP_CREATE',
+        id: 123
+    }
+
+    export const mockInputVGDelete: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup\/{id}',
+            httpMethod: 'DELETE'
+        },
+        pathParams: {
+            id: 123
+        }
+    }
+
+    export const mockInputVGDeleteInvalidPath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup',
+            httpMethod: 'DELETE'
+        },
+        pathParams: {
+            id: 123
+        }
+    }
+
+    export const mockOutputVGFeatureDelete: DataModels.VehicleGroupFeatureDeleteData= {
+        requestedService: 'VEHICLEGROUP_FEATURE_DELETE',
+        code: "XXX",
+        id: 123
+    }
+
+    export const mockOutputVGFeatureDeleteNumerics: DataModels.VehicleGroupFeatureDeleteData= {
+        requestedService: 'VEHICLEGROUP_FEATURE_DELETE',
+        code: "123",
+        id: 123
+    }
+
+    export const mockOutputVGFeatureDeleteInvalid: DataModels.VehicleGroupFeatureDeleteData= {
+        requestedService: 'VEHICLEGROUP_FEATURE_INSERT',
+        code: "123",
+        id: 123
+    }
+
+    export const mockInputVGFeatureDelete: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/vehicleGroup\/{id}',
+            httpMethod: 'DELETE'
+        },
+        pathParams: {
+            code: "XXX",
+            id: 123
+        }
+    }
+
+    export const mockInputVGFeatureDeleteInvalidPath: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup',
+            httpMethod: 'DELETE'
+        },
+        pathParams: {
+            code: "XXX",
+            id: 123
+        }
+    }
+
+    export const mockOutputVGFeatureCreate: DataModels.VehicleGroupFeatureCreateData= {
+        requestedService: 'VEHICLEGROUP_FEATURE_INSERT',
+        code: "XXX",
+        id: 123
+    }
+
+    export const mockOutputVGFeatureCreateNumerics: DataModels.VehicleGroupFeatureCreateData= {
+        requestedService: 'VEHICLEGROUP_FEATURE_INSERT',
+        code: "123",
+        id: 123
+    }
+
+    export const mockOutputVGFeatureCreateInvalid: DataModels.VehicleGroupFeatureCreateData= {
+        requestedService: 'VEHICLEGROUP_FEATURE_DELETE',
+        code: "XXX",
+        id: 123
+    }
+
+    export const mockInputVGFeatureCreate: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/feature\/{code}\/vehicleGroup\/{id}',
+            httpMethod: 'POST'
+        },
+        pathParams: {
+            code: "XXX",
+            id: 123
+        }
+    }
+
+    export const mockInputVGFeatureCreateInvalid: UtilityObjects.TransformedInputEvent = {
+        runTimeInfo: {
+            resourcePath: '^\/v[1-9][0-9]*\/featureProvisioning\/vehicleGroup',
+            httpMethod: 'POST'
+        },
+        pathParams: {
+            code: "XXX",
+            id: 123
         }
     }
 

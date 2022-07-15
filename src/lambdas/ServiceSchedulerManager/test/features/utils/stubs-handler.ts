@@ -1,5 +1,5 @@
 import { DataModels } from "../../../src/interfaces";
-import { UtilityObjects, GCVErrors } from 'gcv-utils';
+import { UtilityObjects } from 'gcv-utils';
 
 export namespace stubsHandler { 
 

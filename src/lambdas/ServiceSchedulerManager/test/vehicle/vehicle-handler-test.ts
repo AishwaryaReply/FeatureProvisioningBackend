@@ -68,6 +68,108 @@ describe('VehicleHandler', () => {
             expect(expected).to.not.eqls("VEHICLE_CREATE");
         })
 
+
+        //Testing each switch case in prepareRequestData
+        it('should give the correct output while calling VEHICLE_CREATE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleCreateById);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVehicleCreateById);
+        })
+
+        it('should give the correct output with special character output values, while calling VEHICLE_CREATE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleCreateById);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVehicleCreateByIdSpecialChar);
+        })
+
+        it('should give an error while calling VEHICLE_CREATE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleCreateById);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVehicleCreateByIdInvalid);
+        })
+
+        it('should give an error while calling VEHICLE_CREATE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleCreateByIdInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVehicleCreateById);
+        })
+
+        it('should give the correct output while calling VEHICLE_CREATE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleCreateByVin);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVehicleCreateByVin);
+        })
+
+        it('should give the correct output with special character output values, while calling VEHICLE_CREATE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleCreateByVin);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVehicleCreateByVinSpecialChar);
+        })
+
+        it('should give an error while calling VEHICLE_CREATE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleCreateByVin);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVehicleCreateByVinInvalid);
+        })
+
+        it('should give an error while calling VEHICLE_CREATE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleCreateByVinInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVehicleCreateByVin);
+        })
+
+        it('should give the correct output while calling VEHICLE_SEARCH_LIST', () => {
+        const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleSearchList);
+        expect(output).to.be.eqls(stubsHandler.mockOutputVehicleSearchList);
+        })
+
+        it('should give the correct output with special character output values, while calling VEHICLE_SEARCH_LIST', () => {
+        const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleSearchList);
+        expect(output).to.be.eqls(stubsHandler.mockOutputVehicleSearchListSpecialchar);
+        })
+
+        it('should give an error while calling VEHICLE_SEARCH_LIST', () => {
+        const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleSearchList);
+        expect(output).to.not.eqls(stubsHandler.mockOutputVehicleSearchListInvalid);
+        })
+
+        it('should give an error while calling VEHICLE_SEARCH_LIST', () => {
+        const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleSearchListInvalidPath);
+        expect(output).to.not.eqls(stubsHandler.mockOutputVehicleSearchList);
+        })
+
+        it('should give the correct output while calling VEHICLE_DELETE', () => {
+        const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleDeleteById);
+        expect(output).to.be.eqls(stubsHandler.mockOutputVehicleDeleteById);
+        })
+
+        it('should give the correct output with special character output values, while calling VEHICLE_DELETE', () => {
+        const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleDeleteById);
+        expect(output).to.be.eqls(stubsHandler.mockOutputVehicleDeleteByIdSpecialChar);
+        })
+
+        it('should give an error while calling VEHICLE_DELETE', () => {
+        const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleDeleteById);
+        expect(output).to.not.eqls(stubsHandler.mockOutputVehicleDeleteByIdInvalid);
+        })
+
+        it('should give an error while calling VEHICLE_DELETE', () => {
+        const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleDeleteByIdInvalidPath);
+        expect(output).to.not.eqls(stubsHandler.mockOutputVehicleDeleteById);
+        })
+
+        it('should give the correct output while calling VEHICLE_DELETE', () => {
+        const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleDeleteByVin);
+        expect(output).to.be.eqls(stubsHandler.mockOutputVehicleDeleteByVin);
+        })
+
+        it('should give the correct output while calling VEHICLE_DELETE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleDeleteByVin);
+            expect(output).to.be.eqls(stubsHandler.mockOutputVehicleDeleteSpecialCharByVin);
+        })
+
+        it('should give an error while calling VEHICLE_DELETE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleDeleteByVin);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVehicleDeleteInvalidByVin);
+        })
+
+        it('should give an error while calling VEHICLE_DELETE', () => {
+            const output= testedVehicleHandler.getVehicleParams(stubsHandler.mockInputVehicleDeleteByVinInvalidPath);
+            expect(output).to.not.eqls(stubsHandler.mockOutputVehicleDeleteByVin);
+        })
+
     })  
 
 })
